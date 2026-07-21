@@ -104,7 +104,7 @@ PREVIOUS DAY VOLUME PROFILE CALCULATION:
 | **Entry Window Start** | No entries before 9:45 AM EST (avoids opening auction noise) |
 | **Signal Evaluation Cutoff** | No new setups may be evaluated after **2:15 PM EST**. (Required to accommodate the 1-bar execution delay — a signal at 2:15-2:30 PM would trigger entry at 2:30-2:45 PM, violating the hard time exit and exposing the trade to closing cross volatility) |
 | **Entry Window End** | No entries after 2:30 PM EST (avoids closing cross volatility) |
-| **Hard Time Exit** | If a position is still open at 3:30 PM EST, execute a Market Close. (Mandatory to avoid the 3:50 PM Market-On-Close imbalance risk) |
+| **Hard Time Exit** | If a position is still open at 3:30 PM EST, execute a standard **Market Order**. (Do NOT use a Market-On-Close order — MOC executes at 4:00 PM and directly violates the rule to avoid the 3:50 PM closing cross imbalance risk) |
 | **Daily Kill Switch** | If daily realized loss reaches **3%** of Total Account Equity, halt all trading for the day |
 
 ### 4.B. Entry Logic (The 4 Plays)
@@ -173,7 +173,7 @@ THEN: Execute Market Sell at Close.
 |---|---|
 | **Stop Loss** | Entry Price +/- (**2.0** * 15-min ATR). Volatility-adjusted. |
 | **Take Profit** | None — use a **trailing stop** instead |
-| **Trail: Breakeven** | Once price moves **+1.5 ATR** in your favor, move Stop Loss to breakeven |
+| **Trail: Breakeven** | IF Intra-bar High (for longs) >= Entry Price + (1.5 * ATR), move Stop Loss to Entry Price immediately. (Do NOT check close-only — price may spike +1.5 ATR intra-bar then reverse, and a close-only check would miss the trigger) |
 | **Trail: Active** | Thereafter, trail the stop at the **2-period 15-minute Low** (longs) or **High** (shorts) |
 
 #### For Plays 3 & 4 (Mean Reversion)
@@ -185,8 +185,17 @@ THEN: Execute Market Sell at Close.
 
 #### Pre-Flight R:R Check (Crucial)
 
-Before executing Play 3 or 4, the machine must calculate:
+Before executing Play 3 or 4, the machine must run two checks.
 
+**Check 1 — Directional POC Validity:**
+```
+IF Play is Long:
+   IF Previous_Day_POC <= Entry Price: ABORT TRADE. (POC is behind entry — buying away from target)
+IF Play is Short:
+   IF Previous_Day_POC >= Entry Price: ABORT TRADE. (POC is ahead of entry — selling away from target)
+```
+
+**Check 2 — Minimum R:R:**
 ```
 Stop_Distance = |Entry Price - Stop Loss Price|
 Target_Distance = |Entry Price - Previous Day POC|
@@ -194,7 +203,7 @@ Target_Distance = |Entry Price - Previous Day POC|
 IF Target_Distance < (1.5 * Stop_Distance): ABORT TRADE.
 ```
 
-This prevents taking trades where the "extends far" scenario ruins the risk-to-reward math.
+This prevents taking trades where the POC is on the wrong side of entry or the risk-to-reward is insufficient.
 
 ### 4.D. Position Sizing (Volatility Targeting)
 
