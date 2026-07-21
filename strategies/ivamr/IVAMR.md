@@ -15,7 +15,8 @@
 5. [Validation & Overfitting Protocol](#5-validation--overfitting-protocol)
 6. ["When to Say No" (Go/No-Go Thresholds)](#6-when-to-say-no-gono-go-thresholds)
 7. [Automation & Live Monitoring](#7-automation--live-monitoring)
-8. [Appendix: Quick Reference Card](#8-appendix-quick-reference-card)
+8. [Technical Notes for Implementation](#8-technical-notes-for-implementation)
+9. [Appendix: Quick Reference Card](#9-appendix-quick-reference-card)
 
 ---
 
@@ -62,11 +63,34 @@ A strategy without a defined counterparty is gambling. This strategy exploits tw
 | **Adjustments** | Unadjusted, survivorship-bias-free data |
 | **Prohibited Sources** | Yahoo Finance and other free data corrupt intraday volume/price calculations |
 
+### Session Boundary: RTH Only
+
+The Volume Profile (VAH, VAL, POC) must be calculated using **only the Regular Trading Hours (RTH) cash session** from the previous trading day: **9:30 AM - 4:00 PM EST**.
+
+**Do NOT include:**
+- Overnight electronic trading (4:00 PM - 9:30 AM EST)
+- Pre-market session
+- After-hours session
+
+**Why this matters:**
+1. The academic literature on intraday patterns (U-shaped volume/volatility) specifically studies the RTH cash session. The structural mechanics of institutional rebalancing, news digestion at the open, and overnight risk avoidance at the close exist only during RTH.
+2. If you include overnight volume in the profile, you will distort the POC location, shift VAH/VAL levels, and create false support/resistance levels that have no structural relevance to the RTH session.
+
+**Explicit specification for implementation:**
+```
+PREVIOUS DAY VOLUME PROFILE CALCULATION:
+- Session:     Regular Trading Hours (RTH) ONLY
+- Time Window: 9:30:00 AM EST to 4:00:00 PM EST (previous trading day)
+- Data Source: Use only trades executed during RTH
+- Exclusion:   Do NOT include overnight electronic trading, pre-market, or after-hours
+- Profile:     70% Value Area based on RTH volume distribution
+```
+
 ### Daily Pre-Market Routine (Executed at 9:15 AM EST)
 
-1. **Value Area High (VAH)** — Calculate from the previous day's **70% Volume Profile**.
-2. **Value Area Low (VAL)** — Calculate from the previous day's **70% Volume Profile**.
-3. **Point of Control (POC)** — The price level with the highest traded volume from the previous day.
+1. **Value Area High (VAH)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
+2. **Value Area Low (VAL)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
+3. **Point of Control (POC)** — The price level with the highest traded volume from the previous day's RTH session.
 4. **14-period 15-minute Average True Range (ATR)** — Volatility reference for the trading day.
 
 ---
@@ -242,7 +266,43 @@ Your job is no longer to execute trades; it is to monitor the statistical health
 
 ---
 
-## 8. Appendix: Quick Reference Card
+## 8. Technical Notes for Implementation
+
+### 8.A. Scope Clarification: This is NOT the Academic Paper
+
+This document defines a **Volume Profile / Auction Market Theory strategy**. It is **not** a translation of the Gao, Han, Li, and Zhou paper ("Market Intraday Momentum").
+
+- The paper documents a **time-based anomaly**: first half-hour return predicts last half-hour return.
+- This document documents a **price-location anomaly**: Value Area breakouts and fades.
+- If your goal was to test the paper, this strategy will fail to do so. If your goal was to build a robust Volume Profile strategy, this document is complete. Do not confuse the two in your backtesting analysis.
+
+### 8.B. Volume Profile Data Granularity Trap
+
+**The flaw:** If the developer calculates the previous day's 70% Volume Profile using 15-minute OHLCV data, the strategy will fail. A 15-minute candle only gives Open, High, Low, Close, and Total Volume. It does not reveal *where* within that range the volume actually occurred.
+
+**The fix:** The developer must use **1-minute or tick-level data** to calculate VAH, VAL, and POC. They must build a Volume-at-Price histogram for the previous day's RTH session using 1-minute closes (or tick data), find the price level with the highest volume (POC), and expand outward until 70% of the day's total volume is captured. Only then should they apply the 15-minute entry logic.
+
+### 8.C. The "Next Candle" Execution Delay
+
+**The flaw:** For Plays 1 and 2, the rule states: `IF 15-min Candle Close > VAH... AND Next 15-min Candle Close > VAH... THEN Execute Market Buy at Close.` If the developer codes execution at the close of Candle N+1 (the confirmation candle), they introduce **look-ahead bias** — the close price is not known until the candle actually finishes.
+
+**The fix:** The developer must explicitly code a **1-bar execution delay**:
+1. Signal is evaluated on the close of Candle N+1.
+2. Market Order is executed at the **open** of Candle N+2.
+3. The backtest must account for slippage between the close of N+1 and the open of N+2.
+
+### 8.D. Trailing Stop Logic in Backtesting
+
+**The flaw:** For Plays 1 and 2, the trailing stop rule is: `Trail the stop at the 2-period 15-minute Low (for longs) or High (for shorts).` Standard backtesting engines evaluate trailing stops based on the *close* of each bar. In reality, price will hit the 2-period low *during* the bar (intra-bar). If the backtester only checks the close, it will miss stop-outs and artificially inflate the win rate.
+
+**The fix:** The developer must use **intra-bar order simulation**:
+- In Backtrader: `process_orders_on_close=False`
+- In Pine Script: `calc_on_every_tick=true`
+- The stop loss must be evaluated against the intra-bar High/Low, not just the closing price.
+
+---
+
+## 9. Appendix: Quick Reference Card
 
 ### Pre-Market Checklist (9:15 AM EST)
 
