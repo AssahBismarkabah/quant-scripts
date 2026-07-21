@@ -91,7 +91,7 @@ PREVIOUS DAY VOLUME PROFILE CALCULATION:
 1. **Value Area High (VAH)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
 2. **Value Area Low (VAL)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
 3. **Point of Control (POC)** — The price level with the highest traded volume from the previous day's RTH session.
-4. **14-period 15-minute Average True Range (ATR)** — Volatility reference for the trading day.
+4. **14-period 15-minute Average True Range (ATR)** — Calculate using the previous day's RTH 15-minute candles, with the final calculation ending at 4:00 PM EST. This ensures the ATR reflects cash session volatility only.
 
 ---
 
@@ -102,6 +102,7 @@ PREVIOUS DAY VOLUME PROFILE CALCULATION:
 | Filter | Rule |
 |---|---|
 | **Entry Window Start** | No entries before 9:45 AM EST (avoids opening auction noise) |
+| **Signal Evaluation Cutoff** | No new setups may be evaluated after **2:15 PM EST**. (Required to accommodate the 1-bar execution delay — a signal at 2:15-2:30 PM would trigger entry at 2:30-2:45 PM, violating the hard time exit and exposing the trade to closing cross volatility) |
 | **Entry Window End** | No entries after 2:30 PM EST (avoids closing cross volatility) |
 | **Hard Time Exit** | If a position is still open at 3:30 PM EST, execute a Market Close. (Mandatory to avoid the 3:50 PM Market-On-Close imbalance risk) |
 | **Daily Kill Switch** | If daily realized loss reaches **3%** of Total Account Equity, halt all trading for the day |
@@ -280,7 +281,11 @@ This document defines a **Volume Profile / Auction Market Theory strategy**. It 
 
 **The flaw:** If the developer calculates the previous day's 70% Volume Profile using 15-minute OHLCV data, the strategy will fail. A 15-minute candle only gives Open, High, Low, Close, and Total Volume. It does not reveal *where* within that range the volume actually occurred.
 
-**The fix:** The developer must use **1-minute or tick-level data** to calculate VAH, VAL, and POC. They must build a Volume-at-Price histogram for the previous day's RTH session using 1-minute closes (or tick data), find the price level with the highest volume (POC), and expand outward until 70% of the day's total volume is captured. Only then should they apply the 15-minute entry logic.
+**The fix:** The developer must use **1-minute or tick-level data** to calculate VAH, VAL, and POC. They must build a Volume-at-Price histogram for the previous day's RTH session using 1-minute closes (or tick data), find the price level with the highest volume (POC), and expand outward until 70% of the day's total volume is captured.
+
+**Volume-at-Price Bin Size:** Use a strict **1-tick bin size** (e.g., $0.01 for SPY, 0.25 for ES futures) for the histogram calculation. Different bin sizes produce different POC and VAH/VAL levels — leaving this as a developer choice introduces an invisible parameter that will alter structural levels and corrupt the backtest.
+
+Only after these steps should the developer apply the 15-minute entry logic.
 
 ### 8.C. The "Next Candle" Execution Delay
 
