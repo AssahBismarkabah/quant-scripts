@@ -14,7 +14,7 @@ Can a hedged position involving a crypto perpetual contract and its correspondin
 
 This is a hypothesis. It is not yet an edge, strategy, or approval to trade.
 
-The first implementation should target one liquid asset and a small number of liquid venues. The exact asset, venues, time period, and thresholds must be chosen only after the research phase verifies data quality and market access.
+The first implementation should target one liquid asset on one venue. The exact venue, research period, and thresholds must be chosen only after market access and data availability are verified.
 
 ---
 
@@ -66,6 +66,23 @@ The research changes the working hypothesis from:
 to:
 
 > Reconstruct the exact venue funding payment and executable two-leg return, then determine whether any residual return survives current costs, basis risk, and operational constraints.
+
+---
+
+### **version-one research scope**
+
+The venue research supports the following provisional scope:
+
+- **Research venue:** Binance USDⓈ-M Futures. User-confirmed as available for the intended jurisdiction and use.
+- **Perpetual contract:** BTCUSDT linear perpetual.
+- **Spot hedge:** BTCUSDT spot on the same venue if the account and market access support both legs.
+- **Direction:** Positive-funding carry only: long spot and short perpetual.
+- **Excluded from version one:** Negative-funding carry, spot borrowing, cross-venue transfers, cross-venue basis, altcoins, leverage above the minimum required for operational margin, and prediction of unusually high future funding.
+- **Research objective:** Reconstruct whether holding the two legs through funding assessments produced positive net return after executable entry and exit costs, funding payments, basis movement, margin, and operational reserves.
+
+This is a research scope, not a trading approval. If same-venue spot and perpetual access is not available, the scope must be revised before coding rather than silently becoming a cross-venue strategy.
+
+Binance is selected provisionally because its official USDⓈ-M documentation exposes funding history, mark price, index price, open interest, order-book, symbol information, and related market-data endpoints. Venue availability is confirmed by the user; account fee tier and historical-data verification remain.
 
 ---
 
@@ -124,6 +141,7 @@ The hypothesis fails conceptually if the observed return is primarily unexplaine
 7. Confirm venue jurisdiction, custody, withdrawal, API, outage, and counterparty risks before treating a venue as usable.
 8. Identify all known sources of survivorship, selection, timestamp, look-ahead, and stale-price bias.
 9. Reconstruct at least one venue's historical funding payment independently from the venue's published history before using a unified API for the full study.
+10. Confirm that Binance USDⓈ-M Futures and the corresponding spot market are available for our jurisdiction, account type, and intended paper-trading use.
 
 ---
 
@@ -183,6 +201,8 @@ The hypothesis fails conceptually if the observed return is primarily unexplaine
 - Insurance, auto-deleveraging, and liquidation policy
 - Historical changes to contract rules and fee schedules
 
+For version one, the minimum viable historical dataset is BTCUSDT spot and perpetual bid/ask or depth data, executed trades, mark price, index price, realized funding rate and timestamp, open interest, symbol metadata, and the applicable fee schedule. Liquidation and borrow data remain required risk inputs where available, but they are not reasons to expand the initial scope to negative-funding or cross-venue trades.
+
 ---
 
 ### **data validation**
@@ -218,6 +238,8 @@ At decision time, calculate:
 - borrow or financing cost where applicable;
 - a risk reserve for funding changes, leg divergence, and liquidation distance.
 
+For version one, the signal is evaluated before each funding assessment. The next funding estimate is not treated as guaranteed. The research must compare at least three assumptions: zero future funding, the published estimate with a conservative haircut, and the realized funding rate after the assessment. Entry is allowed only when the conservative case clears the threshold.
+
 #### **Entry condition**
 
 Enter only when:
@@ -225,6 +247,8 @@ Enter only when:
 `expected net return = expected funding + expected basis capture - all costs - risk reserve`
 
 is greater than a pre-registered minimum threshold.
+
+The initial backtest must test the threshold as a parameter range and must not hard-code a funding-rate threshold from published research. The first version should enter only when the spot and perpetual hedge can be opened within the same decision window and the executable basis is within the pre-registered risk band.
 
 The threshold, holding period, and sizing rule must be selected before out-of-sample testing. They must not be chosen to make the historical result pass.
 
@@ -239,6 +263,8 @@ Exit when any of the following occurs:
 - liquidity falls below the minimum execution requirement;
 - venue, custody, API, or settlement risk becomes unacceptable;
 - the stop condition is reached.
+
+For version one, the planned holding period ends after a pre-registered number of funding assessments or when the conservative expected carry no longer covers the estimated round-trip closing cost. The basis stop must be expressed as a loss in account currency or percentage of hedged notional, not as an undefined chart condition.
 
 #### **Position sizing**
 
@@ -271,6 +297,8 @@ The backtest must model both legs independently and include:
 - exchange outages and forced-unwind assumptions.
 
 No result is valid if it uses mid-price fills while claiming executable arbitrage.
+
+For the same-venue version-one model, transfer fees are excluded from each trade's PnL only when both legs are funded before the simulated entry. They remain part of the operational capital requirement. If capital must be transferred between venues, this is a different model and requires a separate specification.
 
 ---
 
@@ -369,15 +397,19 @@ Promotional material is not sufficient to validate the mechanic.
 
 The initial research pass is complete using Tavily and supporting source checks. Tavily was restored and four focused research queries were completed. Some generated summaries contained unsupported precision, so only claims traceable to primary papers, official venue documentation, or raw data have been incorporated.
 
-Still unresolved before coding:
+Still unresolved before coding, and who resolves each item:
 
-- Which venue and jurisdiction are actually available to us for both data and eventual paper trading.
-- Whether complete historical order-book depth can be obtained for the selected venue and asset.
-- Whether historical fee schedules, funding-interval changes, caps, floors, and contract-rule changes can be reconstructed.
-- Whether the expected funding income remains positive after four fills, funding uncertainty, and hedge rebalancing.
-- Whether the spot hedge can be held with acceptable custody, borrow, financing, and counterparty risk.
-- Whether the observed basis is executable or only a mark-price/index-price difference.
-- Whether the candidate has enough capacity for the intended capital.
+- **User:** Confirmed Binance Futures and spot availability.
+- **Assumption:** Treat the account as a regular Binance user and use a conservative published retail fee assumption. The exact live account tier is not needed for the research pass.
+- **Assumption:** Evaluate capacity as a notional sensitivity curve rather than against a personal deployment target.
+- **Research:** Verify complete historical BTCUSDT order-book/depth availability.
+- **Research:** Reconstruct historical fee schedules, funding-interval changes, caps, floors, and contract-rule changes.
+- **Research:** Test whether expected funding remains positive after four fills, funding uncertainty, and hedge rebalancing.
+- **Research:** Test same-venue hedge, custody, margin, financing, and counterparty assumptions.
+- **Research:** Determine whether the observed basis is executable or only a mark-price/index-price difference.
+- **Research:** Estimate capacity at multiple notional sizes.
+
+These assumptions are for backtesting only. They do not authorize live trading or imply that the strategy is suitable for the user's account.
 
 The next research deliverable must resolve these questions with venue-specific evidence. Until then, no venue, asset, threshold, or return target is approved.
 
