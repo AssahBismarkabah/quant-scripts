@@ -171,11 +171,13 @@ These exist because portfolio managers are human beings optimizing for their own
 ### **category 5: auction market & market profile mechanics**
 *"The Self-Organizing Properties of Price Discovery"*
 
-This category covers edges rooted in how continuous double-auction markets self-organize around volume. They do NOT depend on derivatives math, regulations, operational friction, or manager behavior. They emerge from the auction process itself.
+This category covers candidate mechanics rooted in how continuous double-auction markets self-organize around volume. They do not depend on derivatives math, regulations, or a legal mandate. They emerge from the auction process itself and therefore require stronger statistical validation than a mechanic with an explicitly forced counterparty.
+
+An auction or profile observation is not automatically a structural edge. It becomes a tradable edge only if the mechanism, counterparty or liquidity interaction, trigger, and positive expected value survive out-of-sample testing and realistic friction.
 
 **Foundation:** Auction Market Theory (Steidlmayer, 1980s) formalized that markets alternate between **balance** (range-bound value building, ~70% of time) and **imbalance** (trending value discovery, ~30% of time). Volume Profile (volume-at-price histogram) reveals the structural skeleton of where institutions built positions. Academic research (Chutka Jan, 2021) explicitly connects Volume Profile levels to microeconomic supply/demand equilibrium theory — POC is the equilibrium price, VAH is a surplus zone, VAL is a deficit zone.
 
-**Backtest evidence:** A rigorous 33-year walk-forward study across US and Brazilian equities found a real but modest standalone edge on liquid US indices, with volume confirmation being the strongest signal filter. The edge does not survive on single-name stocks or high-cost instruments — it requires liquid, low-cost markets.
+**Backtest evidence:** Existing studies are evidence for a research hypothesis, not proof that the edge remains live or is portable to every instrument. Any implementation must be re-tested on its own data, market, costs, and execution rules.
 
 **14. Value Area Breakout & Retest (Momentum / Trend Following)**
 
@@ -235,11 +237,51 @@ These mechanics have emerged or grown dramatically in the last decade due to the
 
 ---
 
+### **validation gate for every mechanic**
+
+The catalog identifies mechanisms worth investigating. It does not certify them as live trading edges. Before promoting any mechanic to a strategy, apply the following gates:
+
+1. **Mechanism and counterparty**
+   - State the economic reason the opportunity exists.
+   - Identify who is on the other side and why they trade when they do.
+   - Define the trigger that makes the behavior predictable or constrained.
+   - If no counterparty or causal mechanism can be identified, classify the idea as a statistical hypothesis, not a structural mechanic.
+
+2. **Data integrity**
+   - Verify source quality, timestamps, session definitions, corporate actions, missing observations, and instrument coverage.
+   - Include delisted, bankrupt, merged, or otherwise failed assets when relevant.
+   - Ensure the data available at each historical timestamp matches what would have been known then.
+
+3. **Machine-executable rules**
+   - Define entry, exit, time-based exit, invalidation, and position sizing without discretionary interpretation.
+   - Freeze the rules and parameters before the out-of-sample test.
+
+4. **Economic results after friction**
+   - Model commissions, spread, slippage, market impact, funding, borrow, financing, roll, and venue costs as applicable.
+   - Record net profit, win rate, average trade, maximum drawdown, and return on drawdown.
+   - Reject the implementation if the average trade does not clear realistic costs.
+
+5. **Robustness and validation**
+   - Test across a range of reasonable parameters, instruments, and market regimes.
+   - Use an in-sample and out-of-sample split, with no tuning on the out-of-sample period.
+   - Use walk-forward testing where parameters or market conditions change over time.
+   - Use Monte Carlo trade reshuffling and bootstrap resampling to estimate sequence risk, drawdown, and ruin probability.
+   - Reject ideas that depend on one parameter value, one period, one instrument, or one lucky equity-curve order.
+
+6. **Capacity and monitoring**
+   - Measure whether the trade can absorb the intended capital without changing its own price or execution cost.
+   - Define live thresholds for drawdown, average trade, fill quality, and degradation.
+   - Pause the strategy when live behavior leaves the validated range.
+
+Only an implementation that passes these gates should be described as a validated edge. A category is a map of possible sources; it is not proof that every listed mechanic is profitable.
+
+---
+
 ### **why the count is larger than usually admitted**
 
 The original claim of "10 to 15 categories" is too restrictive because it treats only **product-driven, regulation-driven, and institution-driven** mechanics. It omits:
 
-- **Pure microstructure edges** (Categories 5 and 6) — the physics of continuous auctions and the plumbing of passive flows. These are harder to measure but are documented in academic literature and institutional practice
+- **Pure microstructure candidates** (Categories 5 and 6) — the physics of continuous auctions and the plumbing of passive flows. These are harder to measure and must pass the validation gate before being treated as edges
 - **Modern innovations** — 0DTE options, crypto funding rates, and passive flow inelasticity did not exist meaningfully a decade ago. The market creates new structural mechanics as it evolves
 - **Composability within categories** — You CAN run multiple mechanics within Category 5 (value area breakout + volume exhaustion + initial balance breakout) with a single data feed, a single 15-minute bar engine, and a single OMS. This is exactly how quantitative firms build diversified intraday portfolios
 
@@ -256,7 +298,7 @@ The original claim of "10 to 15 categories" is too restrictive because it treats
 ### **the path forward**
 
 - You do not need a buffet. You need a **deep vein within one category**
-- IVAMR sits in **Category 5: Auction Market & Market Profile Mechanics**. This is a real, documented category with academic backing and institutional practice. It requires a specific data pipeline (1-minute RTH OHLCV) and produces edges across multiple time horizons (15-min to multi-week)
+- IVAMR sits in **Category 5: Auction Market & Market Profile Mechanics**. This is a documented research category, not a guarantee of a live edge. It requires a specific data pipeline (1-minute RTH OHLCV) and must pass the validation gate on the chosen instruments and execution assumptions
 - Within Category 5 alone, you could build multiple uncorrelated models — value area breakout/retest, value area break-in/fade, volume exhaustion, initial balance breakout, multi-session value migration — all sharing the same data feed, bar structure, and OMS
 - To explore another category, select one of the six above. For the chosen category:
   1) Exact academic search queries for the top working papers
