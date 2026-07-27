@@ -3,6 +3,8 @@
 - An edge is a persistent statistical asymmetry in expected value derived from a market inefficiency that cannot be instantly arbitraged away.
 - It is not a chart pattern, a Volume Profile level, or a moving average crossover.
 - If the inefficiency can be removed immediately by capital, speed, or information, it is not a durable edge.
+- We do not need to discover an unknown market mechanism. A known mechanism can still contain a tradable implementation if it survives current competition, costs, capacity, and execution constraints.
+- The mechanism is the hypothesis. The implementation is what we must test.
 
 ### **three parameters**
 
@@ -91,12 +93,14 @@
 ### **why you will not know all of them**
 
 - The best edges are usually not published.
-- Publication accelerates decay.
+- Publication can accelerate decay by attracting capital, but publication does not automatically invalidate an idea.
 - Different edges require different capital structures, execution engines, and data pipelines.
 - Trying to build for all edges at once creates engineering collapse.
 - Extreme secrecy matters.
 - The most profitable mechanics are usually guarded by firms that do not publish them.
-- Alpha decays once the edge becomes public.
+- Alpha may decay when an implementation becomes sufficiently public, crowded, and cheap to reproduce.
+- A published mechanism may still work in a narrower market, time window, capacity range, or execution implementation.
+- Research must therefore test whether a known mechanism remains positive after realistic friction and capacity, rather than assume it is either secret or dead.
 - Mutually exclusive infrastructure makes one universal system unrealistic.
 
 ### **strategy families**

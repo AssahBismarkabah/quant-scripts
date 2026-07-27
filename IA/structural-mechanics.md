@@ -45,7 +45,8 @@
 ### **the core principle**
 
 - Statistical anomalies are infinite and mostly useless. Structural market mechanics are finite, rooted in market architecture, and the only edges worth pursuing
-- If there were "tons" of robust, structural, non-decaying mechanics they would not exist. The moment a structural inefficiency is discovered capital floods it, arbitraging the return down to the cost of capital and execution. The only reason any structural edge survives is because it is constrained by **capacity**, **regulation**, or **extreme technical barriers**
+- If there were "tons" of robust, structural, non-decaying mechanics they would not exist. The moment a structural inefficiency is discovered, capital tends to reduce the return toward the cost of capital and execution. A mechanic can still survive when implementation is constrained by **capacity**, **regulation**, **technical barriers**, **operational friction**, or limited scalability
+- A published mechanic is not automatically rejected. The research question is whether a specific implementation still has positive expected value after current competition, costs, execution risk, and capacity limits
 - The universe of documented structural mechanics is approximately **25 to 30 globally** (as of 2026). Most of what retail traders call "edges" are statistical ghosts, overfitted backtests, or derivatives of these core mechanics
 - You cannot run all of them simultaneously. They require mutually exclusive infrastructure, data pipelines, capital structures, and regulatory licenses. But **within one category you CAN run multiple models** — this is how professional quant firms build diversified portfolios of uncorrelated models sharing the same data feed and OMS
 
