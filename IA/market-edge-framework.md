@@ -125,6 +125,9 @@
 - High quality data is non-negotiable.
 - Bad data does not announce itself.
 - Missing trades, bad ticks, and bad settings corrupt the result.
+- Survivorship bias must be excluded.
+- The dataset must include delisted, bankrupt, and merged assets when relevant.
+- If the dataset only contains survivors, the backtest is broken and returns are overstated.
 - Before any test, interrogate the data.
 - Ask whether it covers enough markets and whether the provider is reliable.
 - Data to collect:
