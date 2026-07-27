@@ -1,6 +1,4 @@
-# market edge framework
-
-### **core definition**
+### **market edge framework**
 
 - An edge is a persistent statistical asymmetry in expected value derived from a market inefficiency that cannot be instantly arbitraged away.
 - It is not a chart pattern, a Volume Profile level, or a moving average crossover.
@@ -8,22 +6,21 @@
 
 ### **three parameters**
 
-- Entry logic clearly defined with no ambiguity.
-- Exit logic clearly defined with stop loss, take profit, or time-based exit.
+- Entry Logic clearly defined with no ambiguity that a machine can execute on every bar when conditions are met.
+- Exit Logic clearly defined with stop loss, take profit, or time exit.
 - Position sizing clearly defined with explicit risk.
-
-- The research process starts with the why.
-- Who is on the other side of the trade?
+- The why matters.
+- Who is on the other side of this trade?
 - Why are they statistically giving you money?
 - Without that answer, you are gambling.
 
 ### **simple bits complex**
 
-- Every rule you add is a claim that the future will resemble the past.
-- Three rules make three claims.
-- Fifteen rules make fifteen claims.
-- More rules and more parameters can make the past look better without making the strategy more real.
-- Strategies that survive tend to be small, direct, and built around one clear economic reason to exist.
+- Every rule you add to a strategy is a claim that the future will resemble the past.
+- A strategy with 3 rules makes 3 claims.
+- A strategy with 15 rules makes 15 claims.
+- More rules and more parameters can make the past look great without making the strategy real.
+- Strategies that survive tend to be a handful of rules, one clear why, and robust behavior across a wide range of values.
 
 ### **the three pillars**
 
@@ -44,6 +41,23 @@
   - Mid-price backtests are not enough.
   - If friction kills the edge, the edge was never real.
 
+### **where ideas come from**
+
+- Academic research
+  - Decades of measurement already exist.
+  - Start from what has been studied, then test it with your own pipeline.
+
+- Structure and mechanics
+  - Forced flows
+  - Rebalances
+  - Hedging
+  - Participants who must trade
+
+- Behavioral observation
+  - Observe first, then interrogate the observation.
+  - The observation is the beginning of the work, not the end.
+  - Institutions ask why the behavior exists before they call it an edge.
+
 ### **what to look for**
 
 - Stop starting from price.
@@ -62,23 +76,6 @@
   - What can you observe, clean, or process better than the consensus?
   - Examples: SEC filing parsing, cleaner tick data, faster alternative data pipelines.
 
-### **where ideas come from**
-
-- Academic research
-  - Decades of measurement already exist.
-  - Start from what has been studied, then test it with your own pipeline.
-
-- Structure and mechanics
-  - Forced flows
-  - Rebalances
-  - Hedging
-  - Participants who must trade
-
-- Behavioral observation
-  - Observe first, then interrogate the observation.
-  - The observation is the beginning of the work, not the end.
-  - Institutions ask why the behavior exists before they call it an edge.
-
 ### **how many edges exist**
 
 - Very few true, durable structural edges exist.
@@ -88,8 +85,6 @@
   - Derivatives of core mechanics
   - Temporary behavioral quirks
   - Pure noise from overfitting
-
-- The universe of real structural mechanics is finite.
 - The number is small enough that you can categorize it, but large enough that you should not pretend to know all of it.
 - Roughly 10 to 15 core categories is a useful working estimate, not a law.
 
@@ -103,48 +98,6 @@
 - The most profitable mechanics are usually guarded by firms that do not publish them.
 - Alpha decays once the edge becomes public.
 - Mutually exclusive infrastructure makes one universal system unrealistic.
-
-### **the path forward**
-
-- Do not catalog the entire market.
-- Find one edge that fits your capital, data, and execution constraints.
-- Build the pipeline, validate it, then monitor decay.
-
-- The research process should answer:
-  - What is the why?
-  - Who is on the other side?
-  - What is the moat?
-  - Does it survive friction?
-  - Does it survive out-of-sample?
-  - Does it survive Monte Carlo?
-
-### **data**
-
-- High quality data is non-negotiable.
-- Bad data does not announce itself.
-- Missing trades, bad ticks, and bad settings corrupt the result.
-- Before any test, interrogate the data.
-- Ask whether it covers enough markets and whether the provider is reliable.
-
-- Data to collect:
-  - Net profit
-  - Win rate
-  - Average trade
-  - Max drawdown
-  - Return on drawdown
-
-### **in code**
-
-- The machine must replay the data bar by bar or day by day.
-- The code is where the idea becomes executable.
-- The machine executes without emotion and without improvisation.
-
-### **analyze**
-
-- Do not stop at whether it made money.
-- Ask how it made money.
-- Ask when it made money.
-- Ask whether the profit is the result of an edge or just luck.
 
 ### **strategy families**
 
@@ -167,17 +120,40 @@
 - Add Monte Carlo reshuffle and bootstrap tests.
 - Reject strategies that only work on one curve.
 
+### **data**
+
+- High quality data is non-negotiable.
+- Bad data does not announce itself.
+- Missing trades, bad ticks, and bad settings corrupt the result.
+- Before any test, interrogate the data.
+- Ask whether it covers enough markets and whether the provider is reliable.
+- Data to collect:
+  - Net profit
+  - Win rate
+  - Average trade
+  - Max drawdown
+  - Return on drawdown
+
+### **in code**
+
+- The machine must replay the data bar by bar or day by day.
+- The code is where the idea becomes executable.
+- The machine executes without emotion and without improvisation.
+
+### **analyze**
+
+- Do not stop at whether it made money.
+- Ask how it made money.
+- Ask when it made money.
+- Ask whether the profit is the result of an edge or just luck.
+
 ### **validate**
 
 - The strategy must try to prove that what it found is real.
 - Monte Carlo reshuffle reorders the same trades.
 - Monte Carlo bootstrap resamples with replacement.
 - Tight dispersion across many equity curves is better than one lucky path.
-- Use the distribution to estimate:
-  - Expected profit
-  - Expected loss
-  - Expected drawdown
-  - Probability of ruin
+- Use the distribution to estimate expected profit, expected loss, expected drawdown, and probability of ruin.
 - If it only looks good in one equity curve, it is probably luck.
 - If it fails validation, it goes to the bin.
 
