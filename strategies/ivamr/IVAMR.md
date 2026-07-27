@@ -22,20 +22,20 @@
 
 ## 1. Executive Summary & Strategy Philosophy
 
-This document defines the complete, machine-executable blueprint for the IVAMR strategy. It rejects subjective visual analysis in favor of strict boolean logic, volatility-adjusted parameters, and rigorous statistical validation. The strategy is designed to survive across varying market regimes by relying on structural market mechanics rather than overfitted historical patterns. It strictly adheres to the principle that every rule must have a clear economic justification, and every parameter must be robust across a wide range of values.
+This document defines the complete, machine-executable blueprint for the IVAMR strategy. It rejects subjective visual analysis in favor of strict boolean logic, volatility-adjusted parameters, and rigorous statistical validation. The strategy is designed to survive across varying market regimes by relying on auction-market structure and microstructural behavior rather than overfitted historical patterns. It strictly adheres to the principle that every rule must have a clear economic justification, and every parameter must be robust across a wide range of values.
 
 **Design Principles:**
 - **No subjective interpretation** — every rule is machine-executable.
 - **Volatility-adjusted parameters** — no fixed-point magic numbers.
 - **Statistical validation** — the strategy must survive out-of-sample and Monte Carlo testing.
-- **Structural market mechanics** — the edge is grounded in institutional order flow, not overfitted historical patterns.
+- **Auction-market mechanics** — the edge is grounded in institutional order flow and price discovery, not overfitted historical patterns.
 - **Economic justification** — every rule has a clear counterparty and rationale; no assumptions without a thesis.
 
 ---
 
 ## 2. The Economic Edge ("The Why")
 
-A strategy without a defined counterparty is gambling. This strategy exploits two distinct structural inefficiencies:
+A strategy without a defined counterparty is gambling. This strategy exploits two distinct behavioral and microstructural inefficiencies:
 
 ### Trend Following Edge (Breakouts)
 
@@ -65,10 +65,10 @@ A strategy without a defined counterparty is gambling. This strategy exploits tw
 
 ### Session Boundary: RTH Only
 
-The Volume Profile (VAH, VAL, POC) must be calculated using **only the Regular Trading Hours (RTH) cash session** from the previous trading day: **9:30 AM - 4:00 PM EST**.
+The Volume Profile (VAH, VAL, POC) must be calculated using **only the Regular Trading Hours (RTH) cash session** from the previous trading day: **9:30 AM - 4:00 PM ET**.
 
 **Do NOT include:**
-- Overnight electronic trading (4:00 PM - 9:30 AM EST)
+- Overnight electronic trading (4:00 PM - 9:30 AM ET)
 - Pre-market session
 - After-hours session
 
@@ -80,18 +80,18 @@ The Volume Profile (VAH, VAL, POC) must be calculated using **only the Regular T
 ```
 PREVIOUS DAY VOLUME PROFILE CALCULATION:
 - Session:     Regular Trading Hours (RTH) ONLY
-- Time Window: 9:30:00 AM EST to 4:00:00 PM EST (previous trading day)
+- Time Window: 9:30:00 AM ET to 4:00:00 PM ET (previous trading day)
 - Data Source: Use only trades executed during RTH
 - Exclusion:   Do NOT include overnight electronic trading, pre-market, or after-hours
 - Profile:     70% Value Area based on RTH volume distribution
 ```
 
-### Daily Pre-Market Routine (Executed at 9:15 AM EST)
+### Daily Pre-Market Routine (Executed at 9:15 AM ET)
 
 1. **Value Area High (VAH)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
 2. **Value Area Low (VAL)** — Calculate from the previous day's **70% Volume Profile** (RTH session only).
 3. **Point of Control (POC)** — The price level with the highest traded volume from the previous day's RTH session.
-4. **14-period 15-minute Average True Range (ATR)** — Calculate using the previous day's RTH 15-minute candles, with the final calculation ending at 4:00 PM EST. This ensures the ATR reflects cash session volatility only.
+4. **14-period 15-minute Average True Range (ATR)** — Calculate using the previous day's RTH 15-minute candles, with the final calculation ending at 4:00 PM ET. This ensures the ATR reflects cash session volatility only.
 
 ---
 
@@ -101,15 +101,15 @@ PREVIOUS DAY VOLUME PROFILE CALCULATION:
 
 | Filter | Rule |
 |---|---|
-| **Entry Window Start** | No entries before 9:45 AM EST (avoids opening auction noise) |
-| **Signal Evaluation Cutoff** | No new setups may be evaluated after **2:15 PM EST**. (Required to accommodate the 1-bar execution delay — a signal at 2:15-2:30 PM would trigger entry at 2:30-2:45 PM, violating the hard time exit and exposing the trade to closing cross volatility) |
-| **Entry Window End** | No entries after 2:30 PM EST (avoids closing cross volatility) |
-| **Hard Time Exit** | If a position is still open at 3:30 PM EST, execute a standard **Market Order**. (Do NOT use a Market-On-Close order — MOC executes at 4:00 PM and directly violates the rule to avoid the 3:50 PM closing cross imbalance risk) |
+| **Entry Window Start** | No entries before 9:45 AM ET (avoids opening auction noise) |
+| **Signal Evaluation Cutoff** | No new setups may be evaluated after **2:15 PM ET**. This keeps the 1-bar execution delay inside the entry window and before the hard time exit. |
+| **Entry Window End** | No entries after 2:30 PM ET (avoids closing cross volatility) |
+| **Hard Time Exit** | If a position is still open at 3:30 PM ET, execute a standard **Market Order**. (Do NOT use a Market-On-Close order — MOC executes at 4:00 PM and directly violates the rule to avoid the 3:50 PM closing cross imbalance risk) |
 | **Daily Kill Switch** | If daily realized loss reaches **3%** of Total Account Equity, halt all trading for the day |
 
 ### 4.B. Entry Logic (The 4 Plays)
 
-All entries execute at the exact close of the qualifying 15-minute candle.
+All entries execute via a Market Order at the open of the candle immediately following the confirmation candle (Candle N+2).
 
 ---
 
@@ -121,7 +121,7 @@ IF:
   2. Next 15-min Candle Low <= Previous_Day_VAH         (retest)
   3. Next 15-min Candle Low >= (Previous_Day_VAH - (0.5 * 15-min ATR))   (structural integrity)
   4. Next 15-min Candle Close > Previous_Day_VAH         (confirmation)
-THEN: Execute Market Buy at Close.
+THEN: Queue Market Buy for execution at the next candle open.
 ```
 
 ---
@@ -134,7 +134,7 @@ IF:
   2. Next 15-min Candle High >= Previous_Day_VAL        (retest)
   3. Next 15-min Candle High <= (Previous_Day_VAL + (0.5 * 15-min ATR))   (structural integrity)
   4. Next 15-min Candle Close < Previous_Day_VAL        (confirmation)
-THEN: Execute Market Sell at Close.
+THEN: Queue Market Sell for execution at the next candle open.
 ```
 
 ---
@@ -147,7 +147,7 @@ IF:
   2. 15-min Candle Close > Previous_Day_VAL
   3. Candle Close is in the top 40% of the candle's total range:
        (Close - Low) / (High - Low) >= 0.60
-THEN: Execute Market Buy at Close.
+THEN: Execute Market Buy at the next candle open.
 ```
 
 ---
@@ -160,7 +160,7 @@ IF:
   2. 15-min Candle Close < Previous_Day_VAH
   3. Candle Close is in the bottom 40% of the candle's total range:
        (High - Close) / (High - Low) >= 0.60
-THEN: Execute Market Sell at Close.
+THEN: Execute Market Sell at the next candle open.
 ```
 
 ---
@@ -285,6 +285,7 @@ This document defines a **Volume Profile / Auction Market Theory strategy**. It 
 - The paper documents a **time-based anomaly**: first half-hour return predicts last half-hour return.
 - This document documents a **price-location anomaly**: Value Area breakouts and fades.
 - If your goal was to test the paper, this strategy will fail to do so. If your goal was to build a robust Volume Profile strategy, this document is complete. Do not confuse the two in your backtesting analysis.
+- Treat Volume Profile here as a behavioral/statistical edge with finite half-life, not as a permanent market law.
 
 ### 8.B. Volume Profile Data Granularity Trap
 
@@ -318,7 +319,7 @@ Only after these steps should the developer apply the 15-minute entry logic.
 
 ## 9. Appendix: Quick Reference Card
 
-### Pre-Market Checklist (9:15 AM EST)
+### Pre-Market Checklist (9:15 AM ET)
 
 - [ ] Calculate VAH (70% Volume Profile)
 - [ ] Calculate VAL (70% Volume Profile)

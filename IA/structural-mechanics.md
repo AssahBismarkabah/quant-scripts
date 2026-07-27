@@ -181,7 +181,7 @@ This category covers edges rooted in how continuous double-auction markets self-
 - When price breaks decisively outside the prior session's Value Area (VAH/VAL), it signals that institutional participants have accepted a new price range. If price retests the boundary and holds, it confirms the shift
 - **The Counterparty:** Traders who placed stops at value area boundaries; late breakout buyers/sellers
 - **The Mechanic:** Price breaching VAH/VAL triggers stop-loss cascades from trapped participants. Institutional algo flow (VWAP/TWAP) absorbs the liquidity, creating a mechanical trending move
-- **Data needed:** 1-minute OHLCV or tick data for Volume Profile calculation. RTH session only (9:30 AM — 4:00 PM EST)
+- **Data needed:** 1-minute OHLCV or tick data for Volume Profile calculation. RTH session only (9:30 AM — 4:00 PM ET)
 - **Horizon:** 15-minute to hourly
 
 **15. Value Area Break-in / Fade the Breakdown (Mean Reversion)**
