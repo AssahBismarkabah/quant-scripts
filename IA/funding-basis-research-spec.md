@@ -54,11 +54,13 @@ The first literature and documentation pass produces the following conclusions:
 - A perpetual contract is not guaranteed to converge to spot in the same way as an expiry-based futures contract. The hedge can therefore carry residual basis risk even when the spot and perpetual represent the same asset.
 - Funding rules are venue-specific. Settlement intervals, mark and index prices, premium averaging, caps, floors, and the exact rate used at assessment can change by contract and over time.
 - Official venue documentation confirms that a position may need to remain open at a precise assessment time to receive or pay funding. The displayed or estimated rate is not necessarily the rate ultimately applied.
+- The funding timestamp itself is an execution risk. Entry and exit must be modeled with an explicit buffer around the assessment time so the backtest does not assume ideal fills at the exact funding tick.
 - Existing empirical studies report potentially attractive results, but those results are not sufficient evidence of deployable profitability. They require independent reconstruction with current venue rules, executable prices, conservative costs, and out-of-sample testing.
 - The most defensible first study is therefore a **single-venue, single-asset historical reconstruction** before attempting cross-venue transfer or capital movement.
 - Tavily returned claims of positive net returns in selected historical windows, but the reported thresholds and annualized returns were not consistently traceable to strong primary sources. They are not adopted as assumptions, targets, or evidence of a live edge.
 - The first falsifiable result must be generated from raw venue data and our own conservative execution model, not copied from published annualized yields.
 - Binance's official API provides current order-book data and historical funding, mark/index, and related series, but a complete arbitrary historical full-depth order-book archive is not identified as a normal free public endpoint. Historical executable-cost reconstruction may therefore require a licensed dataset, a whitelisted historical-depth service, or conservative scenario modeling.
+- Liquidation wicks are a separate failure mode from close-to-close basis risk. A valid backtest must stress the intraperiod mark or liquidation price path, not only bar closes, because a short perpetual can be liquidated by a wick while the spot hedge remains open.
 
 The research changes the working hypothesis from:
 
@@ -80,6 +82,7 @@ The venue research supports the following provisional scope:
 - **Direction:** Positive-funding carry only: long spot and short perpetual.
 - **Excluded from version one:** Negative-funding carry, spot borrowing, cross-venue transfers, cross-venue basis, altcoins, leverage above the minimum required for operational margin, and prediction of unusually high future funding.
 - **Research objective:** Reconstruct whether holding the two legs through funding assessments produced positive net return after executable entry and exit costs, funding payments, basis movement, margin, and operational reserves.
+- **Funding event handling:** Version one must test an explicit pre-funding entry window and a post-funding exit window rather than assuming fills at the exact assessment timestamp. The narrow-timestamp case remains a stress test, not the default assumption.
 
 This is a research scope, not a trading approval. If same-venue spot and perpetual access is not available, the scope must be revised before coding rather than silently becoming a cross-venue strategy.
 
@@ -218,6 +221,8 @@ The hypothesis fails conceptually if the observed return is primarily unexplaine
 - Tick size and quantity step
 - Minimum order size and notional limits
 - Margin mode and liquidation rules
+- Margin model assumptions, including whether the backtest uses isolated margin, cross margin, or portfolio margin
+- Whether spot inventory can be posted as collateral or netted against perpetual margin in the modeled account type
 - Funding interval and payment convention
 - Mark-price and index-price definitions
 - Listing, delisting, and contract-change dates
@@ -240,6 +245,7 @@ The hypothesis fails conceptually if the observed return is primarily unexplaine
 - Funding cap and floor at the time of payment
 - Premium-index and interest-rate components where available
 - Liquidation data where available
+- Intraperiod mark-price high and low, or the closest available sub-bar proxy, for wick stress testing
 
 #### **Spot market data**
 
@@ -276,6 +282,8 @@ Before calculating a return:
 - Reconcile funding payments against venue-published history.
 - Verify that prices are executable rather than theoretical midpoints.
 - Verify both legs against order-book depth at the intended notional, not only last trade prices.
+- Model funding-event liquidity explicitly with a pre-registered buffer before and after the assessment time.
+- Stress-test every candidate trade against intraperiod mark-price extremes to determine whether a liquidation wick would have closed the perpetual leg.
 - Verify symbol mappings through contract changes and delistings.
 - Check that each signal uses only information available before the order decision.
 - Keep raw data immutable and store cleaning decisions separately.
@@ -287,7 +295,7 @@ Before calculating a return:
 
 ### **minimum machine-executable model**
 
-The first model must be deliberately simple.
+The first model must be deliberately simple, but not naive about timing or liquidation.
 
 #### **Signal**
 
@@ -301,6 +309,11 @@ At decision time, calculate:
 - a risk reserve for funding changes, leg divergence, and liquidation distance.
 
 For version one, the signal is evaluated before each funding assessment. The next funding estimate is not treated as guaranteed. The research must compare at least three assumptions: zero future funding, the published estimate with a conservative haircut, and the realized funding rate after the assessment. Entry is allowed only when the conservative case clears the threshold.
+
+The model must test at least two execution windows around the funding event:
+
+- a conservative pre-funding buffer window that avoids the exact assessment tick;
+- a narrow event-window stress case that measures whether exact-timestamp entry would have been dominated by spread widening and slippage.
 
 #### **Entry condition**
 
@@ -324,6 +337,7 @@ Exit when any of the following occurs:
 - one leg cannot be maintained or rebalanced;
 - liquidity falls below the minimum execution requirement;
 - venue, custody, API, or settlement risk becomes unacceptable;
+- a simulated liquidation wick hits the perpetual leg before the planned exit;
 - the stop condition is reached.
 
 For version one, the planned holding period ends after a pre-registered number of funding assessments or when the conservative expected carry no longer covers the estimated round-trip closing cost. The basis stop must be expressed as a loss in account currency or percentage of hedged notional, not as an undefined chart condition.
@@ -339,6 +353,12 @@ Size from the lower of:
 - capital available for both legs and operational reserves.
 
 Do not size from funding yield alone. A high funding rate may represent high stress and high basis risk.
+
+The margin model must be stated explicitly before any test:
+
+- **Default research mode:** cross margin or portfolio-style netting if the venue and account type support it;
+- **Stress mode:** isolated margin for each leg as a conservative upper bound on capital usage;
+- **Not allowed as an unstated assumption:** treating isolated-margin capital efficiency as if it were cross-margin netting, or vice versa.
 
 ---
 
@@ -357,8 +377,12 @@ The backtest must model both legs independently and include:
 - conversion and stablecoin costs where applicable;
 - failed, partial, or delayed fills;
 - exchange outages and forced-unwind assumptions.
+- funding-event spread widening and slippage around the assessment timestamp;
+- liquidation-wick path stress using intraperiod mark-price extremes.
 
 No result is valid if it uses mid-price fills while claiming executable arbitrage.
+
+The backtest must also record whether the trade survives if the entry or exit is shifted away from the exact funding timestamp by a pre-registered buffer. If the PnL only exists at the exact timestamp and disappears once realistic queueing or spread widening is modeled, the apparent edge is not executable.
 
 For the same-venue version-one model, transfer fees are excluded from each trade's PnL only when both legs are funded before the simulated entry. They remain part of the operational capital requirement. If capital must be transferred between venues, this is a different model and requires a separate specification.
 
