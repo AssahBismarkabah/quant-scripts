@@ -1,0 +1,2 @@
+"""Quant research scaffolding."""
+
