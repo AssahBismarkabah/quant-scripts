@@ -22,3 +22,10 @@ A collection of quantitative trading strategies, research specs, and executable 
 ## Edge Workflows
 
 - [Funding Basis Workflow](research/funding-basis/Makefile)
+
+## Funding Basis Flow
+
+1. Run `make -C research/funding-basis smoke` to verify Binance connectivity.
+2. Run `make -C research/funding-basis dump SYMBOL=BTCUSDT INTERVAL=1h` to save BTCUSDT funding, mark, and spot fixtures.
+3. Run `make -C research/funding-basis test` to validate the loaders and normalization logic.
+4. Use the saved fixtures to drive the first backtest pass.

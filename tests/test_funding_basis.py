@@ -267,6 +267,13 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertEqual(args.mode, "smoke")
 
+    def test_cli_parser_dump_mode(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args(["--mode", "dump", "--output-dir", "fixtures"])
+
+        self.assertEqual(args.mode, "dump")
+        self.assertEqual(str(args.output_dir), "fixtures")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -6,12 +6,13 @@ SYMBOL ?= BTCUSDT
 INTERVAL ?= 1h
 DOTENV ?= ../../.env
 
-.PHONY: help test smoke funding mark spot
+.PHONY: help test smoke dump funding mark spot
 
 help:
 	@printf '%s\n' \
 		'Funding-basis edge workflow:' \
 		'  make smoke' \
+		'  make dump SYMBOL=BTCUSDT INTERVAL=1h' \
 		'  make test' \
 		'  make funding SYMBOL=BTCUSDT' \
 		'  make mark SYMBOL=BTCUSDT INTERVAL=1h' \
@@ -19,6 +20,9 @@ help:
 
 smoke:
 	$(PYTHON) -m quant_scripts.funding_basis.cli --mode smoke --dotenv $(DOTENV) --insecure-tls
+
+dump:
+	$(PYTHON) -m quant_scripts.funding_basis.cli --mode dump --symbol $(SYMBOL) --interval $(INTERVAL) --dotenv $(DOTENV) --insecure-tls --output-dir fixtures
 
 test:
 	$(PYTHON) -m unittest discover -s $(TEST_DIR) -q

@@ -17,7 +17,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--interval", default="1h")
     parser.add_argument("--dotenv", type=Path, default=None)
     parser.add_argument("--insecure-tls", action="store_true")
-    parser.add_argument("--mode", choices=["smoke", "funding", "mark", "spot"], default="smoke")
+    parser.add_argument("--mode", choices=["smoke", "funding", "mark", "spot", "dump"], default="smoke")
+    parser.add_argument("--output-dir", type=Path, default=None)
     return parser
 
 
@@ -46,8 +47,48 @@ def main() -> int:
         dataset = service.load_funding_history(args.symbol, limit=10)
     elif args.mode == "mark":
         dataset = service.load_mark_price_klines(args.symbol, args.interval, limit=10)
-    else:
+    elif args.mode == "spot":
         dataset = service.load_spot_klines(args.symbol, args.interval, limit=10)
+    else:
+        output_dir = args.output_dir or Path("research/funding-basis/fixtures")
+        output_dir.mkdir(parents=True, exist_ok=True)
+        datasets = {
+            "funding": service.load_funding_history(args.symbol, limit=10),
+            "mark": service.load_mark_price_klines(args.symbol, args.interval, limit=10),
+            "spot": service.load_spot_klines(args.symbol, args.interval, limit=10),
+        }
+        output = {}
+        for name, dataset in datasets.items():
+            path = output_dir / f"{args.symbol.lower()}_{name}.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "venue": dataset.venue,
+                        "symbol": dataset.symbol,
+                        "snapshots": [
+                            {
+                                "ts": snapshot.ts.isoformat(),
+                                "venue": snapshot.venue,
+                                "symbol": snapshot.symbol,
+                                "bid": snapshot.bid,
+                                "ask": snapshot.ask,
+                                "last": snapshot.last,
+                                "mark": snapshot.mark,
+                                "index": snapshot.index,
+                                "funding_rate_bps": snapshot.funding_rate_bps,
+                                "open_interest": snapshot.open_interest,
+                                "source": snapshot.source,
+                            }
+                            for snapshot in dataset.snapshots
+                        ],
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            output[name] = {"rows": len(dataset.snapshots), "path": str(path)}
+        print(json.dumps(output, indent=2))
+        return 0
 
     print(
         json.dumps(
