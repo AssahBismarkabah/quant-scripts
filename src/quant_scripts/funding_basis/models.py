@@ -1,14 +1,40 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from typing import Literal
 
 
 class MarginMode(str, Enum):
     ISOLATED = "isolated"
     CROSS = "cross"
     PORTFOLIO = "portfolio"
+
+
+class Side(str, Enum):
+    BUY = "buy"
+    SELL = "sell"
+
+
+class SourceFormat(str, Enum):
+    CSV = "csv"
+    JSONL = "jsonl"
+
+
+@dataclass(frozen=True)
+class MarketSnapshot:
+    ts: datetime
+    venue: str
+    symbol: str
+    bid: float | None = None
+    ask: float | None = None
+    last: float | None = None
+    mark: float | None = None
+    index: float | None = None
+    funding_rate_bps: float | None = None
+    open_interest: float | None = None
+    source: str | None = None
 
 
 @dataclass(frozen=True)
@@ -72,6 +98,31 @@ class FundingBasisTrade:
 
     def net_pnl(self) -> float:
         return self.notional * self.net_edge_bps() / 10_000.0
+
+
+@dataclass(frozen=True)
+class TradeDecision:
+    event: FundingEvent
+    entry_time: datetime
+    exit_time: datetime
+    notional: float
+    entry_spread_bps: float
+    exit_spread_bps: float
+    estimated_funding_bps: float
+    basis_capture_bps: float
+    fees_bps: float
+    slippage_bps: float
+    liquidation_risk_bps: float
+
+
+@dataclass(frozen=True)
+class NormalizedDataset:
+    venue: str
+    symbol: str
+    snapshots: tuple[MarketSnapshot, ...] = field(default_factory=tuple)
+
+    def sorted_snapshots(self) -> tuple[MarketSnapshot, ...]:
+        return tuple(sorted(self.snapshots, key=lambda item: item.ts))
 
 
 def build_funding_event(
