@@ -1,25 +1,39 @@
 import csv
+import hashlib
+import hmac
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import sys
+import os
+from unittest.mock import patch, MagicMock
+from urllib.request import Request
 
 SRC_DIR = Path(__file__).resolve().parents[1] / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from quant_scripts.funding_basis import (
+    BinanceFileMarketDataSource,
+    BinanceRecordType,
+    BinanceCredentials,
+    BinanceIngestionService,
+    BinanceRestClient,
+    build_parser,
     FundingBasisBacktest,
     MarginAssumptions,
     MarginMode,
     SourceFormat,
     TradeDecision,
+    funding_rate_rows_to_dataset,
     build_funding_event,
     validate_dataset,
     validate_trade_window,
     wick_stress,
     FileMarketDataSource,
+    mark_price_klines_to_dataset,
+    spot_klines_to_dataset,
 )
 
 
@@ -121,6 +135,131 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertTrue(result.accepted)
         self.assertGreater(result.trade.net_pnl(), 0.0)
+
+    def test_binance_jsonl_loader_normalizes_agg_trade(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "binance.jsonl"
+            path.write_text(
+                "\n".join(
+                    [
+                        '{"T": 1722240000000, "s": "BTCUSDT", "p": "100.25"}',
+                        '{"T": 1722240001000, "s": "BTCUSDT", "p": "100.35"}',
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            dataset = BinanceFileMarketDataSource(
+                path=path,
+                venue="binance",
+                symbol="BTCUSDT",
+                record_type=BinanceRecordType.AGG_TRADE,
+                source="fixture",
+            ).load()
+
+            self.assertEqual(dataset.venue, "binance")
+            self.assertEqual(dataset.symbol, "BTCUSDT")
+            self.assertEqual(dataset.snapshots[0].last, 100.25)
+            self.assertEqual(dataset.snapshots[1].last, 100.35)
+
+    def test_binance_credentials_load_from_env(self) -> None:
+        with patch.dict(os.environ, {"BINANCE_API_KEY": "abc", "BINANCE_API_SECRET": "def"}, clear=False):
+            creds = BinanceCredentials.from_env()
+
+        self.assertEqual(creds.api_key, "abc")
+        self.assertEqual(creds.api_secret, "def")
+
+    def test_binance_credentials_load_from_dotenv_file(self) -> None:
+        with TemporaryDirectory() as tmpdir:
+            repo_root = Path(tmpdir)
+            env_path = repo_root / ".env"
+            env_path.write_text(
+                "BINANCE_API_KEY=file-key\nBINANCE_API_SECRET=file-secret\n",
+                encoding="utf-8",
+            )
+
+            with patch.dict(os.environ, {}, clear=True):
+                creds = BinanceCredentials.from_env(env_path)
+
+        self.assertEqual(creds.api_key, "file-key")
+        self.assertEqual(creds.api_secret, "file-secret")
+
+    def test_binance_signed_request_builds_expected_url(self) -> None:
+        creds = BinanceCredentials(api_key="key", api_secret="secret")
+        client = BinanceRestClient(credentials=creds)
+
+        fake_response = MagicMock()
+        fake_response.__enter__.return_value.read.return_value = b"{}"
+        fake_response.__exit__.return_value = False
+
+        with patch("quant_scripts.funding_basis.client.urlopen", return_value=fake_response) as urlopen_mock, patch(
+            "quant_scripts.funding_basis.client.time.time", return_value=1000.0
+        ):
+            client.get_futures_account()
+
+        request = urlopen_mock.call_args.args[0]
+        self.assertIsInstance(request, Request)
+        self.assertIn("timestamp=1000000", request.full_url)
+        expected_query = "timestamp=1000000"
+        expected_signature = hmac.new(
+            b"secret",
+            expected_query.encode("utf-8"),
+            hashlib.sha256,
+        ).hexdigest()
+        self.assertIn(f"signature={expected_signature}", request.full_url)
+
+    def test_binance_funding_rate_rows_normalize_to_dataset(self) -> None:
+        dataset = funding_rate_rows_to_dataset(
+            rows=[{"fundingTime": 1722240000000, "fundingRate": "0.0001"}],
+            venue="binance",
+            symbol="BTCUSDT",
+            source="fixture",
+        )
+
+        self.assertEqual(dataset.snapshots[0].funding_rate_bps, 1.0)
+        self.assertEqual(dataset.snapshots[0].ts.isoformat(), "2024-07-29T08:00:00+00:00")
+
+    def test_binance_kline_rows_normalize_to_dataset(self) -> None:
+        spot_dataset = spot_klines_to_dataset(
+            rows=[[1722240000000, "1", "2", "0.5", "1.5", "100"]],
+            venue="binance",
+            symbol="BTCUSDT",
+            source="fixture",
+        )
+        mark_dataset = mark_price_klines_to_dataset(
+            rows=[[1722240000000, "1", "2", "0.5", "1.75", "100"]],
+            venue="binance",
+            symbol="BTCUSDT",
+            source="fixture",
+        )
+
+        self.assertEqual(spot_dataset.snapshots[0].last, 1.5)
+        self.assertEqual(mark_dataset.snapshots[0].mark, 1.75)
+
+    def test_binance_ingestion_service_normalizes_client_payloads(self) -> None:
+        client = MagicMock()
+        client.get_futures_funding_rate_history.return_value = [
+            {"fundingTime": 1722240000000, "fundingRate": "0.0001"}
+        ]
+        client.get_futures_mark_price_klines.return_value = [[1722240000000, "1", "2", "0.5", "1.75", "100"]]
+        client.get_spot_klines.return_value = [[1722240000000, "1", "2", "0.5", "1.5", "100"]]
+        service = BinanceIngestionService(client=client)
+
+        funding_dataset = service.load_funding_history("BTCUSDT")
+        mark_dataset = service.load_mark_price_klines("BTCUSDT", "1h")
+        spot_dataset = service.load_spot_klines("BTCUSDT", "1h")
+
+        self.assertEqual(funding_dataset.snapshots[0].funding_rate_bps, 1.0)
+        self.assertEqual(mark_dataset.snapshots[0].mark, 1.75)
+        self.assertEqual(spot_dataset.snapshots[0].last, 1.5)
+
+    def test_cli_parser_defaults(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args([])
+
+        self.assertEqual(args.symbol, "BTCUSDT")
+        self.assertEqual(args.interval, "1h")
+        self.assertEqual(args.mode, "funding")
 
 
 if __name__ == "__main__":
