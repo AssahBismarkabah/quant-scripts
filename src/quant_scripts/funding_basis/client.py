@@ -7,7 +7,7 @@ import ssl
 import time
 from dataclasses import dataclass
 from typing import Any
-from urllib.error import URLError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -21,6 +21,7 @@ class BinanceRestClient:
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "_ssl_context", ssl._create_unverified_context() if self.settings.insecure_tls else ssl.create_default_context())
+        object.__setattr__(self, "_time_offset_ms", 0)
 
     def get_server_time(self) -> dict[str, Any]:
         return self._request_with_fallback(
@@ -106,8 +107,13 @@ class BinanceRestClient:
         if params:
             url = f"{url}?{urlencode(params)}"
         request = Request(url=url, method=method)
-        with urlopen(request, timeout=30, context=self._ssl_context) as response:
-            return json.loads(response.read().decode("utf-8"))
+        try:
+            with urlopen(request, timeout=30, context=self._ssl_context) as response:
+                body = response.read().decode("utf-8", errors="replace")
+                return self._decode_json(body, url)
+        except HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"HTTP {exc.code} {exc.reason}: {body}") from exc
 
     def _request_with_fallback(self, method: str, urls: list[str], params: dict[str, Any] | None = None) -> dict[str, Any]:
         last_error: Exception | None = None
@@ -129,11 +135,16 @@ class BinanceRestClient:
         if params:
             url = f"{url}?{urlencode(params)}"
         request = Request(url=url, method=method)
-        with urlopen(request, timeout=30, context=self._ssl_context) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-            if not isinstance(payload, list):
-                raise TypeError(f"expected list payload from {url}")
-            return payload
+        try:
+            with urlopen(request, timeout=30, context=self._ssl_context) as response:
+                body = response.read().decode("utf-8", errors="replace")
+                payload = self._decode_json(body, url)
+                if not isinstance(payload, list):
+                    raise TypeError(f"expected list payload from {url}")
+                return payload
+        except HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"HTTP {exc.code} {exc.reason}: {body}") from exc
 
     def _request_list_with_fallback(
         self,
@@ -156,7 +167,8 @@ class BinanceRestClient:
             raise RuntimeError("Binance credentials are required for signed requests")
 
         payload = dict(params or {})
-        payload["timestamp"] = int(time.time() * 1000)
+        payload["timestamp"] = int(time.time() * 1000) + int(self._time_offset_ms)
+        payload.setdefault("recvWindow", 5000)
         query = urlencode(payload)
         signature = hmac.new(
             self.credentials.api_secret.encode("utf-8"),
@@ -166,8 +178,16 @@ class BinanceRestClient:
         signed_url = f"{url}?{query}&signature={signature}"
         request = Request(url=signed_url, method=method)
         request.add_header("X-MBX-APIKEY", self.credentials.api_key)
-        with urlopen(request, timeout=30, context=self._ssl_context) as response:
-            return json.loads(response.read().decode("utf-8"))
+        try:
+            with urlopen(request, timeout=30, context=self._ssl_context) as response:
+                body = response.read().decode("utf-8", errors="replace")
+                return self._decode_json(body, url)
+        except HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            if exc.code == 400 and '"code":-1021' in body:
+                self._sync_time()
+                return self._signed_request(method, url, params=params)
+            raise RuntimeError(f"HTTP {exc.code} {exc.reason}: {body}") from exc
 
     def _signed_request_with_fallback(self, method: str, urls: list[str]) -> dict[str, Any]:
         last_error: Exception | None = None
@@ -179,3 +199,14 @@ class BinanceRestClient:
         if last_error is not None:
             raise last_error
         raise RuntimeError("no URLs available")
+
+    def _sync_time(self) -> None:
+        server_time = self.get_server_time().get("serverTime")
+        if isinstance(server_time, int):
+            object.__setattr__(self, "_time_offset_ms", server_time - int(time.time() * 1000))
+
+    def _decode_json(self, body: str, url: str) -> Any:
+        try:
+            return json.loads(body)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"non-JSON response from {url}: {body}") from exc

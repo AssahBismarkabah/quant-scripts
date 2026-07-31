@@ -200,7 +200,7 @@ class FundingBasisTests(unittest.TestCase):
         request = urlopen_mock.call_args.args[0]
         self.assertIsInstance(request, Request)
         self.assertIn("timestamp=1000000", request.full_url)
-        expected_query = "timestamp=1000000"
+        expected_query = "timestamp=1000000&recvWindow=5000"
         expected_signature = hmac.new(
             b"secret",
             expected_query.encode("utf-8"),
