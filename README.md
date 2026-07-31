@@ -18,3 +18,7 @@ A collection of quantitative trading strategies, research specs, and executable 
 ## Documentation
 
 - [Documentation Index](docs/README.md)
+
+## Edge Workflows
+
+- [Funding Basis Workflow](research/funding-basis/Makefile)
