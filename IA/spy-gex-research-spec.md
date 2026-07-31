@@ -23,7 +23,7 @@ The first implementation targets SPX. The exact historical window and thresholds
 - **Asset class:** U.S. equities / index options
 - **Primary underlying:** SPX
 - **Signal source:** Listed equity index options with open interest and expiration structure
-- **Execution instrument:** SPX intraday price action used as the research target
+- **Execution instrument:** SPY intraday price action used as the tradable proxy for execution backtests
 - **Strategy family:** Intraday bias / trend following / mean reversion regime filter
 - **Initial horizon:** 5-minute to 15-minute intraday
 - **Excluded initially:** Single-name options, overnight gap prediction, options market making, and multi-strategy portfolios
@@ -72,7 +72,7 @@ The venue research supports the following provisional scope:
 
 - **Research venue:** SPX.
 - **Signal source:** Daily end-of-day options chain and open interest.
-- **Execution proxy:** Intraday price action on the underlying during regular trading hours.
+- **Execution proxy:** SPY intraday price action during regular trading hours.
 - **Direction:** Regime-dependent.
 - **Excluded from version one:** Overnight prediction, single-name options, multi-leg options trades, and discretionary interpretation of the gamma map.
 - **Research objective:** Determine whether the sign and magnitude of dealer gamma exposure improves intraday return classification after executable costs and a frozen set of rules.
@@ -81,6 +81,8 @@ The venue research supports the following provisional scope:
 - **0DTE handling in version one:** Exclude 0DTE from the first-pass gamma calculation. Use only 1DTE and longer expirations from the previous day’s EOD snapshot.
 
 This is a research scope, not a trading approval.
+
+For execution testing, SPX remains the signal source and SPY is the tradable proxy. That keeps the gamma regime defined on the index market while the backtest itself uses a security that can actually be traded intraday.
 
 Databento is the preferred starting point for a full intraday options replay if we later need a higher-fidelity chain workflow, because it supports historical options, option chains, expirations, strikes, greeks, and underlying prices in one normalized workflow. For the first pass, Cboe is the primary data route because the SPX option EOD summary includes gamma and open interest fields needed to construct a daily regime classifier without immediately requiring a paid intraday chain feed.
 
@@ -205,6 +207,13 @@ The hypothesis fails conceptually if the observed result is primarily look-ahead
 - Trading hours
 - Data source coverage and timestamp conventions
 
+#### **Friction model**
+
+- SEC transaction fee for covered sales, using the current advisory rate at test time
+- Broker commission assumption, configurable per share or per contract depending on instrument
+- Slippage buffer, modeled conservatively per side
+- Bid-ask spread impact, estimated from the intraday proxy series or a fixed conservative buffer if spread history is unavailable
+
 ---
 
 ### **data validation**
@@ -246,6 +255,15 @@ The daily regime label is:
 - `dealer_gex < 0` -> negative dealer gamma regime
 
 This first-pass formula is a regime classifier, not a proof of executable edge.
+
+#### **friction model constants**
+
+The default first-pass execution model is conservative and configurable:
+
+- slippage: 1 basis point per side
+- commission: broker-specific assumption, defaulting to a small per-share proxy cost for SPY
+- SEC fee: apply the current SEC Section 31 rate at the time of testing
+- spread: model through midpoint minus slippage rather than assuming ideal fills
 
 #### **intraday playbook**
 

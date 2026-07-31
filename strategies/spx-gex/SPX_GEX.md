@@ -50,7 +50,7 @@ Treat the first pass as a regime classifier, not an executable edge.
 
 - Underlying: SPX
 - Signal source: SPX options chain and open interest
-- Execution target: SPX intraday price action
+- Execution target: SPY intraday price action as the tradable proxy for execution backtests
 - Horizon: 5-minute to 15-minute intraday
 - Regime design: daily dealer gamma sign and magnitude
 - First-pass data route: Cboe EOD options data, with Databento reserved for deeper replay if required
@@ -67,6 +67,17 @@ The research pipeline will need to answer:
 - does the regime separate intraday trend and mean-reversion behavior
 - does the result survive friction and out-of-sample splitting
 - does the effect remain stable across different volatility states
+
+## 4. Execution Assumptions
+
+SPX remains the signal source. SPY is the tradable proxy used for execution testing because it is directly tradeable intraday while preserving exposure to the same broad market move.
+
+### Friction Model
+
+- SEC transaction fee: apply the current Section 31 rate at the time of testing
+- Broker commission: configurable per share assumption for SPY
+- Slippage: 1 basis point per side as the default conservative buffer
+- Spread impact: approximate through midpoint minus slippage rather than ideal fills
 
 ## 5. Machine-Executable Rules
 

@@ -4,6 +4,7 @@
 - Exit Logic(Stop Loss, Take profit, and a condition when none of those are met)
 - Position sizing(how much do we want to Risk)
 - The why? who is in the other side of this trade and why are they statistically giving you money(a clear reason on why a specific behavior in the market is giving you an edge, who is on the other side of the trade and why are they systematically giving you money, e.g let say you know that every 2:00pm crypto funds are going to buy or sell to rebalance their portfolio , without it you are gambling)
+- separate the signal from the tradable proxy when they are not the same thing(source can be an index, execution can be an ETF, future, or other tradable instrument that best matches the signal)
 - simple bits complex(every rule you add to a strategy is a clame that the future will resemble the past in one way or the other, a strategy with 3 rules makes 3 claim a strategy with 15 rules makes 15 claims , themore rule and parameter a strategy has the more the past can look great instead of being a machine until you meet reality)
 - strategy that survive ages are just a hand full of rules, one clear why(a single economic reason to exist, robust works accrodss a wide range of values instead of just one magic setting )
 - where does ideas actually come from?
@@ -23,6 +24,7 @@
 - Data(high quality data for the instrument)
     - your backtest cannot be better than the data you feed to it and bad data doesnt annouce it self(missing trades,bad ticks, settings confogirations)
     - before any test interrogate the data, does it cover enough markets, those the data comes from a reliable provider
+    - if the signal source is not directly tradable, define the execution proxy explicitly and measure the basis between them before trusting the backtest
     - Data to collect(Net profit(what history paid, tells you nothing about how you got there), winrate(read it only beside average profit and everage loss it is the balance), avararge trade(net profit over trades, must clear commisions and slippage), max drawdown(the worst stetch you would had had to sit though assume worse ahead), return on drawdown(what is the profit per unit of risk))
 - In Code (the machine will replay every data in years, day by day, bar by bar)
 - analyze(not just did it make money, How,When how painfully quesitoing if the profit is the result of an edge or just luck)
@@ -51,6 +53,7 @@ improvement iwth the position sizing
 
 - working on postion sizing can be an effective way on improving performance without encountering overfitting risk
 - for example we can set 1 contract of every single trade, meaning thatwith thesame size of 1 basedon the volatily of the instrument the solution is applying a volatily targetting an example is a specific amount of dollar per trade
+- friction is part of the model, not an afterthought, and should be defined as explicit assumptions for spread, slippage, commissions, and venue fees before any live-like test
 
 when to say no
 
