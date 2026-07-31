@@ -38,8 +38,8 @@ Options market makers must hedge changes in delta exposure as the underlying mov
 
 The candidate implementation is:
 
-- **Negative gamma regime:** traders expect stronger intraday momentum or trend persistence.
-- **Positive gamma regime:** traders expect stronger intraday mean reversion or pinning behavior.
+- **Negative dealer gamma regime:** traders expect stronger intraday momentum or trend persistence.
+- **Positive dealer gamma regime:** traders expect stronger intraday mean reversion or pinning behavior.
 
 The position is not automatically profitable. It may still have basis risk, model error, stale open-interest assumptions, and execution friction.
 
@@ -50,10 +50,11 @@ The position is not automatically profitable. It may still have basis risk, mode
 The first literature and documentation pass produces the following conclusions:
 
 - Recent empirical work supports the idea that dealer gamma matters for intraday behavior in S&P 500-related markets, but the effect is regime-dependent rather than universal.
-- 0DTE growth makes same-day hedging effects more important in modern SPX behavior.
+- 0DTE growth makes same-day hedging effects more important in modern SPX behavior, so version one excludes 0DTE rather than pretending an EOD-only chain can observe it.
 - Positive gamma tends to be associated with dampened volatility or reversal behavior, while negative gamma can be associated with amplified movement.
 - The literature also shows that pooling regimes can erase predictive power, so a valid study must split by regime and test robustness out of sample.
 - A daily gamma regime derived from end-of-day options data is a defensible first research design, but it is not sufficient proof of a live edge.
+- Cboe’s own 0DTE commentary warns that customer flow can be balanced and that net market-maker gamma hedging may be de minimis on some days, so the first pass should treat the regime as a testable hypothesis rather than a presumed strong signal.
 
 The research changes the working hypothesis from:
 
@@ -76,6 +77,8 @@ The venue research supports the following provisional scope:
 - **Excluded from version one:** Overnight prediction, single-name options, multi-leg options trades, and discretionary interpretation of the gamma map.
 - **Research objective:** Determine whether the sign and magnitude of dealer gamma exposure improves intraday return classification after executable costs and a frozen set of rules.
 - **Regime handling:** Version one must test positive-gamma and negative-gamma regimes separately rather than pooling them into one average signal.
+- **First-pass regime design:** Daily EOD regime classification before any intraday options replay.
+- **0DTE handling in version one:** Exclude 0DTE from the first-pass gamma calculation. Use only 1DTE and longer expirations from the previous day’s EOD snapshot.
 
 This is a research scope, not a trading approval.
 
@@ -221,150 +224,77 @@ Before calculating a return:
 
 The first model must be deliberately simple.
 
-#### **Signal**
+#### **Gamma formula**
 
-At decision time, calculate:
+For each option contract, calculate dollar gamma exposure using the EOD gamma and open interest fields:
 
-- aggregate dealer gamma regime;
-- sign of the regime;
-- intraday volatility context;
-- expected friction.
+`contract_gex = gamma × open_interest × contract_multiplier × underlying_price² × 0.01`
 
-For version one, the signal is evaluated once per day before the intraday trading window. The regime must be frozen before execution and cannot use future intraday information.
+For SPX EOD data, the contract multiplier is `100`.
 
-#### **Entry condition**
+First compute aggregate customer-side gamma exposure across the chain:
 
-Enter only when the regime filter and the intraday trigger align:
+`aggregate_gex = Σ contract_gex`
 
-- negative gamma regime may allow momentum-style entries;
-- positive gamma regime may allow mean-reversion-style entries.
+Then invert the aggregate to approximate dealer positioning:
 
-The exact trigger must be frozen before out-of-sample testing.
+`dealer_gex = -1 × aggregate_gex`
 
-#### **Exit conditions**
+The daily regime label is:
 
-Exit when any of the following occurs:
+- `dealer_gex > 0` -> positive dealer gamma regime
+- `dealer_gex < 0` -> negative dealer gamma regime
 
-- the stop loss is hit;
-- the take profit is hit;
-- the session ends;
-- the regime filter no longer applies for the next holding period;
-- the market becomes illiquid or disconnected.
+This first-pass formula is a regime classifier, not a proof of executable edge.
 
-#### **Position sizing**
+#### **intraday playbook**
 
-Size from the lower of:
+The regime label controls which intraday playbook is eligible on that day.
 
-- predefined portfolio risk budget;
-- stop-loss distance;
-- available executable depth;
-- venue and instrument limits.
+The regime concept and the daily 15:45 snapshot timing are research-backed. The specific technical indicators below are not part of the gamma literature and have been removed. The first pass now uses a fixed mid-day window as the conditioning variable so the test avoids both the opening auction and the closing MOC cross.
 
-Do not size from gamma alone. A strong regime signal does not remove execution risk.
+**Common setup**
 
----
+- evaluation time: 13:30 ET
+- lookback return: 11:30 ET to 13:30 ET
+- holding period: 13:30 ET to 15:00 ET
 
-### **validation plan**
+**Positive dealer gamma regime**
 
-#### **Economic validation**
+- if the 11:30 ET to 13:30 ET return is positive, enter short at 13:30 ET and exit at 15:00 ET
+- if the 11:30 ET to 13:30 ET return is negative, enter long at 13:30 ET and exit at 15:00 ET
 
-- Explain the return decomposition.
-- Verify that the result is not profitable only because of look-ahead or a regime label that used future data.
-- Compare regime-conditioned returns against an unconditioned benchmark.
+**Negative dealer gamma regime**
 
-#### **Statistical validation**
+- if the 11:30 ET to 13:30 ET return is positive, enter long at 13:30 ET and exit at 15:00 ET
+- if the 11:30 ET to 13:30 ET return is negative, enter short at 13:30 ET and exit at 15:00 ET
 
-- Split data into in-sample and out-of-sample periods.
-- Freeze the rules before out-of-sample evaluation.
-- Use walk-forward testing across different volatility regimes.
-- Use Monte Carlo trade reshuffling to study sequence risk.
-- Use bootstrap resampling to estimate drawdown, expected outcomes, and ruin probability.
+**Exit**
 
-#### **Robustness validation**
+- exit all positions at 15:00 ET
+- if the trade cannot be established at 13:30 ET, skip it
 
-The result must not depend on:
+**Trade filter**
 
-- one ticker only;
-- one short window;
-- one threshold;
-- one fee tier;
-- one favorable day;
-- one specific 0DTE session;
-- one model assumption.
+- only one regime may be active on a given day
+- if the regime is ambiguous or the data quality check fails, do not trade
 
 ---
 
 ### **rejection gates**
 
-Reject the candidate if any of the following is true:
+The candidate is rejected if any of the following are true:
 
-- the counterparty and economic mechanism cannot be explained;
-- the result depends on unavailable or look-ahead data;
-- the regime signal disappears after realistic friction;
-- out-of-sample performance is materially worse than in-sample performance;
-- the result works only on one window or one volatility state;
-- data quality cannot support a stable regime label;
-- Monte Carlo or bootstrap results show unacceptable drawdown or ruin probability.
-
-A failed candidate is a successful research outcome. It prevents capital from being allocated to an unverified story.
+- the dealer sign convention cannot be reconstructed without look-ahead
+- the data source cannot provide consistent historical chain coverage
+- the regime effect disappears out of sample
+- the result fails a conservative friction model
+- the effect is concentrated only in a single short subperiod with no stability
 
 ---
 
-### **tavily research questions**
+### **status**
 
-Research should answer these questions before implementation:
+No gamma-flow code has been written yet.
 
-1. What peer-reviewed or high-quality empirical evidence measures dealer gamma exposure and intraday behavior in SPY/SPX?
-2. How should 0DTE and short-dated options be treated in the regime calculation?
-3. What data fields are required to reconstruct a daily gamma regime from historical options data?
-4. Which venue or data vendor provides the cleanest and most complete historical options chain for SPX?
-5. What known risks make gamma-based intraday models fail during high-volatility regimes?
-6. What evidence exists for regime dependence rather than a universal effect?
-7. Which parts of the proposed model are already crowded or likely to have decayed?
-8. What minimum paper-trading period and live monitoring metrics are appropriate before any capital is considered?
-
-Search results must be classified as:
-
-- primary academic evidence;
-- official venue documentation;
-- reliable market-data documentation;
-- practitioner evidence;
-- anecdotal or promotional material.
-
-Promotional material is not sufficient to validate the mechanic.
-
----
-
-### **research status and unresolved questions**
-
-The funding-basis candidate is rejected and documented separately. This spec is now the next research target.
-
-Still unresolved before coding, and who resolves each item:
-
-- **Implemented:** Chosen underlying for the first pass is SPX.
-- **Implemented:** Chosen data route for the first pass is Cboe EOD options data for SPX, with Databento reserved as the higher-fidelity fallback.
-- **Research:** Confirm whether the first version should be daily EOD regime classification or intraday options replay.
-- **Research:** Reconstruct one historical gamma regime from a short sample and verify that the label is stable.
-- **Research:** Test whether the regime survives friction and out-of-sample splitting.
-
-These assumptions are for research only. They do not authorize live trading or imply that the strategy is suitable for the user's account.
-
-The next research deliverable must resolve these questions with source-backed evidence. Until then, no underlying, data vendor, threshold, or return target is approved.
-
----
-
-### **definition of done before coding**
-
-No collection or backtest code begins until:
-
-- the research questions have been answered with cited sources;
-- the underlying and data source have been selected with reasons;
-- the data schema and historical availability are confirmed;
-- the gamma regime formula and sign convention are understood;
-- the cost model is specified;
-- entry, exit, and sizing rules are frozen in writing;
-- rejection thresholds are registered;
-- the known risks and failure modes are documented;
-- the first paper-trading design is defined.
-
-The outcome of this document may be approval to code, revision of the hypothesis, or rejection of the candidate.
+The purpose of this file is to freeze the research assumptions before implementation starts.
