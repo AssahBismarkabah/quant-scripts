@@ -27,6 +27,8 @@ from quant_scripts.funding_basis import (
     TradeDecision,
     funding_rate_rows_to_dataset,
     build_funding_event,
+    replay_fixture_set_many,
+    replay_fixture_set,
     validate_dataset,
     validate_trade_window,
     wick_stress,
@@ -269,10 +271,40 @@ class FundingBasisTests(unittest.TestCase):
 
     def test_cli_parser_dump_mode(self) -> None:
         parser = build_parser()
-        args = parser.parse_args(["--mode", "dump", "--output-dir", "fixtures"])
+        args = parser.parse_args(["--mode", "dump", "--output-dir", "fixtures", "--start-time", "2026-07-29T00:00:00Z"])
 
         self.assertEqual(args.mode, "dump")
         self.assertEqual(str(args.output_dir), "fixtures")
+        self.assertEqual(args.start_time, 1785283200000)
+
+    def test_cli_parser_replay_mode(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args(["--mode", "replay"])
+
+        self.assertEqual(args.mode, "replay")
+
+    def test_fixture_replay_runs(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        replay = replay_fixture_set(
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_funding.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_mark.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_spot.json",
+        )
+
+        self.assertEqual(replay.funding.symbol, "BTCUSDT")
+        self.assertEqual(replay.mark.symbol, "BTCUSDT")
+        self.assertEqual(replay.spot.symbol, "BTCUSDT")
+
+    def test_fixture_replay_many_runs(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        replay = replay_fixture_set_many(
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_funding.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_mark.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_spot.json",
+        )
+
+        self.assertGreaterEqual(len(replay.decisions), 1)
+        self.assertEqual(len(replay.decisions), len(replay.results))
 
 
 if __name__ == "__main__":
