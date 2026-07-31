@@ -99,6 +99,12 @@ class FundingBasisTrade:
     def net_pnl(self) -> float:
         return self.notional * self.net_edge_bps() / 10_000.0
 
+    def gross_edge_bps(self) -> float:
+        return self.funding_received_bps + self.basis_capture_bps
+
+    def cost_bps(self) -> float:
+        return self.entry_spread_bps + self.exit_spread_bps + self.fees_bps + self.slippage_bps + self.liquidation_risk_bps
+
 
 @dataclass(frozen=True)
 class TradeDecision:
@@ -167,4 +173,3 @@ def validate_trade_window(
         raise ValueError("entry_time must be before the funding assessment buffer")
     if exit_time < event.exit_window_start():
         raise ValueError("exit_time must be after the funding assessment buffer")
-

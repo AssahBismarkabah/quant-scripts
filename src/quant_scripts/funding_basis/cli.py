@@ -8,7 +8,7 @@ from urllib.error import URLError
 
 from .config import BinanceCredentials, BinanceSettings
 from .client import BinanceRestClient
-from .fixture_replay import replay_fixture_set_many
+from .fixture_replay import replay_fixture_set_many, summarize_regimes
 from .ingest import BinanceIngestionService
 
 
@@ -18,11 +18,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--interval", default="1h")
     parser.add_argument("--dotenv", type=Path, default=None)
     parser.add_argument("--insecure-tls", action="store_true")
-    parser.add_argument("--mode", choices=["smoke", "funding", "mark", "spot", "dump", "replay"], default="smoke")
+    parser.add_argument("--mode", choices=["smoke", "funding", "mark", "spot", "dump", "replay", "sweep"], default="smoke")
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--limit", type=int, default=1000)
     parser.add_argument("--start-time", type=_parse_timestamp, default=None)
     parser.add_argument("--end-time", type=_parse_timestamp, default=None)
+    parser.add_argument("--show-trades", action="store_true")
+    parser.add_argument("--basis-thresholds", default="0.0")
+    parser.add_argument("--net-thresholds", default="0.0")
     return parser
 
 
@@ -85,12 +88,18 @@ def main() -> int:
             output_dir / f"{args.symbol.lower()}_spot.json",
         )
         accepted = sum(1 for result in replay.results if result.accepted)
+        rejection_counts: dict[str, int] = {}
+        for result in replay.results:
+            if result.accepted or result.rejection_reason is None:
+                continue
+            rejection_counts[result.rejection_reason] = rejection_counts.get(result.rejection_reason, 0) + 1
         print(
             json.dumps(
                 {
                     "decisions": len(replay.decisions),
                     "accepted": accepted,
                     "rejected": len(replay.results) - accepted,
+                    "rejection_counts": rejection_counts,
                     "avg_net_edge_bps": sum(result.trade.net_edge_bps() for result in replay.results) / len(replay.results)
                     if replay.results
                     else 0.0,
@@ -107,6 +116,95 @@ def main() -> int:
                 indent=2,
             )
         )
+        first_half, second_half = summarize_regimes(replay)
+        print(
+            json.dumps(
+                {
+                    "regimes": [
+                        {
+                            "label": first_half.label,
+                            "decisions": first_half.decisions,
+                            "accepted": first_half.accepted,
+                            "rejected": first_half.rejected,
+                            "avg_net_edge_bps": first_half.avg_net_edge_bps,
+                        },
+                        {
+                            "label": second_half.label,
+                            "decisions": second_half.decisions,
+                            "accepted": second_half.accepted,
+                            "rejected": second_half.rejected,
+                            "avg_net_edge_bps": second_half.avg_net_edge_bps,
+                        },
+                    ]
+                },
+                indent=2,
+            )
+        )
+        if args.show_trades:
+            for result in replay.results:
+                print(
+                    json.dumps(
+                        {
+                            "entry_time": result.trade.entry_time.isoformat(),
+                            "exit_time": result.trade.exit_time.isoformat(),
+                            "funding_bps": result.trade.funding_received_bps,
+                            "basis_bps": result.trade.basis_capture_bps,
+                            "gross_edge_bps": result.trade.gross_edge_bps(),
+                            "cost_bps": result.trade.cost_bps(),
+                            "net_edge_bps": result.trade.net_edge_bps(),
+                            "accepted": result.accepted,
+                            "rejection_reason": result.rejection_reason,
+                        },
+                        indent=2,
+                    )
+                )
+        return 0
+    elif args.mode == "sweep":
+        output_dir = args.output_dir or Path("research/funding-basis/fixtures")
+        thresholds = [float(value) for value in args.basis_thresholds.split(",") if value.strip()]
+        net_thresholds = [float(value) for value in args.net_thresholds.split(",") if value.strip()]
+        replay_rows = []
+        for threshold in thresholds:
+            replay = replay_fixture_set_many(
+                output_dir / f"{args.symbol.lower()}_funding.json",
+                output_dir / f"{args.symbol.lower()}_mark.json",
+                output_dir / f"{args.symbol.lower()}_spot.json",
+                minimum_basis_capture_bps=threshold,
+            )
+            accepted = sum(1 for result in replay.results if result.accepted)
+            replay_rows.append(
+                {
+                    "minimum_basis_capture_bps": threshold,
+                    "decisions": len(replay.decisions),
+                    "accepted": accepted,
+                    "rejected": len(replay.results) - accepted,
+                    "avg_net_edge_bps": sum(result.trade.net_edge_bps() for result in replay.results) / len(replay.results)
+                    if replay.results
+                    else 0.0,
+                }
+            )
+        net_rows = []
+        for threshold in net_thresholds:
+            replay = replay_fixture_set_many(
+                output_dir / f"{args.symbol.lower()}_funding.json",
+                output_dir / f"{args.symbol.lower()}_mark.json",
+                output_dir / f"{args.symbol.lower()}_spot.json",
+                minimum_net_edge_bps=threshold,
+                minimum_basis_capture_bps=0.0,
+            )
+            accepted = sum(1 for result in replay.results if result.accepted)
+            net_rows.append(
+                {
+                    "minimum_net_edge_bps": threshold,
+                    "decisions": len(replay.decisions),
+                    "accepted": accepted,
+                    "rejected": len(replay.results) - accepted,
+                    "avg_net_edge_bps": sum(result.trade.net_edge_bps() for result in replay.results) / len(replay.results)
+                    if replay.results
+                    else 0.0,
+                }
+            )
+        print(json.dumps({"basis_sweep": replay_rows, "net_sweep": net_rows}, indent=2))
         return 0
     else:
         output_dir = args.output_dir or Path("research/funding-basis/fixtures")

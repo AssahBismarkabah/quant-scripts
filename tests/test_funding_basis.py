@@ -29,6 +29,7 @@ from quant_scripts.funding_basis import (
     build_funding_event,
     replay_fixture_set_many,
     replay_fixture_set,
+    summarize_regimes,
     validate_dataset,
     validate_trade_window,
     wick_stress,
@@ -137,6 +138,46 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertTrue(result.accepted)
         self.assertGreater(result.trade.net_pnl(), 0.0)
+
+    def test_backtest_classifies_negative_basis_rejection(self) -> None:
+        event = build_funding_event(datetime(2026, 7, 29, 8, 0, tzinfo=timezone.utc))
+        decision = TradeDecision(
+            event=event,
+            entry_time=datetime(2026, 7, 29, 7, 50, tzinfo=timezone.utc),
+            exit_time=datetime(2026, 7, 29, 8, 10, tzinfo=timezone.utc),
+            notional=10_000.0,
+            entry_spread_bps=0.5,
+            exit_spread_bps=0.5,
+            estimated_funding_bps=0.5,
+            basis_capture_bps=-1.0,
+            fees_bps=0.2,
+            slippage_bps=0.3,
+            liquidation_risk_bps=0.0,
+        )
+        result = FundingBasisBacktest(minimum_net_edge_bps=0.0).run(dataset=None, decisions=[decision])[0]
+
+        self.assertFalse(result.accepted)
+        self.assertEqual(result.rejection_reason, "basis capture below threshold (-1.000000 bps < 0.000000 bps)")
+
+    def test_backtest_applies_basis_threshold(self) -> None:
+        event = build_funding_event(datetime(2026, 7, 29, 8, 0, tzinfo=timezone.utc))
+        decision = TradeDecision(
+            event=event,
+            entry_time=datetime(2026, 7, 29, 7, 50, tzinfo=timezone.utc),
+            exit_time=datetime(2026, 7, 29, 8, 10, tzinfo=timezone.utc),
+            notional=10_000.0,
+            entry_spread_bps=0.5,
+            exit_spread_bps=0.5,
+            estimated_funding_bps=1.0,
+            basis_capture_bps=0.4,
+            fees_bps=0.2,
+            slippage_bps=0.3,
+            liquidation_risk_bps=0.0,
+        )
+        result = FundingBasisBacktest(minimum_net_edge_bps=0.0, minimum_basis_capture_bps=0.5).run(dataset=None, decisions=[decision])[0]
+
+        self.assertFalse(result.accepted)
+        self.assertEqual(result.rejection_reason, "basis capture below threshold (0.400000 bps < 0.500000 bps)")
 
     def test_binance_jsonl_loader_normalizes_agg_trade(self) -> None:
         with TemporaryDirectory() as tmpdir:
@@ -283,6 +324,20 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertEqual(args.mode, "replay")
 
+    def test_cli_parser_show_trades_flag(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args(["--mode", "replay", "--show-trades"])
+
+        self.assertTrue(args.show_trades)
+
+    def test_cli_parser_sweep_mode(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args(["--mode", "sweep", "--basis-thresholds", "0.0,0.5,1.0", "--net-thresholds", "0.0,1.0,2.0"])
+
+        self.assertEqual(args.mode, "sweep")
+        self.assertEqual(args.basis_thresholds, "0.0,0.5,1.0")
+        self.assertEqual(args.net_thresholds, "0.0,1.0,2.0")
+
     def test_fixture_replay_runs(self) -> None:
         root = Path(__file__).resolve().parents[1]
         replay = replay_fixture_set(
@@ -305,6 +360,20 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertGreaterEqual(len(replay.decisions), 1)
         self.assertEqual(len(replay.decisions), len(replay.results))
+
+    def test_regime_summary_splits_results(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        replay = replay_fixture_set_many(
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_funding.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_mark.json",
+            root / "research" / "funding-basis" / "fixtures" / "btcusdt_spot.json",
+        )
+
+        first_half, second_half = summarize_regimes(replay)
+
+        self.assertEqual(first_half.label, "first_half")
+        self.assertEqual(second_half.label, "second_half")
+        self.assertEqual(first_half.decisions + second_half.decisions, len(replay.decisions))
 
 
 if __name__ == "__main__":

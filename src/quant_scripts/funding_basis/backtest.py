@@ -13,10 +13,24 @@ class FundingBasisTradeResult:
     accepted: bool
     rejection_reason: str | None = None
 
+    def summary(self) -> dict[str, float | str | None]:
+        return {
+            "entry_time": self.trade.entry_time.isoformat(),
+            "exit_time": self.trade.exit_time.isoformat(),
+            "funding_bps": self.trade.funding_received_bps,
+            "basis_bps": self.trade.basis_capture_bps,
+            "gross_edge_bps": self.trade.gross_edge_bps(),
+            "cost_bps": self.trade.cost_bps(),
+            "net_edge_bps": self.trade.net_edge_bps(),
+            "accepted": self.accepted,
+            "rejection_reason": self.rejection_reason,
+        }
+
 
 @dataclass
 class FundingBasisBacktest:
     minimum_net_edge_bps: float = 0.0
+    minimum_basis_capture_bps: float = 0.0
     results: list[FundingBasisTradeResult] = field(default_factory=list)
 
     def run(
@@ -40,12 +54,15 @@ class FundingBasisBacktest:
 
             trade = _build_trade(decision)
             accepted = trade.net_edge_bps() >= self.minimum_net_edge_bps
+            rejection_reason = None
+            if not accepted:
+                rejection_reason = _classify_rejection(trade, self.minimum_net_edge_bps, self.minimum_basis_capture_bps)
             self.results.append(
                 FundingBasisTradeResult(
                     decision=decision,
                     trade=trade,
                     accepted=accepted,
-                    rejection_reason=None if accepted else "net edge below threshold",
+                    rejection_reason=rejection_reason,
                 )
             )
         return self.results
@@ -64,3 +81,17 @@ def _build_trade(decision: TradeDecision) -> FundingBasisTrade:
         liquidation_risk_bps=decision.liquidation_risk_bps,
         notional=decision.notional,
     )
+
+
+def _classify_rejection(
+    trade: FundingBasisTrade,
+    minimum_net_edge_bps: float,
+    minimum_basis_capture_bps: float,
+) -> str:
+    if trade.funding_received_bps <= 0:
+        return "funding not positive"
+    if trade.basis_capture_bps < minimum_basis_capture_bps:
+        return f"basis capture below threshold ({trade.basis_capture_bps:.6f} bps < {minimum_basis_capture_bps:.6f} bps)"
+    if trade.gross_edge_bps() < trade.cost_bps():
+        return "costs exceed gross edge"
+    return f"net edge below threshold ({trade.net_edge_bps():.6f} bps < {minimum_net_edge_bps:.6f} bps)"

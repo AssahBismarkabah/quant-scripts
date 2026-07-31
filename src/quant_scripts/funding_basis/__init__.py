@@ -5,7 +5,16 @@ from .client import BinanceRestClient
 from .binance import BinanceFileMarketDataSource, BinanceRecordType
 from .backtest import FundingBasisBacktest, FundingBasisTradeResult
 from .ingest import BinanceIngestionService
-from .fixture_replay import FixtureReplayResult, build_replay_decision, build_replay_decisions, load_fixture_dataset, replay_fixture_set, replay_fixture_set_many
+from .fixture_replay import (
+    FixtureReplayResult,
+    ReplayRegimeSummary,
+    build_replay_decision,
+    build_replay_decisions,
+    load_fixture_dataset,
+    replay_fixture_set,
+    replay_fixture_set_many,
+    summarize_regimes,
+)
 from .normalize import (
     funding_rate_rows_to_dataset,
     mark_price_klines_to_dataset,
@@ -36,6 +45,7 @@ __all__ = [
     "BinanceRestClient",
     "BinanceIngestionService",
     "FixtureReplayResult",
+    "ReplayRegimeSummary",
     "FileMarketDataSource",
     "FundingBasisBacktest",
     "FundingBasisTrade",
@@ -61,4 +71,5 @@ __all__ = [
     "load_fixture_dataset",
     "replay_fixture_set",
     "replay_fixture_set_many",
+    "summarize_regimes",
 ]

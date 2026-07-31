@@ -99,6 +99,12 @@ The Binance-first research scaffold is now implemented and runnable in the local
 - Replay over that window produces 22 decisions, 13 accepted trades, and 9 rejected trades.
 - The first rejection reason is `net edge below threshold`, which means the plumbing works but the economics still need tighter validation before any live consideration.
 - The fixture window is a research sample only. It is not a deployment signal.
+- A wider July BTCUSDT window now contains 93 funding rows, 738 mark rows, and 738 spot rows.
+- Replay over that wider month-long sample produces 92 decisions, 44 accepted trades, and 48 rejected trades.
+- The average net edge on the wider July sample is negative after the current conservative cost model, which means the candidate does not yet survive the validation gate as modeled.
+- A June BTCUSDT window now contains 90 funding rows, 720 mark rows, and 720 spot rows.
+- Replay over the June sample produces 89 decisions, 45 accepted trades, and 44 rejected trades.
+- The average net edge on the June sample is also negative after the current conservative cost model.
 
 The first study has two data-fidelity levels:
 
@@ -515,8 +521,8 @@ Still unresolved before final validation, and who resolves each item:
 ### **current known limitations**
 
 - The current live replay uses venue snapshots and candles, not full historical depth. It is Level 1 feasibility plus a conservative execution proxy, not a full executable Level 2 backtest.
-- The current replay window is wider than the original smoke test, but it is still a bounded BTCUSDT sample. It does not yet prove regime robustness across a much longer horizon.
-- The current result is near breakeven on average net edge. That means the project is still in validation mode, not deployment mode.
+- The current replay window now covers two separate monthly samples, but both are bounded BTCUSDT windows. They still do not prove regime robustness across a much longer horizon or different venue conditions.
+- The current result was near breakeven on the short window, but negative on both the wider July window and the June window after costs. That means the current candidate fails the validation gate as modeled.
 - The current cost model is conservative by design and may be improved only after the market-data path is more complete.
 - CryptoHFTData and Binance historical-depth access remain research items because they are the path to stronger executable validation, not because the current work is blocked.
 
@@ -541,3 +547,7 @@ No collection or backtest code begins until:
 - the first paper-trading design is defined.
 
 The outcome of this document may be approval to code, revision of the hypothesis, or rejection of the candidate.
+
+### **current decision**
+
+Based on the June and July replays, the BTCUSDT Binance funding-basis candidate is currently rejected under the present conservative assumptions. The code and data pipeline are useful and should be kept, but this specific implementation should not move forward to deployment without a materially different execution model, a different venue/window, or stronger historical evidence.

@@ -18,6 +18,15 @@ class FixtureReplayResult:
     results: tuple[FundingBasisTradeResult, ...]
 
 
+@dataclass(frozen=True)
+class ReplayRegimeSummary:
+    label: str
+    decisions: int
+    accepted: int
+    rejected: int
+    avg_net_edge_bps: float
+
+
 def load_fixture_dataset(path: Path) -> NormalizedDataset:
     payload = json.loads(path.read_text(encoding="utf-8"))
     snapshots = tuple(
@@ -136,12 +145,20 @@ def replay_fixture_set_many(
     funding_path: Path,
     mark_path: Path,
     spot_path: Path,
+    *,
+    minimum_net_edge_bps: float = 0.0,
+    minimum_basis_capture_bps: float = 0.0,
 ) -> FixtureReplayResult:
     funding = load_fixture_dataset(funding_path)
     mark = load_fixture_dataset(mark_path)
     spot = load_fixture_dataset(spot_path)
     decisions = build_replay_decisions(funding, mark, spot)
-    results = tuple(FundingBasisBacktest(minimum_net_edge_bps=0.0).run(dataset=funding, decisions=decisions))
+    results = tuple(
+        FundingBasisBacktest(
+            minimum_net_edge_bps=minimum_net_edge_bps,
+            minimum_basis_capture_bps=minimum_basis_capture_bps,
+        ).run(dataset=funding, decisions=decisions)
+    )
     return FixtureReplayResult(
         funding=funding,
         mark=mark,
@@ -149,6 +166,19 @@ def replay_fixture_set_many(
         decisions=decisions,
         results=results,
     )
+
+
+def summarize_regimes(
+    replay: FixtureReplayResult,
+) -> tuple[ReplayRegimeSummary, ReplayRegimeSummary]:
+    if not replay.decisions:
+        empty = ReplayRegimeSummary(label="empty", decisions=0, accepted=0, rejected=0, avg_net_edge_bps=0.0)
+        return empty, empty
+
+    midpoint = replay.decisions[len(replay.decisions) // 2].event.funding_time
+    first_results = [result for result in replay.results if result.decision.event.funding_time <= midpoint]
+    second_results = [result for result in replay.results if result.decision.event.funding_time > midpoint]
+    return _summarize_bucket("first_half", first_results), _summarize_bucket("second_half", second_results)
 
 
 def replay_fixture_set(
@@ -172,3 +202,14 @@ def _minutes(value: int):
     from datetime import timedelta
 
     return timedelta(minutes=value)
+
+
+def _summarize_bucket(label: str, results: list[FundingBasisTradeResult]) -> ReplayRegimeSummary:
+    accepted = sum(1 for result in results if result.accepted)
+    return ReplayRegimeSummary(
+        label=label,
+        decisions=len(results),
+        accepted=accepted,
+        rejected=len(results) - accepted,
+        avg_net_edge_bps=sum(result.trade.net_edge_bps() for result in results) / len(results) if results else 0.0,
+    )
