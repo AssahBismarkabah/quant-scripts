@@ -26,6 +26,19 @@ class BinanceCredentials:
 class BinanceSettings:
     base_url: str = "https://api.binance.com"
     futures_base_url: str = "https://fapi.binance.com"
+    insecure_tls: bool = False
+    base_url_candidates: tuple[str, ...] = (
+        "https://api.binance.com",
+        "https://api1.binance.com",
+        "https://api2.binance.com",
+        "https://api3.binance.com",
+    )
+    futures_base_url_candidates: tuple[str, ...] = (
+        "https://fapi.binance.com",
+        "https://fapi1.binance.com",
+        "https://fapi2.binance.com",
+        "https://fapi3.binance.com",
+    )
 
 
 def _load_dotenv(dotenv_path: Path | None = None) -> None:

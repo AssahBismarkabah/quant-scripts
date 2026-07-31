@@ -1,19 +1,24 @@
 PYTHON ?= python3
+export PYTHONPATH := ../../src:$(PYTHONPATH)
 
 TEST_DIR ?= ../../tests
 SYMBOL ?= BTCUSDT
 INTERVAL ?= 1h
 DOTENV ?= ../../.env
 
-.PHONY: help test funding mark spot
+.PHONY: help test smoke funding mark spot
 
 help:
 	@printf '%s\n' \
 		'Funding-basis edge workflow:' \
+		'  make smoke' \
 		'  make test' \
 		'  make funding SYMBOL=BTCUSDT' \
 		'  make mark SYMBOL=BTCUSDT INTERVAL=1h' \
 		'  make spot SYMBOL=BTCUSDT INTERVAL=1h'
+
+smoke:
+	$(PYTHON) -m quant_scripts.funding_basis.cli --mode smoke --dotenv $(DOTENV) --insecure-tls
 
 test:
 	$(PYTHON) -m unittest discover -s $(TEST_DIR) -q

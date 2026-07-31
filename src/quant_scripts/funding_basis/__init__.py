@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from .cli import build_parser, main
 from .config import BinanceCredentials, BinanceSettings
 from .client import BinanceRestClient
 from .binance import BinanceFileMarketDataSource, BinanceRecordType
@@ -34,8 +33,6 @@ __all__ = [
     "BinanceCredentials",
     "BinanceSettings",
     "BinanceRestClient",
-    "build_parser",
-    "main",
     "BinanceIngestionService",
     "FileMarketDataSource",
     "FundingBasisBacktest",

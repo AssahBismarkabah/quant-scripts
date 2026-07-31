@@ -20,7 +20,6 @@ from quant_scripts.funding_basis import (
     BinanceCredentials,
     BinanceIngestionService,
     BinanceRestClient,
-    build_parser,
     FundingBasisBacktest,
     MarginAssumptions,
     MarginMode,
@@ -35,6 +34,7 @@ from quant_scripts.funding_basis import (
     mark_price_klines_to_dataset,
     spot_klines_to_dataset,
 )
+from quant_scripts.funding_basis.cli import build_parser
 
 
 class FundingBasisTests(unittest.TestCase):
@@ -259,7 +259,13 @@ class FundingBasisTests(unittest.TestCase):
 
         self.assertEqual(args.symbol, "BTCUSDT")
         self.assertEqual(args.interval, "1h")
-        self.assertEqual(args.mode, "funding")
+        self.assertEqual(args.mode, "smoke")
+
+    def test_cli_parser_smoke_mode(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args(["--mode", "smoke"])
+
+        self.assertEqual(args.mode, "smoke")
 
 
 if __name__ == "__main__":
