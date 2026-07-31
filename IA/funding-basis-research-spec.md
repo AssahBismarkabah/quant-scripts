@@ -14,7 +14,7 @@ Can a hedged position involving a crypto perpetual contract and its correspondin
 
 This is a hypothesis. It is not yet an edge, strategy, or approval to trade.
 
-The first implementation should target one liquid asset on one venue. The exact venue, research period, and thresholds must be chosen only after market access and data availability are verified.
+The first implementation should target one liquid asset on one venue. The exact venue, research period, and thresholds must be chosen only after market access and data availability are verified. For this project, the first implemented research path is Binance USDⓈ-M Futures plus Binance spot for BTCUSDT.
 
 ---
 
@@ -87,6 +87,18 @@ The venue research supports the following provisional scope:
 This is a research scope, not a trading approval. If same-venue spot and perpetual access is not available, the scope must be revised before coding rather than silently becoming a cross-venue strategy.
 
 Binance is selected provisionally because its official USDⓈ-M documentation exposes funding history, mark price, index price, open interest, order-book, symbol information, and related market-data endpoints. Venue availability is confirmed by the user; regular-user fees are fixed as the research assumption and historical-data verification remains.
+
+### **implementation status**
+
+The Binance-first research scaffold is now implemented and runnable in the local workspace.
+
+- The edge-specific workflow lives in `research/funding-basis/Makefile`.
+- The CLI supports live smoke checks, funding/mark/spot downloads, fixture dumps, and replay.
+- The CLI accepts explicit `--start-time`, `--end-time`, and `--limit` arguments so the capture window is not artificially capped at a tiny sample.
+- The current wider BTCUSDT fixture set contains 23 funding rows, 181 mark rows, and 181 spot rows.
+- Replay over that window produces 22 decisions, 13 accepted trades, and 9 rejected trades.
+- The first rejection reason is `net edge below threshold`, which means the plumbing works but the economics still need tighter validation before any live consideration.
+- The fixture window is a research sample only. It is not a deployment signal.
 
 The first study has two data-fidelity levels:
 
@@ -483,11 +495,13 @@ Promotional material is not sufficient to validate the mechanic.
 
 The initial research pass is complete using Tavily and supporting source checks. Tavily was restored and four focused research queries were completed. Some generated summaries contained unsupported precision, so only claims traceable to primary papers, official venue documentation, or raw data have been incorporated.
 
-Still unresolved before coding, and who resolves each item:
+Still unresolved before final validation, and who resolves each item:
 
 - **User:** Confirmed Binance Futures and spot availability.
 - **Assumption:** Treat the account as a regular Binance user and use a conservative published retail fee assumption. The exact live account tier is not needed for the research pass.
 - **Assumption:** Evaluate capacity as a notional sensitivity curve rather than against a personal deployment target.
+- **Implemented:** Downloaded and replayed Binance BTCUSDT spot and Futures historical samples from the live venue using the local Binance client.
+- **Implemented:** Added timestamp range controls and limit controls to the research CLI so the capture can be expanded without changing code.
 - **Research:** Download a short BTCUSDT spot and Futures sample from CryptoHFTData and verify that snapshots and incremental updates replay into a continuous book.
 - **Research:** Confirm the free API's rate limits, date coverage, file integrity, sequence continuity, and licensing terms.
 - **Research:** Test Binance's historical-depth API in parallel, but do not block Level 2 feasibility on Binance whitelist approval.
@@ -497,6 +511,14 @@ Still unresolved before coding, and who resolves each item:
 - **Research:** Test same-venue hedge, custody, margin, financing, and counterparty assumptions.
 - **Research:** Determine whether the observed basis is executable or only a mark-price/index-price difference.
 - **Research:** Estimate capacity at multiple notional sizes.
+
+### **current known limitations**
+
+- The current live replay uses venue snapshots and candles, not full historical depth. It is Level 1 feasibility plus a conservative execution proxy, not a full executable Level 2 backtest.
+- The current replay window is wider than the original smoke test, but it is still a bounded BTCUSDT sample. It does not yet prove regime robustness across a much longer horizon.
+- The current result is near breakeven on average net edge. That means the project is still in validation mode, not deployment mode.
+- The current cost model is conservative by design and may be improved only after the market-data path is more complete.
+- CryptoHFTData and Binance historical-depth access remain research items because they are the path to stronger executable validation, not because the current work is blocked.
 
 These assumptions are for backtesting only. They do not authorize live trading or imply that the strategy is suitable for the user's account.
 
