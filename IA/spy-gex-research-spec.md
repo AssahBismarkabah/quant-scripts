@@ -88,11 +88,12 @@ Databento is the preferred starting point for a full intraday options replay if 
 
 ### **implementation status**
 
-The gamma-flow research scaffold is not yet implemented.
+The gamma-flow research scaffold is now partially implemented.
 
 - The funding-basis candidate has been formally rejected and recorded separately.
 - This document defines the next mechanic to investigate.
-- No gamma-flow code should be written until the research questions and data source are finalized.
+- The first code path now includes a Cboe EOD export normalizer that maps vendor chain data into the internal SPX GEX payload.
+- No live edge claim should be made until the real historical chain path and SPY proxy path are both replayed on market data.
 
 The first study has two data-fidelity levels:
 

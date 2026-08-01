@@ -1,7 +1,7 @@
 # SPX Dealer Gamma Exposure
 
 **Version:** 1.0
-**Status:** Pre-research
+**Status:** Implemented research scaffold
 **Classification:** Intraday Bias / Trend Following and Mean Reversion Regime Filter
 
 ## 1. Executive Summary
@@ -13,7 +13,9 @@ The hypothesis is simple:
 - positive dealer gamma may favor mean reversion or pinning
 - negative dealer gamma may favor momentum or trend persistence
 
-This is a research candidate, not a proven edge.
+This is a research candidate, not a proven edge. The implementation currently provides a normalized input contract, a regime classifier, a mid-day backtest harness, a walk-forward summary runner, and a Cboe EOD export normalizer.
+
+The first real vendor adapter now supports Cboe-style EOD option exports normalized into the internal SPX GEX payload.
 
 ## 2. The Economic Edge
 
@@ -45,6 +47,24 @@ Regime label:
 - `dealer_gex < 0` -> negative dealer gamma regime
 
 Treat the first pass as a regime classifier, not an executable edge.
+
+### Execution Contract
+
+The code path assumes two files when running the strategy in executable mode:
+
+- a point file containing the SPX options snapshot
+- a bars file containing the intraday SPY proxy bars
+
+Supported local research commands:
+
+- `make -C research/spx-gex smoke`
+- `make -C research/spx-gex template`
+- `make -C research/spx-gex point-template`
+- `make -C research/spx-gex bars-template`
+- `make -C research/spx-gex sessions-template`
+- `make -C research/spx-gex backtest POINT=... BARS=...`
+- `make -C research/spx-gex walk-forward INPUT=...`
+- `make -C research/spx-gex normalize-cboe INPUT=...`
 
 ## 3. Research Scope
 
@@ -131,12 +151,12 @@ Negative dealer gamma regime:
 - only one regime may be active on a given day
 - if the regime is ambiguous or the data quality check fails, do not trade
 
-## 5. Verified Status
+## 6. Verified Status
 
-No gamma-flow code has been written yet.
+The gamma-flow scaffold exists and passes the current test suite.
 
-This strategy record exists so the new track is captured before implementation starts.
+The current implementation includes vendor-specific SPX options export normalization, but not yet live SPY proxy ingestion. It is ready for historical export wiring.
 
-## 6. Next Step
+## 7. Next Step
 
-Build the research pipeline only after the SPX data route and regime definition are frozen in the IA spec.
+Wire the real SPX chain export and SPY intraday export into the existing JSON contract, then run walk-forward summaries on historical sessions.
