@@ -19,6 +19,7 @@ from quant_scripts.spx_gex.io import load_gex_point, sample_csv_payload, sample_
 from quant_scripts.spx_gex.cli import build_parser
 from quant_scripts.spx_gex.backtest import run_walk_forward, write_backtest_report
 from quant_scripts.spx_gex.cboe import load_cboe_export
+from quant_scripts.spx_gex.databento import load_spy_intraday_bars
 
 
 def test_calculate_dealer_gex_inverts_aggregate_sign() -> None:
@@ -171,6 +172,41 @@ def test_load_cboe_export_normalizes_vendor_columns() -> None:
     assert point.underlying_symbol == "SPX"
     assert point.underlying_price == 5000.0
     assert len(point.contracts) == 1
+
+
+def test_load_spy_intraday_bars_supports_databento_shape() -> None:
+    with TemporaryDirectory() as tmpdir:
+        path = Path(tmpdir) / "spy_bars.json"
+        path.write_text(
+            json.dumps(
+                {
+                    "symbol": "SPY",
+                    "bars": [
+                        {
+                            "ts": "2026-08-01T13:30:00+00:00",
+                            "open": 500.0,
+                            "high": 501.0,
+                            "low": 499.5,
+                            "close": 500.5,
+                        },
+                        {
+                            "ts": "2026-08-01T11:30:00+00:00",
+                            "open": 499.0,
+                            "high": 500.0,
+                            "low": 498.0,
+                            "close": 499.5,
+                        },
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        bars = load_spy_intraday_bars(path)
+
+    assert len(bars) == 2
+    assert bars[0].ts.isoformat() == "2026-08-01T11:30:00+00:00"
+    assert bars[1].close == 500.5
 
 
 def test_run_walk_forward_summarizes_multiple_sessions() -> None:

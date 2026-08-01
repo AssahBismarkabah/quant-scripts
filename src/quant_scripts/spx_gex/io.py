@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from .cboe import load_cboe_export_payload
+from .databento import load_spy_intraday_bars
 from .models import (
     GEXContract,
     GEXDataPoint,
@@ -138,6 +139,10 @@ def load_intraday_bars(path: Path) -> list[IntradayBar]:
         ],
         key=lambda item: item.ts,
     )
+
+
+def load_spy_bars(path: Path) -> list[IntradayBar]:
+    return load_spy_intraday_bars(path)
 
 
 def load_intraday_bars_csv(path: Path) -> list[IntradayBar]:

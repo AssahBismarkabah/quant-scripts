@@ -16,6 +16,7 @@ The hypothesis is simple:
 This is a research candidate, not a proven edge. The implementation currently provides a normalized input contract, a regime classifier, a mid-day backtest harness, a walk-forward summary runner, and a Cboe EOD export normalizer.
 
 The first real vendor adapter now supports Cboe-style EOD option exports normalized into the internal SPX GEX payload.
+The next vendor path is Databento for SPY intraday bars using `EQUS.MINI` and `ohlcv-1m`.
 
 ## 2. The Economic Edge
 
@@ -65,6 +66,7 @@ Supported local research commands:
 - `make -C research/spx-gex backtest POINT=... BARS=...`
 - `make -C research/spx-gex walk-forward INPUT=...`
 - `make -C research/spx-gex normalize-cboe INPUT=...`
+- `make -C research/spx-gex fetch-spy-bars START=... END=... OUTPUT=...`
 
 ## 3. Research Scope
 

@@ -86,6 +86,8 @@ For execution testing, SPX remains the signal source and SPY is the tradable pro
 
 Databento is the preferred starting point for a full intraday options replay if we later need a higher-fidelity chain workflow, because it supports historical options, option chains, expirations, strikes, greeks, and underlying prices in one normalized workflow. For the first pass, Cboe is the primary data route because the SPX option EOD summary includes gamma and open interest fields needed to construct a daily regime classifier without immediately requiring a paid intraday chain feed.
 
+For the SPY execution proxy layer, Databento US Equities Mini (`EQUS.MINI`) with the `ohlcv-1m` schema is the selected vendor path because it provides historical SPY bars that can be normalized into the existing intraday bar contract.
+
 ### **implementation status**
 
 The gamma-flow research scaffold is now partially implemented.

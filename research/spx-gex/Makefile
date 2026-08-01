@@ -3,7 +3,7 @@ export PYTHONPATH := ../../src:$(PYTHONPATH)
 
 TEST_DIR ?= ../../tests
 
-.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe
+.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars
 
 help:
 	@printf '%s\n' \
@@ -15,6 +15,7 @@ help:
 		'  make sessions-template' \
 		'  make csv-template' \
 		'  make normalize-cboe INPUT=...' \
+		'  make fetch-spy-bars START=... END=... OUTPUT=...' \
 		'  make backtest INPUT=... POINT=... BARS=...' \
 		'  make walk-forward INPUT=...' \
 		'  make test'
@@ -39,6 +40,9 @@ csv-template:
 
 normalize-cboe:
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT)
+
+fetch-spy-bars:
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $(START) --end $(END) --output $(OUTPUT)
 
 backtest:
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(OUTPUT)

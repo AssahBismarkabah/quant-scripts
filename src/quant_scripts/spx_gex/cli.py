@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
 from .backtest import SPXGEXBacktest, run_walk_forward, write_backtest_report
+from .databento import DatabentoBarRequest, fetch_spy_intraday_bars, write_spy_intraday_bars_json
 from .io import (
     load_gex_files,
     load_gex_point,
@@ -21,21 +23,56 @@ from .io import (
 from .models import GEXContract, build_gex_data_point, classify_regime, calculate_dealer_gex
 
 
+def _load_dotenv(dotenv_path: Path | None = None) -> None:
+    env_path = dotenv_path if dotenv_path is not None else Path(__file__).resolve().parents[4] / ".env"
+    if not env_path.exists():
+        return
+
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="SPX dealer gamma exposure research helper")
     parser.add_argument(
         "--mode",
-        choices=["smoke", "calc", "backtest", "walk-forward", "template", "validate", "point-template", "bars-template", "sessions-template", "csv-template", "normalize-cboe"],
+        choices=[
+            "smoke",
+            "calc",
+            "backtest",
+            "walk-forward",
+            "template",
+            "validate",
+            "point-template",
+            "bars-template",
+            "sessions-template",
+            "csv-template",
+            "normalize-cboe",
+            "fetch-spy-bars",
+        ],
         default="smoke",
     )
     parser.add_argument("--input", type=Path, default=None)
     parser.add_argument("--point", type=Path, default=None)
     parser.add_argument("--bars", type=Path, default=None)
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--dataset", type=str, default="EQUS.MINI")
+    parser.add_argument("--symbol", type=str, default="SPY")
+    parser.add_argument("--start", type=str, default=None)
+    parser.add_argument("--end", type=str, default=None)
     return parser
 
 
 def main() -> int:
+    _load_dotenv()
     args = build_parser().parse_args()
     if args.mode == "smoke":
         sample = build_gex_data_point(
@@ -75,6 +112,22 @@ def main() -> int:
         if args.input is None:
             raise SystemExit("--input is required for normalize-cboe mode")
         print(json.dumps(normalize_cboe_input(args.input), indent=2))
+        return 0
+
+    if args.mode == "fetch-spy-bars":
+        if args.start is None or args.end is None:
+            raise SystemExit("--start and --end are required for fetch-spy-bars mode")
+        if args.output is None:
+            raise SystemExit("--output is required for fetch-spy-bars mode")
+        request = DatabentoBarRequest(
+            dataset=args.dataset,
+            symbol=args.symbol,
+            start=datetime.fromisoformat(args.start),
+            end=datetime.fromisoformat(args.end),
+        )
+        bars = fetch_spy_intraday_bars(request)
+        write_spy_intraday_bars_json(args.output, bars)
+        print(json.dumps({"bars": len(bars), "output": str(args.output)}, indent=2))
         return 0
 
     if args.mode == "validate":
