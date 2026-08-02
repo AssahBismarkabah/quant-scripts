@@ -1,4 +1,11 @@
+PYTHON ?= ../../.venv/bin/python
+ifneq ($(wildcard ../../.venv/bin/python),)
+PYTHON := ../../.venv/bin/python
+else ifneq ($(wildcard ./.venv/bin/python),)
+PYTHON := ./.venv/bin/python
+else
 PYTHON ?= python3
+endif
 export PYTHONPATH := ../../src:$(PYTHONPATH)
 
 TEST_DIR ?= ../../tests
