@@ -18,16 +18,22 @@ END ?=
 DATA_DIR ?= data
 DEFAULT_BARS := $(DATA_DIR)/spy_bars.json
 DEFAULT_POINT := $(DATA_DIR)/spx_point.json
+DEFAULT_MERGED_POINT := $(DATA_DIR)/spx_point_merged.json
+DEFAULT_OI := $(DATA_DIR)/spx_open_interest.csv
 RAW_POINT := $(DATA_DIR)/raw/cboe_spx.csv
 OUTPUT ?= $(DEFAULT_BARS)
 BACKTEST_OUTPUT ?= $(DATA_DIR)/backtest_report.json
 POINT ?= $(DEFAULT_POINT)
 BARS ?= $(DEFAULT_BARS)
 INPUT ?= $(RAW_POINT)
+CHAIN ?=
+OI ?=
+MERGED_POINT ?= $(DEFAULT_MERGED_POINT)
+OI_OUTPUT ?= $(DEFAULT_OI)
 
 .DEFAULT_GOAL := backtest-default
 
-.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars backtest-default prepare prepare-point
+.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe normalize-optionsdx fetch-databento-oi fetch-spy-bars backtest-default prepare prepare-point prepare-bars prepare-merged backtest-merged
 
 help:
 	@printf '%s\n' \
@@ -40,9 +46,13 @@ help:
 		'  make sessions-template' \
 		'  make csv-template' \
 		'  make normalize-cboe INPUT=...' \
+		'  make normalize-optionsdx INPUT=...' \
 		'  make prepare-point INPUT=...' \
+		'  make fetch-databento-oi START=... END=... OUTPUT=...' \
+		'  make prepare-merged CHAIN=... OI=...' \
 		'  make fetch-spy-bars START=... END=... OUTPUT=...' \
 		'  make prepare' \
+		'  make backtest-merged CHAIN=... OI=...' \
 		'  make backtest' \
 		'  make walk-forward INPUT=...' \
 		'  make test'
@@ -68,10 +78,24 @@ csv-template:
 normalize-cboe:
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT)
 
+normalize-optionsdx:
+	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-optionsdx --input $(INPUT)
+
+fetch-databento-oi:
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-databento-oi --oi-dataset $${OI_DATASET:-OPRA.PILLAR} --oi-symbol $${OI_SYMBOL:-SPX.OPT} --oi-schema $${OI_SCHEMA:-statistics} --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OI_OUTPUT)
+
 prepare-point:
 	@mkdir -p $(DATA_DIR)
 	@test -f $(INPUT) || (printf '%s\n' "missing raw SPX export: $(INPUT)" && exit 1)
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT) > $(DEFAULT_POINT)
+
+prepare-merged:
+	@mkdir -p $(DATA_DIR)
+	@test -n "$(CHAIN)" || (printf '%s\n' "missing CHAIN=..." && exit 1)
+	@test -n "$(OI)" || (printf '%s\n' "missing OI=..." && exit 1)
+	@test -f $(CHAIN) || (printf '%s\n' "missing chain input: $(CHAIN)" && exit 1)
+	@test -f $(OI) || (printf '%s\n' "missing oi input: $(OI)" && exit 1)
+	$(PYTHON) -m quant_scripts.spx_gex --mode merge-optionsdx-oi --chain $(CHAIN) --oi $(OI) --output $(MERGED_POINT)
 
 fetch-spy-bars:
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OUTPUT)
@@ -82,9 +106,16 @@ backtest:
 backtest-default: prepare
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(DEFAULT_POINT) --bars $(DEFAULT_BARS) --output $(BACKTEST_OUTPUT)
 
+backtest-merged: prepare-merged
+	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(MERGED_POINT) --bars $(DEFAULT_BARS) --output $(BACKTEST_OUTPUT)
+
 prepare:
 	@mkdir -p $(DATA_DIR)
 	$(MAKE) prepare-point INPUT=$(INPUT)
+	$(MAKE) fetch-databento-oi
+	$(MAKE) prepare-bars
+
+prepare-bars:
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(DEFAULT_BARS)
 
 walk-forward:

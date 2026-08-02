@@ -8,6 +8,11 @@ from pathlib import Path
 
 from .backtest import SPXGEXBacktest, run_walk_forward, write_backtest_report
 from .databento import DatabentoBarRequest, fetch_spy_intraday_bars, write_spy_intraday_bars_json
+from .databento_options import (
+    load_optionsdx_chain,
+    write_databento_open_interest_csv,
+    write_merged_payload,
+)
 from .io import (
     load_gex_files,
     load_gex_point,
@@ -56,16 +61,24 @@ def build_parser() -> argparse.ArgumentParser:
             "sessions-template",
             "csv-template",
             "normalize-cboe",
+            "normalize-optionsdx",
+            "merge-optionsdx-oi",
+            "fetch-databento-oi",
             "fetch-spy-bars",
         ],
         default="smoke",
     )
     parser.add_argument("--input", type=Path, default=None)
     parser.add_argument("--point", type=Path, default=None)
+    parser.add_argument("--chain", type=Path, default=None)
+    parser.add_argument("--oi", type=Path, default=None)
     parser.add_argument("--bars", type=Path, default=None)
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--dataset", type=str, default="EQUS.MINI")
     parser.add_argument("--symbol", type=str, default="SPY")
+    parser.add_argument("--oi-symbol", type=str, default="SPX.OPT")
+    parser.add_argument("--oi-dataset", type=str, default="OPRA.PILLAR")
+    parser.add_argument("--oi-schema", type=str, default="statistics")
     parser.add_argument("--start", type=str, default=None)
     parser.add_argument("--end", type=str, default=None)
     return parser
@@ -112,6 +125,59 @@ def main() -> int:
         if args.input is None:
             raise SystemExit("--input is required for normalize-cboe mode")
         print(json.dumps(normalize_cboe_input(args.input), indent=2))
+        return 0
+
+    if args.mode == "normalize-optionsdx":
+        if args.input is None:
+            raise SystemExit("--input is required for normalize-optionsdx mode")
+        point = load_optionsdx_chain(args.input)
+        print(
+            json.dumps(
+                {
+                    "snapshot_time": point.snapshot_time.isoformat(),
+                    "underlying_symbol": point.underlying_symbol,
+                    "underlying_price": point.underlying_price,
+                    "exclude_0dte": point.exclude_0dte,
+                    "contracts": [
+                        {
+                            "option_type": contract.option_type,
+                            "strike": contract.strike,
+                            "expiration": contract.expiration.isoformat(),
+                            "open_interest": contract.open_interest,
+                            "gamma": contract.gamma,
+                            "contract_multiplier": contract.contract_multiplier,
+                        }
+                        for contract in point.contracts
+                    ],
+                },
+                indent=2,
+            )
+        )
+        return 0
+
+    if args.mode == "merge-optionsdx-oi":
+        if args.chain is None or args.oi is None:
+            raise SystemExit("--chain and --oi are required for merge-optionsdx-oi mode")
+        if args.output is None:
+            raise SystemExit("--output is required for merge-optionsdx-oi mode")
+        write_merged_payload(args.chain, args.oi, args.output)
+        print(json.dumps({"output": str(args.output)}, indent=2))
+        return 0
+
+    if args.mode == "fetch-databento-oi":
+        if args.start is None or args.end is None:
+            raise SystemExit("--start and --end are required for fetch-databento-oi mode")
+        if args.output is None:
+            raise SystemExit("--output is required for fetch-databento-oi mode")
+        write_databento_open_interest_csv(
+            path=args.output,
+            dataset=args.oi_dataset,
+            symbol=args.oi_symbol,
+            start=datetime.fromisoformat(args.start),
+            end=datetime.fromisoformat(args.end),
+            schema=args.oi_schema,
+        )
+        print(json.dumps({"output": str(args.output)}, indent=2))
         return 0
 
     if args.mode == "fetch-spy-bars":

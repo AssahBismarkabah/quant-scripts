@@ -20,6 +20,7 @@ from quant_scripts.spx_gex.cli import build_parser
 from quant_scripts.spx_gex.backtest import run_walk_forward, write_backtest_report
 from quant_scripts.spx_gex.cboe import load_cboe_export
 from quant_scripts.spx_gex.databento import load_spy_intraday_bars
+from quant_scripts.spx_gex.databento_options import load_optionsdx_chain, merge_optionsdx_with_open_interest
 
 
 def test_calculate_dealer_gex_inverts_aggregate_sign() -> None:
@@ -207,6 +208,30 @@ def test_load_spy_intraday_bars_supports_databento_shape() -> None:
     assert len(bars) == 2
     assert bars[0].ts.isoformat() == "2026-08-01T11:30:00+00:00"
     assert bars[1].close == 500.5
+
+
+def test_merge_optionsdx_chain_with_open_interest() -> None:
+    with TemporaryDirectory() as tmpdir:
+        chain_path = Path(tmpdir) / "spx_eod_202301.txt"
+        oi_path = Path(tmpdir) / "oi.csv"
+        chain_path.write_text(
+            "[QUOTE_UNIXTIME], [QUOTE_READTIME], [QUOTE_DATE], [QUOTE_TIME_HOURS], [UNDERLYING_LAST], [EXPIRE_DATE], [EXPIRE_UNIX], [DTE], [C_DELTA], [C_GAMMA], [C_VEGA], [C_THETA], [C_RHO], [C_IV], [C_VOLUME], [C_LAST], [C_SIZE], [C_BID], [C_ASK], [STRIKE], [P_BID], [P_ASK], [P_SIZE], [P_LAST], [P_DELTA], [P_GAMMA], [P_VEGA], [P_THETA], [P_RHO], [P_IV], [P_VOLUME], [STRIKE_DISTANCE], [STRIKE_DISTANCE_PCT]\n"
+            "1672866000, 2023-01-04 16:00, 2023-01-04, 16.000000, 3853.390000, 2023-01-05, 1672952400, 1.000000, 0.100000, 0.020000, 0.000000, 0.000000, 0.000000, , 1.000000, 3041.370000, 7 x 7, 2846.800000, 2848.300000, 1000.000000, 0.000000, 0.050000, 0 x 272, 0.030000, 0.000000, 0.000000, 0.000230, -0.024810, -0.000330, 8.175360, 7.000000, 2853.400000, 0.740000\n",
+            encoding="utf-8",
+        )
+        oi_path.write_text(
+            "option_type,strike,expiration,open_interest\n"
+            "call,1000,2023-01-05,250\n"
+            "put,1000,2023-01-05,150\n",
+            encoding="utf-8",
+        )
+
+        point = merge_optionsdx_with_open_interest(chain_path, oi_path)
+
+    assert point.underlying_symbol == "SPX"
+    assert len(point.contracts) == 2
+    assert point.contracts[0].open_interest == 250.0
+    assert point.contracts[1].open_interest == 150.0
 
 
 def test_run_walk_forward_summarizes_multiple_sessions() -> None:
