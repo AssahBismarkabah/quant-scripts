@@ -15,14 +15,17 @@ DATASET ?= EQUS.MINI
 SYMBOL ?= SPY
 START ?=
 END ?=
-OUTPUT ?= /tmp/spy_bars.json
-POINT ?=
-BARS ?=
+DATA_DIR ?= data
+DEFAULT_BARS := $(DATA_DIR)/spy_bars.json
+DEFAULT_POINT := $(DATA_DIR)/spx_point.json
+OUTPUT ?= $(DEFAULT_BARS)
+POINT ?= $(DEFAULT_POINT)
+BARS ?= $(DEFAULT_BARS)
 INPUT ?=
 
 .DEFAULT_GOAL := fetch-spy-bars-default
 
-.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars
+.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars backtest-default prepare
 
 help:
 	@printf '%s\n' \
@@ -36,8 +39,8 @@ help:
 		'  make csv-template' \
 		'  make normalize-cboe INPUT=...' \
 		'  make fetch-spy-bars START=... END=... OUTPUT=...' \
-		'  make fetch-spy-bars-default' \
-		'  make backtest POINT=... BARS=...' \
+		'  make prepare' \
+		'  make backtest' \
 		'  make walk-forward INPUT=...' \
 		'  make test'
 
@@ -63,13 +66,17 @@ normalize-cboe:
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT)
 
 fetch-spy-bars:
-	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $(START) --end $(END) --output $(OUTPUT)
-
-fetch-spy-bars-default:
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OUTPUT)
 
 backtest:
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(OUTPUT)
+
+backtest-default:
+	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(DEFAULT_POINT) --bars $(DEFAULT_BARS) --output $(DATA_DIR)/backtest_report.json
+
+prepare:
+	@mkdir -p $(DATA_DIR)
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(DEFAULT_BARS)
 
 walk-forward:
 	$(PYTHON) -m quant_scripts.spx_gex --mode walk-forward --input $(INPUT) --output $(OUTPUT)
