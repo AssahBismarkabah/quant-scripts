@@ -8,13 +8,26 @@ PYTHON ?= python3
 endif
 export PYTHONPATH := ../../src:$(PYTHONPATH)
 
+DEFAULT_START ?= 2026-07-31T13:30:00+00:00
+DEFAULT_END ?= 2026-07-31T20:00:00+00:00
 TEST_DIR ?= ../../tests
+DATASET ?= EQUS.MINI
+SYMBOL ?= SPY
+START ?=
+END ?=
+OUTPUT ?= /tmp/spy_bars.json
+POINT ?=
+BARS ?=
+INPUT ?=
+
+.DEFAULT_GOAL := fetch-spy-bars-default
 
 .PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars
 
 help:
 	@printf '%s\n' \
 		'SPX GEX research workflow:' \
+		'  make' \
 		'  make smoke' \
 		'  make template' \
 		'  make point-template' \
@@ -23,7 +36,8 @@ help:
 		'  make csv-template' \
 		'  make normalize-cboe INPUT=...' \
 		'  make fetch-spy-bars START=... END=... OUTPUT=...' \
-		'  make backtest INPUT=... POINT=... BARS=...' \
+		'  make fetch-spy-bars-default' \
+		'  make backtest POINT=... BARS=...' \
 		'  make walk-forward INPUT=...' \
 		'  make test'
 
@@ -50,6 +64,9 @@ normalize-cboe:
 
 fetch-spy-bars:
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $(START) --end $(END) --output $(OUTPUT)
+
+fetch-spy-bars-default:
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OUTPUT)
 
 backtest:
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(OUTPUT)

@@ -24,7 +24,7 @@ from .models import GEXContract, build_gex_data_point, classify_regime, calculat
 
 
 def _load_dotenv(dotenv_path: Path | None = None) -> None:
-    env_path = dotenv_path if dotenv_path is not None else Path(__file__).resolve().parents[4] / ".env"
+    env_path = dotenv_path if dotenv_path is not None else Path(__file__).resolve().parents[3] / ".env"
     if not env_path.exists():
         return
 

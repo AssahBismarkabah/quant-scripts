@@ -68,10 +68,10 @@ def fetch_spy_intraday_bars(request: DatabentoBarRequest) -> list[IntradayBar]:
         start=request.start.isoformat(),
         end=request.end.isoformat(),
     )
-    rows = list(data.to_dicts())
+    frame = data.to_df()
     bars: list[IntradayBar] = []
-    for row in rows:
-        ts = row.get("ts_event") or row.get("ts") or row.get("timestamp")
+    for _, row in frame.reset_index().iterrows():
+        ts = row.get("ts_event") or row.get("ts") or row.get("timestamp") or row.get("index")
         if ts is None:
             continue
         bars.append(
