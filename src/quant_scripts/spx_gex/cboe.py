@@ -101,6 +101,10 @@ def write_cboe_normalized_payload(path: Path, output: Path) -> None:
     output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
+def write_cboe_normalized_point(path: Path, output: Path) -> None:
+    write_cboe_normalized_payload(path, output)
+
+
 def iter_cboe_rows(path: Path) -> Iterable[dict[str, str]]:
     if not path.exists():
         raise FileNotFoundError(f"input file not found: {path}")

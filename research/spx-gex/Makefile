@@ -18,14 +18,16 @@ END ?=
 DATA_DIR ?= data
 DEFAULT_BARS := $(DATA_DIR)/spy_bars.json
 DEFAULT_POINT := $(DATA_DIR)/spx_point.json
+RAW_POINT := $(DATA_DIR)/raw/cboe_spx.csv
 OUTPUT ?= $(DEFAULT_BARS)
+BACKTEST_OUTPUT ?= $(DATA_DIR)/backtest_report.json
 POINT ?= $(DEFAULT_POINT)
 BARS ?= $(DEFAULT_BARS)
-INPUT ?=
+INPUT ?= $(RAW_POINT)
 
-.DEFAULT_GOAL := fetch-spy-bars-default
+.DEFAULT_GOAL := backtest-default
 
-.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars backtest-default prepare
+.PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe fetch-spy-bars backtest-default prepare prepare-point
 
 help:
 	@printf '%s\n' \
@@ -38,6 +40,7 @@ help:
 		'  make sessions-template' \
 		'  make csv-template' \
 		'  make normalize-cboe INPUT=...' \
+		'  make prepare-point INPUT=...' \
 		'  make fetch-spy-bars START=... END=... OUTPUT=...' \
 		'  make prepare' \
 		'  make backtest' \
@@ -65,17 +68,23 @@ csv-template:
 normalize-cboe:
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT)
 
+prepare-point:
+	@mkdir -p $(DATA_DIR)
+	@test -f $(INPUT) || (printf '%s\n' "missing raw SPX export: $(INPUT)" && exit 1)
+	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-cboe --input $(INPUT) > $(DEFAULT_POINT)
+
 fetch-spy-bars:
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OUTPUT)
 
 backtest:
-	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(OUTPUT)
+	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(BACKTEST_OUTPUT)
 
-backtest-default:
-	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(DEFAULT_POINT) --bars $(DEFAULT_BARS) --output $(DATA_DIR)/backtest_report.json
+backtest-default: prepare
+	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(DEFAULT_POINT) --bars $(DEFAULT_BARS) --output $(BACKTEST_OUTPUT)
 
 prepare:
 	@mkdir -p $(DATA_DIR)
+	$(MAKE) prepare-point INPUT=$(INPUT)
 	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(DEFAULT_BARS)
 
 walk-forward:
