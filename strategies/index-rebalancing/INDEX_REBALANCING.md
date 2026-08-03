@@ -1,7 +1,7 @@
 # Index Rebalancing Price Pressure
 
 **Version:** 1.0
-**Status:** Pre-backtest (Level 1 research spec approved)
+**Status:** Level 1 in progress (research spec approved, data verifications passed, event-table construction next)
 **Classification:** Relative Value / Event-Driven Mean Reversion (Category 2: Regulatory & Mandate Constraints)
 
 ## 1. Executive Summary

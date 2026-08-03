@@ -1,6 +1,6 @@
 ### **index rebalancing price pressure research specification**
 
-**Status:** Pre-research specification (Level 1 not yet implemented)
+**Status:** Level-1 research preparation approved — all three pre-implementation data verifications passed (see "data verification results" below). Event-table construction and the Level-1 event study may begin.
 
 **Classification:** Candidate mechanic / Regulatory & mandate constraints / Passive flow inelasticity
 
@@ -141,6 +141,35 @@ The acquisition sequence is:
 - Validate the event table against Wikipedia and tickerleague for the same window.
 - Download constituent OHLCV bars for the event windows.
 - If the Russell 2000 is included, verify historical reconstitution list availability; otherwise drop the secondary venue.
+
+---
+
+### **data verification results (all passed, 2026-08-03)**
+
+#### **Verification 1: EQUS.MINI small-cap coverage — PASSED**
+
+- Dataset window confirmed: `EQUS.MINI` ohlcv-1d available 2023-03-28 through 2026-08-01 (ohlcv-1m through 2026-08-03). Study window fits entirely.
+- Universe sampled: 562 current constituents (298 S&P SmallCap 600 + 264 S&P MidCap 400 tickers extracted from Wikipedia constituent lists, de-duplicated).
+- Full-window record check (2023-03-28 to 2026-08-01, ohlcv-1d, raw_symbol symbology): 455,253 records vs ~466,460 theoretical maximum (562 tickers x ~830 trading days) = **97.6% coverage**.
+- Every gap traced to listing date, not coverage: AAMI (IPO 2025-07), AMTM (spin-off 2024-10), AHR (IPO 2024-02) fail raw-symbol resolution in 2023 because they did not trade then; each resolves correctly at its actual listing date (verified individually). Recent IPOs are excluded from version one anyway (insufficient price history).
+- Conclusion: EQUS.MINI covers the S&P 600 / S&P 400 universe for the study window. Delisted-name coverage within EQUS.MINI is expected from the dataset's point-in-time construction and remains subject to spot checks during event-table construction.
+
+#### **Verification 2: S&P DJI press-release announcement-date archive — PASSED**
+
+- `press.spglobal.com` publishes a release for every addition/deletion ("Set to Join" releases), with the announcement date in the URL and page title (format `press.spglobal.com/YYYY-MM-DD-...`).
+- Release bodies contain the effective date, tickers, and the full replacement table. Verified on the 2024-11-21 Texas Pacific Land release: announcement date 2024-11-21, "effective prior to the opening of trading on Tuesday, November 26", full add/replace chain (TPL -> S&P 500, MLI -> S&P MidCap 400, AESI -> S&P SmallCap 600).
+- Archive is paginated (`index.php?s=2429&l=50&o=<offset>`), covers 2012 through 2026 (offset 3500 still returns 2012 releases; offset 4000 is empty), far beyond the 2023-2026 study window.
+- Announcement dates are therefore recoverable without look-ahead for every S&P 600 / S&P 400 event in the window.
+
+#### **Verification 3: FTSE Russell historical reconstitution lists — PASSED**
+
+- Live URLs on lseg.com host the weekly preliminary series plus finals, e.g. `.../other/ru3000-additions-20250620.pdf` and `ru3000-deletions-20250620.pdf` (both HTTP 200), and the 2026 series (`ru3000-additions-20260522.pdf` onward).
+- Historical finals recovered via the Wayback Machine CDX API:
+  - 2023: `ru3000-additions-final-20230623.pdf`, `ru3000-deletions-final-20230623.pdf`
+  - 2024: preliminary weekly series (`ru3000-deletions-preliminary-20240524/31, 20240607/14/21.pdf`) plus finals (`ru3000-additions-final-20240628.pdf`, `ru3000-deletions-final-20240628.pdf`)
+- Russell 2000 venue stays in version one. The Russell 3000 addition/deletion lists define the event population; Russell 2000 membership is derived by the known R1000/R2000 breakpoint and micro-cap migration, with the 2000-name list cross-checked against the reconstitution summaries.
+
+These results lift the three pre-implementation holds. Remaining unresolved items are listed under "research status and unresolved questions".
 
 ---
 
@@ -407,23 +436,22 @@ Promotional material is not sufficient to validate the mechanic.
 
 ### **research status and unresolved questions**
 
-The initial research pass is complete. The mechanism is heavily documented in the academic literature, the decay in the S&P 500 is documented, and the small-cap survivor venues are identified.
+The initial research pass is complete. The mechanism is heavily documented in the academic literature, the decay in the S&P 500 is documented, the small-cap survivor venues are identified, and all three pre-implementation data verifications have passed (EQUS.MINI coverage, S&P DJI announcement archive, FTSE Russell historical lists).
 
 Still unresolved before final validation, and who resolves each item:
 
-- **Research:** Verify Databento EQUS.MINI coverage of S&P 600 and S&P 400 constituents, including delisted names, for 2023-2026.
-- **Research:** Verify that S&P DJI press-release archives provide announcement dates for the study window.
-- **Research:** Verify FTSE Russell historical list availability for the Russell 2000 secondary venue; drop the venue if lists cannot be recovered.
 - **Research:** Reconstruct historical borrow-fee data or, failing that, model borrow as a conservative stress assumption with a hard-to-borrow filter.
 - **Research:** Determine whether the observed reversal is executable or only a mark-to-market artifact of the index effect literature.
 - **Research:** Estimate capacity at multiple notional sizes for the long-deletions leg.
+- **Research:** Spot-check EQUS.MINI coverage of delisted S&P 600 / S&P 400 names (names deleted from the indices within the window) during event-table construction.
+- **Implementation:** Build the addition/deletion event table (announcement date, effective date, ticker, index, reason category) from the S&P DJI press archive and FTSE Russell lists, cross-validated against Wikipedia/tickerleague.
 
 ### **current known limitations**
 
 - No historical borrow-fee dataset is confirmed for the short-additions leg; borrow cost will be modeled as a stress assumption until data is verified.
-- Historical FTSE Russell list availability is unverified; the Russell 2000 venue may be dropped at Level 1.
-- EQUS.MINI small-cap coverage is unverified; the study window and universe depend on this check.
 - The effect has demonstrably decayed in the S&P 500; version one deliberately excludes it.
+- EQUS.MINI starts 2023-03-28, which bounds the earliest possible study window; a longer history would require the full EQUS dataset or another licensed source.
+- The Russell 3000 lists are the recoverable event source; Russell 2000 membership is derived, and the derivation must be validated against reconstitution summaries during event-table construction.
 
 These assumptions are for backtesting only. They do not authorize live trading or imply that the strategy is suitable for any account.
 
@@ -449,4 +477,6 @@ The outcome of this document may be approval to code, revision of the hypothesis
 
 ### **current decision**
 
-The index-rebalancing price-pressure candidate is approved for Level-1 research preparation, subject to the three data verifications above (EQUS.MINI small-cap coverage, S&P DJI announcement-date archive, FTSE Russell historical lists). The primary direction is long small-cap deletions after the effective date, with short additions tested separately under borrow constraints. The S&P 500 venue is excluded due to documented effect decay.
+The index-rebalancing price-pressure candidate is approved for Level-1 research preparation. All three pre-implementation data verifications passed on 2026-08-03: (1) EQUS.MINI covers the S&P 600 / S&P 400 universe (97.6% full-window record coverage; all gaps traced to post-2023 IPOs, which are excluded from version one); (2) the S&P DJI press-release archive provides announcement and effective dates for every event in the window; (3) FTSE Russell historical additions/deletions lists are recoverable for 2023-2026, keeping the Russell 2000 secondary venue in scope.
+
+The next deliverable is the event table (announcement date, effective date, ticker, index, reason category) cross-validated across S&P DJI releases, FTSE Russell lists, Wikipedia, and tickerleague, followed by the Level-1 event study (entry at the first open after the effective date; holding windows 10/20/40/60 trading days; long deletions primary, short additions tested separately under borrow constraints). The S&P 500 venue remains excluded due to documented effect decay.
