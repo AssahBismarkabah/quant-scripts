@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import date
 from pathlib import Path
 
@@ -122,6 +123,35 @@ def test_reconcile_confirm_and_conflict() -> None:
         out2 = reconcile(events2, cross_rows, log_path=Path(tmp) / "cleaning_log.jsonl")
         assert out2[0].status is EventStatus.RECONCILED
         assert out2[0].reason_category is ReasonCategory.M_A
+
+
+def test_parse_russell_pdf_2025_deletions() -> None:
+    """Real weekly list (2025-06-20) parsed: 155 rows, correct header skip."""
+    from quant_scripts.index_rebalancing.ftse import parse_russell_pdf
+
+    rows = parse_russell_pdf(Path("/tmp/ru3000-dels-2025.pdf"))
+    assert len(rows) > 100
+    assert {"ticker": "DIBS", "company_name": "1STDIBS.COM"} in rows
+    assert all(re.match(r"^[A-Z0-9.\-]{1,6}$", r["ticker"]) for r in rows)
+
+
+def test_validate_r2000_counts_2025_within_tolerance() -> None:
+    from quant_scripts.index_rebalancing.ftse import validate_r2000_counts
+
+    adds = [{"ticker": f"X{i}", "company_name": f"C{i}"} for i in range(233)]
+    dels = [{"ticker": f"Y{i}", "company_name": f"D{i}"} for i in range(155)]
+    result = validate_r2000_counts(adds, dels, 2025)
+    assert result["within_tolerance"] is True
+    assert result["add_diff_pct"] <= 2.0
+
+
+def test_validate_r2000_counts_breaks_on_big_gap() -> None:
+    from quant_scripts.index_rebalancing.ftse import validate_r2000_counts
+
+    adds = [{"ticker": f"X{i}", "company_name": f"C{i}"} for i in range(10)]
+    dels = [{"ticker": f"Y{i}", "company_name": f"D{i}"} for i in range(10)]
+    result = validate_r2000_counts(adds, dels, 2025)
+    assert result["within_tolerance"] is False
 
 
 def test_parse_wikipedia_changes_extracts_additions_and_deletions() -> None:
