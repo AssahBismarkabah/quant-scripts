@@ -63,3 +63,76 @@ def test_classify_reason_discretionary() -> None:
         )
         is ReasonCategory.DISCRETIONARY
     )
+
+
+WIKI_CHANGES_FIXTURE = """<table>
+<tr><th>Date</th><th>Added</th><th>Removed</th><th>Reason</th></tr>
+<tr><th>Ticker</th><th>Security</th><th>Ticker</th><th>Security</th></tr>
+<tr><td>November 26, 2024</td><td>MLI</td><td>Mueller Industries</td><td>TPL</td><td>Texas Pacific Land</td><td>S&amp;P 500 constituent Berkshire Hathaway acquired Taylor Morrison</td></tr>
+<tr><td>June 24, 2024</td><td>TPL</td><td>Texas Pacific Land</td><td></td><td></td><td>Market cap</td></tr>
+</table>"""
+
+
+def test_reconcile_confirm_and_conflict() -> None:
+    from tempfile import TemporaryDirectory
+
+    from quant_scripts.index_rebalancing.models import EventAction, EventStatus, IndexEvent
+    from quant_scripts.index_rebalancing.reconcile import reconcile
+
+    events = [
+        IndexEvent(
+            venue=Venue.SP400,
+            ticker="TPL",
+            company_name="Texas Pacific Land",
+            action=EventAction.DELETION,
+            announcement_date=date(2024, 11, 21),
+            effective_date=date(2024, 11, 26),
+            reason_category=ReasonCategory.DISCRETIONARY,
+            reason_source="spdji_text",
+            source_primary="spdji_press",
+            sources=("spdji_press",),
+            status=EventStatus.UNVERIFIED,
+        )
+    ]
+    cross_rows = [
+        {"ticker": "TPL", "action": "deletion", "date": date(2024, 11, 26), "reason": ReasonCategory.DISCRETIONARY},
+        {"ticker": "MRO", "action": "deletion", "date": date(2024, 11, 26), "reason": ReasonCategory.M_A},
+    ]
+    with TemporaryDirectory() as tmp:
+        out = reconcile(events, cross_rows, log_path=Path(tmp) / "cleaning_log.jsonl")
+        assert out[0].status is EventStatus.CONFIRMED
+        assert "cross_sources" in out[0].sources
+
+        # conflicting reason -> reconciled + excluded
+        events2 = [
+            IndexEvent(
+                venue=Venue.SP500,
+                ticker="MRO",
+                company_name="Marathon Oil",
+                action=EventAction.DELETION,
+                announcement_date=date(2024, 11, 21),
+                effective_date=date(2024, 11, 26),
+                reason_category=ReasonCategory.DISCRETIONARY,
+                reason_source="spdji_text",
+                source_primary="spdji_press",
+                sources=("spdji_press",),
+                status=EventStatus.UNVERIFIED,
+            )
+        ]
+        out2 = reconcile(events2, cross_rows, log_path=Path(tmp) / "cleaning_log.jsonl")
+        assert out2[0].status is EventStatus.RECONCILED
+        assert out2[0].reason_category is ReasonCategory.M_A
+
+
+def test_parse_wikipedia_changes_extracts_additions_and_deletions() -> None:
+    from quant_scripts.index_rebalancing.crossvalidate import parse_wikipedia_changes
+
+    rows = parse_wikipedia_changes(WIKI_CHANGES_FIXTURE, Venue.SP400)
+    by_key = {(r["ticker"], r["action"], r["date"]) for r in rows}
+    assert ("MLI", "addition", date(2024, 11, 26)) in by_key
+    assert ("TPL", "deletion", date(2024, 11, 26)) in by_key
+    assert ("TPL", "addition", date(2024, 6, 24)) in by_key
+    mli = [r for r in rows if r["ticker"] == "MLI"][0]
+    assert mli["reason"] is ReasonCategory.M_A  # reason text mentions acquisition
+    tpl_add = [r for r in rows if r["ticker"] == "TPL" and r["action"] == "addition"][0]
+    assert tpl_add["reason"] is ReasonCategory.DISCRETIONARY  # 'Market cap'
