@@ -14,18 +14,9 @@ A collection of quantitative trading strategies, research specs, and executable 
 | Strategy | Type | Status |
 |---|---|---|
 | [IVAMR](strategies/ivamr/IVAMR.md) | Intraday Value Area Momentum & Mean Reversion | Ready for Backtesting |
+| [SPX GEX](strategies/spx-gex/SPX_GEX.md) | Intraday Bias / Regime Filter | Rejected at Level 1 (friction gate) |
+| [Funding Basis](strategies/funding-basis/FUNDING_BASIS.md) | Relative Value / Funding Carry | Rejected Under Current Assumptions |
 
 ## Documentation
 
 - [Documentation Index](docs/README.md)
-
-## Edge Workflows
-
-- [Funding Basis Workflow](research/funding-basis/Makefile)
-
-## Funding Basis Flow
-
-1. Run `make -C research/funding-basis smoke` to verify Binance connectivity.
-2. Run `make -C research/funding-basis dump SYMBOL=BTCUSDT INTERVAL=1h` to save BTCUSDT funding, mark, and spot fixtures.
-3. Run `make -C research/funding-basis test` to validate the loaders and normalization logic.
-4. Use the saved fixtures to drive the first backtest pass.
