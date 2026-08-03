@@ -3,8 +3,9 @@ from __future__ import annotations
 import argparse
 import json
 import os
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from .backtest import SPXGEXBacktest, run_walk_forward, write_backtest_report
 from .databento import DatabentoBarRequest, fetch_spy_intraday_bars, write_spy_intraday_bars_json
@@ -26,6 +27,12 @@ from .io import (
     summarize_input,
 )
 from .models import GEXContract, build_gex_data_point, classify_regime, calculate_dealer_gex
+
+MARKET_TZ = ZoneInfo("America/New_York")
+
+
+def _market_time(value: datetime) -> datetime:
+    return value.astimezone(MARKET_TZ)
 
 
 def _load_dotenv(dotenv_path: Path | None = None) -> None:
@@ -69,6 +76,9 @@ def build_parser() -> argparse.ArgumentParser:
         default="smoke",
     )
     parser.add_argument("--input", type=Path, default=None)
+    parser.add_argument("--date", type=str, default=None)
+    parser.add_argument("--oi-as-of", type=str, default=None)
+    parser.add_argument("--exclude-0dte", action="store_true")
     parser.add_argument("--point", type=Path, default=None)
     parser.add_argument("--chain", type=Path, default=None)
     parser.add_argument("--oi", type=Path, default=None)
@@ -160,7 +170,14 @@ def main() -> int:
             raise SystemExit("--chain and --oi are required for merge-optionsdx-oi mode")
         if args.output is None:
             raise SystemExit("--output is required for merge-optionsdx-oi mode")
-        write_merged_payload(args.chain, args.oi, args.output)
+        write_merged_payload(
+            args.chain,
+            args.oi,
+            args.output,
+            snapshot_date=date.fromisoformat(args.date) if args.date else None,
+            oi_as_of=date.fromisoformat(args.oi_as_of) if args.oi_as_of else None,
+            exclude_0dte=args.exclude_0dte,
+        )
         print(json.dumps({"output": str(args.output)}, indent=2))
         return 0
 
@@ -213,10 +230,10 @@ def main() -> int:
         wf_sessions = []
         for point, bars in sessions:
             ordered = sorted(bars, key=lambda bar: bar.ts)
-            evaluation = next((bar.ts for bar in ordered if bar.ts.hour == 13 and bar.ts.minute == 30), None)
+            evaluation = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 13 and _market_time(bar.ts).minute == 30), None)
             entry = evaluation
-            exit_time = next((bar.ts for bar in ordered if bar.ts.hour == 15 and bar.ts.minute == 0), None)
-            lookback = next((bar.ts for bar in ordered if bar.ts.hour == 11 and bar.ts.minute == 30), None)
+            exit_time = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 15 and _market_time(bar.ts).minute == 0), None)
+            lookback = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 11 and _market_time(bar.ts).minute == 30), None)
             if evaluation is None or entry is None or exit_time is None or lookback is None:
                 continue
             wf_sessions.append((point, bars, lookback, evaluation, entry, exit_time))
@@ -241,10 +258,10 @@ def main() -> int:
             raise SystemExit("backtest mode requires bars in the input file")
         backtest = SPXGEXBacktest()
         ordered = sorted(bars, key=lambda bar: bar.ts)
-        evaluation = next((bar.ts for bar in ordered if bar.ts.hour == 13 and bar.ts.minute == 30), None)
+        evaluation = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 13 and _market_time(bar.ts).minute == 30), None)
         entry = evaluation
-        exit_time = next((bar.ts for bar in ordered if bar.ts.hour == 15 and bar.ts.minute == 0), None)
-        lookback = next((bar.ts for bar in ordered if bar.ts.hour == 11 and bar.ts.minute == 30), None)
+        exit_time = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 15 and _market_time(bar.ts).minute == 0), None)
+        lookback = next((bar.ts for bar in ordered if _market_time(bar.ts).hour == 11 and _market_time(bar.ts).minute == 30), None)
         if evaluation is None or entry is None or exit_time is None or lookback is None:
             raise SystemExit("backtest mode requires 11:30, 13:30, and 15:00 bars")
         results = backtest.run(

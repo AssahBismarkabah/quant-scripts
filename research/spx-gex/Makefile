@@ -8,8 +8,8 @@ PYTHON ?= python3
 endif
 export PYTHONPATH := ../../src:$(PYTHONPATH)
 
-DEFAULT_START ?= 2026-07-31T13:30:00+00:00
-DEFAULT_END ?= 2026-07-31T20:00:00+00:00
+DEFAULT_START ?= 2023-04-03T00:00:00+00:00
+DEFAULT_END ?= 2023-04-04T00:00:00+00:00
 TEST_DIR ?= ../../tests
 DATASET ?= EQUS.MINI
 SYMBOL ?= SPY
@@ -31,7 +31,7 @@ OI ?=
 MERGED_POINT ?= $(DEFAULT_MERGED_POINT)
 OI_OUTPUT ?= $(DEFAULT_OI)
 
-.DEFAULT_GOAL := backtest-default
+.DEFAULT_GOAL := backtest-merged-default
 
 .PHONY: help test smoke template backtest walk-forward point-template bars-template sessions-template csv-template normalize-cboe normalize-optionsdx fetch-databento-oi fetch-spy-bars backtest-default prepare prepare-point prepare-bars prepare-merged backtest-merged
 
@@ -82,7 +82,7 @@ normalize-optionsdx:
 	$(PYTHON) -m quant_scripts.spx_gex --mode normalize-optionsdx --input $(INPUT)
 
 fetch-databento-oi:
-	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-databento-oi --oi-dataset $${OI_DATASET:-OPRA.PILLAR} --oi-symbol $${OI_SYMBOL:-SPX.OPT} --oi-schema $${OI_SCHEMA:-statistics} --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OI_OUTPUT)
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-databento-oi --oi-dataset $(if $(OI_DATASET),$(OI_DATASET),OPRA.PILLAR) --oi-symbol $(if $(OI_SYMBOL),$(OI_SYMBOL),SPX.OPT) --oi-schema $(if $(OI_SCHEMA),$(OI_SCHEMA),statistics) --start $(if $(START),$(START),$(DEFAULT_START)) --end $(if $(END),$(END),$(DEFAULT_END)) --output $(OI_OUTPUT)
 
 prepare-point:
 	@mkdir -p $(DATA_DIR)
@@ -98,7 +98,7 @@ prepare-merged:
 	$(PYTHON) -m quant_scripts.spx_gex --mode merge-optionsdx-oi --chain $(CHAIN) --oi $(OI) --output $(MERGED_POINT)
 
 fetch-spy-bars:
-	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $${START:-$(DEFAULT_START)} --end $${END:-$(DEFAULT_END)} --output $(OUTPUT)
+	$(PYTHON) -m quant_scripts.spx_gex --mode fetch-spy-bars --dataset $(DATASET) --symbol $(SYMBOL) --start $(if $(START),$(START),$(DEFAULT_START)) --end $(if $(END),$(END),$(DEFAULT_END)) --output $(OUTPUT)
 
 backtest:
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(POINT) --bars $(BARS) --output $(BACKTEST_OUTPUT)
@@ -108,6 +108,11 @@ backtest-default: prepare
 
 backtest-merged: prepare-merged
 	$(PYTHON) -m quant_scripts.spx_gex --mode backtest --point $(MERGED_POINT) --bars $(DEFAULT_BARS) --output $(BACKTEST_OUTPUT)
+
+backtest-merged-default:
+	@test -s $(OI_OUTPUT) || $(MAKE) fetch-databento-oi
+	@test -s $(DEFAULT_BARS) || $(MAKE) fetch-spy-bars START=2023-04-03T13:30:00+00:00 END=2023-04-03T20:00:00+00:00 OUTPUT=$(DEFAULT_BARS)
+	$(MAKE) backtest-merged CHAIN=../../spx_eod_extract/spx_eod_2023q2-kdxt36/spx_eod_202304.txt OI=$(OI_OUTPUT)
 
 prepare:
 	@mkdir -p $(DATA_DIR)

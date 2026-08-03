@@ -21,7 +21,8 @@ class GEXContract:
     contract_multiplier: float = 100.0
 
     def contract_gex(self, underlying_price: float) -> float:
-        return self.gamma * self.open_interest * self.contract_multiplier * (underlying_price**2) * 0.01
+        base = self.gamma * self.open_interest * self.contract_multiplier * (underlying_price**2) * 0.01
+        return base if self.option_type == "call" else -base
 
 
 @dataclass(frozen=True)
@@ -78,7 +79,7 @@ def calculate_dealer_gex(point: GEXDataPoint) -> float:
         if point.exclude_0dte and contract.expiration.date() == point.snapshot_time.date():
             continue
         aggregate += contract.contract_gex(point.underlying_price)
-    return -1.0 * aggregate
+    return aggregate
 
 
 def classify_regime(dealer_gex: float, flat_threshold: float = 0.0) -> GEXRegime:
@@ -111,8 +112,7 @@ def summarize_contracts(point: GEXDataPoint) -> dict[str, float]:
         for contract in point.contracts
         if not (point.exclude_0dte and contract.expiration.date() == point.snapshot_time.date())
     )
-    dealer = -1.0 * aggregate
-    return {"aggregate_gex": aggregate, "dealer_gex": dealer}
+    return {"aggregate_gex": aggregate, "dealer_gex": aggregate}
 
 
 def validate_gex_data_point(point: GEXDataPoint) -> None:

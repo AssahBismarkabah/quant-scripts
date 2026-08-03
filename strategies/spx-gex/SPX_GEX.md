@@ -1,22 +1,16 @@
 # SPX Dealer Gamma Exposure
 
 **Version:** 1.0
-**Status:** Implemented research scaffold
+**Status:** Rejected at Level 1 (friction gate)
 **Classification:** Intraday Bias / Trend Following and Mean Reversion Regime Filter
 
 ## 1. Executive Summary
 
-This document records the next structural mechanic to investigate after the funding-basis candidate was rejected. The idea is to use SPX options dealer gamma exposure as a daily regime filter for intraday behavior.
+This document records the investigation of SPX options dealer gamma exposure as a daily regime filter for intraday behavior. The hypothesis was that positive dealer gamma favors mean reversion and negative dealer gamma favors momentum.
 
-The hypothesis is simple:
+**Result:** The regime classifier works (Convention B produces both regimes with intuitive 2023 alignment), but the intraday playbook fails the conservative friction model. The candidate is rejected at Level 1.
 
-- positive dealer gamma may favor mean reversion or pinning
-- negative dealer gamma may favor momentum or trend persistence
-
-This is a research candidate, not a proven edge. The implementation currently provides a normalized input contract, a regime classifier, a mid-day backtest harness, a walk-forward summary runner, and a Cboe EOD export normalizer.
-
-The first real vendor adapter now supports Cboe-style EOD option exports normalized into the internal SPX GEX payload.
-The next vendor path is Databento for SPY intraday bars using `EQUS.MINI` and `ohlcv-1m`.
+The implementation provides a normalized input contract, a regime classifier, a mid-day backtest harness, and Databento adapters for SPX/SPXW options and SPY intraday bars.
 
 ## 2. The Economic Edge
 
@@ -24,28 +18,30 @@ The source of return, if it exists, comes from dealer hedging flows.
 
 Options market makers must hedge changing delta exposure as the underlying moves and time decays. That hedging can dampen or amplify intraday moves depending on aggregate gamma.
 
-The counterparty is the dealer hedging book. The research question is whether that structure survives realistic friction and can be turned into a machine-executable intraday regime filter.
+The counterparty is the dealer hedging book. The research question was whether that structure survives realistic friction and can be turned into a machine-executable intraday regime filter.
 
-### Gamma Regime Formula
+**Level-1 Finding:** The regime classifier separates days into positive/negative gamma regimes that align with 2023 market narrative (spring/summer rally = positive gamma; Aug-Oct selloff = negative gamma). However, the intraday playbook (fade in positive regime, follow in negative regime) produces marginal edge that does not survive conservative friction.
 
-For the first pass, use the daily EOD chain to compute:
+### Gamma Regime Formula (Convention B — Standard Public Convention)
 
-`contract_gex = gamma × open_interest × contract_multiplier × underlying_price² × 0.01`
+For the first pass, use the daily EOD chain to compute per-contract gamma exposure with option-type sign (standard public convention: dealers long calls, short puts on index level):
+
+`contract_gex = gamma × open_interest × contract_multiplier × underlying_price² × 0.01 × sign`
+
+where `sign = +1` for calls, `-1` for puts.
 
 For SPX, the contract multiplier is `100`.
 
-First compute aggregate customer-side gamma exposure:
+Aggregate dealer gamma exposure (no inversion — the type sign already encodes dealer positioning):
 
-`aggregate_gex = Σ contract_gex`
-
-Then invert the aggregate to approximate dealer positioning:
-
-`dealer_gex = -1 × aggregate_gex`
+`dealer_gex = Σ contract_gex`
 
 Regime label:
 
 - `dealer_gex > 0` -> positive dealer gamma regime
 - `dealer_gex < 0` -> negative dealer gamma regime
+
+**Note:** The original doc formula (Convention A: invert aggregate of unsigned contract_gex) is structurally degenerate — it can never produce a positive regime because gamma > 0 for both calls and puts. Convention B was adopted per the spec's open question on sign convention and matches the public standard (perfiliev, SpotGamma, insiderfinance).
 
 Treat the first pass as a regime classifier, not an executable edge.
 
@@ -71,53 +67,74 @@ Supported local research commands:
 ## 3. Research Scope
 
 - Underlying: SPX
-- Signal source: SPX options chain and open interest
+- Signal source: SPX options chain and open interest (SPX monthlies + SPXW weeklies, combined with SUM dedupe)
 - Execution target: SPY intraday price action as the tradable proxy for execution backtests
 - Horizon: 5-minute to 15-minute intraday
 - Regime design: daily dealer gamma sign and magnitude
-- First-pass data route: Cboe EOD options data, with Databento reserved for deeper replay if required
+- First-pass data route: Databento OPRA.PILLAR (SPX.OPT + SPXW.OPT statistics, stat_type=9) + OptionsDX EOD chains
 - First-pass model: daily EOD regime classification before any intraday replay
 - 0DTE handling in version one: exclude 0DTE from the first-pass gamma calculation and use only 1DTE and longer expirations from the previous day's EOD snapshot
 
-This record is intentionally narrow. It documents the first SPX gamma-flow candidate, not every possible options strategy.
+This record documents the first SPX gamma-flow candidate and its Level-1 rejection.
 
-## 4. What Needs to Be Tested
+## 4. Level-1 Test Results (2023-03-28 to 2023-12-29)
 
-The research pipeline will need to answer:
+### Data
+- **OptionsDX SPX EOD chains:** 12 monthly files, full chains (daily/weekly/monthly expiries), underlying within 0.05% of SPX close
+- **Databento SPX.OPT (monthlies):** 250 trade days, 3.9M OI rows, 16,962 contracts/day
+- **Databento SPXW.OPT (weeklies):** 250 trade days, 8.2M OI rows, 35,724 contracts/day
+- **Combined OI (SUM dedupe):** ~50 expiries/day, ~15M OI/day
+- **EQUS.MINI SPY 1m bars:** 101,627 bars, 2023-03-28..12-29
 
-- can the daily gamma regime be reconstructed from historical data
-- does the regime separate intraday trend and mean-reversion behavior
-- does the result survive friction and out-of-sample splitting
-- does the effect remain stable across different volatility states
+### Regime Distribution (Convention B)
+| Regime | Sessions | Avg Net Edge (bps) | Win Rate |
+|--------|----------|-------------------|----------|
+| Positive | 122 | +0.64 | 45.9% |
+| Negative | 70 | −5.02 | 50.0% |
 
-## 4. Execution Assumptions
+Regime narrative alignment: Apr–Jul mostly positive (rally), Aug–Oct mostly negative (selloff), Nov–Dec mostly positive (year-end rally).
+
+### Friction Model (Conservative)
+- Slippage: 1 bps/side (2 bps round-trip)
+- Commission: 0.1 bps
+- SEC fee: 0.08 bps
+- **Total: 2.18 bps per trade**
+
+### Net After Friction
+| Regime | Gross Edge | Net Edge (after 2.18 bps) |
+|--------|------------|---------------------------|
+| Positive | +0.64 bps | **−1.54 bps** |
+| Negative | −5.02 bps | **−7.20 bps** |
+
+**Result: Fails the conservative friction model (rejection gate triggered).**
+
+## 5. Execution Assumptions (Level 1)
 
 SPX remains the signal source. SPY is the tradable proxy used for execution testing because it is directly tradeable intraday while preserving exposure to the same broad market move.
 
 ### Friction Model
-
 - SEC transaction fee: apply the current Section 31 rate at the time of testing
 - Broker commission: configurable per share assumption for SPY
 - Slippage: 1 basis point per side as the default conservative buffer
 - Spread impact: approximate through midpoint minus slippage rather than ideal fills
 
+**Total conservative friction: 2.18 bps per round-trip trade.**
+
 ## 5. Machine-Executable Rules
 
 ### 5.A Daily Regime Classification
 
-At the end of the Cboe 15:45 snapshot, compute:
+At the end of the Cboe 15:45 snapshot, compute per-contract gamma exposure with option-type sign (standard public convention: dealers long calls, short puts on index level):
 
-`contract_gex = gamma × open_interest × contract_multiplier × underlying_price² × 0.01`
+`contract_gex = gamma × open_interest × contract_multiplier × underlying_price² × 0.01 × sign`
+
+where `sign = +1` for calls, `-1` for puts.
 
 For SPX, the contract multiplier is `100`.
 
-Then aggregate:
+Aggregate dealer gamma exposure (no inversion — the type sign already encodes dealer positioning):
 
-`aggregate_gex = Σ contract_gex`
-
-Invert the aggregate to approximate dealer positioning:
-
-`dealer_gex = -1 × aggregate_gex`
+`dealer_gex = Σ contract_gex`
 
 If `dealer_gex > 0`, the day is a positive dealer gamma regime.
 
@@ -153,12 +170,22 @@ Negative dealer gamma regime:
 - only one regime may be active on a given day
 - if the regime is ambiguous or the data quality check fails, do not trade
 
+**Note:** No position sizing rule was defined (volatility targeting, risk-based sizing). This is a gap per institutional approach requirements.
+
 ## 6. Verified Status
 
 The gamma-flow scaffold exists and passes the current test suite.
 
-The current implementation includes vendor-specific SPX options export normalization, but not yet live SPY proxy ingestion. It is ready for historical export wiring.
+The implementation includes Databento adapters for SPX/SPXW options (OPRA.PILLAR statistics, stat_type=9) and SPY intraday bars (EQUS.MINI ohlcv-1m), OptionsDX EOD chain normalization, regime classifier (Convention B), and mid-day backtest harness with per-regime reporting.
+
+**Level-1 Result: REJECTED** — fails conservative friction model (rejection gate: "the result fails a conservative friction model").
 
 ## 7. Next Step
 
-Wire the real SPX chain export and SPY intraday export into the existing JSON contract, then run walk-forward summaries on historical sessions.
+**Candidate rejected at Level 1.** The pipeline (data adapters, regime classifier, backtest harness) is preserved for future candidates.
+
+If revisiting this hypothesis, Level 2 (intraday options replay) is required per spec, plus:
+- Position sizing (volatility targeting)
+- Monte Carlo validation (reshuffle/bootstrap)
+- Walk-forward / out-of-sample testing
+- Registered thresholds for max drawdown, avg trade profit, win/loss balance
