@@ -141,17 +141,26 @@ A failed candidate is a successful research outcome. It prevents capital from be
 ### **research status and unresolved questions**
 
 - **Complete:** survey selected this candidate (#1) from the 2025-2026 structural shortlist; literature pass done (see register); mechanic documented (forced flow + 10b5-1 cooling-off signal + price-support evidence); the two prior-candidate failure modes are explicitly gated (beta-confound control; persistence gate).
+
+- **Feasibility check (2026-08-04, live EDGAR tests):**
+  - **CONFIRMED - EDGAR full-text search + document retrieval works.** `repurchase program` returns ~90% Form 8-K; an item 8.01 8-K for Smart Sand (SND) was retrieved and parsed containing "board approved a new two-year repurchase program authorizing the repurchase of up to $20.0m" — the Tier A signal is reliably findable and machine-readable.
+  - **CONFIRMED - 10b5-1 plan activity is discoverable** (8-K for issuer repurchase plans; Form 10-Q Item 5 / Reg S-K Item 408 for director/officer plan adoptions/terminations; e.g. Alphabet Q2 2026 Item 5 discloses a director plan termination).
+  - **FINDING - the 30-day issuer cooling-off is rule-derived, not filing-verbatim.** Announcement 8-Ks describe buyback methods ("...may include open market purchases, ASRs, 10b5-1 plans...") but typically do not restate the cooling-off number. Tier B timing therefore comes from the SEC Rule 10b5-1(c) structure (30 days to buyback-commencement after plan adoption), a valid forward signal, but the model must source it from the rule, not a filing field.
+  - **FINDING - the daily 10b-18 backtest table is uneven.** A top repurchaser (Alphabet, Q2 2026 10-Q) Item 2 reports "Issuer Purchases of Equity Securities - None", even though the firm is a large buyer (its buybacks run via ASRs/structured programs and different reporting). The daily open-market table is NOT uniformly populated and **cannot be the sole universe/history source for backtesting**.
+  - **Design consequence:** build the backtest **event set from 8-K repurchase-program announcements (Tier A)** and 10b5-1 Item 5/408 disclosures (Tier B), and treat the daily 10b-18 table as supplementary/spot-check, not the universe builder. This removes reliance on the uneven quarterly table.
+  - **CONFIRMED - daily-bar lineage** (Yahoo, per the vol-fade/SPY work) extends to a multi-name universe; EDGAR retains delisted issuers' filings, so survivorship-bias control is feasible.
+
 - **Unresolved before coding, who resolves:**
-  - **Research:** verify the practical feed of 10b5-1 buyback-plan adoptions — is it reliably on EDGAR 8-K and is the 30-day issuer cooling-off uniformly applied? (This determines Tier B feasibility.)
-  - **Research:** test whether the 2023 daily-disclosure tables are complete/machine-readable at scale.
+  - **Research:** confirm the practical feed of 8-K repurchase-program announcements is comprehensive enough to build a large, independent event set (sparsity test) — the #1 design risk for the "too few events" gate.
+  - **Research:** verify whether 10b5-1 issuer repurchase plans are systematically announced via 8-K vs only in 10-Q/10-K, to size Tier B.
   - **Assumption:** base friction 10-20 bps single-stock round trip; confirm with live depth.
   - **User:** confirm intended capital scale (drives capacity reporting) and whether small-cap (S&P 600) is in scope given its higher friction.
 
 ### **current known limitations**
 
-- The 10b5-1 cooling-off (30-day issuer) is the linchpin of the forward signal; its uniform application and disclosure completeness need verification.
-- The daily repurchase tables are quarterly-lagged — fine for backtesting, not for live daily signal; the live edge is the 10b5-1 adoption signal (+ the post-decline regularity).
-- Post-2001 decay documented for *announcement/long-run* returns; the *execution/price-support* edge is a different, less-decayed mechanic and is what Tier C targets — but decay is a live risk to gate on.
+- The 10b5-1 cooling-off (30-day issuer) is the linchpin of the forward signal; it is rule-derived and must be verified against real plan announcements, not a filing field.
+- The daily repurchase tables are quarterly-lagged AND unevenly populated (some large repurchasers report via ASR/structured programs and show "None" in the open-market table) — so the backtest must not depend on them as the primary calendar.
+- Post-2001 decay documented for *announcement/long-run* returns; the *execution/price-support* edge is a different, less-decayed mechanic, but decay is a live risk to gate on.
 - The single-stock long is exposed to idiosyncratic and momentum/beta risk, which the matched-control/beta-adjustment must remove else the candidate is rejected.
 
 ---
@@ -170,4 +179,4 @@ The outcome of this document may be approval to code, revision of the hypothesis
 
 ### **current decision**
 
-Under research. No code, no data acquired, no pre-registered numeric gates yet finalized — those freeze after the unresolved items (above) are closed. This document commits the framework (forced-flow + 10b5-1 forward signal + price-support evidence + explicit beta-control and persistence gates) as the basis for the next step.
+Under research, with the key data-feasibility questions **answered (2026-08-04) via live EDGAR tests**: the Tier A feed (8-K repurchase-program announcements) is confirmed working and machine-readable; the 10b5-1 signal is discoverable; the 30-day cooling-off is rule-derived (not a filing field); and the daily 10b-18 backtest table is uneven and must not be the primary event source — build the event set from 8-K/10b5-1 disclosures instead. No code, no data-build, no pre-registered numeric gates finalized yet. Those freeze after the remaining research item (sparsity/comprehensiveness of the 8-K repurchase-announcement feed) is closed. This document commits the framework and the confirmed data route as the basis for the next step.

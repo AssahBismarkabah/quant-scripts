@@ -60,7 +60,7 @@ Borrow: N/A (we are long). No mid-price fills. Capacity reported as notional sen
 - Signal: EDGAR 10b5-1 / repurchase-program parsing + verified daily bars + corporate-action calendar.
 - Horizon: event-window CARs (0,+1), (+1,+5), (+5,+20) and medium; reported-not-selected.
 - Excluded: options, shorting, leverage, non-US, paid intraday data.
-- Data route: EDGAR (free) + Yahoo/verified bars lineage (per the vol-fade/SPY work) — the same cheap-data discipline that closed the last candidates with real answers.
+- Data route: EDGAR (free) + Yahoo/verified bars lineage (per the vol-fade/SPY work) — the same cheap-data discipline that closed the last candidates with real answers. Feasibility check (2026-08-04): EDGAR full-text search + retrieval confirmed working (8-K repurchase-program announcements parseable); build the event set from 8-K / 10b5-1 disclosures, NOT the uneven daily 10b-18 table (some top repurchasers report "None" in it, e.g. Alphabet Q2 2026).
 
 ## 6. Test Results
 
