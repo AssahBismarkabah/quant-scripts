@@ -125,8 +125,8 @@ Reject if any of the following is true:
 ## 8. Next Step
 
 1. The candidate is rejected at Level 1-2 per the registered gates. Record the rejection decision in the research spec (S11) - done 2026-08-04.
-2. Revisit only with new evidence: a longer history (EQUS full dataset or another licensed source to include 2023 and pre-2023 reconstitutions), a different venue, or an independent confirmation of the effect outside the March 2025 S&P 600 batch.
-3. The data pipeline (event tables, bars, study, S10, Level-2 analysis) remains reusable for any future revisit via the Makefile targets.
+2. **CLOSED (2026-08-04).** The extended multi-year evidence to decide a revisit is ALREADY in hand and confirms non-persistence, so no further free re-test is warranted. `research/index-rebalancing/outputs/level2_year_breakdown.parquet` shows the S&P 600 short-additions reversal is a single-batch phenomenon, NOT a persistent edge: 2024 +139 bps (t=0.76, not significant), 2025 **+1542 bps (t=3.93)** — the March 2025 batch — and 2026 **-786 bps (t=-3.54)**. The effect does not persist across years; it peaks in one batch and turns negative. There is no "hoping to test something that isn't there" — the year-to-year evidence already answers the persistence question.
+3. The candidate is therefore **done**. A revisit would require genuinely new evidence outside this pattern (a licensed pre-2023 reconstitution history, a different venue, or an independent confirmation of the effect beyond the single 2025 batch) — not merely more of the same free data. The data pipeline (event tables, bars, study, S10, Level-2 analysis) remains reusable via the Makefile targets if such evidence ever appears.
 
 ## 9. Key References
 

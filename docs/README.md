@@ -18,7 +18,7 @@
 - [IVAMR](../strategies/ivamr/IVAMR.md) - not pursued (2026-08-04)
 - [SPX GEX](../strategies/spx-gex/SPX_GEX.md) - rejected Level 1, L2 declined (2026-08-04)
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
-- [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - rejected Level 1-2 (2026-08-04)
+- [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
 
 ## Code
 
