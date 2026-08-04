@@ -2,3 +2,10 @@
 .env
 __pycache__/
 *.pyc
+
+# research data: downloaded raw sources and Databento caches are
+# re-fetchable via the Makefile; only derived event tables and
+# provenance logs are tracked
+research/index-rebalancing/raw/
+research/index-rebalancing/cache/
+research/index-rebalancing/outputs/
