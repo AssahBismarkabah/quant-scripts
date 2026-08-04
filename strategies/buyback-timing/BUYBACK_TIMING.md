@@ -38,12 +38,12 @@ Long-run announcement-return effects have **decayed** post-2001 (CFA review 2022
 
 ## 3. Machine-Executable Rules (to be frozen in the spec before coding)
 
-- **Universe:** S&P 500 + S&P 600 constituents; long only.
+- **Universe (two co-base cells, joint gate):** Cell 1 = S&P 500; Cell 2 = S&P 600. Both must pass independently (prevents one size bucket masking weakness in the other).
 - **Signal:** EDGAR-derived 10b5-1 buyback-plan adoption (Form 8-K / 10-Q / 10-K exhibit) and/or new repurchase authorization; event date; 30-day cooling-off for Tier B.
 - **Entry:** open of day t+1 after the signal (Tier A), or ~30 sessions after adoption at cooling-off expiry (Tier B), or after a pre-registered decline magnitude in an active-repurchaser (Tier C).
 - **Exit:** pre-registered horizon windows; time exit; stop-loss reported.
 - **Sizing:** equal-risk / volatility-targeted per the institutional approach; from the lower of risk budget, depth, and volatility target.
-- **Control (mandatory):** matched non-repurchasing names on size/book-to-market/momentum/beta; the "beats matched control after beta adjustment" gate.
+- **Control (mandatory):** matched non-repurchasing names on size/book-to-market/momentum/beta, built within each cell; the "beats matched control after beta adjustment" gate.
 
 ## 4. Friction Model (provisional)
 
@@ -53,7 +53,7 @@ Long-run announcement-return effects have **decayed** post-2001 (CFA review 2022
 | Market impact | ~5 bps/side | ~20 bps/side |
 | Round trip | **~10-20 bps** (large) / **~40-60 bps** (small-cap) | higher in stress |
 
-Borrow: N/A (we are long). No mid-price fills. Capacity reported as notional sensitivity.
+Borrow: N/A (we are long). No mid-price fills. **Capacity is reported as a notional-sensitivity curve, not a gate** (buyback demand ~$6B/day is far above our scale; deployment size is a later decision).
 
 ## 5. Research Scope
 
@@ -70,17 +70,17 @@ Borrow: N/A (we are long). No mid-price fills. Capacity reported as notional sen
 
 Reject if any of the following is true:
 - Effect vanishes after beta/momentum/size adjustment or vs the matched control (vol-fade beat-random failure).
+- **Either co-base cell fails the gate set** (joint gate across S&P 500 and S&P 600 — no cell selection).
 - Effect does not survive across years / depends on one year or quarter (index-rebal failure).
 - Not tradable after realistic friction (breaks when entry is realistic, not at the exact disclosure timestamp).
 - Signal too sparse; too few independent events.
 - Apparent return is a data artifact (survivorship bias, look-ahead, lagged-table dates).
-- Capacity not credible.
+- Capacity not credible at any reasonable intended scale.
 
 ## 8. Next Step
 
-1. Finalize the pre-registration spec (`IA/buyback-timing-research-spec.md`) — close the unresolved items (EDGAR 10b5-1 feed verification; 30-day cooling-off uniformity; friction; capital scale).
-2. On approval, acquire/verify data (EDGAR parse + bars + delisted coverage) and implement the study.
-3. Run the pre-registered study and record the verdict here.
+1. Pre-registration spec (`IA/buyback-timing-research-spec.md`) is written; **feasibility + sparsity + design are resolved (2026-08-04)**: EDGAR 8-K feed confirmed machine-readable; ~879 distinct repurchasing issuers, ~740-840 8-K events/yr (lower bound); event count is not a constraint. Design frozen: **both universes are co-base cells with a joint gate**; capacity is reported as a curve, not gated. Remaining pre-build items: implementation-time dedup to distinct programs and Tier B (10b5-1) sizing.
+2. On approval: build the event set (EDGAR 8-K harvest → dedup → verify bars), apply the pre-registered gates (beta/matched-control + persistence + joint-gate + friction), run the study, and record the verdict here.
 
 ## 9. Key References
 

@@ -82,16 +82,19 @@ Selective, evidence-based mechanics:
 
 ### **version-one research scope**
 
-- **Universe:** S&P 500 + S&P 600 constituents (execute long only, the repurchasing issuer).
+- **Universe — TWO co-base cells (joint gate, no selection, execute long on each repurchasing issuer only):**
+  - **Cell 1 (large-cap):** S&P 500 constituents.
+  - **Cell 2 (small-cap):** S&P 600 constituents.
+  - Both must pass the pre-registered gate set independently; the joint gate prevents the stronger cell from masking weakness in the other and directly tests whether the buyback effect survives in each size bucket (the literature says the effect is stronger but noisier/riskier in small-caps — exactly the cell where a beta/friction artifact would live).
 - **Signal variants to test (pre-registered tiers, not selection):**
   - **Tier A (announcement/plan):** event = Form 8-K/10-Q disclosure of a new 10b5-1 buyback plan or a new open-market repurchase authorization. Entry after announcement.
   - **Tier B (cooling-off expiry):** use the 2022 rule's ~30-day issuer cooling-off to schedule entry ~30 days after 10b5-1 adoption, when buyback trading commences — a forward, date-scheduled entry.
   - **Tier C (post-decline clusters):** event = a repurchasing issuer that also recently declined (undervaluation window), combining the documented "repurchase after declines" behavior.
-- **Primary hypothesis H1:** over a pre-registered horizon from the signal date, the repurchasing-issuer long earns positive forward return **after friction AND after controlling for market beta/momentum** (excess over a matched control), for at least one pre-registered tier.
-- **Benchmark/control (critical — the vol-fade lesson):** matched-control set of non-repurchasing or repurchase-inactive names matched on size, book-to-market, momentum, and beta; and a beta/momentum-adjusted excess. We pre-register the adjustment so the result cannot be a beta confound.
+- **Primary hypothesis H1:** over a pre-registered horizon from the signal date, the repurchasing-issuer long earns positive forward return **after friction AND after controlling for market beta/momentum** (excess over a matched control), in BOTH co-base cells, for at least one pre-registered tier.
+- **Benchmark/control (critical — the vol-fade lesson):** matched-control set of non-repurchasing or repurchase-inactive names matched on size, book-to-market, momentum, and beta — built **within each cell** (SPX-matched controls for Cell 1, S&P 600-matched controls for Cell 2); and a beta/momentum-adjusted excess. We pre-register the adjustment so the result cannot be a beta confound.
 - **Horizon:** event-window CARs (e.g. 0,+1), (+1,+5), (+5,+20) and a medium window, reported-not-selected.
-- **Friction:** single-stock round trip; base 10-20 bps (spread+impact), stress 40-60 bps (small-caps). No mid-price fills.
-- **Capacity:** buyback demand is ~$6B/day market-wide; per-name capacity from depth; report a notional sensitivity curve.
+- **Friction:** single-stock round trip; Cell 1 base 10-20 bps (spread+impact), Cell 2 base 20-40 bps (small-cap); stress +30 bps each. No mid-price fills.
+- **Capacity: reported, not a gate.** Buyback demand is ~$6B/day market-wide, far above any scale where we'd bind; report a per-name notional sensitivity curve (the funding-basis convention) rather than gate on a single capital figure. Deployment scale is a later decision, not a research blocker.
 
 ---
 
@@ -149,12 +152,13 @@ A failed candidate is a successful research outcome. It prevents capital from be
   - **FINDING - the daily 10b-18 backtest table is uneven.** A top repurchaser (Alphabet, Q2 2026 10-Q) Item 2 reports "Issuer Purchases of Equity Securities - None", even though the firm is a large buyer (its buybacks run via ASRs/structured programs and different reporting). The daily open-market table is NOT uniformly populated and **cannot be the sole universe/history source for backtesting**.
   - **Design consequence:** build the backtest **event set from 8-K repurchase-program announcements (Tier A)** and 10b5-1 Item 5/408 disclosures (Tier B), and treat the daily 10b-18 table as supplementary/spot-check, not the universe builder. This removes reliance on the uneven quarterly table.
   - **CONFIRMED - daily-bar lineage** (Yahoo, per the vol-fade/SPY work) extends to a multi-name universe; EDGAR retains delisted issuers' filings, so survivorship-bias control is feasible.
+  - **Sparsity test (2026-08-04): event count is NOT a constraint.** Harvesting EDGAR full-text `"repurchase program"` Form 8-Ks across 2024-2026 (24 months) returned ~1,953 unique (CIK,adsh) filings and **~879 distinct issuing companies**, with ~1,454 filings carrying item 8.01, and **~740-840 8-K events captured per full year** (a lower bound, since monthly hits truncate at the 100-result page cap). Even after conservative dedup for issuers with multiple 8-Ks per program (e.g. News Corp, ~544 filings over 2024-2026), this yields on the order of **hundreds of independent buyback-authorization events per year** — orders of magnitude beyond the ~80-event vol-fade sample and the single ~11-event batch that killed index-rebalancing. The "too few events" gate is cleared for Tier A.
 
 - **Unresolved before coding, who resolves:**
-  - **Research:** confirm the practical feed of 8-K repurchase-program announcements is comprehensive enough to build a large, independent event set (sparsity test) — the #1 design risk for the "too few events" gate.
+  - **Research:** confirm the practical feed of 8-K repurchase-program announcements is comprehensive enough to build a large, independent event set (sparsity test) - **RESOLVED** (see above; hundreds of events/yr; the remaining work is the implementation-time dedup to distinct programs).
   - **Research:** verify whether 10b5-1 issuer repurchase plans are systematically announced via 8-K vs only in 10-Q/10-K, to size Tier B.
-  - **Assumption:** base friction 10-20 bps single-stock round trip; confirm with live depth.
-  - **User:** confirm intended capital scale (drives capacity reporting) and whether small-cap (S&P 600) is in scope given its higher friction.
+  - **Assumption (determined):** capacity is reported as a notional-sensitivity curve, not gated on a single capital figure (the funding-basis convention) — deployment scale is a later decision.
+  - **Assumption (determined):** BOTH universes are tested as co-base cells (S&P 500 and S&P 600) with a joint gate, so the choice between large- and small-cap is made empirically, not by guess.
 
 ### **current known limitations**
 
@@ -179,4 +183,4 @@ The outcome of this document may be approval to code, revision of the hypothesis
 
 ### **current decision**
 
-Under research, with the key data-feasibility questions **answered (2026-08-04) via live EDGAR tests**: the Tier A feed (8-K repurchase-program announcements) is confirmed working and machine-readable; the 10b5-1 signal is discoverable; the 30-day cooling-off is rule-derived (not a filing field); and the daily 10b-18 backtest table is uneven and must not be the primary event source — build the event set from 8-K/10b5-1 disclosures instead. No code, no data-build, no pre-registered numeric gates finalized yet. Those freeze after the remaining research item (sparsity/comprehensiveness of the 8-K repurchase-announcement feed) is closed. This document commits the framework and the confirmed data route as the basis for the next step.
+Under research, with the key data-feasibility and sparsity questions **answered (2026-08-04)** via live EDGAR tests and a harvest, and the two design choices frozen: **both universes (S&P 500 + S&P 600) are pre-registered as co-base cells with a joint gate**, and **capacity is reported as a notional-sensitivity curve, not a gate** (deployment scale is a later decision). Confirmed: Tier A 8-K feed works and is machine-readable; 10b5-1 signal discoverable; the 30-day cooling-off is rule-derived (not a filing field); the daily 10b-18 table is uneven and must not be the primary event source; **event sparsity is not a constraint (~hundreds of independent 8-K buyback-authorization events per year)**. The only remaining pre-build items are implementation-time program dedup and a Tier B (10b5-1) sizing check. No code has collected data or run a backtest; numeric rejection gates freeze once the implementation build begins. This document commits the framework, the confirmed data route, and the frozen design as the basis for the next step.
