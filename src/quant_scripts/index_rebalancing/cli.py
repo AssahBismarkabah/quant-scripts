@@ -48,6 +48,7 @@ def build_parser() -> argparse.ArgumentParser:
             "fetch-bars",
             "run-study",
             "validate-s10",
+            "level2-analysis",
         ],
         default="run-study",
     )
@@ -380,6 +381,61 @@ def mode_validate_s10(args: argparse.Namespace) -> int:
     return 0
 
 
+def mode_level2_analysis(args: argparse.Namespace) -> int:
+    import pandas as pd
+
+    from .config import FrictionSettings, StudySettings
+    from .event_study import run_study
+    from .level2 import addv20_by_event, borrow_breakeven, capacity_report, threshold_sweep, year_breakdown
+
+    events_dir = _research_dir() / "events"
+    out_dir = _research_dir() / "outputs"
+    settings = StudySettings()
+    frames = []
+    for path in (events_dir / "spdji_reconciled.parquet", events_dir / "r2000_events.parquet"):
+        if path.exists():
+            frames.append(pd.read_parquet(path))
+    events = pd.concat(frames, ignore_index=True)
+    events = events[
+        (events["venue"].isin(["sp600", "sp400"]))
+        & (events["reason_category"] == ReasonCategory.DISCRETIONARY.value)
+        & (~events["status"].isin([EventStatus.RECONCILED.value, EventStatus.DROPPED.value]))
+        & (pd.to_datetime(events["effective_date"]).dt.date >= settings.study_start)
+    ]
+    cal_path = _research_dir() / "cache" / "calendar.parquet"
+    if not cal_path.exists():
+        raise SystemExit("no calendar cache; run fetch-bars first")
+    calendar = [pd.Timestamp(d).date() for d in pd.read_parquet(cal_path)["ts_date"].tolist()]
+    bars_dir = _research_dir() / "cache" / "bars"
+
+    sweep = threshold_sweep(events, bars_dir, calendar, base_settings=settings)
+    results_base = pd.read_parquet(out_dir / "results_base.parquet")
+    years = year_breakdown(results_base)
+    addv = addv20_by_event(events, bars_dir)
+    capacity = capacity_report(results_base, addv)
+    borrow = borrow_breakeven(results_base)
+
+    sweep.to_parquet(out_dir / "level2_threshold_sweep.parquet", index=False)
+    years.to_parquet(out_dir / "level2_year_breakdown.parquet", index=False)
+    capacity.to_parquet(out_dir / "level2_capacity.parquet", index=False)
+    borrow.to_parquet(out_dir / "level2_borrow_breakeven.parquet", index=False)
+    print(
+        json.dumps(
+            {
+                "threshold_sweep": sweep.to_dict(orient="records"),
+                "year_breakdown": years.to_dict(orient="records"),
+                "capacity_batches": len(capacity),
+                "capacity_notional_5pct_total_usd": (
+                    float(capacity["notional_5pct_usd"].sum()) if not capacity.empty else 0.0
+                ),
+                "borrow_breakeven": borrow.to_dict(orient="records"),
+            },
+            indent=2,
+        )
+    )
+    return 0
+
+
 _HANDLERS = {
     "sweep-spdji": mode_sweep_spdji,
     "parse-releases": mode_parse_releases,
@@ -391,6 +447,7 @@ _HANDLERS = {
     "fetch-bars": mode_fetch_bars,
     "run-study": mode_run_study,
     "validate-s10": mode_validate_s10,
+    "level2-analysis": mode_level2_analysis,
 }
 
 

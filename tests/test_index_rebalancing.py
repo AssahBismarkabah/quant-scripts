@@ -138,8 +138,8 @@ def test_parse_russell_pdf_2025_deletions() -> None:
 def test_validate_r2000_counts_2025_within_tolerance() -> None:
     from quant_scripts.index_rebalancing.ftse import validate_r2000_counts
 
-    adds = [{"ticker": f"X{i}", "company_name": f"C{i}"} for i in range(233)]
-    dels = [{"ticker": f"Y{i}", "company_name": f"D{i}"} for i in range(155)]
+    adds = [{"ticker": f"X{i}", "company_name": f"C{i}"} for i in range(228)]
+    dels = [{"ticker": f"Y{i}", "company_name": f"D{i}"} for i in range(154)]
     result = validate_r2000_counts(adds, dels, 2025)
     assert result["within_tolerance"] is True
     assert result["add_diff_pct"] <= 2.0

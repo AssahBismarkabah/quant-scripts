@@ -1,14 +1,14 @@
 # Index Rebalancing Price Pressure
 
 **Version:** 1.0
-**Status:** Level 1 complete (2026-08-04) - hypothesis revised: short S&P 600/400 additions @10td survives; long-deletions leg and Russell 2000 venue do not clear their gates
+**Status:** Level 1-2 complete (2026-08-04) - candidate REJECTED: surviving short-additions edge is a single-year (March 2025 S&P 600) batch effect, fails the registered robustness gate
 **Classification:** Relative Value / Event-Driven Mean Reversion (Category 2: Regulatory & Mandate Constraints)
 
 ## 1. Executive Summary
 
 This document records the investigation of index rebalancing price pressure as an event-driven mean reversion strategy. The hypothesis: index-tracking funds are forced to buy additions and sell deletions on a fixed schedule regardless of price, creating temporary price distortion that partially reverses after the effective date.
 
-**Result:** Tested at Level 1. The effect has demonstrably decayed in the S&P 500 (Bennett, Stulz, and Wang, 2022), and the Level-1 event study found the reversal survives only in a narrow cell: **shorting S&P 600 additions (marginally S&P 400) held ~10 trading days after the effective date** (+769 bps abnormal, t=2.88, robust to bootstrap/stress). The primary long-deletions leg is not robust after friction (40-day cells only, driven by single trades), and Russell 2000 additions show a permanent, not temporary, inclusion effect (inverted hypothesis). See section 6.
+**Result:** Tested at Level 1 and Level 2, then **rejected**. The effect has demonstrably decayed in the S&P 500 (Bennett, Stulz, and Wang, 2022), and the Level-1 study found the reversal only in a narrow cell: shorting S&P 600 additions held ~10 trading days after the effective date (+769 bps abnormal, t=2.88). Level-2 robustness testing (2026-08-04) showed that cell is a **single-batch phenomenon**: the March 2025 S&P 600 reconstitution (11 events, +2,081 to +4,526 bps each) drives the entire mean; 2024 was flat, September/December 2025 mixed-to-negative, 2026 negative. Under the pre-registered gate "result depends on a single year", the candidate is rejected. The primary long-deletions leg never cleared its gate, and Russell 2000 additions show a permanent, not temporary, inclusion effect. See sections 6 and 8.
 
 The implementation will provide an event-table builder (additions/deletions with announcement and effective dates), a post-effective-date backtest harness, and a friction model that includes borrow cost for the short leg.
 
@@ -39,7 +39,7 @@ The effect has decayed to ~zero in the S&P 500 (Bennett, Stulz, Wang, 2022; Pres
 
 ### 3.A Event Definition
 
-- Universe: S&P SmallCap 600 and S&P MidCap 400 additions (short leg, ~10td hold); deletions leg and Russell 2000 excluded per Level-1 findings
+- Universe: S&P SmallCap 600 and S&P MidCap 400 additions (short leg, ~10td hold); deletions leg and Russell 2000 excluded per Level-1 findings. **NOTE: candidate rejected at Level 1-2 (single-year effect); section retained for reference.**
 - Only discretionary changes (market-cap driven). Exclude M&A, bankruptcy, spin-off, and IPO-driven events.
 - Event fields: ticker, index, action (addition/deletion), announcement date, effective date, reason category
 
@@ -101,7 +101,14 @@ S10 validation (10,000 bootstrap/reshuffle simulations, seeded): only S&P 600 ad
 
 **Limitations:** 2023 events excluded by the 252-session history gate (data starts 2023-03-28), so all traded events are 2024-2026 and no out-of-sample year split is possible. Russell 2000 deletions are microcap drops failing the $5M ADDV gate (largest 2025 deletion: $3.7M) - only one Russell deletion event survives. Borrow cost is modeled (flat fee base, hard-to-borrow filter stress), no borrow-fee dataset available. Capacity not measured (needs depth data, Level 2).
 
-**Level-1 conclusion:** the pre-registered primary direction (long deletions) does not clear its rejection gate; the surviving candidate is short S&P 600/400 additions held ~10 trading days. Pending Level-2 confirmation: borrow-fee data, capacity, intraday fills.
+**Level-2 robustness (2026-08-04, cached daily bars, no new data):**
+
+- Liquidity sweep: the short-additions edge strengthens with the ADDV gate ($2M: +461 bps t=2.77, n=96; $10M: +930 t=3.02, n=30) - no microcap dependence on liquidity.
+- Year breakdown: S&P 600 additions 10td is +139 (2024, n=11), +1,542 (2025, n=19, t=3.93), **-786 (2026, n=5, t=-3.54)**. The 2025 number is one batch: the March 2025 reconstitution (11 events, +2,081 to +4,526 bps each). September 2025 is mixed, December 2025 negative. S&P 400 additions are positive in 2025-2026 (n=17 and n=5) but negative in 2024 (n=10).
+- Capacity: 10 tradeable batches, $8.2M total at 1% participation, $40.8M at 5%, $81.5M at 10% of ADDV20; median batch $3.8M at 5%. Small but not the binding constraint.
+- Borrow: break-even annual fee that would zero the 10td short edge is 14,657 bps (S&P 600) / 11,338 bps (S&P 400); at the 300 bps hard-to-borrow cap the edge is unchanged (+393 vs +396). Borrow is not binding at the 10-day horizon.
+
+**Level-2 conclusion: REJECTED.** The surviving short-additions cell fails the pre-registered "result depends on a single year" gate: it is one reconstitution batch (March 2025 S&P 600). Liquidity, capacity, and borrow all pass; the year dependence is disqualifying. No leg or venue from this hypothesis advances without new evidence (longer history, other venues, independent effect confirmation).
 
 ## 7. Rejection Gates
 
@@ -117,9 +124,9 @@ Reject if any of the following is true:
 
 ## 8. Next Step
 
-1. Record the Level-1 result in the research spec (S11): hypothesis revised to short S&P 600/400 additions @10td; long-deletions leg and Russell 2000 venue not advanced without new evidence.
-2. Level-2 confirmation for the surviving candidate: historical borrow-fee data, capacity estimate at multiple notional sizes, intraday fill/impact checks.
-3. If Level-2 confirms: frozen strategy rules (entry/exit/sizing), paper-trading design, and Monte Carlo thresholds registered for live monitoring.
+1. The candidate is rejected at Level 1-2 per the registered gates. Record the rejection decision in the research spec (S11) - done 2026-08-04.
+2. Revisit only with new evidence: a longer history (EQUS full dataset or another licensed source to include 2023 and pre-2023 reconstitutions), a different venue, or an independent confirmation of the effect outside the March 2025 S&P 600 batch.
+3. The data pipeline (event tables, bars, study, S10, Level-2 analysis) remains reusable for any future revisit via the Makefile targets.
 
 ## 9. Key References
 

@@ -515,3 +515,33 @@ The index-rebalancing price-pressure candidate is approved for Level-1 research 
 **Decision: hypothesis revised, not approved as specified.** The pre-registered primary direction (long deletions) does not clear its gate at Level 1: the reversal is not robust there, and the Russell 2000 venue does not exhibit the hypothesized temporary pressure. The evidence supports a narrower candidate: **short S&P 600 (and marginally S&P 400) additions held ~10 trading days after the effective date**, which survives friction, stress, and robustness checks. Recommended path: record the revised candidate (short-additions 10td, S&P 600/400) in the strategy document as a Level-1 finding pending Level-2 confirmation (borrow data, capacity, intraday fills); do not advance the long-deletions leg or the Russell 2000 venue without new evidence (longer history, actual borrow fees).
 
 The S&P 500 venue remains excluded due to documented effect decay.
+
+### **Level-2 robustness, capacity, and borrow analysis (2026-08-04)**
+
+Run against cached daily bars (no new data): liquidity-threshold sweep, year-by-year breakdown, batch capacity at 1%/5%/10% participation, and borrow break-even for the short leg.
+
+**Liquidity threshold sweep (short additions, 10td, S&P 600+400 pooled, abnormal bps):**
+
+| ADDV20 gate | n | mean abnormal | t-stat |
+|---|---|---|---|
+| $2M | 96 | +461 | 2.77 |
+| $5M (registered) | 67 | +639 | 3.28 |
+| $10M | 30 | +930 | 3.02 |
+| $20M | 7 | +543 | 0.84 |
+
+The effect survives, and strengthens, at higher liquidity gates — no microcap dependence on the liquidity dimension.
+
+**Year-by-year breakdown (short additions, 10td):**
+
+| Venue | 2024 | 2025 | 2026 |
+|---|---|---|---|
+| S&P 600 | +139 (n=11, t=0.76) | **+1,542 (n=19, t=3.93)** | **-786 (n=5, t=-3.54)** |
+| S&P 400 | -238 (n=10, t=-1.69) | +736 (n=17, t=1.48) | +1,163 (n=5, t=2.37) |
+
+The S&P 600 cell is a **single-batch phenomenon**: the March 2025 reconstitution (11 events, +2,081 to +4,526 bps each) drives the entire positive mean. September 2025 is mixed, December 2025 negative, 2026 negative (4 of 5 events), 2024 mixed. The sp400 cell is positive in both 2025 and 2026 (n=5 each) but was negative in 2024.
+
+**Capacity (tradeable batches, participation of entry-day ADDV20, pre-registered depth = 5%):** 10 batches over 2024-2026; total notional $8.2M at 1%, **$40.8M at 5%**, $81.5M at 10%; median batch $3.8M at 5%. Enough for a small book; not large.
+
+**Borrow break-even (short leg, 10td):** borrow is charged at 200 bps annual in the base case (~5.5 bps over the hold). The fee that would zero the edge is 14,657 bps annual for S&P 600 and 11,338 bps for S&P 400; at the 300 bps hard-to-borrow cap the edge is essentially unchanged (+393 vs +396). **Borrow is not a binding constraint at the 10-day horizon** — the fee break-even exceeds any realistic borrow market by orders of magnitude.
+
+**Level-2 verdict: REJECT the surviving candidate.** The short-additions 10td edge fails the pre-registered robustness gate "result depends on a single year" — it is one reconstitution batch (March 2025 S&P 600). Liquidity robustness, capacity, and borrow all pass, but the year dependence is disqualifying under the registered gates. The index-rebalancing price-pressure candidate is closed at Level 1/2: no venue or leg from this hypothesis advances to paper trading without new evidence (longer history, a different venue, or an independent effect confirmation).
