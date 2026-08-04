@@ -1,0 +1,35 @@
+{
+  "params": {
+    "vol_window": 20,
+    "target": 0.1,
+    "cap": 1.5,
+    "aum": 1000000000000.0,
+    "decile": 0.1,
+    "friction_base_bps": 4.0,
+    "friction_stress_bps": 12.0,
+    "n_sims": 10000,
+    "seed": 42
+  },
+  "n_flow_days": 813,
+  "n_events": 77,
+  "same_day_corr": 0.18115588764105062,
+  "threshold_usd": -46310470249.64712,
+  "primary_hold1": {
+    "raw_bps": -3.23,
+    "net_base_bps": -7.23,
+    "net_stress_bps": -15.23,
+    "drop_best_bps": -7.36,
+    "control_bps": 6.62,
+    "bootstrap": {
+      "p5_bps": -20.66,
+      "p95_bps": 13.94,
+      "p_negative": 0.6263
+    }
+  },
+  "split": {
+    "IS_bps": -3.93,
+    "OOS_bps": -2.34,
+    "IS_n": 43,
+    "OOS_n": 34
+  }
+}

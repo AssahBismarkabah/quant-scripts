@@ -1,0 +1,658 @@
+{
+  "params": {
+    "target": 0.1,
+    "cap": 2.0,
+    "aum": 1000000000000.0,
+    "decile": 0.1,
+    "friction_base_bps": 4.0,
+    "friction_stress_bps": 12.0,
+    "n_sims": 10000,
+    "seed": 42,
+    "horizon": 5
+  },
+  "cell_a": {
+    "cell": "A (60d RV)",
+    "n_events": 79,
+    "n_events_is": 39,
+    "n_events_oos": 40,
+    "threshold_bn": -15.0,
+    "same_day_corr": 0.1205,
+    "episodes": {
+      "2024-08-05": {
+        "flow_bn": -99.1,
+        "ret_pct": -2.91,
+        "pct_rank": 0.006,
+        "in_bottom_decile": true
+      },
+      "2025-04-04": {
+        "flow_bn": -76.7,
+        "ret_pct": -5.85,
+        "pct_rank": 0.009,
+        "in_bottom_decile": true
+      }
+    },
+    "primary_hold5": {
+      "raw_bps": 41.75,
+      "net_base_bps": 37.75,
+      "net_stress_bps": 29.75,
+      "tstat": 1.46,
+      "stop_bps": 38.35,
+      "bootstrap": {
+        "p5_bps": -4.84,
+        "p95_bps": 89.52,
+        "p_negative": 0.0729
+      },
+      "drop_best_bps": 30.55,
+      "control_bps": 36.62,
+      "no_aug2024_bps": 18.65
+    },
+    "split": {
+      "IS_bps": 44.91,
+      "OOS_bps": 38.66
+    },
+    "horizons": {
+      "3": 25.27,
+      "5": 41.75,
+      "10": 94.58
+    },
+    "close_entry": {
+      "3": 24.4,
+      "5": 41.18,
+      "10": 94.48
+    },
+    "top_sell_flow": [
+      {
+        "date": "2025-10-10",
+        "flow_bn": -189.4,
+        "ret_pct": -2.7
+      },
+      {
+        "date": "2024-12-18",
+        "flow_bn": -140.5,
+        "ret_pct": -2.98
+      },
+      {
+        "date": "2025-04-09",
+        "flow_bn": -131.0,
+        "ret_pct": 10.5
+      },
+      {
+        "date": "2024-07-24",
+        "flow_bn": -101.7,
+        "ret_pct": -2.27
+      },
+      {
+        "date": "2024-08-05",
+        "flow_bn": -99.1,
+        "ret_pct": -2.91
+      },
+      {
+        "date": "2025-04-03",
+        "flow_bn": -89.4,
+        "ret_pct": -4.93
+      },
+      {
+        "date": "2025-04-04",
+        "flow_bn": -76.7,
+        "ret_pct": -5.85
+      },
+      {
+        "date": "2026-03-31",
+        "flow_bn": -72.4,
+        "ret_pct": 2.91
+      }
+    ],
+    "gates": {
+      "same_day": true,
+      "episode": true,
+      "h1_base_friction": true,
+      "split_same_sign": true,
+      "bootstrap_p5": false,
+      "drop_best": true,
+      "beats_random": true,
+      "close_entry": true,
+      "single_episode": true
+    },
+    "gates_pass": false
+  },
+  "cell_b": {
+    "cell": "B (VIX close)",
+    "n_events": 80,
+    "n_events_is": 45,
+    "n_events_oos": 35,
+    "threshold_bn": -51.7,
+    "same_day_corr": 0.7501,
+    "episodes": {
+      "2024-08-05": {
+        "flow_bn": -168.3,
+        "ret_pct": -2.91,
+        "pct_rank": 0.005,
+        "in_bottom_decile": true
+      },
+      "2025-04-04": {
+        "flow_bn": -112.4,
+        "ret_pct": -5.85,
+        "pct_rank": 0.012,
+        "in_bottom_decile": true
+      }
+    },
+    "primary_hold5": {
+      "raw_bps": 35.92,
+      "net_base_bps": 31.92,
+      "net_stress_bps": 23.92,
+      "tstat": 1.42,
+      "stop_bps": 34.87,
+      "bootstrap": {
+        "p5_bps": -5.39,
+        "p95_bps": 77.22,
+        "p_negative": 0.0749
+      },
+      "drop_best_bps": 24.8,
+      "control_bps": 9.59,
+      "no_aug2024_bps": 16.5
+    },
+    "split": {
+      "IS_bps": 41.18,
+      "OOS_bps": 29.15
+    },
+    "horizons": {
+      "3": 40.09,
+      "5": 35.92,
+      "10": 99.18
+    },
+    "close_entry": {
+      "3": 28.58,
+      "5": 25.03,
+      "10": 88.17
+    },
+    "top_sell_flow": [
+      {
+        "date": "2024-12-18",
+        "flow_bn": -268.1,
+        "ret_pct": -2.98
+      },
+      {
+        "date": "2026-06-05",
+        "flow_bn": -184.5,
+        "ret_pct": -2.58
+      },
+      {
+        "date": "2024-09-03",
+        "flow_bn": -184.0,
+        "ret_pct": -2.06
+      },
+      {
+        "date": "2024-08-05",
+        "flow_bn": -168.3,
+        "ret_pct": -2.91
+      },
+      {
+        "date": "2025-10-10",
+        "flow_bn": -147.0,
+        "ret_pct": -2.7
+      },
+      {
+        "date": "2026-01-20",
+        "flow_bn": -132.8,
+        "ret_pct": -2.04
+      },
+      {
+        "date": "2025-04-03",
+        "flow_bn": -131.8,
+        "ret_pct": -4.93
+      },
+      {
+        "date": "2024-07-24",
+        "flow_bn": -125.0,
+        "ret_pct": -2.27
+      }
+    ],
+    "gates": {
+      "same_day": true,
+      "episode": true,
+      "h1_base_friction": true,
+      "split_same_sign": true,
+      "bootstrap_p5": false,
+      "drop_best": true,
+      "beats_random": true,
+      "close_entry": true,
+      "single_episode": true
+    },
+    "gates_pass": false
+  },
+  "joint_pass": false,
+  "robustness": [
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 23.84,
+      "h5": 28.28,
+      "h10": 70.74,
+      "n": 79
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 23.84,
+      "h5": 28.28,
+      "h10": 70.74,
+      "n": 79
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 30.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 28.92,
+      "h5": 32.71,
+      "h10": 63.93,
+      "n": 77
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "rv",
+      "window": 120.0,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 41.22,
+      "h5": 34.36,
+      "h10": 103.44,
+      "n": 68
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "A",
+      "kind": "ewma",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 23.18,
+      "h5": 29.82,
+      "h10": 80.06,
+      "n": 75
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 1.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 1.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": 2.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": 2.5,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.08,
+      "cap": Infinity,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 500000000000.0,
+      "tgt": 0.12,
+      "cap": Infinity,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.08,
+      "cap": Infinity,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    },
+    {
+      "cell": "B",
+      "kind": "vix",
+      "window": NaN,
+      "aum": 2000000000000.0,
+      "tgt": 0.12,
+      "cap": Infinity,
+      "h3": 40.09,
+      "h5": 35.92,
+      "h10": 99.18,
+      "n": 81
+    }
+  ]
+}
