@@ -8,6 +8,7 @@
 - [Funding Basis Research Spec](../IA/funding-basis-research-spec.md)
 - [Vol Targeting Research Spec](../IA/vol-targeting-research-spec.md)
 - [Vol Targeting Revisit Research Spec (v2)](../IA/vol-targeting-revisit-research-spec.md)
+- [Data and Portfolio Roadmap](../IA/data-and-portfolio-roadmap.md)
 
 ## Strategy Specs
 
