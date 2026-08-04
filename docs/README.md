@@ -10,6 +10,7 @@
 - [Vol Targeting Revisit Research Spec (v2)](../IA/vol-targeting-revisit-research-spec.md)
 - [Vol Targeting Long-History Research Spec (v3)](../IA/vol-targeting-long-history-research-spec.md)
 - [Data and Portfolio Roadmap](../IA/data-and-portfolio-roadmap.md)
+- [Research Pipeline Review](../IA/research-pipeline-review.md)
 
 ## Strategy Specs
 
