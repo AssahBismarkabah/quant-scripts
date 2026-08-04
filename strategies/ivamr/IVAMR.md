@@ -1,7 +1,7 @@
 # IVAMR: Intraday Value Area Momentum & Mean Reversion
 
 **Version:** 1.0
-**Status:** Ready for Backtesting & Implementation
+**Status:** Not pursued (2026-08-04) - declined for testing: no pre-2023 intraday data to honor the spec's own IS/OOS protocol; behavioral edge with finite half-life. Candidate closed; do not revisit without new data or evidence.
 **Classification:** Intraday Bias / Trend Following & Mean Reversion Hybrid
 
 ---
@@ -360,3 +360,15 @@ ALL must pass:
 ---
 
 **Final Directive:** This document is the complete blueprint. It contains no subjective language, no magic numbers, and no unverified assumptions. It is ready to be handed to a developer for Python/Pine Script implementation. Execute the backtest. Let the data prove if the edge exists. If it fails the Out-of-Sample or Monte Carlo tests, accept the result, save your capital, and move to the next hypothesis.
+
+---
+
+## 10. Testing Decision (2026-08-04) - record, do not re-litigate
+
+**This candidate was declined for testing on 2026-08-04.** The decision is recorded so it is not reopened without new evidence:
+
+1. **The spec's own validation protocol is unfalsifiable in our environment.** Section 5 requires in-sample 2010-2018 and out-of-sample 2019-2023. Our intraday data source (EQUS.MINI) starts 2023-03-28, so no out-of-sample period exists and the Go/No-Go gate "OOS >= 70% of IS" cannot be tested. Testing a behavioral edge with no OOS capability is the worst possible configuration.
+2. **The edge is behavioral, not structural.** Section 8.A itself concedes: "Treat Volume Profile here as a behavioral/statistical edge with finite half-life, not as a permanent market law." The counterparties are retail traders. Per the institutional approach, structural edges (mandated flows) are preferred; behavioral edges decay and require constant monitoring.
+3. **High implementation cost for a weak prior.** A full build (volume profile engine, 4 playbooks, intra-bar stop simulation, sizing) with no pre-2023 data and no OOS test would be a large effort to prove a short-half-life edge.
+
+**Reopen condition:** new intraday data covering a genuine out-of-sample period (pre-2023), or an independent, peer-reviewed demonstration that the volume-profile mechanic survives costs out of sample. Until then, this document remains a blueprint only, not an approved strategy.

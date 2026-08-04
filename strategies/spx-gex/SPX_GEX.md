@@ -1,7 +1,7 @@
 # SPX Dealer Gamma Exposure
 
 **Version:** 1.0
-**Status:** Rejected at Level 1 (friction gate)
+**Status:** Rejected at Level 1 (friction gate); Level-2 upgrade considered and DECLINED on V1 evidence (2026-08-04) - candidate closed, do not revisit without new evidence
 **Classification:** Intraday Bias / Trend Following and Mean Reversion Regime Filter
 
 ## 1. Executive Summary
@@ -182,10 +182,17 @@ The implementation includes Databento adapters for SPX/SPXW options (OPRA.PILLAR
 
 ## 7. Next Step
 
-**Candidate rejected at Level 1.** The pipeline (data adapters, regime classifier, backtest harness) is preserved for future candidates.
+**Candidate rejected at Level 1 and the Level-2 upgrade was considered and declined on 2026-08-04.** The pipeline (data adapters, regime classifier, backtest harness) is preserved for future candidates.
 
-If revisiting this hypothesis, Level 2 (intraday options replay) is required per spec, plus:
-- Position sizing (volatility targeting)
-- Monte Carlo validation (reshuffle/bootstrap)
-- Walk-forward / out-of-sample testing
-- Registered thresholds for max drawdown, avg trade profit, win/loss balance
+### Level-2 decline decision (2026-08-04) - record, do not re-litigate
+
+The proposed Level-2 upgrade (intraday 0DTE zero-gamma/gamma-wall price-level triggers instead of time windows) was evaluated and rejected before any new data was fetched. The Level-1 results already answer the question the upgrade would test:
+
+- Positive regime gross edge: **+0.64 bps** - a signal that barely exists before costs; 2.18 bps friction finished it.
+- Negative regime gross edge: **-5.02 bps** - in the regime where the hypothesis predicts momentum, the playbook **lost money before any costs**. The signal is directionally wrong or absent at the 1-3 hour horizon, not friction-inefficient.
+
+A price-level trigger changes when a trade is entered, not whether dealer gamma predicts short-horizon returns. If the predictability is absent at that horizon (per V1), a better trigger cannot manufacture it. Re-testing the same signal with a new execution wrapper carries a negative prior from our own data and would repeat the work without new information.
+
+**Reopen condition (must be met before any Level-2 work):** new evidence that intraday dealer-gamma predicts returns at tradeable scale - e.g., independent peer-reviewed or broker research showing a net-of-cost edge at intraday horizons, or a new data source (intraday OI/flow) that demonstrably changes the V1 conclusion. The zero-gamma breakout claim alone is vendor marketing and is not sufficient per the spec's evidence-classification rule (promotional material does not validate a mechanic).
+
+Remaining Level-2 requirements (position sizing, Monte Carlo validation, walk-forward, registered thresholds) are moot until the reopen condition is met.

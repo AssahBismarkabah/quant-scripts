@@ -13,10 +13,10 @@ A collection of quantitative trading strategies, research specs, and executable 
 
 | Strategy | Type | Status |
 |---|---|---|
-| [IVAMR](strategies/ivamr/IVAMR.md) | Intraday Value Area Momentum & Mean Reversion | Ready for Backtesting |
-| [SPX GEX](strategies/spx-gex/SPX_GEX.md) | Intraday Bias / Regime Filter | Rejected at Level 1 (friction gate) |
+| [IVAMR](strategies/ivamr/IVAMR.md) | Intraday Value Area Momentum & Mean Reversion | Not pursued (2026-08-04): no pre-2023 data for its own OOS protocol; behavioral edge |
+| [SPX GEX](strategies/spx-gex/SPX_GEX.md) | Intraday Bias / Regime Filter | Rejected at Level 1 (friction gate); Level-2 upgrade declined (2026-08-04) |
 | [Funding Basis](strategies/funding-basis/FUNDING_BASIS.md) | Relative Value / Funding Carry | Rejected Under Current Assumptions |
-| [Index Rebalancing](strategies/index-rebalancing/INDEX_REBALANCING.md) | Event-Driven Mean Reversion | Level 1 in progress (spec approved, data verified) |
+| [Index Rebalancing](strategies/index-rebalancing/INDEX_REBALANCING.md) | Event-Driven Mean Reversion | Rejected at Level 1-2 (2026-08-04): single-batch effect, fails persistence gate |
 
 ## Documentation
 
