@@ -14,7 +14,7 @@ VENUE ?=
 LIMIT ?=
 STRESS ?=
 
-.PHONY: help sweep parse cross reconcile ftse r2000 bars study all test
+.PHONY: help sweep parse cross reconcile ftse r2000 bars study s10 all test
 
 help:
 	@printf '%s\n' \
@@ -27,6 +27,7 @@ help:
 		'  make r2000            parse Russell PDFs, derive R2000 events, validate counts' \
 		'  make bars             fetch daily bars + benchmark ETFs + calendar (needs Databento key)' \
 		'  make study            run event study (base + stress) and write aggregates' \
+		'  make s10              bootstrap + Monte Carlo validation of study cells (S10)' \
 		'  make all              sweep -> parse -> cross -> reconcile -> ftse -> r2000' \
 		'  make test             run unit tests'
 
@@ -55,6 +56,9 @@ bars:
 study:
 	$(PYTHON) -m quant_scripts.index_rebalancing --mode run-study
 	$(PYTHON) -m quant_scripts.index_rebalancing --mode run-study --stress
+
+s10:
+	$(PYTHON) -m quant_scripts.index_rebalancing --mode validate-s10
 
 all: sweep parse cross reconcile ftse r2000
 

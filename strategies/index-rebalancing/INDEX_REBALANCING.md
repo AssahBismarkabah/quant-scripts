@@ -1,14 +1,14 @@
 # Index Rebalancing Price Pressure
 
 **Version:** 1.0
-**Status:** Level 1 in progress (research spec approved, data verifications passed, event-table construction next)
+**Status:** Level 1 complete (2026-08-04) - hypothesis revised: short S&P 600/400 additions @10td survives; long-deletions leg and Russell 2000 venue do not clear their gates
 **Classification:** Relative Value / Event-Driven Mean Reversion (Category 2: Regulatory & Mandate Constraints)
 
 ## 1. Executive Summary
 
 This document records the investigation of index rebalancing price pressure as an event-driven mean reversion strategy. The hypothesis: index-tracking funds are forced to buy additions and sell deletions on a fixed schedule regardless of price, creating temporary price distortion that partially reverses after the effective date.
 
-**Result:** Not yet tested. The hypothesis is heavily documented in the academic literature (40 years of evidence), but the effect has demonstrably decayed in the S&P 500 (Bennett, Stulz, and Wang, 2022). The surviving venue is small-cap indices: S&P SmallCap 600, S&P MidCap 400, and Russell 2000.
+**Result:** Tested at Level 1. The effect has demonstrably decayed in the S&P 500 (Bennett, Stulz, and Wang, 2022), and the Level-1 event study found the reversal survives only in a narrow cell: **shorting S&P 600 additions (marginally S&P 400) held ~10 trading days after the effective date** (+769 bps abnormal, t=2.88, robust to bootstrap/stress). The primary long-deletions leg is not robust after friction (40-day cells only, driven by single trades), and Russell 2000 additions show a permanent, not temporary, inclusion effect (inverted hypothesis). See section 6.
 
 The implementation will provide an event-table builder (additions/deletions with announcement and effective dates), a post-effective-date backtest harness, and a friction model that includes borrow cost for the short leg.
 
@@ -39,7 +39,7 @@ The effect has decayed to ~zero in the S&P 500 (Bennett, Stulz, Wang, 2022; Pres
 
 ### 3.A Event Definition
 
-- Universe: S&P SmallCap 600 and S&P MidCap 400 additions/deletions (Russell 2000 pending list availability)
+- Universe: S&P SmallCap 600 and S&P MidCap 400 additions (short leg, ~10td hold); deletions leg and Russell 2000 excluded per Level-1 findings
 - Only discretionary changes (market-cap driven). Exclude M&A, bankruptcy, spin-off, and IPO-driven events.
 - Event fields: ticker, index, action (addition/deletion), announcement date, effective date, reason category
 
@@ -84,10 +84,24 @@ The effect has decayed to ~zero in the S&P 500 (Bennett, Stulz, Wang, 2022; Pres
 
 ## 6. Level-1 Test Results
 
-**Not yet run.** Level 1 requires the three data verifications from the research spec:
-1. EQUS.MINI small-cap coverage (incl. delisted names)
-2. S&P DJI announcement-date archive availability
-3. FTSE Russell historical list availability
+**Complete (2026-08-04).** All three data verifications from the research spec passed on 2026-08-03 (EQUS.MINI small-cap coverage incl. delisted names; S&P DJI announcement-date archive; FTSE Russell historical list availability). Event tables were built and cross-validated (1,204 S&P events, 98.63% date agreement vs Wikipedia; 1,196 Russell events validated vs official recaps), and the event study ran over 1,604 events (2024-2026, benchmark-adjusted vs IJR/IJH/IWM, base and stress friction).
+
+Headline cells, mean abnormal bps after friction:
+
+| Venue / action | 10td | 20td | 40td | 60td |
+|---|---|---|---|---|
+| S&P 600 additions (short) | **+769** (t=2.88, n=35) | +320 | -170 | +8 |
+| S&P 400 additions (short) | +498 (t=1.73, n=32) | -23 | -495 | -7 |
+| S&P 600 deletions (long) | -352 | -73 | +891 (t=1.45, n=14) | +478 |
+| S&P 400 deletions (long) | +89 | +25 | +876 (t=1.13, n=6) | +456 |
+| Russell 2000 additions (short) | -730 | -1,072 | -1,393 | -3,440 |
+| Russell 2000 deletions (long) | n=1 | n=1 | n=1 | n=1 |
+
+S10 validation (10,000 bootstrap/reshuffle simulations, seeded): only S&P 600 additions @10td is robust end-to-end (100% positive bootstrap means, survives stress friction and dropping the best trade, zero ruin paths). S&P 400 additions @10td is marginal-positive (p5 of bootstrap near zero). The long-deletions 40td cells fail robustness (bootstrap p5 crosses zero; best single trade drives a large share; n=14 and n=6). Russell 2000 additions are inverted (0% positive bootstrap means) - consistent with a largely permanent inclusion effect in Russell (Chang, Hong, Liskovich 2015).
+
+**Limitations:** 2023 events excluded by the 252-session history gate (data starts 2023-03-28), so all traded events are 2024-2026 and no out-of-sample year split is possible. Russell 2000 deletions are microcap drops failing the $5M ADDV gate (largest 2025 deletion: $3.7M) - only one Russell deletion event survives. Borrow cost is modeled (flat fee base, hard-to-borrow filter stress), no borrow-fee dataset available. Capacity not measured (needs depth data, Level 2).
+
+**Level-1 conclusion:** the pre-registered primary direction (long deletions) does not clear its rejection gate; the surviving candidate is short S&P 600/400 additions held ~10 trading days. Pending Level-2 confirmation: borrow-fee data, capacity, intraday fills.
 
 ## 7. Rejection Gates
 
@@ -103,11 +117,9 @@ Reject if any of the following is true:
 
 ## 8. Next Step
 
-1. Verify EQUS.MINI small-cap coverage
-2. Verify S&P DJI announcement-date archive
-3. Verify FTSE Russell historical list availability
-4. If all three pass: build the event-table builder and Level-1 backtest harness
-5. If any fails: revise the venue or data route before coding
+1. Record the Level-1 result in the research spec (S11): hypothesis revised to short S&P 600/400 additions @10td; long-deletions leg and Russell 2000 venue not advanced without new evidence.
+2. Level-2 confirmation for the surviving candidate: historical borrow-fee data, capacity estimate at multiple notional sizes, intraday fill/impact checks.
+3. If Level-2 confirms: frozen strategy rules (entry/exit/sizing), paper-trading design, and Monte Carlo thresholds registered for live monitoring.
 
 ## 9. Key References
 

@@ -436,22 +436,25 @@ Promotional material is not sufficient to validate the mechanic.
 
 ### **research status and unresolved questions**
 
-The initial research pass is complete. The mechanism is heavily documented in the academic literature, the decay in the S&P 500 is documented, the small-cap survivor venues are identified, and all three pre-implementation data verifications have passed (EQUS.MINI coverage, S&P DJI announcement archive, FTSE Russell historical lists).
+The initial research pass is complete. The mechanism is heavily documented in the academic literature, the decay in the S&P 500 is documented, the small-cap survivor venues are identified, and all three pre-implementation data verifications have passed (EQUS.MINI coverage, S&P DJI announcement archive, FTSE Russell historical lists). The event tables and the Level-1 event study are built and run (see "current decision" for the full S9-S10 results and gate evaluation).
 
-Still unresolved before final validation, and who resolves each item:
+Resolved during event-table construction and the event study, with who resolved each item:
 
-- **Research:** Reconstruct historical borrow-fee data or, failing that, model borrow as a conservative stress assumption with a hard-to-borrow filter.
-- **Research:** Determine whether the observed reversal is executable or only a mark-to-market artifact of the index effect literature.
-- **Research:** Estimate capacity at multiple notional sizes for the long-deletions leg.
-- **Research:** Spot-check EQUS.MINI coverage of delisted S&P 600 / S&P 400 names (names deleted from the indices within the window) during event-table construction.
-- **Implementation:** Build the addition/deletion event table (announcement date, effective date, ticker, index, reason category) from the S&P DJI press archive and FTSE Russell lists, cross-validated against Wikipedia/tickerleague.
+- **Research:** Reconstruct historical borrow-fee data or, failing that, model borrow as a conservative stress assumption with a hard-to-borrow filter. — *Resolved by modeling: borrow is charged in the base case as a conservative flat annual fee and again under the stress case with the hard-to-borrow filter applied. No borrow-fee dataset exists for the window; the modeled assumption stands.*
+- **Research:** Determine whether the observed reversal is executable or only a mark-to-market artifact of the index effect literature. — *Resolved at Level-1 granularity: the study trades actual constituent bars at the first open after the effective date with benchmark-adjusted abnormal returns; no look-ahead is used (entry strictly after effective date).*
+- **Research:** Estimate capacity at multiple notional sizes for the long-deletions leg. — *Not resolved: requires spread/depth data not in EQUS.MINI; deferred to Level 2. Recorded as a limitation.*
+- **Research:** Spot-check EQUS.MINI coverage of delisted S&P 600 / S&P 400 names (names deleted from the indices within the window) during event-table construction. — *Resolved: 100% bar coverage of the 1,604 study events including delisted names (bars fetched for all event tickers, delistings force-closed and recorded via exit_reason).*
+- **Implementation:** Build the addition/deletion event table (announcement date, effective date, ticker, index, reason category) from the S&P DJI press archive and FTSE Russell lists, cross-validated against Wikipedia/tickerleague. — *Resolved: `events/spdji_reconciled.parquet` (1,204 S&P events, 98.63% date agreement vs Wikipedia within +-1 day) and `events/r2000_events.parquet` (1,196 Russell events, counts validated vs official reconstitution recaps within 5%). tickerleague is unusable (site restructured); Wikipedia satisfies the second source.*
 
 ### **current known limitations**
 
-- No historical borrow-fee dataset is confirmed for the short-additions leg; borrow cost will be modeled as a stress assumption until data is verified.
+- No historical borrow-fee dataset is confirmed for the short-additions leg; borrow cost is modeled as a stress assumption (flat annual fee base, hard-to-borrow filter stress).
 - The effect has demonstrably decayed in the S&P 500; version one deliberately excludes it.
-- EQUS.MINI starts 2023-03-28, which bounds the earliest possible study window; a longer history would require the full EQUS dataset or another licensed source.
-- The Russell 3000 lists are the recoverable event source; Russell 2000 membership is derived, and the derivation must be validated against reconstitution summaries during event-table construction.
+- EQUS.MINI starts 2023-03-28, which bounds the earliest possible study window; the 2023 reconstitution events are excluded by the 252-session minimum-history gate (only ~65 sessions available before June 2023), so all traded events are 2024-2026. A longer history would require the full EQUS dataset or another licensed source.
+- The Russell 3000 lists are the recoverable event source; Russell 2000 membership is derived, and the derivation was validated against reconstitution recaps within 5% during event-table construction.
+- Russell 2000 deletions are microcap drops by construction: the largest 2025 deletion had ADDV20 of $3.7M, below the $5M liquidity gate, so only one Russell deletion (ICLR 2024) survives to the study. The Russell deletion leg is not estimable at Level 1.
+- Out-of-sample evaluation by year is not possible with the current window: all traded events fall in 2024-2026 and the rules are frozen; there is no held-out reconstitution year.
+- Capacity is not estimated (requires spread/depth data); deferred to Level 2.
 
 These assumptions are for backtesting only. They do not authorize live trading or imply that the strategy is suitable for any account.
 
@@ -479,4 +482,36 @@ The outcome of this document may be approval to code, revision of the hypothesis
 
 The index-rebalancing price-pressure candidate is approved for Level-1 research preparation. All three pre-implementation data verifications passed on 2026-08-03: (1) EQUS.MINI covers the S&P 600 / S&P 400 universe (97.6% full-window record coverage; all gaps traced to post-2023 IPOs, which are excluded from version one); (2) the S&P DJI press-release archive provides announcement and effective dates for every event in the window; (3) FTSE Russell historical additions/deletions lists are recoverable for 2023-2026, keeping the Russell 2000 secondary venue in scope.
 
-The next deliverable is the event table (announcement date, effective date, ticker, index, reason category) cross-validated across S&P DJI releases, FTSE Russell lists, Wikipedia, and tickerleague, followed by the Level-1 event study (entry at the first open after the effective date; holding windows 10/20/40/60 trading days; long deletions primary, short additions tested separately under borrow constraints). The S&P 500 venue remains excluded due to documented effect decay.
+**Level-1 study (S9) complete on 2026-08-04.** Event tables built and cross-validated (GATE 4 pass: 98.63% date agreement within +-1 day vs Wikipedia), 1,604 study events, 100% bar coverage, base and stress friction cases run benchmark-adjusted (IJR/IJH/IWM). Headline cells, mean abnormal bps after friction (base case; stress in parentheses):
+
+| Venue / action | 10td | 20td | 40td | 60td |
+|---|---|---|---|---|
+| S&P 600 additions (short) | **+769** (t=2.88, n=35; stress +752) | +320 | -170 | +8 |
+| S&P 400 additions (short) | +498 (t=1.73, n=32; stress +481) | -23 | -495 | -7 |
+| S&P 600 deletions (long) | -352 | -73 | +891 (t=1.45, n=14) | +478 |
+| S&P 400 deletions (long) | +89 | +25 | +876 (t=1.13, n=6) | +456 |
+| Russell 2000 additions (short) | -730 | -1,072 | -1,393 | -3,440 |
+| Russell 2000 deletions (long) | n=1 | n=1 | n=1 | n=1 |
+
+**S10 statistical validation (10,000 simulations, seeded) — bootstrap, reshuffle, drop-best sensitivity:**
+
+- S&P 600 additions @10td is the only fully robust cell: 100% of bootstrap means positive (p5 +353 bps), survives stress friction, survives dropping the best trade (mean +768 -> +658), zero ruin paths, p95 max drawdown ~3,900 bps across a 35-trade sequence.
+- S&P 400 additions @10td is marginal-positive: p_positive 1.0 but bootstrap p5 sits at +42 bps (near zero), drop-best keeps it positive (+366).
+- S&P 600 deletions @40td fails robustness: bootstrap p5 crosses zero (-26), mean-without-best collapses +891 -> +461, and the best single trade (+6,477 bps) drives a large share of the cell (n=14).
+- S&P 400 deletions @40td: n=6, bootstrap p5 negative (-39), not estimable with confidence.
+- Russell 2000 additions short leg is inverted: 0% positive bootstrap means, p_ruin 1.0, consistently negative at every window. Consistent with the literature distinction: the Russell inclusion effect is largely permanent (Chang, Hong, Liskovich 2015), unlike the temporary S&P 600 pressure.
+
+**Rejection-gate evaluation (gates from this spec):**
+
+- Post-effective-date reversal survives the conservative friction model: **PASS** for the short-additions leg at 10td on S&P 600/400 (stress decay only 2-3% of edge). FAIL for deletions at 10/20td; only the 40td cell is positive and it does not survive robustness.
+- Reversal disappears or inverts out of sample: **CANNOT TEST at Level 1** (no held-out reconstitution year; 2023 excluded by the data window). Russell additions inversion is in-sample evidence of venue dependence.
+- Result depends on a single year: **CANNOT TEST** (all traded events 2024-2026).
+- Event table reconstructed without look-ahead / unverifiable announcement dates: **PASS** (GATE 4).
+- Borrow costs exceed the short-side edge: **PASS** for the 10td addition leg (borrow modeled conservatively, hard-to-borrow filter in stress).
+- Long-deletions leg alone is profitable after friction (the primary direction): **FAIL / NOT ROBUST**. Only the 40td cells are positive; neither survives bootstrap or drop-best; n=14 and n=6.
+- Monte Carlo / bootstrap shows unacceptable drawdown or ruin: **PASS** for the surviving 10td addition cells (p_ruin 0.0); **FAIL** for Russell additions (p_ruin 1.0), consistent with the inverted hypothesis there.
+- Capacity too low for intended capital: **NOT MEASURED** (Level 2, needs depth data).
+
+**Decision: hypothesis revised, not approved as specified.** The pre-registered primary direction (long deletions) does not clear its gate at Level 1: the reversal is not robust there, and the Russell 2000 venue does not exhibit the hypothesized temporary pressure. The evidence supports a narrower candidate: **short S&P 600 (and marginally S&P 400) additions held ~10 trading days after the effective date**, which survives friction, stress, and robustness checks. Recommended path: record the revised candidate (short-additions 10td, S&P 600/400) in the strategy document as a Level-1 finding pending Level-2 confirmation (borrow data, capacity, intraday fills); do not advance the long-deletions leg or the Russell 2000 venue without new evidence (longer history, actual borrow fees).
+
+The S&P 500 venue remains excluded due to documented effect decay.

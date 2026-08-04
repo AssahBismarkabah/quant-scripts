@@ -204,7 +204,11 @@ def run_study(
     *,
     stress: bool = False,
 ) -> dict[str, Path]:
-    """Full pipeline: load events, filter, compute window returns, aggregate."""
+    """Full pipeline: load events, filter, compute window returns, aggregate.
+
+    Persists both the per-event window results (for bootstrap/reshuffle in
+    S10) and the venue x action x window aggregate.
+    """
     events = pd.read_parquet(events_path)
     out_dir.mkdir(parents=True, exist_ok=True)
     filtered = apply_market_filters(events, bars_dir, calendar, settings)
@@ -213,7 +217,9 @@ def run_study(
     suffix = "stress" if stress else "base"
     agg_path = out_dir / f"aggregate_{suffix}.parquet"
     agg.to_parquet(agg_path, index=False)
-    return {"aggregate": agg_path}
+    results_path = out_dir / f"results_{suffix}.parquet"
+    pd.DataFrame([vars(r) for r in results]).to_parquet(results_path, index=False)
+    return {"aggregate": agg_path, "results": results_path}
 
 
 __all__ = [

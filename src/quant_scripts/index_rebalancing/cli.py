@@ -47,6 +47,7 @@ def build_parser() -> argparse.ArgumentParser:
             "derive-r2000",
             "fetch-bars",
             "run-study",
+            "validate-s10",
         ],
         default="run-study",
     )
@@ -54,6 +55,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--venue", type=str, default=None, choices=["sp600", "sp400", "sp500", "r2000"])
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--stress", action="store_true")
+    parser.add_argument("--n-sims", type=int, default=None)
+    parser.add_argument("--seed", type=int, default=None)
     return parser
 
 
@@ -362,6 +365,21 @@ def mode_run_study(args: argparse.Namespace) -> int:
     return 0
 
 
+def mode_validate_s10(args: argparse.Namespace) -> int:
+    from .validation import run_s10
+
+    out_path = _research_dir() / "outputs" / "s10_validation.parquet"
+    out = run_s10(
+        _research_dir() / "outputs" / "results_base.parquet",
+        out_path,
+        n_sims=args.n_sims or 10_000,
+        seed=args.seed,
+    )
+    print(out.to_json(orient="records", indent=2))
+    print(json.dumps({"output": str(out_path)}, indent=2))
+    return 0
+
+
 _HANDLERS = {
     "sweep-spdji": mode_sweep_spdji,
     "parse-releases": mode_parse_releases,
@@ -372,6 +390,7 @@ _HANDLERS = {
     "derive-r2000": mode_derive_r2000,
     "fetch-bars": mode_fetch_bars,
     "run-study": mode_run_study,
+    "validate-s10": mode_validate_s10,
 }
 
 
