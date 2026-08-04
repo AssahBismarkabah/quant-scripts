@@ -10,6 +10,17 @@ from .models import EventAction, EventStatus, IndexEvent, ReasonCategory, Venue
 from .utils import append_log
 
 
+def _as_date(value) -> date | None:
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        try:
+            return date.fromisoformat(value)
+        except ValueError:
+            return None
+    return None
+
+
 def spdji_chain_to_events(
     releases: list[dict[str, object]],
     *,
@@ -23,20 +34,29 @@ def spdji_chain_to_events(
     """
     events: list[IndexEvent] = []
     for release in releases:
-        ann_date = release.get("announcement_date")
-        eff_date = release.get("effective_date")
-        if ann_date is None or eff_date is None:
+        ann_date = _as_date(release.get("announcement_date"))
+        if ann_date is None:
             continue
         if min_announcement is not None and ann_date < min_announcement:
-            continue
-        if max_effective is not None and eff_date > max_effective:
             continue
         for link in release.get("chain", []):
             ticker = str(link.get("ticker", "")).strip()
             venue = link.get("venue")
+            if isinstance(venue, str):
+                venue = Venue(venue)
             action = link.get("action")
+            # table rows carry their own effective date; prose releases share
+            # one effective date per release
+            eff_date = _as_date(link.get("effective_date") or release.get("effective_date"))
             if not ticker or venue is None or action not in ("addition", "deletion"):
                 continue
+            if eff_date is None:
+                continue
+            if max_effective is not None and eff_date > max_effective:
+                continue
+            reason = link.get("reason") or ReasonCategory.DISCRETIONARY
+            if isinstance(reason, str):
+                reason = ReasonCategory(reason)
             events.append(
                 IndexEvent(
                     venue=venue,
@@ -45,7 +65,7 @@ def spdji_chain_to_events(
                     action=EventAction(action),
                     announcement_date=ann_date,
                     effective_date=eff_date,
-                    reason_category=ReasonCategory.DISCRETIONARY,
+                    reason_category=reason,
                     reason_source="spdji_text",
                     source_primary="spdji_press",
                     sources=("spdji_press",),
@@ -83,22 +103,28 @@ def reconcile(
             cross_keys.setdefault(key, []).append(row)
 
     result: list[IndexEvent] = []
+    hard_exclude = {ReasonCategory.M_A, ReasonCategory.BANKRUPTCY, ReasonCategory.SPINOFF}
     for ev in spdji_events:
         key = (ev.ticker.upper(), ev.action.value, ev.effective_date)
         matches = cross_keys.get(key, [])
         if matches:
             reasons = {m.get("reason") for m in matches if m.get("reason") is not None}
-            if reasons and ReasonCategory.DISCRETIONARY not in reasons and len(reasons) == 1:
-                # all cross sources agree on a non-discretionary reason while
-                # release text says discretionary -> conflict, exclude
-                reason = reasons.pop()
+            # reasons may be ReasonCategory or str; normalize
+            reasons = {r if isinstance(r, ReasonCategory) else ReasonCategory(r) for r in reasons}
+            cross_exclude = bool(reasons & hard_exclude)
+            spdji_exclude = ev.reason_category in hard_exclude
+            if cross_exclude != spdji_exclude and reasons:
+                # sources disagree on whether the event is study-eligible
+                # (M&A/bankruptcy/spin-off vs discretionary) -> exclude until
+                # resolved; agreement on 'other' does not trigger exclusion
+                cross_reason = next(iter(reasons & hard_exclude)) if cross_exclude else next(iter(reasons))
                 append_log(
                     log_path,
                     {
                         "event_id": ev.event_id,
                         "decision": "reason_conflict",
                         "spdji_reason": ev.reason_category.value,
-                        "cross_reason": reason.value,
+                        "cross_reason": cross_reason.value,
                         "source": "reconcile",
                     },
                 )
@@ -109,8 +135,8 @@ def reconcile(
                     action=ev.action,
                     announcement_date=ev.announcement_date,
                     effective_date=ev.effective_date,
-                    reason_category=reason,
-                    reason_source="cross_sources",
+                    reason_category=cross_reason if cross_exclude else ev.reason_category,
+                    reason_source="cross_sources" if cross_exclude else ev.reason_source,
                     source_primary=ev.source_primary,
                     sources=ev.sources + ("cross_sources",),
                     status=EventStatus.RECONCILED,

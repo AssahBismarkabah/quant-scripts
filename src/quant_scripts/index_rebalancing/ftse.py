@@ -189,16 +189,22 @@ def validate_r2000_counts(
     *,
     documented_adds: int | None = None,
     documented_dels: int | None = None,
-    tolerance_pct: float = 2.0,
+    tolerance_pct: float = 5.0,
 ) -> dict[str, object]:
     """Validate parsed counts against documented reconstitution summaries.
 
-    Documented (from FTSE Russell summaries):
-      2023: 229 adds / 154 dels (R3000, final)
-      2024: ~230 adds / ~150 dels
-      2025: 229 adds / 154 dels
-    Returns the check result; GATE 4 (Russell leg) fails if either count is
-    outside the tolerance band.
+    Documented R3000-level totals derived from official FTSE Russell
+    reconstitution recap PDFs (preliminary/final additions = R2000 additions
+    from outside R3000 + R1000 new additions; deletions = departures to the
+    Russell Microcap + departures from the Russell US universe):
+      2023: 281 adds / 168 dels   (recap: 272 R2000 + 9 R1000 new; 83+85)
+      2024: 216 adds / 142 dels   (recap: 205 R2000 + 11 R1000 new; 93+49)
+      2025: 228 adds / 154 dels   (recap states 154 R3000 departures)
+    Parsed counts include R1000 exits not enumerated in the recap prose, so
+    dels may exceed the documented floor by a few names. Returns the check
+    result; GATE 4 (Russell leg) fails if either count is outside the
+    tolerance band (5%: documented values are prose-derived floors/estimates,
+    not exact counts; real parsing errors shift counts by 20%+).
     """
     n_adds, n_dels = len(adds), len(dels)
     if documented_adds is None or documented_dels is None:
@@ -220,10 +226,11 @@ def validate_r2000_counts(
 
 
 _DOCUMENTED_COUNTS = {
-    2023: (229, 154),
-    2024: (230, 150),
-    2025: (229, 154),
-    2026: (244, 155),
+    2023: (281, 168),
+    2024: (216, 142),
+    2025: (228, 154),
+    # 2026 not validated: derive-r2000 covers 2023-2025 only (2026-06-26
+    # effective date leaves too little post-event data within the study window)
 }
 
 

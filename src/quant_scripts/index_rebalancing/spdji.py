@@ -5,7 +5,7 @@ import re
 from datetime import date, datetime
 from pathlib import Path
 
-from .models import ReasonCategory, Venue
+from .models import EventAction, ReasonCategory, Venue
 from .utils import fetch_bytes
 
 _ARCHIVE_URL = "https://press.spglobal.com/index.php?s=2429&l={page_size}&o={offset}"
@@ -88,19 +88,105 @@ def parse_release_page(path: Path) -> list[dict[str, object]]:
 
 
 def parse_release_body(html_str: str) -> dict[str, object]:
-    """Extract effective date and the replacement chain from a release page.
+    """Extract the event chain and effective dates from a release page.
 
-    The replacement chain is parsed from the "S&P SmallCap 600 constituent X
-    will replace Y in ... effective prior to the opening of trading on ..."
-    summary paragraph. Falls back to scanning for ticker mentions if the
-    summary paragraph structure differs.
+    Primary source: the PRNewswire summary table
+    (Effective Date | Index Name | Action | Company Name | Ticker | GICS
+    Sector). Each row carries its own effective date, so a release with
+    multiple effective dates (e.g. two separate rebalance dates) parses
+    correctly. Falls back to the prose replacement-chain regex when the
+    table is absent.
     """
     text = _strip_tags(html_str)
     text = html.unescape(text)
     effective_date = _find_effective_date(text)
-    lead = _extract_lead_paragraph(text)
-    chain = _parse_chain(lead)
+    table_chain = _parse_summary_table(html_str)
+    if table_chain:
+        chain = table_chain
+    else:
+        lead = _extract_lead_paragraph(text)
+        chain = _parse_chain(lead)
+    reason = classify_reason(text)
+    for link in chain:
+        link["reason"] = reason
     return {"effective_date": effective_date, "chain": chain, "body": text}
+
+
+def _parse_summary_table(html_str: str) -> list[dict[str, object]] | None:
+    """Parse the PRNewswire summary table: rows of
+    Effective Date | Index Name | Action | Company Name | Ticker | GICS Sector.
+    Returns chain links carrying per-row effective_date, or None if the
+    table is absent or has no data rows."""
+    m = re.search(r"Effective\s*Date", html_str)
+    if not m:
+        return None
+    table_start = html_str.rfind("<table", 0, m.start())
+    table_end = html_str.find("</table>", m.start())
+    if table_start == -1 or table_end == -1:
+        return None
+    table = html_str[table_start:table_end]
+    links: list[dict[str, object]] = []
+    last_date: date | None = None
+    for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", table, re.S):
+        cells = []
+        for td in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S):
+            cell = re.sub(r"<[^>]+>", " ", td)
+            cell = html.unescape(cell)
+            cell = re.sub(r"\s+", " ", cell).strip()
+            cells.append(cell)
+        if len(cells) < 5:
+            continue
+        eff_date = _parse_table_date(cells[0])
+        if eff_date is not None:
+            last_date = eff_date  # date cell repeats only on the first row
+        action_raw = cells[2].lower()
+        ticker = cells[4].strip()
+        if last_date is None or ticker == "Ticker":
+            continue  # header row or no date yet
+        action = EventAction.ADDITION if action_raw == "addition" else EventAction.DELETION
+        links.append(
+            {
+                "effective_date": last_date,
+                "venue": _venue_from_raw(cells[1]),
+                "action": action.value,
+                "ticker": ticker,
+                "company_name": cells[3],
+            }
+        )
+    return links or None
+
+
+_MONTHS_ABBR = {
+    "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+    "Jul": 7, "Aug": 8, "Sep": 9, "Sept": 9, "Oct": 10, "Nov": 11, "Dec": 12,
+}
+
+
+def _parse_table_date(text: str) -> date | None:
+    # formats seen in releases: 'November 26, 2024', 'Dec 22, 2025',
+    # 'Sept. 19, 2022', 'Mar.18, 2024', '23-Sep-24'
+    month_names = "|".join(_MONTHS) 
+    month_abbrs = "|".join(_MONTHS_ABBR)
+    match = re.match(
+        rf"\s*(?:({month_names})\s+(\d{{1,2}}),\s*(\d{{4}})"
+        rf"|({month_abbrs})\.?\s*(\d{{1,2}}),\s*(\d{{4}})"
+        rf"|(\d{{1,2}})-({month_abbrs})-(\d{{2}}|\d{{4}}))",
+        text,
+    )
+    if not match:
+        return None
+    if match.group(1):
+        month, day, year = _MONTHS[match.group(1)], int(match.group(2)), int(match.group(3))
+    elif match.group(4):
+        month = _MONTHS_ABBR[match.group(4)]
+        day, year = int(match.group(5)), int(match.group(6))
+    else:
+        month = _MONTHS_ABBR[match.group(8)]
+        day = int(match.group(7))
+        year = int(match.group(9))
+        if year < 100:
+            year += 2000
+    return date(year, month, day)
 
 
 def _extract_lead_paragraph(text: str) -> str:
@@ -158,7 +244,9 @@ def _parse_chain(text: str) -> list[dict[str, object]]:
     pattern = re.compile(
         r"(?:,\s*(?:and\s+)?|and\s+)?"
         r"(?:S&P\s+[A-Za-z0-9&]+(?:\s\d{3})?\s+constituent\s+)?"
+        r"(?=[A-Za-z])"
         r"((?:(?!S&P|constituent)[^(])+?)\s*\(([^)]+)\)\s+will\s+replace\s+"
+        r"(?=[A-Za-z])"
         r"((?:(?!S&P)[^(])+?)(?:\s*\(([^)]+)\))?\s+in\s+the\s+"
         r"(S&P\s+500|S&P\s+MidCap\s+400|S&P\s+SmallCap\s+600)"
     )

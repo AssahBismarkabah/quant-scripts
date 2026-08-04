@@ -134,7 +134,9 @@ def compute_window_returns(
             span = [s for s in calendar if entry_date <= s <= exit_date]
             bench_cum = 0.0
             if bench is not None and not bench.empty and len(span) > 1:
-                bench_slice = bench.loc[bench.index.isin(pd.DatetimeIndex(span))]
+                # bench index holds datetime.date objects; isin must compare
+                # like-for-like (DatetimeIndex() would never match dates)
+                bench_slice = bench.loc[bench.index.isin(span)]
                 bench_cum = float((1 + bench_slice).prod() - 1) * 10_000
             abnormal_bps = net_bps - bench_cum
             results.append(

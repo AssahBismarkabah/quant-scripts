@@ -79,32 +79,42 @@ def fetch_daily_bars(
     client,
     dataset: str = "EQUS.MINI",
     schema: str = "ohlcv-1d",
+    chunk_size: int = 50,
 ) -> dict[str, Path]:
     """Fetch ohlcv-1d bars for symbols into per-symbol parquet cache.
 
-    Each symbol is fetched individually so one failed symbol does not break
-    the batch. Start is clipped to the listing date when the symbol was not
-    listed for the whole window. Returns {ticker: parquet_path}.
+    Symbols are batched (chunk_size per resolve/get_range call) so ~1,700
+    symbols cost ~40 API requests instead of one round-trip per symbol.
+    A failed chunk does not break the batch. Start is clipped to the listing
+    date when the symbol was not listed for the whole window. Returns
+    {ticker: parquet_path}.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     paths: dict[str, Path] = {}
-    for symbol in symbols:
-        out_path = out_dir / f"{symbol}.parquet"
-        if out_path.exists():
-            paths[symbol] = out_path
+    pending = [s for s in symbols if not (out_dir / f"{s}.parquet").exists()]
+    for i in range(0, len(pending), chunk_size):
+        chunk = pending[i : i + chunk_size]
+        try:
+            resolved = client.symbology.resolve(
+                dataset=dataset,
+                symbols=",".join(chunk),
+                stype_in="raw_symbol",
+                stype_out="instrument_id",
+                start_date=start,
+                end_date=end,
+            )
+        except Exception:
             continue
-        listing = resolve_listing(symbol, start, end, client=client, dataset=dataset)
-        if listing["status"] == "not_found":
-            continue
-        eff_start = listing["start_date"] if listing["start_date"] is not None else start
-        if eff_start > end:
+        results = resolved.get("result") or {}
+        listed = {s: e for s, e in results.items() if e}
+        if not listed:
             continue
         try:
             store = client.timeseries.get_range(
                 dataset=dataset,
-                start=eff_start,
+                start=start,
                 end=end,
-                symbols=symbol,
+                symbols=",".join(listed),
                 schema=schema,
                 stype_in="raw_symbol",
                 stype_out="instrument_id",
@@ -117,8 +127,15 @@ def fetch_daily_bars(
             continue
         if df is None or df.empty:
             continue
-        _write_bars(df, out_path)
-        paths[symbol] = out_path
+        if "symbol" not in df.columns:
+            continue
+        for symbol, sub in df.groupby("symbol", sort=False):
+            if symbol not in listed:
+                continue
+            out_path = out_dir / f"{symbol}.parquet"
+            _write_bars(sub, out_path)
+            paths[symbol] = out_path
+    # report symbols that resolve to an instrument but returned no bars
     return paths
 
 
