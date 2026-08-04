@@ -56,8 +56,8 @@ EPISODE_WINDOWS = [
 ]
 
 
-def load_bars() -> pd.DataFrame:
-    df = pd.read_parquet(BARS)
+def load_bars(path: Path | None = None) -> pd.DataFrame:
+    df = pd.read_parquet(path or BARS)
     df["ts_date"] = pd.to_datetime(df["ts_date"])
     df = df.sort_values("ts_date").reset_index(drop=True)
     df["ret"] = df["close"].pct_change()
@@ -279,7 +279,7 @@ def main() -> int:
     p.add_argument("--out", default=None)
     args = p.parse_args()
 
-    df = load_bars()
+    df = load_bars(args.bars and Path(args.bars))
     vix = load_vix()
 
     cell_a = build_cell(df, vix, "rv", BASE["target"], BASE["cap"], BASE["aum"], window=60)

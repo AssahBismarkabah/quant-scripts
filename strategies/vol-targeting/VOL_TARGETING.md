@@ -1,7 +1,7 @@
 # Target Volatility Fund Rebalancing Flow Fade
 
-**Version:** 2.0
-**Status:** Second-pass (revisit) complete (2026-08-04) - candidate REJECTED at the pre-registered bootstrap p5 gate in BOTH co-base cells (A: 60d RV, B: VIX close). All other gates passed, including the episode check that failed in v1. v1's rejection stands on verified data; v1's recorded split-sample and episode failures were artifacts of a corrupted bar cache (see section 6.A).
+**Version:** 3.0
+**Status:** Extended-history (v3) complete (2026-08-04) - candidate **MEASURED-BUT-MARGINAL: NO ADVANCE** on the full 1993-2026 sample (~840 events/cell). Bootstrap p5 turns positive in BOTH cells (t~2.0-2.2), but the effect collapses to ~+17 bps hold5 vs a ~+16 bps random-long baseline (~1-2 bps excess), and Cell A underperforms the random-day control; the joint gate fails. The effect is real but not tradable. Prior: v2 REJECTED at the bootstrap p5 gate (n~80); v1's rejection stood on verified data. See sections 7.A and 8.
 **Classification:** Flow-Driven / Forced-Deleveraging Fade (Category 1: Mathematical Mandates)
 
 ## 1. Executive Summary
@@ -136,6 +136,29 @@ Top sell-flow days are now vol events, not cap crossings: Cell A includes 2025-0
 
 **Second-pass conclusion: REJECTED at the pre-registered bootstrap p5 gate in BOTH cells.** All other gates pass, including the v1 failure mode (episode check) and joint consistency across the two independently documented constructions. Point estimates are uniformly positive (+24 to +42 bps at hold5; 36/36 grid cells positive at 3/5/10 days), but the pre-registered statistical threshold is not met: the one-sided 95% lower bound of the event-return mean is negative in both cells (-4.8 / -5.4 bps; t ~1.4-1.5). Per the no-sign-switching / no-horizon-switching / no-cell-selection rule, the candidate is rejected as unproven. The positive point estimates and the stronger hold10 (+94/+99 bps, pre-registered as reported-not-selected) are recorded as a hypothesis for a future pre-registered revisit with more data — not as an edge.
 
+## 7.A Extended-history (v3) test results
+
+**Complete (2026-08-04).** Pre-registered in `IA/vol-targeting-long-history-research-spec.md` (v3.0). This executes the registered option (section 9.3a): extend the sample and re-test. Data extended freely: long SPY daily OHLC from Yahoo (Feb 1993 -> 2026-07-31, `acquire_long_spy.py`), verified bit-for-bit against the trusted `SPY_clean.parquet` on overlap (0 bps close diff, 838 days) and against FRED SP500 (SPY*10/SPX ratio std 15 bps); VIXCLS reused (1990+). Working series `SPY_clean_long.parquet` (8427 sessions; 2 pre-2000 VIX-invalid holidays excluded, no fabricated values).
+
+Design unchanged from v2 (co-base cells A/B, joint gate, 5-day primary, frozen params, IS-trained decile, 4/12 bps friction), applied to the full 1993-2026 sample — sample roughly 10x v2's in length, giving ~840 events/cell.
+
+| Metric | Cell A (60d RV) | Cell B (VIX) |
+|---|---|---|
+| n events (IS/OOS) | 842 (798/44) | 849 (804/45) |
+| hold5 raw / net base | +17.45 / +13.45 bps | +17.94 / +13.94 bps |
+| t-stat (hold5) | **2.01** | **2.22** |
+| bootstrap p5 / p_neg | **+2.64 / 0.026** | **+4.67 / 0.015** |
+| drop-best | +16.11 | +16.62 |
+| random-day control | +25.85 (UNDERPERFORM) | +8.35 (PASS) |
+| split IS/OOS | +16.8 / +28.7 | +17.0 / +34.8 |
+| t+1 close entry | +13.5 | +13.6 |
+| single-episode | +15.25 | +16.11 |
+| gates_pass | **False** | **True** |
+
+Horizons (reported): Cell A hold3/hold10 +10.6/+38.0; Cell B +7.0/+36.5. Robustness grid: h5 +36/36, h10 +36/36, h3 +32/36.
+
+**Extended-history conclusion: MEASURED-BUT-MARGINAL, NO ADVANCE.** Extending the sample produced the intended power gain — bootstrap p5 goes positive in both cells (t~2) — but the point estimates collapse from v2's +37.75/+31.92 bps (n~80) to ~+17 bps (n~840), roughly market-drift parity (~+16 bps random-long baseline), an excess of ~1-2 bps that is not tradable. Cell A underperforms the random-day control, so the joint gate fails. The effect is real (statistically detectable at large n) but economically negligible; v2's stronger point estimate was a 2023-2026 stress-window artifact. The candidate does not advance; the extended sample disconfirms the idea that the v2 estimate represented a tradeable edge.
+
 ## 8. Rejection Gates
 
 Reject if any of the following is true:
@@ -151,10 +174,10 @@ Reject if any of the following is true:
 
 ## 9. Next Step
 
-1. The candidate is rejected at second pass per the registered gates (bootstrap p5 in both cells). Recorded in this document and in the v2 research spec - done 2026-08-04.
-2. The v2 construction itself is validated as a flow measure (episode check passes, same-day diagnostic passes, flows are vol-event-driven, not cap-crossings) — that part of the hypothesis is no longer in question. What failed is the statistical significance of the fade at the 5-day horizon on ~80 events.
-3. A further revisit requires a NEW pre-registration. Registered options, in order of defensibility: (a) extend the sample (the window contains only two stress episodes; the effect and its uncertainty need more events); (b) pre-register the 10-day horizon, whose point estimate (+94/+99 bps) is stronger but was reported-not-selected in v2; (c) intraday data to see the flow in the close itself. No option is approved; all require a new spec.
-4. Data note: all future work on this candidate must use the verified `research/vol-targeting/cache/SPY_clean.parquet` series, not the corrupted EQUS.MINI cache (see 6.A).
+1. The candidate is adjudicated on the extended sample (v3, 2026-08-04) as **measured-but-marginal, no advance**: statistically detectable at ~840 events/cell but ~1-2 bps excess over a random long hold over 32 years; Cell A fails the random-control gate; joint gate fails. Recorded in this document (7.A) and in the v3 research spec.
+2. The v2 construction is validated as a flow measure (episode check and same-day diagnostic pass; flows are vol-event-driven). The extended sample answers the sample-size question: the effect exists but is too small to trade.
+3. The 5-day primary and the co-base cells A/B are **closed** under any sample. No re-tuning, no horizon/cell selection. Further work on this candidate would require a genuinely different, pre-registered question (e.g., intraday "see the flow in the close" variant) — currently deferred by the roadmap (section 3.4). The intraday route needs a paid source and has the weakest priors; not recommended now.
+4. Data note: all v1-v3 work must use the verified `SPY_clean.parquet` / `SPY_clean_long.parquet` lineage (Yahoo OHLC, FRED-verified), not the corrupted EQUS.MINI cache (see 6.A).
 
 ## 10. Key References
 
