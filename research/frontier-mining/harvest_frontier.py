@@ -37,6 +37,57 @@ CATEGORIES = ["q-fin.ST", "q-fin.TR", "q-fin.GN", "q-fin.RM", "q-fin.MF", "q-fin
 OUT = Path(__file__).resolve().parent / "outputs"
 USER_AGENT = "quant-research-funnel/1.0 (mailto:research@example.com)"
 
+# Finance-journal allowlist: Crossref has no discipline scope, so we gate by journal.
+# Substrings matched (case-insensitive) against container-title.
+FINANCE_JOURNALS = [
+    "journal of finance",
+    "journal of financial economics",
+    "review of financial studies",
+    "review of finance",
+    "journal of banking",
+    "journal of financial and quantitative analysis",
+    "journal of empirical finance",
+    "financial analysts journal",
+    "journal of financial markets",
+    "journal of portfolio management",
+    "journal of financial research",
+    "journal of financial intermediation",
+    "critical finance",
+    "financial management",
+    "journal of money, credit and banking",
+    "journal of financial econometrics",
+    "mathematical finance",
+    "finance and stochastics",
+    "journal of financial stability",
+    "journal of international money and finance",
+    "journal of futures markets",
+    "journal of derivatives",
+    "journal of economic dynamics and control",
+    "journal of applied econometrics",
+    "journal of econometrics",
+    "journal of business & economic statistics",
+    "financial review",
+    "european financial management",
+    "journal of asset management",
+    "journal of risk",
+    "quantitative finance",
+    "journal of investment management",
+    "journal of behavioral finance",
+    "journal of financial planning",
+    "journal of institutional and theoretical economics",
+    "journal of risk and uncertainty",
+    "journal of corporate finance",
+    "journal of financial services research",
+    "journal of risk and financial management",
+    "journal of financial economics and banking",
+    "journal of applied finance",
+]
+
+
+def _is_finance_journal(container: str) -> bool:
+    c = (container or "").lower()
+    return any(j in c for j in FINANCE_JOURNALS)
+
 
 def _clean(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
@@ -66,13 +117,27 @@ def fetch_arxiv(cats: list[str], max_results: int) -> list[dict]:
     return rows
 
 
+def _inverted_to_text(inv: dict | None) -> str:
+    """Reconstruct text from OpenAlex abstract_inverted_index."""
+    if not inv:
+        return ""
+    pos = {}
+    for word, idxs in inv.items():
+        for i in idxs:
+            pos[i] = word
+    return _clean(" ".join(pos[i] for i in sorted(pos)))
+
+
 def fetch_openalex(from_date: str, per_page: int = 100, pages: int = 1) -> list[dict]:
-    """Recent works whose primary location is SSRN (covers SSRN preprints), free API."""
+    """Recent finance-topic works from SSRN-in-OpenAlex (free API).
+
+    Gated to OpenAlex topic T10047 (Financial Markets and Investment Strategies)
+    so SSRN's multidisciplinary noise (genetics, physics, etc.) is excluded.
+    """
     rows = []
     for page in range(1, pages + 1):
         params = {
-            "filter": f"locations.source.id:{SSRN_SOURCE},from_publication_date:{from_date},type:article",
-            "search": "market OR anomaly OR return OR flow OR rebalancing OR hedging OR momentum OR reversal OR carry",
+            "filter": f"locations.source.id:{SSRN_SOURCE},from_publication_date:{from_date},type:article,primary_topic.id:T10047",
             "per-page": per_page,
             "page": page,
             "sort": "publication_date:desc",
@@ -93,10 +158,11 @@ def fetch_openalex(from_date: str, per_page: int = 100, pages: int = 1) -> list[
                 {
                     "date": (w.get("publication_date") or "")[:10],
                     "title": _clean(w.get("title") or ""),
-                    "abstract": _clean(((w.get("abstract_inverted_index") or {}) and "") or (w.get("title") or "")),
+                    "abstract": _inverted_to_text(w.get("abstract_inverted_index")),
                     "url": "https://doi.org/" + str(w.get("doi")) if w.get("doi") else "",
                     "source": "ssrn(openalex)",
                     "authors": author,
+                    "container": _clean(loc.get("display_name") or src.get("display_name") or ""),
                 }
             )
         if not d.get("results") or page >= 1 and pages == 1:
@@ -126,6 +192,9 @@ def fetch_crossref(from_date: str, rows: int = 100) -> list[dict]:
     r.raise_for_status()
     out = []
     for it in r.json()["message"]["items"]:
+        container = (it.get("container-title") or [""])[0]
+        if not _is_finance_journal(container):
+            continue
         pubd = (it.get("published") or {}).get("date-parts", [[None]])[0]
         y = pubd[0] if isinstance(pubd, list) and pubd else None
         m = pubd[1] if isinstance(pubd, list) and len(pubd) > 1 else 1
@@ -137,7 +206,7 @@ def fetch_crossref(from_date: str, rows: int = 100) -> list[dict]:
                 "abstract": "",
                 "url": "https://doi.org/" + (it.get("DOI") or ""),
                 "source": "crossref",
-                "journal": (it.get("container-title") or [""])[0],
+                "journal": container,
             }
         )
     return out
