@@ -46,7 +46,7 @@ Filter applied: real forced/constrained counterparty (why), durability of the me
 
 | # | Candidate | Mechanism (why) | Counterparty MUST trade | Data (free/cheap?) | Honest prior / risk that killed prior candidates | Verdict |
 |---|---|---|---|---|---|---|
-| 1 | **Buyback-timing support / "buyback put"** | Companies repurchase on a schedule (10b5-1, post-earnings windows); price-insensitive daily demand supports stock near lows for weeks | Yes — corporate mandate, Rule 10b-18/10b5-1 | **Free**: EDGAR daily buyback exhibits (lagged, quarterly) + 10b5-1 adoption dates (real-time 8-K) | Disclosure lag; effect may already be crowded; "buyback put" literature is mixed (Bonaime et al.); risk of being a momentum-beta confound. **But** identifiable via 10b5-1 plan *signals* (announced in advance) + corporate-calendar regularity | **TOP testable** |
+| 1 | **Buyback-timing support / "buyback put"** | Companies repurchase on a schedule (10b5-1, post-earnings windows); price-insensitive daily demand supports stock near lows for weeks | Yes — corporate mandate, Rule 10b-18/10b5-1 | **Free**: EDGAR daily buyback exhibits (lagged, quarterly) + 10b5-1 adoption dates (real-time 8-K) | Disclosure lag; effect may already be crowded; "buyback put" literature is mixed (Bonaime et al.); risk of being a momentum-beta confound. **But** identifiable via 10b5-1 plan *signals* (announced in advance) + corporate-calendar regularity | **TESTED - NOT ADVANCED (2026-08-04, bounded)**: 47 program events; primary 20d point positive but insignificant (bootstrap p5<0), drop-best->~0; short horizons underperform index. Full multi-year sample pending, but bounded signal does not justify that spend |
 | 2 | **Quarter-end "balance-sheet / window-dressing" + index rebalance re-test on a *different* construction** | Funds window-dress top holdings at quarter end; schedule known | Yes — benchmarked funds | **Free**: calendar (known dates) + daily bars | This is index-rebal's family (closed); priors are that decayed edges don't return | **Testable, weak prior** |
 | 3 | **0DTE expiry / dealer-gamma intraday (GEX-L2)** | Dealers must delta-hedge daily expiries; pinning / final-hour flow | Yes — options market makers | **Needs intraday OI/flow: paid** | Already rejected L1 on friction; needs paid intraday data | **Blocks on paid data** |
 | 4 | **Insider / 10b5-1 filing reaction** | Insider net buying + 10b5-1 adoptions predict near-term drift | Behavioral | **Free**: EDGAR Form 4 | Well-studied, largely arbitraged (post-2002 SOX); modest and decaying | Testable, weak |
@@ -56,29 +56,26 @@ Filter applied: real forced/constrained counterparty (why), durability of the me
 
 ## 4. Recommendation (next pre-registered spec)
 
-**The single best next candidate to research into a pre-registration spec is #1 — buyback/10b5-1 timing ("buyback put"), built on the cheap data asymmetry that the existing pipeline already supports (EDGAR parsing).**
+**Update (2026-08-04): #1 (buyback-timing) has now been TESTED on a bounded sample and did NOT advance** (47 program events, H1 2026: primary 20d point positive but insignificant, bootstrap p5<0, drop-best collapse to ~0; short horizons underperform the index). The data feed works and events are dense (sparsity is not a constraint), but the signal does not demonstrate a tradeable edge after friction vs the index on this bounded sample; the full multi-year spend is not justified on this evidence. See `strategies/buyback-timing/BUYBACK_TIMING.md` and `IA/buyback-timing-research-spec.md`.
 
-Why it clears the portfolio's hard lessons better than the rest:
-1. **The mechanism is a genuine mandate** (companies must / strongly choose to repurchase on schedule; Rule 10b-18/10b5-1), satisfying the asymmetry-of-constraint pillar.
-2. **The data is free and already-producible** (EDGAR + existing `requests`/`pdfplumber` stack); no paid intraday buy.
-3. **The prior failure that killed the last five — too few events / single batch / decay — is addressable:** buyback schedules are *high-frequency and recurring* across ~hundreds of S&P names per quarter, giving many more independent events than index-rebal's ~11 per reconstitution.
-4. **Testability:** the 10b5-1 adoption date is disclosed in advance and on Form 4/8-K (near-real-time), giving a genuinely testable, non-lagged signal vs the decayed quarterly tables.
+With #1 tested-and-not-advanced, the remaining candidates carry weaker priors:
+- **#2 (quarter-end / index-rebalance re-test)** is in the already-CLOSED index-rebal family — priors are that decayed edges don't return; not recommended first.
+- **#5 (spin-off / corporate-action drift)** is niche with low event count (the index-rebal disease) and higher operational complexity (corporate-action/survivorship data).
+- **#4 (insider / 10b5-1 filing reaction)** is well-studied and largely arbitraged (post-SOX); modest, decaying.
+- **#3 (0DTE / dealer-gamma intraday, GEX-L2)** remains the best *fresh* edge and the only genuinely different, high-fidelity signal — but it needs **paid intraday OI/flow** data, and the Level-1 friction question already failed.
 
-**Honest priors to put in the spec:** the "buyback put" is part behavioral, and academic evidence is mixed; the main risk is that buyback support is just correlated with low-beta / value / momentum factors (a beta confound), so the spec must include a matched-control / beta-neutral test up front (the exact failure mode of vol-fade's beats_random gate). And it must pre-register a persistence / multi-cycle gate so a single strong quarter doesn't carry it.
-
-I recommend researching #1 into a full pre-registration spec next. **#3 (0DTE/GEX-L2) remains the best *paid-data* candidate** if we ever decide the intraday buy is worth it, but it stays deferred under the standing no-paid-intraday rule.
-
----
+**Honest next decision:** with the free-data candidates adjudicated (not-advanced or weak-decayed), the survey points back to the fork identified in the pipeline review: **either buy the paid intraday data to unblock #3 (GEX-L2), or deliberately pick a weaker-prior free candidate / stop.** #3 is the strongest remaining edge by market-structure reality (0DTE is now >61% of SPX option volume and dealer hedging is a daily forced flow), so if an intraday-data purchase is ever approved, it is the best use of that spend.
 
 ## 5. Explicitly not recommended now
 
 - Not re-opening vol-fade cells, index-rebal, funding-basis, or IVAMR under any name.
+- Not #1 (buyback-timing) for a full multi-year build unless a new, materially different sub-hypothesis appears (the bounded evidence does not justify it).
 - Not #3 (0DTE/GEX-L2) until/unless the intraday data buy-vs-stop decision is made explicitly.
-- Not a blind pre-registration of any of the above without the research pass (why + counterparty + friction + capacity) first.
+- Not a blind pre-registration of any candidate without the research pass (why + counterparty + friction + capacity) first.
 
 ---
 
 ## 6. Status
 
-- **2026-08-04:** Survey written from current web research (Tavily) across forced flows (buybacks, 0DTE/gamma, index/quarter-end), frictions (T+1), and data asymmetries (EDGAR). Shortlist ranked; **#1 buyback/10b5-1 timing recommended as the next research target.** No data acquired, no code written, no spec pre-registered yet.
-- Next concrete step (on your go-ahead): run the research pass on #1 into `IA/buyback-timing-research-spec.md` (pre-registration), then decide whether to implement.
+- **2026-08-04:** Survey written from current web research (Tavily) across forced flows (buybacks, 0DTE/gamma, index/quarter-end), frictions (T+1), and data asymmetries (EDGAR). Shortlist ranked; **#1 buyback/10b5-1 timing recommended as the next research target.**
+- **2026-08-04 (later):** #1 researched, implemented, and **tested on a bounded sample — NOT ADVANCED** (see section 4 update and `strategies/buyback-timing/BUYBACK_TIMING.md`). The survey's free-data candidates are now all adjudicated (not-advanced or weak-decayed). **Next step = the buy-vs-stop fork on intraday data (#3 GEX-L2) or picking a weaker-prior free candidate.**
