@@ -1,7 +1,7 @@
 # Share Repurchase (Buyback) Timing / "Buyback Put"
 
-**Version:** 0.1 (research spec stage)
-**Status:** UNDER RESEARCH (2026-08-04) - not yet an edge, not approved. Research spec at `IA/buyback-timing-research-spec.md`. No code, no data, no backtest run yet. This record will be updated with test results and a verdict only after a pre-registered study runs.
+**Version:** 0.2 (bounded-sample study complete)
+**Status:** Bounded-sample study NOT ADVANCED (2026-08-04): 47 program events (H1 2026); primary 20d point estimate positive but insignificant (t 0.64), bootstrap p5 negative (gate fail), and drop-best collapses it to zero — plus no short-horizon edge (underperforms index). Full multi-year sample required before any further judgement; this bounded signal does not justify that spend on its own. Research spec at `IA/buyback-timing-research-spec.md`.
 **Classification:** Structural forced-flow (Corporate-repurchase mandate overlap) + Data asymmetry (mandate & legal-constraint / data-asymmetry category)
 **Selected from:** `IA/structural-edge-survey-2025-2026.md` — the #1 testable candidate on free/cheap data.
 
@@ -64,7 +64,19 @@ Borrow: N/A (we are long). No mid-price fills. **Capacity is reported as a notio
 
 ## 6. Test Results
 
-**Not yet run.** This section will record the pre-registered study output (event counts, CARs, matched-control excess, bootstrap p5, persistence across years, friction survival) and the gate verdict once the spec is frozen and the study executes.
+**Bounded-sample study complete (2026-08-04).** First run on a bounded recent sample: EDGAR 8-K harvest (Jan-Jun 2026) -> 165 classified new-program events -> 90-day issuer dedup -> **47 program-level events across 45 issuers**. Bars from Yahoo (verified lineage) for event issuers + SPY/IWM. Primary horizon (+1,+20), friction 20 bps round trip (conservative small-cap base).
+
+| Horizon | n | net bps | t | rel-SPY bps | pos. frac | bootstrap p5 (net) |
+|---|---|---|---|---|---|---|
+| (+1,+5) | 47 | -22 | -0.22 | -61 | 0.55 | -185 |
+| (+1,+10) | 47 | -47 | -0.36 | -86 | 0.53 | -259 |
+| (+1,+20) | 47 | +118 | 0.64 | +79 | 0.66 | **-189** |
+
+**Bounded-sample verdict: NOT ADVANCED (gate fails).** At the primary 20-day horizon the point estimate is positive (+118 bps net, +79 vs SPY) but **not statistically significant** (t 0.64) and the pre-registered **bootstrap p5 is negative (-189 net / -229 rel-SPY) -> gate FAIL**. The +79 bps is **outlier-driven**: drop-best collapses it to +19 bps (~zero); the distribution is fat-tailed both ways (best5 +1,875..+2,862 bps; worst IPST -3,832, DFIN -3,278). Short horizons (5/10d) **underperform** the index (negative rel-SPY), consistent with post-2001 decay of announcement effects.
+
+**Documented limitations (bounded study):** small sample (47 events, single half-year); **sector/size-concentrated** (skew to regional-bank/small-financial issuers — the names that announce buybacks via 8-K); **no persistence/multi-year test possible** (single year); official cell membership (S&P 500 vs 600) not yet assigned (size proxy used); **delisted-bar coverage not exercised** (all recent names were live). Per the "bounded sample first, note limitations" decision, this is a first directional signal, not the full multi-year study.
+
+**Conclusion:** On this bounded sample the candidate does **not** demonstrate a tradeable edge after friction and vs the index; the announcement-time signal shows no short-horizon edge and only a non-robust, insignificant long-horizon point estimate. Status remains UNDER RESEARCH; the full multi-year sample (with official membership + delisted coverage + persistence test) is required before any advance, and this bounded signal does not justify that spend on its own merit.
 
 ## 7. Rejection Gates (provisional; to be finalized in the spec)
 

@@ -1,0 +1,33 @@
+{
+  "n_events": 45,
+  "h5": {
+    "n": 47,
+    "net_mean_bps": -21.9,
+    "net_tstat": -0.22,
+    "net_p5_bps": -184.8,
+    "rel_spy_mean_bps": -61.0,
+    "rel_spy_p5_bps": -261.8,
+    "rel_iwm_mean_bps": -126.1,
+    "pos_frac": 0.553
+  },
+  "h10": {
+    "n": 47,
+    "net_mean_bps": -46.5,
+    "net_tstat": -0.36,
+    "net_p5_bps": -259.4,
+    "rel_spy_mean_bps": -85.6,
+    "rel_spy_p5_bps": -318.7,
+    "rel_iwm_mean_bps": -150.7,
+    "pos_frac": 0.532
+  },
+  "h20": {
+    "n": 47,
+    "net_mean_bps": 118.4,
+    "net_tstat": 0.64,
+    "net_p5_bps": -189.3,
+    "rel_spy_mean_bps": 79.3,
+    "rel_spy_p5_bps": -229.4,
+    "rel_iwm_mean_bps": 14.2,
+    "pos_frac": 0.66
+  }
+}
