@@ -152,11 +152,13 @@ def fetch_openalex(from_date: str, per_page: int = 50, pages: int = 1) -> list[d
 
     Gated to OpenAlex topic T10047 (Financial Markets and Investment Strategies)
     so SSRN's multidisciplinary noise (genetics, physics, etc.) is excluded.
+    NOTE: no type filter here -- most SSRN works are typed `preprint`, and
+    restricting to `type:article` would drop ~75% of the finance content.
     """
     rows = []
     for page in range(1, pages + 1):
         params = {
-            "filter": f"locations.source.id:{SSRN_SOURCE},from_publication_date:{from_date},type:article,primary_topic.id:T10047",
+            "filter": f"locations.source.id:{SSRN_SOURCE},from_publication_date:{from_date},primary_topic.id:T10047",
             "per-page": per_page,
             "page": page,
             "sort": "publication_date:desc",
@@ -170,7 +172,7 @@ def fetch_openalex(from_date: str, per_page: int = 50, pages: int = 1) -> list[d
                     time.sleep(3 * (attempt + 1))
                     continue
                 raise
-            if r.status_code in (429, 500, 502, 503, 504) and attempt < 2:
+            if r.status_code in (429, 500, 502, 503, 504, 520, 521, 522) and attempt < 2:
                 time.sleep(3 * (attempt + 1))
                 continue
             break
@@ -191,7 +193,7 @@ def fetch_openalex(from_date: str, per_page: int = 50, pages: int = 1) -> list[d
                     "date": (w.get("publication_date") or "")[:10],
                     "title": _clean(w.get("title") or ""),
                     "abstract": _inverted_to_text(w.get("abstract_inverted_index")),
-                    "url": "https://doi.org/" + str(w.get("doi")) if w.get("doi") else "",
+                    "url": str(w.get("doi") or ""),
                     "source": "ssrn(openalex)",
                     "authors": author,
                     "container": _clean(loc.get("display_name") or src.get("display_name") or ""),
@@ -255,22 +257,28 @@ SCHOLAR_FINANCE = re.compile(
 )
 
 
-def fetch_scholar_serpapi(query: str = "stock market anomaly forced flow index rebalancing hedging", max_results: int = 30) -> list[dict]:
-    """Recent Google Scholar results via SerpApi (requires SERPA_API_KEY)."""
-    key = os.environ.get("SERPA_API_KEY") or os.environ.get("SERPAPI_KEY")
-    if not key:
-        print("SKIP google_scholar: SERPA_API_KEY not set (source the repo .env)")
-        return []
+SCHOLAR_QUERIES = [
+    "stock market anomaly forced flow index rebalancing hedging",
+    "site:papers.ssrn.com stock anomaly momentum reversal flow premium",
+    "site:papers.ssrn.com market anomaly forced flow hedging rebalancing",
+]
+
+
+def _scholar_query(key: str, q: str, max_results: int, year_lo: int) -> list[dict]:
     params = {
         "engine": "google_scholar",
-        "q": query,
-        "as_ylo": str(datetime.now(timezone.utc).year - 1),
+        "q": q,
+        "as_ylo": str(year_lo),
         "num": max_results,
         "api_key": key,
     }
-    r = requests.get(SERPAPI_API, params=params, timeout=90)
+    try:
+        r = requests.get(SERPAPI_API, params=params, timeout=90)
+    except requests.RequestException as e:
+        print(f"SKIP google_scholar query '{q[:40]}': {e}")
+        return []
     if r.status_code != 200:
-        print(f"SKIP google_scholar: HTTP {r.status_code} ({r.text[:120]})")
+        print(f"SKIP google_scholar query '{q[:40]}': HTTP {r.status_code} ({r.text[:120]})")
         return []
     out = []
     for it in r.json().get("organic_results", []):
@@ -295,6 +303,32 @@ def fetch_scholar_serpapi(query: str = "stock market anomaly forced flow index r
                 "journal": summary,
             }
         )
+    return out
+
+
+def fetch_scholar_serpapi(max_results: int = 30) -> list[dict]:
+    """Recent Google Scholar results via SerpApi (requires SERPA_API_KEY).
+
+    Runs several queries incl. an SSRN-scoped one so recent SSRN papers that
+    OpenAlex lags on are covered via the licensed SerpApi route (no SSRN
+    scraping). Dedupes by URL.
+    """
+    key = os.environ.get("SERPA_API_KEY") or os.environ.get("SERPAPI_KEY")
+    if not key:
+        print("SKIP google_scholar: SERPA_API_KEY not set (source the repo .env)")
+        return []
+    year_lo = datetime.now(timezone.utc).year - 1
+    per = max(5, max_results // len(SCHOLAR_QUERIES))
+    seen: set[str] = set()
+    out = []
+    for q in SCHOLAR_QUERIES:
+        rows = _scholar_query(key, q, per, year_lo)
+        for r in rows:
+            u = r["url"]
+            if u in seen:
+                continue
+            seen.add(u)
+            out.append(r)
     return out
 
 
