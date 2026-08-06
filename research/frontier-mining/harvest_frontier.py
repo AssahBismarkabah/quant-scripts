@@ -1,13 +1,15 @@
 """Harvest + score the recent quant-finance research frontier into a testable shortlist.
 
-Sources (all free, machine-accessible APIs - no scraping, no ToS risk):
+Sources (machine-accessible APIs; Scholar via SerpApi - API-key-gated, cost per
+query, no scraping of Scholar directly):
   1. arXiv q-fin  (open API)                         - math/method + quant finance working papers
   2. OpenAlex     (free API, indexes SSRN + journals) - captures SSRN-published preprints cleanly
   3. Crossref     (free API, bibliographic)          - journals, meticulous metadata
+  4. Google Scholar (via SerpApi, `SERPA_API_KEY`)    - broad Scholar coverage incl. SSRN/working papers
 
-Together these cover the widely-used portals (SSRN/CrossRef/arXiv) without browser
-automation. Google Scholar has no index and blocks scrapers -> it stays a manual/
-browser-only item (documented, not scraped).
+OpenAlex is gated to finance topic T10047 and Crossref to a finance-journal
+allowlist; Scholar results are gated in the same way because neither source has
+a native discipline scope. ResearchGate has no machine API -> manual/browser only.
 
 Scoring applies the market-edge framework's pillars to each paper:
   (a) forced/mandate counterparty
@@ -21,6 +23,7 @@ Suppress future lint as needed; this is a research tool.
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import time
 from datetime import datetime, timezone
@@ -32,6 +35,22 @@ import requests
 ARXIV_API = "http://export.arxiv.org/api/query"
 OPENALEX_API = "https://api.openalex.org/works"
 CROSSREF_API = "https://api.crossref.org/works"
+SERPAPI_API = "https://serpapi.com/search.json"
+
+
+def _load_dotenv() -> None:
+    env_path = Path(__file__).resolve().parents[2] / ".env"
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 SSRN_SOURCE = "S4210172589"  # SSRN Electronic Journal in OpenAlex
 CATEGORIES = ["q-fin.ST", "q-fin.TR", "q-fin.GN", "q-fin.RM", "q-fin.MF", "q-fin.CP", "q-fin.PM"]
 OUT = Path(__file__).resolve().parent / "outputs"
@@ -128,7 +147,7 @@ def _inverted_to_text(inv: dict | None) -> str:
     return _clean(" ".join(pos[i] for i in sorted(pos)))
 
 
-def fetch_openalex(from_date: str, per_page: int = 100, pages: int = 1) -> list[dict]:
+def fetch_openalex(from_date: str, per_page: int = 50, pages: int = 1) -> list[dict]:
     """Recent finance-topic works from SSRN-in-OpenAlex (free API).
 
     Gated to OpenAlex topic T10047 (Financial Markets and Investment Strategies)
@@ -142,8 +161,21 @@ def fetch_openalex(from_date: str, per_page: int = 100, pages: int = 1) -> list[
             "page": page,
             "sort": "publication_date:desc",
         }
-        r = requests.get(OPENALEX_API, params=params, headers={"User-Agent": USER_AGENT}, timeout=60)
-        r.raise_for_status()
+        r = None
+        for attempt in range(3):
+            try:
+                r = requests.get(OPENALEX_API, params=params, headers={"User-Agent": USER_AGENT}, timeout=90)
+            except requests.RequestException:
+                if attempt < 2:
+                    time.sleep(3 * (attempt + 1))
+                    continue
+                raise
+            if r.status_code in (429, 500, 502, 503, 504) and attempt < 2:
+                time.sleep(3 * (attempt + 1))
+                continue
+            break
+        if r is not None:
+            r.raise_for_status()
         d = r.json()
         for w in d.get("results", []):
             loc = w.get("primary_location") or {}
@@ -179,16 +211,16 @@ def fetch_crossref(from_date: str, rows: int = 100) -> list[dict]:
         "select": "title,DOI,container-title,published",
     }
     r = None
-    for attempt in range(3):
+    for attempt in range(4):
         r = requests.get(
             CROSSREF_API,
             params=params,
             headers={"User-Agent": USER_AGENT},
             timeout=60,
         )
-        if r.status_code != 429 or attempt == 2:
+        if r.status_code != 429 or attempt == 3:
             break
-        time.sleep(2 * (attempt + 1))
+        time.sleep(5 * (attempt + 1))
     r.raise_for_status()
     out = []
     for it in r.json()["message"]["items"]:
@@ -207,6 +239,60 @@ def fetch_crossref(from_date: str, rows: int = 100) -> list[dict]:
                 "url": "https://doi.org/" + (it.get("DOI") or ""),
                 "source": "crossref",
                 "journal": container,
+            }
+        )
+    return out
+
+
+# broad finance-topic signal used to gate Google Scholar results (it has no
+# native discipline scope and would otherwise surface ocean/atmospheric/etc.)
+SCHOLAR_FINANCE = re.compile(
+    r"(stock|equit|shar|quote|index|bond|option|future|derivative|fund|portfolio|"
+    r"asset|return|yield|premium|anomaly|momentum|reversal|hedge|volatil|liquid|"
+    r"arbitrage|predict|market|invest|bank|credit|spread|collateral|margin|buyback|"
+    r"rebalanc|flow|rate|cross.?section|capm|fama|factor|sentiment|mispric|trade)",
+    re.I,
+)
+
+
+def fetch_scholar_serpapi(query: str = "stock market anomaly forced flow index rebalancing hedging", max_results: int = 30) -> list[dict]:
+    """Recent Google Scholar results via SerpApi (requires SERPA_API_KEY)."""
+    key = os.environ.get("SERPA_API_KEY") or os.environ.get("SERPAPI_KEY")
+    if not key:
+        print("SKIP google_scholar: SERPA_API_KEY not set (source the repo .env)")
+        return []
+    params = {
+        "engine": "google_scholar",
+        "q": query,
+        "as_ylo": str(datetime.now(timezone.utc).year - 1),
+        "num": max_results,
+        "api_key": key,
+    }
+    r = requests.get(SERPAPI_API, params=params, timeout=90)
+    if r.status_code != 200:
+        print(f"SKIP google_scholar: HTTP {r.status_code} ({r.text[:120]})")
+        return []
+    out = []
+    for it in r.json().get("organic_results", []):
+        title = _clean(it.get("title") or "")
+        if not title or not SCHOLAR_FINANCE.search(title):
+            continue
+        info = it.get("publication_info") or {}
+        summary = info.get("summary") or ""
+        if summary and not SCHOLAR_FINANCE.search(summary):
+            continue
+        year = ""
+        m = re.search(r"(19|20)\d{2}", summary or "")
+        if m:
+            year = m.group(0)
+        out.append(
+            {
+                "date": year + "-01-01" if year else "",
+                "title": title,
+                "abstract": _clean(it.get("snippet") or ""),
+                "url": it.get("link") or "",
+                "source": "scholar(serpapi)",
+                "journal": summary,
             }
         )
     return out
@@ -289,10 +375,12 @@ def main() -> int:
     p.add_argument("--max-arxiv", type=int, default=300)
     p.add_argument("--openalex-pages", type=int, default=1)
     p.add_argument("--crossref-rows", type=int, default=60)
-    p.add_argument("--sources", default="arxiv,openalex,crossref")
+    p.add_argument("--scholar-results", type=int, default=30)
+    p.add_argument("--sources", default="arxiv,openalex,crossref,scholar")
     p.add_argument("--out", default=str(OUT / "frontier_papers.csv"))
     args = p.parse_args()
 
+    _load_dotenv()
     from datetime import timedelta
     from_date = (datetime.now(timezone.utc) - timedelta(days=args.days)).date().isoformat()
 
@@ -305,6 +393,9 @@ def main() -> int:
     if "crossref" in srcs:
         time.sleep(0.5)
         rows += fetch_crossref(from_date, rows=args.crossref_rows)
+    if "scholar" in srcs:
+        time.sleep(0.5)
+        rows += fetch_scholar_serpapi(max_results=args.scholar_results)
 
     OUT.mkdir(parents=True, exist_ok=True)
     df = pd.DataFrame(rows)

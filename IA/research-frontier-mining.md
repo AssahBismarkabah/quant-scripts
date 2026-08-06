@@ -22,27 +22,33 @@ For each paper the funnel surfaces, the gate is unchanged: real forced/mandate c
 
 | Source | Status | How we use it |
 |---|---|---|
-| **arXiv q-fin** (ST/TR/GN/RM/MF/CP/PM) | **Open API (free, machine-accessible)** — verified working | **Primary automated harvest.** Clean, dated, structured (title/abstract/date/URL). Fully scriptable. |
-| **SSRN** (`papers.ssrn.com`) | No public API; blocks scripted fetch (403) | **Automated via OpenAlex** (indexes SSRN Electronic Journal, source `S4210172589`) + **manual/curated layer** with a real browser. |
-| **Crossref** (`api.crossref.org`) | **Open API (free); 429 rate-limits -> retry with backoff** — verified working | **Automated harvest.** Bibliographic metadata for journals (title/DOI/container/date). |
-| **OpenAlex** (`api.openalex.org`) | **Open API (free, no key)** — verified working | **Automated SSRN/journals coverage** via the `locations.source.id` filter. |
-| **Google Scholar** (`scholar.google.com`) | No public API; blocks bots (429) | **Manual/curated layer.** Browser-session only. |
-| **ResearchGate** | No public API; blocks bots (403) | **Manual/curated layer.** Browser-session only. |
-| **Semantic Scholar** (`api.semanticscholar.org`) | Hard 429 without an API key; no obvious key-provisioning page for the free tier | **DROPPED.** OpenAlex + Crossref already cover indexed SSRN/journal content; the marginal value did not justify a key dependency none of us can find. |
+| **arXiv q-fin** (ST/TR/GN/RM/MF/CP/PM) | **Open API (free)** — category-scoped, clean | **Automated harvest.** No discipline gating needed (q-fin categories). |
+| **SSRN** (`papers.ssrn.com`) | No public API; blocks scripted fetch (403) | **Automated via OpenAlex** (indexes SSRN), gated to finance topic `T10047`. + **manual/browser layer**. |
+| **Crossref** (`api.crossref.org`) | **Open API (free); 429 rate-limits -> retry+backoff** | **Automated harvest**, gated to a finance-journal allowlist (~40 journals) because Crossref has no finance scope. |
+| **OpenAlex** (`api.openalex.org`) | **Open API (free, no key)** — occasionally flaky (504/timeouts) | **Automated SSRN/journals coverage**, finance-gated via `primary_topic.id:T10047`. |
+| **Google Scholar** (`scholar.google.com`) | No direct API; blocks bots — **reached via SerpApi** (`SERPA_API_KEY`) | **Automated harvest via SerpApi** (keyed, per-query cost). Gated to finance via title/journal filter. **New. Works.** |
+| **ResearchGate** | No machine API; blocks bots (403) | **Manual/curated layer.** Browser-session only. |
+| **Semantic Scholar** (`api.semanticscholar.org`) | Hard 429 without an API key; no obvious key-provisioning page | **DROPPED.** No marginal value over OpenAlex/Crossref/Scholar. |
 
-**Honest note on automation:** arXiv exposes a usable API directly, and **OpenAlex + Crossref are the legitimate free, machine-accessible route to SSRN/journal content** (no scraping, no ToS risk). SSRN / Google Scholar / ResearchGate themselves remain browser-first and block `requests`-style scraping (403/429), so we do NOT scrape them directly. The harvest covers **arXiv + Crossref + SSRN-via-OpenAlex** automatically; Scholar/RG stay a **manual scan** pair with the link template below. This gives breadth without violating their access.
+**Honest note on automation:** arXiv exposes a usable API directly. **OpenAlex + Crossref are the legitimate free, machine-accessible route to SSRN/journal content**, and **Google Scholar is now automated via SerpApi** (the account's `SERPA_API_KEY`, loaded from the repo `.env`). None of these scrape Scholar/SSRN directly (SerpApi is a licensed API; OpenAlex/Crossref index the content). Only **ResearchGate** remains browser-only (no machine API of any kind).
 
-**Manual scan link template (recent):**
+Three of the four sources needed a **finance discipline gate** because their native query has no finance scope — otherwise they surface multidisciplinary noise (genetics, physics, ocean, menopause, etc.):
+- OpenAlex -> `primary_topic.id:T10047` (Financial Markets and Investment Strategies)
+- Crossref -> finance-journal allowlist [~40 names]
+- Scholar -> finance title/journal regex filter
+(Only arXiv is intrinsically finance-scoped via its q-fin categories.)
+
+**Manual scan link template (recent)** — for the one remaining manual layer and ad-hoc deep-dives:
 - SSRN: `https://papers.ssrn.com/sol3/results.cfm?term=<topic>&date=last_12_months`
 - Google Scholar (year-filtered): `https://scholar.google.com/scholar?q=<topic>+anomaly&as_ylo=2025`
 - ResearchGate: `https://www.researchgate.net/search/publication?q=<topic>`
 
 ---
 
-## 3. The harvest + scorecard (auto: arXiv + Crossref + SSRN-via-OpenAlex)
+## 3. The harvest + scorecard (auto: arXiv + Crossref + SSRN-via-OpenAlex + Google Scholar-via-SerpApi)
 
 Script: `research/frontier-mining/harvest_frontier.py`. It:
-1. Pulls recent q-fin papers from the **arXiv API**, **Crossref**, and **SSRN-via-OpenAlex** (multi-source; Semantic Scholar removed — key-gated, no value over OpenAlex/Crossref).
+1. Pulls recent q-fin/finance papers from the **arXiv API**, **Crossref**, **SSRN-via-OpenAlex**, and **Google Scholar via SerpApi** (each finance-gated as described in section 2). Scholar needs `SERPA_API_KEY` from the repo `.env`.
 2. Scores each against the framework's pillars via auditable keyword heuristics:
    - `forced` — mechanism implies a counterparty who MUST trade (rebalance, hedging, dealer, index, buyback, margin/collateral, liquidation, expiry/roll...)
    - `documented` — a measurable mechanic is described (anomaly, return, premium, drift, arbitrage, reversal...)
@@ -51,11 +57,11 @@ Script: `research/frontier-mining/harvest_frontier.py`. It:
    - `recent` — within the window.
 3. Outputs a ranked CSV/parquet + a printed shortlist of (empirical, non-method, non-data-heavy) candidates.
 
-Run:
+Run (full; OpenAlex/Crossref can be flaky/rate-limited — the script retries with backoff):
 ```
-.venv/bin/python research/frontier-mining/harvest_frontier.py --max-arxiv 200 --openalex-pages 1 --crossref-rows 50
+.venv/bin/python research/frontier-mining/harvest_frontier.py --max-arxiv 200 --openalex-pages 1 --crossref-rows 50 --scholar-results 30
 ```
-(the venv interpreter is required; `pandas`/`requests` are project deps)
+(the venv interpreter is required; `pandas`/`requests` are project deps; Scholar requires `SERPA_API_KEY` in `.env` — already set)
 
 ---
 
@@ -70,7 +76,10 @@ Run:
 ## 6. Status
 
 - **2026-08-04:** Process defined + scripted. Accessibility confirmed: arXiv = open API (automated primary); SSRN/Scholar/RG = blocked to scripts (manual layer planned). First harvest (arXiv q-fin, ~12 months, 400 papers) run.
-- **2026-08-05:** Multi-source harvest (arXiv + Crossref + SSRN-via-OpenAlex) implemented and **verified end-to-end: 350 papers** from the three sources, ranked shortlist produced. Crossref 429 rate-limits handled with retry+backoff. **Semantic Scholar dropped** (hard 429 without an API key; no obvious free-tier key page; OpenAlex/Crossref already cover indexed SSRN/journal content).
-- **Verified outputs:** `research/frontier-mining/outputs/frontier_papers.csv` / `.parquet` (350 papers, scored/ranked). Top empirical/non-method/non-data-heavy leads include e.g. Crossref "Anomaly flow and anomaly cancellation"; arXiv "Herding, Momentum, and Reversal in China's A-Share Market"; "A Spectral Generalisation of the Variance Ratio".
-- **First-run honest result:** recent machine-accessible frontier is **method-heavy and thin on high-prior, free-data-testable structural anomalies**. A few empirical leads surfaced (e.g. anomaly flow / herding / long-horizon variance-ratio predictability) that are worth a **manual SSRN/Scholar/RG follow-up**, but none is an obvious high-prior free-data win on the machine pass alone.
-- Next: (a) pick a surfaced lead and test whether our existing/free data aligns with the mechanism the paper describes (does the paper's predicted signal show up in our data?), then (b) decide advance-to-spec or bin, (c) if nothing clears, deliberately stop/regroup.
+- **2026-08-05:** Multi-source harvest (arXiv + Crossref + SSRN-via-OpenAlex) implemented and **verified end-to-end: 350 papers**. Crossref 429 handled with retry+backoff. **Semantic Scholar dropped** (no key value).
+- **2026-08-05b (pipeline correctness fix):** Diagnosed that OpenAlex-SSRN and Crossref had **no finance discipline gate** — they surfaced multidisciplinary noise (concrete, genetics, menopause, ocean, etc.). Fixed by gating OpenAlex to finance topic `T10047` and Crossref to a ~40-journal finance allowlist; also fixed an OpenAlex bug that had been returning the *title* as the abstract. Re-run: noise gone, output finance-only.
+- **2026-08-05c (Google Scholar added):** User provisioned a **SerpApi** key (`SERPA_API_KEY` in `.env`). Added `fetch_scholar_serpapi` — automated **Google Scholar** coverage, finance-gated via title/journal filter. Verified: returns high-quality papers other sources miss (e.g. "Business-Cycle Risk Exposure and the Cross-Sectional Returns in China's A-Share" — Emerging Markets Finance and Trade; "Market Structure and the Erosion of Informed Trade" — Journal of Portfolio Management; SSRN working papers). ResearchGate remains the only manual-only source.
+- **Upstream reliability note:** OpenAlex and Crossref are free APIs that intermittently 504/429 and time out; the script retries with backoff and connection-error handling. When they are flaky, arXiv + Scholar (the keyed, reliable two) carry the harvest.
+- **Verified outputs:** `research/frontier-mining/outputs/frontier_papers.csv` / `.parquet` (scored/ranked).
+- **First-run honest result:** recent machine-accessible frontier is **method-heavy and thin on high-prior, free-data-testable structural anomalies**; the funnel's job is to surface the few fresh, testable theses from the noise (e.g. "AI and Exchange Rate Predictability" Sharpe>0.7; JFE "Index rebalancing ... Do indexes time the market?").
+- Next: (a) pick a surfaced thesis, (b) assess whether it makes sense + is testable with free data, (c) decide advance-to-spec or bin, (d) if nothing clears, deliberately stop/regroup.
