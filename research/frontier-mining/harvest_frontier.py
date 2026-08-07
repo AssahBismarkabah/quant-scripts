@@ -36,6 +36,10 @@ ARXIV_API = "http://export.arxiv.org/api/query"
 OPENALEX_API = "https://api.openalex.org/works"
 CROSSREF_API = "https://api.crossref.org/works"
 SERPAPI_API = "https://serpapi.com/search.json"
+ZENROWS_API = "https://api.zenrows.com/v1/"
+
+# ZenRows costs 5x for js_render and 10x for premium_proxy (SERP scored last).
+# We cap calls and pages to keep a sample run cheap on the free credit tier.
 
 
 def _load_dotenv() -> None:
@@ -106,6 +110,16 @@ FINANCE_JOURNALS = [
 def _is_finance_journal(container: str) -> bool:
     c = (container or "").lower()
     return any(j in c for j in FINANCE_JOURNALS)
+
+
+SSRN_URL = re.compile(r"papers\.ssrn\.com/sol3/papers\.cfm\?abstract_id=")
+SSRN_DOI = re.compile(r"10\.2139/ssrn")
+
+
+def _is_ssrn(url: str) -> bool:
+    """True if a row is a genuine SSRN working paper (abstract_id URL or SSRN DOI)."""
+    u = url or ""
+    return bool(SSRN_URL.search(u) or SSRN_DOI.search(u))
 
 
 def _clean(s: str) -> str:
@@ -259,8 +273,11 @@ SCHOLAR_FINANCE = re.compile(
 
 SCHOLAR_QUERIES = [
     "stock market anomaly forced flow index rebalancing hedging",
-    "site:papers.ssrn.com stock anomaly momentum reversal flow premium",
+    "site:papers.ssrn.com stock anomaly momentum reversal flow",
     "site:papers.ssrn.com market anomaly forced flow hedging rebalancing",
+    "site:papers.ssrn.com asset pricing anomaly cross section strategy",
+    "site:papers.ssrn.com index rebalancing passive flows price impact",
+    "site:papers.ssrn.com momentum reversal value premium factor",
 ]
 
 
@@ -329,6 +346,113 @@ def fetch_scholar_serpapi(max_results: int = 30) -> list[dict]:
                 continue
             seen.add(u)
             out.append(r)
+    return out
+
+
+# SSRN finance queries run through ZenRows against SSRN's own search UI
+# (searchresults.cfm?term=...). This reads SSRN's real results + posted dates,
+# closing the "exhaustive/up-to-date SSRN" gap that OpenAlex/SerpApi lag on.
+SSRN_ZENROWS_QUERIES = [
+    "market anomaly",
+    "momentum reversal",
+    "forced flow index rebalancing",
+    "asset pricing cross section",
+    "volatility trading flow",
+]
+
+
+def _parse_ssrn_date(s: str) -> str:
+    """Parse SSRN 'Posted: 24 Jul 2025' -> '%Y-%m-%d' (drop if unparseable)."""
+    try:
+        return datetime.strptime(s.strip(), "%d %b %Y").strftime("%Y-%m-%d")
+    except Exception:
+        return ""
+
+
+def _zenrows_get(key: str, url: str, wait_ms: int = 10000, retries: int = 2) -> str:
+    """Fetch a URL through ZenRows with JS render + premium proxy; retry on fail."""
+    for attempt in range(retries + 1):
+        try:
+            r = requests.get(
+                ZENROWS_API,
+                params={
+                    "apikey": key,
+                    "url": url,
+                    "js_render": "true",
+                    "premium_proxy": "true",
+                    "wait": str(wait_ms),
+                },
+                timeout=150,
+            )
+            if r.status_code == 200 and r.text:
+                return r.text
+        except requests.RequestException:
+            pass
+        if attempt < retries:
+            time.sleep(3 * (attempt + 1))
+    return ""
+
+
+# tight finance signal for SSRN titles read via ZenRows: SSRN term= search matches
+# by 'flow'/'return' broadly, so require a strong finance token, NOT bare 'flow'/'return'.
+# Avoid false positives: 'Liquid' (gas-liquid eng), 'invest' inside 'investigation'.
+SSRN_FINANCE = re.compile(
+    r"(stock|equit|share|quote|index|bond|option|future|derivative|fund|portfolio|asset|"
+    r"market|trading|dealer|bank|credit|spread|collateral|margin|buyback|rebalanc|"
+    r"anomal|momentum|reversal|hedg|volatil|liquidit|arbitrage|mispric|sentiment|"
+    r"capm|fama|factor|carry|premium|yield|investor|investment|investing|"
+    r"cross.?section|pric|expect)",
+    re.I,
+)
+
+
+def fetch_ssrn_zenrows(max_results: int = 100) -> list[dict]:
+    """Recent SSRN search results via ZenRows (requires ZENROW_API_KEY).
+
+    Reads SSRN's own searchresults.cfm for several finance queries, parsing title,
+    abstract_id URL, and posted dates, then filtering to the recency window.
+    ZenRows is the anti-bot route (js_render 5x + premium_proxy 10x credits).
+    """
+    key = os.environ.get("ZENROW_API_KEY")
+    if not key:
+        print("SKIP ssrn_zenrows: ZENROW_API_KEY not set (source the repo .env)")
+        return []
+    import urllib.parse as up
+    seen: set[str] = set()
+    out: list[dict] = []
+    per = max(10, min(50, max_results // len(SSRN_ZENROWS_QUERIES)))
+    for q in SSRN_ZENROWS_QUERIES:
+        url = "https://papers.ssrn.com/searchresults.cfm?term=" + up.quote(q)
+        html = _zenrows_get(key, url)
+        if not html:
+            print(f"  zenrows: no content for query '{q}'")
+            continue
+        # title ~ <a href=...abstract_id=N>Title</a>
+        for aid, title in re.findall(r'abstract_id=(\d+)[^>]*>(.*?)</a>', html, re.S):
+            tt = _clean(re.sub(r"<[^>]+>", "", title))
+            # finance-domain gate: SSRN term= search matches broadly (lava, tires,
+            # gas flow, convection) so keep only finance-relevant titles.
+            if not tt or not SSRN_FINANCE.search(tt):
+                continue
+            u = f"https://papers.ssrn.com/sol3/papers.cfm?abstract_id={aid}"
+            if u in seen:
+                continue
+            seen.add(u)
+            # posted date nearest after this result
+            date = ""
+            m = re.search(r"Posted[s]?:?\s*(\d{1,2}\s+\w+\s+\d{4})", html[html.find(aid): html.find(aid) + 900])
+            if m:
+                date = _parse_ssrn_date(m.group(1))
+            out.append(
+                {
+                    "date": date,
+                    "title": tt,
+                    "abstract": "",
+                    "url": u,
+                    "source": "ssrn(zenrows)",
+                    "journal": "SSRN",
+                }
+            )
     return out
 
 
@@ -410,7 +534,8 @@ def main() -> int:
     p.add_argument("--openalex-pages", type=int, default=1)
     p.add_argument("--crossref-rows", type=int, default=60)
     p.add_argument("--scholar-results", type=int, default=30)
-    p.add_argument("--sources", default="arxiv,openalex,crossref,scholar")
+    p.add_argument("--zenrows-results", type=int, default=100)
+    p.add_argument("--sources", default="arxiv,openalex,crossref,scholar,ssrn_zenrows")
     p.add_argument("--out", default=str(OUT / "frontier_papers.csv"))
     args = p.parse_args()
 
@@ -430,6 +555,9 @@ def main() -> int:
     if "scholar" in srcs:
         time.sleep(0.5)
         rows += fetch_scholar_serpapi(max_results=args.scholar_results)
+    if "ssrn_zenrows" in srcs:
+        time.sleep(0.5)
+        rows += fetch_ssrn_zenrows(max_results=args.zenrows_results)
 
     OUT.mkdir(parents=True, exist_ok=True)
     df = pd.DataFrame(rows)
@@ -440,10 +568,11 @@ def main() -> int:
     for k in ["score", "forced", "documented", "empirical", "method", "data_heavy", "recent", "age_days"]:
         df[k] = [m[k] for m in meta]
     df = df.sort_values("score", ascending=False)
+    df["is_ssrn"] = df["url"].astype(str).map(_is_ssrn)
     df.to_csv(args.out, index=False)
     df.to_parquet(Path(args.out).with_suffix(".parquet"))
 
-    print(f"harvested {len(df)} papers from {sorted(df['source'].unique())}; recent (<={args.days}d): {int(df['recent'].sum())}")
+    print(f"harvested {len(df)} papers from {sorted(df['source'].unique())}; recent (<={args.days}d): {int(df['recent'].sum())}; true SSRN: {int(df['is_ssrn'].sum())}")
     print(f"\n=== TOP TESTABLE CANDIDATES (empirical, non-method, non-data-heavy) ===")
     short = df[(df["empirical"]) & (~df["method"]) & (~df["data_heavy"])].head(15)
     for _, r in short.iterrows():
