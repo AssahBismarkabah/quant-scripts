@@ -22,3 +22,7 @@ A collection of quantitative trading strategies, research specs, and executable 
 Automated harvest of the recent quant-finance frontier (arXiv + Crossref + SSRN + Google Scholar) into a ranked, finance-gated, testable shortlist. See [the process doc](IA/research-frontier-mining.md); re-run via [the Makefile](research/frontier-mining/Makefile) (`make harvest`).
 
 - [Ranked papers CSV](research/frontier-mining/outputs/frontier_papers.csv) — scored/ranked candidates; each row carries a `url` link to the paper (SSRN abstracts, DOI/journal pages, arXiv).
+
+**Candidate verdicts** (latest first, tracked in [the process doc](IA/research-frontier-mining.md)):
+
+- **HK passive-flow weight-cap rebalancing** (Xu, SSRN 5703304) — **CLOSED, not viable post-friction.** Paper's own backtest: long-short Sharpe 1.10 (frictionless) -> 0.28 after HK stamp duty (0.13% x2 legs) + impact + borrow; concentrated in ~4-5 mega-caps, tiny event count.
