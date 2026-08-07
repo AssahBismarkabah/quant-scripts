@@ -2,14 +2,7 @@
 
 A collection of quantitative trading strategies, research specs, and executable scaffolds.
 
-## Project Layout
-
-- `docs/` contains the navigation index for the research material.
-- `IA/` contains the institutional approach and research specifications.
-- `src/` contains executable Python code.
-- `tests/` contains verification for the code.
-
-## Strategies
+## Tested Strategies
 
 | Strategy | Type | Status |
 |---|---|---|
@@ -23,3 +16,9 @@ A collection of quantitative trading strategies, research specs, and executable 
 ## Documentation
 
 - [Documentation Index](docs/README.md)
+
+## Research Frontier Mining
+
+Automated harvest of the recent quant-finance frontier (arXiv + Crossref + SSRN + Google Scholar) into a ranked, finance-gated, testable shortlist. See [the process doc](IA/research-frontier-mining.md); re-run via [the Makefile](research/frontier-mining/Makefile) (`make harvest`).
+
+- [Ranked papers CSV](research/frontier-mining/outputs/frontier_papers.csv) — scored/ranked candidates; each row carries a `url` link to the paper (SSRN abstracts, DOI/journal pages, arXiv).
