@@ -91,5 +91,6 @@ This probe decides, cheaply, whether the **10b5-1 adoption/cooling-off-expiry** 
 
 ## 8. Status
 
-- **2026-08-07:** Spec created as the cheapest falsifiable probe in the "build our own moat" pivot. Not yet run. No code written, no data collected beyond the existing EDGAR stack feasibility confirmation. Next action: harvest the 10b5-1 adoption 8-K event set (bounded recent window, e.g. H1 2026 to match the buyback-study window for comparability), verify bars, run the pre-registered gates, record verdict in the strategy doc.
-- Nothing underwritten or traded. This is a research probe only.
+- **2026-08-07:** Spec created as the cheapest falsifiable probe in the "build our own moat" pivot.
+- **2026-08-07 (later — probe EXECUTED and DISCONFIRMED):** Full EDGAR harvest run (2025-07-01..2026-07-31, 993 8-K filings classified with a resumable cache). Genuine issuer 10b5-1 repurchase-plan adoptions: **3 events / 2 distinct issuers** (TKO x2, SAM) vs the pre-registered ≥30 → **gate FAIL on sparsity**. Rejection reasons across the 993 confirm this is real sparsity, not a classifier bug: ~432 incidental rule citations, ~140 officer/director 10b5-1 *sales* plans, ~100 financing/underwriting docs citing 10b5-1. Issuers disclose buybacks via the broad repurchase-program authorization 8-K or the lagged quarterly tables, not dedicated real-time adoption events. **Verdict: DISCONFIRMED (sparsity), no-advance, family closed at this construction.** Full details in `strategies/10b5-1-timing/10B5-1_TIMING.md` §7.
+- Outcome per §7: the probe failed **cleanly** (specific signal missing density) with a real answer and no further spend — the falsification this spec was designed to produce. No resurfacing. Nothing traded.

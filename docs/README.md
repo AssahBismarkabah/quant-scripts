@@ -17,7 +17,7 @@
 
 ## Strategy Specs
 
-- [10b5-1 Adoption Timing / "Cooling-Off Watch"](../strategies/10b5-1-timing/10B5-1_TIMING.md) - UNDER RESEARCH / pre-registered bounded probe (2026-08-07): real-time Rule 10b5-1 repurchase-adoption signal, distinct from the broad buyback line; gates decide advance vs disconfirm
+- [10b5-1 Adoption Timing / "Cooling-Off Watch"](../strategies/10b5-1-timing/10B5-1_TIMING.md) - DISCONFIRMED (2026-08-07): real-time issuer 10b5-1 repurchase-adoption signal fails the pre-registered sparsity gate (2 distinct issuers vs >=30 in a 993-filing EDGAR harvest); intrinsically sparse, family closed
 - [Buyback Timing / "Buyback Put"](../strategies/buyback-timing/BUYBACK_TIMING.md) - Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (t 0.64, bootstrap p5<0), drop-best->zero; full multi-year sample pending
 - [Vol Targeting Flow Fade](../strategies/vol-targeting/VOL_TARGETING.md) - MEASURED-BUT-MARGINAL (2026-08-04): statistical significance on extended 1993-2026 sample (~840 events) but ~1-2 bps excess over a random long hold; no advance. Prior rejections: v2 p5 gate, v1 on verified data
 - [IVAMR](../strategies/ivamr/IVAMR.md) - not pursued (2026-08-04)

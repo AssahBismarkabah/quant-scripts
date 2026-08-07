@@ -1,0 +1,29 @@
+{
+  "n_distinct_tierA": 2,
+  "n_distinct_tierB": 2,
+  "gates": {
+    "sparse": true,
+    "A_h5": true,
+    "A_h10": true,
+    "A_h20": true,
+    "B_h5": true,
+    "B_h10": true,
+    "B_h20": false,
+    "A_control": true,
+    "B_control": false,
+    "PRIMARY": false
+  },
+  "gates_pass": false,
+  "notes": {
+    "sparse": "distinct B events=2 (min 30)",
+    "A_h5": "n=3 net_p5=-332 rel_mean=-5 rel_p5=-75",
+    "A_h10": "n=3 net_p5=-451 rel_mean=-238 rel_p5=-291",
+    "A_h20": "n=3 net_p5=-600 rel_mean=-332 rel_p5=-600",
+    "B_h5": "n=3 net_p5=-78 rel_mean=64 rel_p5=-87",
+    "B_h10": "n=3 net_p5=-297 rel_mean=-23 rel_p5=-341",
+    "B_h20": "n=3 net_p5=52 rel_mean=226 rel_p5=-114",
+    "A_control": "rel_spy_mean=-332",
+    "B_control": "rel_spy_mean=226",
+    "PRIMARY": "n=3 net_p5=52 rel_mean=226 rel_p5=-114"
+  }
+}

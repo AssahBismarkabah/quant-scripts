@@ -6,7 +6,7 @@ A collection of quantitative trading strategies, research specs, and executable 
 
 | Strategy | Type | Status |
 |---|---|---|
-| [10b5-1 Adoption Timing / "Cooling-Off Watch"](strategies/10b5-1-timing/10B5-1_TIMING.md) | Data asymmetry (real-time EDGAR 10b5-1 adoption) + forced flow | UNDER RESEARCH / pre-registered bounded probe (2026-08-07) — gates decide advance vs disconfirm |
+| [10b5-1 Adoption Timing / "Cooling-Off Watch"](strategies/10b5-1-timing/10B5-1_TIMING.md) | Data asymmetry (real-time EDGAR 10b5-1 adoption) + forced flow | DISCONFIRMED (2026-08-07): bounded probe fails sparsity gate — 3 events / 2 distinct issuers (TKO, SAM) vs required >=30 in a 993-filing harvest; intrinsic sparsity (issuers use program-authorization or lagged tables, not real-time adoption 8-Ks), family closed |
 | [Buyback Timing / "Buyback Put"](strategies/buyback-timing/BUYBACK_TIMING.md) | Structural forced-flow / data asymmetry | Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (bootstrap p5<0), drop-best->zero; full multi-year sample pending |
 | [Vol Targeting Flow Fade](strategies/vol-targeting/VOL_TARGETING.md) | Flow-Driven / Forced-Deleveraging Fade | Measured-but-marginal / no advance (2026-08-04): on extended 1993-2026 sample (~840 events) bootstrap p5 passes but effect is ~1-2 bps over market drift; v1 (1-day) and v2 (p5 gate on ~80 events) rejected earlier |
 | [IVAMR](strategies/ivamr/IVAMR.md) | Intraday Value Area Momentum & Mean Reversion | Not pursued (2026-08-04): no pre-2023 data for its own OOS protocol; behavioral edge |

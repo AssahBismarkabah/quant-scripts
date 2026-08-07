@@ -1,7 +1,7 @@
 # 10b5-1 Adoption Timing / "Cooling-Off Watch"
 
-**Version:** 0.1 (pre-registered mini-test drafted, not run)
-**Status:** UNDER RESEARCH / Pre-registered probe (2026-08-07): bounded falsifiable mini-test of the real-time Rule 10b5-1 repurchase-plan adoption signal. NOT an edge. NOT advanced. Executing the pre-registered gates in `IA/10b5-1-adoption-timing-research-spec.md` will decide advance vs disconfirm.
+**Version:** 0.2 (bounded probe complete)
+**Status:** DISCONFIRMED (2026-08-07) — bounded probe fails the pre-registered sparsity gate: only ~3 adoption events / 2 distinct issuers (TKO x2, SAM) in a full-year EDGAR "10b5-1 repurchase" 8-K search (993 filings) vs the required ≥30. GATE FAIL. The real-time issuer-10b5-1-repurchase-adoption 8-K signal is intrinsically sparse; the buyback/10b5-1 family is disconfirmed at this construction. No further spend.
 **Classification:** Data asymmetry (SEC EDGAR real-time 8-K 10b5-1 adoption) + Structural forced-flow (corporate repurchase mandate overlap)
 **Research spec:** `IA/10b5-1-adoption-timing-research-spec.md`
 **Distinct from:** `strategies/buyback-timing/BUYBACK_TIMING.md` (broad repurchase-program signal, TESTED-NOT-ADVANCED). This is a narrower, real-time/forward event.
@@ -57,11 +57,24 @@ Long only. No mid-price fills. Capacity not a gate at this scale.
 
 Free EDGAR + verified daily bars only. **No paid data, no intraday, no options, no leverage, no non-US.** Same cheap-data discipline that closed vol-fade and index-rebalancing with real answers.
 
-## 7. Next Step
+## 7. Study Result & Verdict (2026-08-07)
 
-1. Harvest the 10b5-1-adoption 8-K event set over a bounded recent window (e.g. H1 2026 to match the buyback window for comparability), dedup to distinct issuer-events, verify bars.
-2. Apply the pre-registered gates (bootstrap p5, short-horizon rel-SPY, matched-control, sparsity, entry-realism, artifact check).
-3. Record the verdict here: **ADVANCE** (scale to full multi-year + persistence/decay gate) or **DISCONFIRMED** (family closed; no spend; no resurfacing).
+**Bounded probe complete — GATE FAIL on sparsity. DISCONFIRMED.**
+
+Harvest: EDGAR full-text 8-K search for `"10b5-1" repurchase`, 2025-07-01..2026-07-31 → 993 unique filings fetched + classified with a resumable disk cache. Genuine issuer 10b5-1 repurchase-plan adoptions: **3 events / 2 distinct issuers** (TKO x2: 2025-09-15, 2026-03-10; SAM: 2025-11-12). All ticker-mapped (TKO, SAM).
+
+**Sparsity gate (`≥30` distinct events) FAILS: only 2 distinct issuers.**
+
+Why sparsity is real, not a classifier artifact — rejection reasons across the 993 candidates:
+- ~432 `rule-cited-no-adoption` — 8-Ks that merely cite Rule 10b5-1 (legal recitals, 10b5-1 *sales* plans, borrowing/convertible notes) with no issuer repurchase adoption.
+- ~140 Director/Officer/Executive-Officer — individual 10b5-1 *sales* plans (the dominant use of 10b5-1), correctly rejected: not issuer buybacks.
+- ~100 Underwriting/Issue/Offering/Conversion — financing docs citing 10b5-1, correctly rejected.
+
+Genuine issuer *buyback* 10b5-1 adoptions are rare because issuers disclose repurchases via the broad repurchase-program authorization 8-K (already tested, not-advanced, in `BUYBACK_TIMING.md`) or the lagged quarterly tables — not dedicated standalone real-time adoption events.
+
+**Study readout (Tier B, n=3 — meaningless, shown for the record):** the tiny-sample `B_h20 net_p5=+52` superficially looks positive but is pure noise (2 distinct issuers, one issuer — TKO — twice); `rel_p5=-114` (vs SPY) contradicts it. `gates_pass=false`. With n=2, no bootstrap is trustworthy — exactly why the sparsity gate is gating.
+
+**Verdict: DISCONFIRMED (sparsity), not-advanced, family closed at this construction.** The real-time issuer-10b5-1-adoption-8-K signal does not exist at tradeable density; the buyback/10b5-1 family is disconfirmed with a real, well-diagnosed answer. No further spend, no resurfacing.
 
 ## 8. Key References
 
