@@ -22,7 +22,7 @@
 - [10b5-1 Adoption Timing / "Cooling-Off Watch"](../strategies/10b5-1-timing/10B5-1_TIMING.md) - DISCONFIRMED (2026-08-07): real-time issuer 10b5-1 repurchase-adoption signal fails the pre-registered sparsity gate (2 distinct issuers vs >=30 in a 993-filing EDGAR harvest); intrinsically sparse, family closed
 - [Buyback Timing / "Buyback Put"](../strategies/buyback-timing/BUYBACK_TIMING.md) - Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (t 0.64, bootstrap p5<0), drop-best->zero; full multi-year sample pending
 - [Vol Targeting Flow Fade](../strategies/vol-targeting/VOL_TARGETING.md) - MEASURED-BUT-MARGINAL (2026-08-04): statistical significance on extended 1993-2026 sample (~840 events) but ~1-2 bps excess over a random long hold; no advance. Prior rejections: v2 p5 gate, v1 on verified data
-- [IVAMR](../strategies/ivamr/IVAMR.md) - not pursued (2026-08-04)
+- [IVAMR](../strategies/ivamr/IVAMR.md) - DISCONFIRMED (2026-08-08): all 5 pre-registered gates failed on Databento NQ 1-min
 - [SPX GEX](../strategies/spx-gex/SPX_GEX.md) - rejected Level 1, L2 declined (2026-08-04)
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)

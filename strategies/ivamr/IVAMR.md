@@ -1,7 +1,7 @@
 # IVAMR: Intraday Value Area Momentum & Mean Reversion
 
-**Version:** 1.0
-**Status:** Not pursued (2026-08-04) - declined for testing: no pre-2023 intraday data to honor the spec's own IS/OOS protocol; behavioral edge with finite half-life. Candidate closed; do not revisit without new data or evidence.
+**Version:** 1.1
+**Status:** DISCONFIRMED (2026-08-08) - pre-registered probe run on Databento NQ 1-min (2013-2023); all five gates failed. Volume-profile mechanic net-negative in IS and OOS; not deployable.
 **Classification:** Intraday Bias / Trend Following & Mean Reversion Hybrid
 
 ---
@@ -363,12 +363,41 @@ ALL must pass:
 
 ---
 
-## 10. Testing Decision (2026-08-04) - record, do not re-litigate
+## 10. Testing Results (2026-08-08) - DISCONFIRMED
 
-**This candidate was declined for testing on 2026-08-04.** The decision is recorded so it is not reopened without new evidence:
+**Verdict: DISCONFIRMED.** This candidate was initially declined on 2026-08-04 (see SS below). On 2026-08-05 the user reopened it for a proper strict-gate probe once Databento NQ 1-min data back to 2013 became available. That probe ran and all five pre-registered gates failed. The volume-profile mechanic is net-negative after costs in both IS and OOS.
 
-1. **The spec's own validation protocol is unfalsifiable in our environment.** Section 5 requires in-sample 2010-2018 and out-of-sample 2019-2023. Our intraday data source (EQUS.MINI) starts 2023-03-28, so no out-of-sample period exists and the Go/No-Go gate "OOS >= 70% of IS" cannot be tested. Testing a behavioral edge with no OOS capability is the worst possible configuration.
-2. **The edge is behavioral, not structural.** Section 8.A itself concedes: "Treat Volume Profile here as a behavioral/statistical edge with finite half-life, not as a permanent market law." The counterparties are retail traders. Per the institutional approach, structural edges (mandated flows) are preferred; behavioral edges decay and require constant monitoring.
-3. **High implementation cost for a weak prior.** A full build (volume profile engine, 4 playbooks, intra-bar stop simulation, sizing) with no pre-2023 data and no OOS test would be a large effort to prove a short-half-life edge.
+### Probe Protocol
+Pre-registered in `IA/ivamr-research-spec.md`. Instrument NQ (`GLBX.MDP3`, `NQ.n.0` continuous lead), 1-min RTH bars fetched via Databento, timestamps UTC -> ET. Rules verbatim from this document (70% Value Area; POC/VAH/VAL from prior-day RTH 1-min closes in 0.25-pt bins; 14-period 15-min ATR; Plays 1/2 breakout-retest trend with trailing stop; Plays 3/4 break-in fade with R:R pre-flight; friction 0.5).
 
-**Reopen condition:** new intraday data covering a genuine out-of-sample period (pre-2023), or an independent, peer-reviewed demonstration that the volume-profile mechanic survives costs out of sample. Until then, this document remains a blueprint only, not an approved strategy.
+**Data split:** IS 2014-01-01 -> 2018-12-31; OOS 2019-01-01 -> 2023-12-31 (spec's 2010 IS start unavailable; data starts 2013-11-01).
+
+### Results
+| Metric | IS (2014-2018) | OOS (2019-2023) |
+|---|---|---|
+| Trades | 517 | 576 |
+| Win rate | 49.9% | 47.9% |
+| Profit factor | 0.80 | 0.78 |
+| Net PnL (ticks*100) | -1,096.89 | -3,695.53 |
+| Kill-switch days (>=3% DD) | 51.85% | - |
+
+**All 5 gates failed.** Gate 1 (net>0): fail both. Gate 2 (bootstrap p5): fail (OOS p5 -11.37). Gate 3 (wr & PF): fail (OOS wr 0.479<0.5, PF 0.78<1.0; MR win rate 0.395<0.55). Gate 4 (kill-switch/drawdown): fail (frac kill-switch days 0.5185>=0.30; gross -3,407.53<=0). Gate 6 (look-ahead): **PASS** (no look-ahead). Blueprint Go/No-Go gates also fail: PF 0.78 < 1.3; avg trade ~0.09% equity < 0.2%; MR win rate 39.5% < 55%.
+
+### Play Breakdown (OOS)
+- **Play 1 (long breakout):** 303 trades, 48.5% wr, net -3,284.13 (largest OOS loss).
+- **Play 2 (short breakout):** 230 trades, 48.7% wr, net -270.05.
+- **Play 3 (long fade):** 43 trades, 39.5% wr, net -141.35.
+- **Play 4 (short fade):** effectively never fires - the R:R pre-flight for short fades to VAH is extremely restrictive (0 trades).
+
+### Interpretation
+The trades are sane and faithful to the engine (real NQ prices, correct timing, distinct entry/exit paths: stop/trail/time). The strategy is structurally net-negative in both IS and OOS. The win rate (~48-50%) is far below the blueprint's claimed 55%/40% math, and profit factor ~0.78-0.80 shows the reward:risk does not overcome losses. The volume-profile mechanic does not produce an edge after costs on NQ.
+
+**Per the standing policy, this candidate is closed. Do not re-open without new evidence (new data, a materially different variant, or an independent demonstration that the mechanic survives costs).** Engine and probe retained under `src/quant_scripts/ivamr/` and `research/ivamr/`.
+
+---
+### Prior record: Testing Decision (2026-08-04) - declined, do not re-litigate
+1. **The spec's own validation protocol was unfalsifiable in our environment.** Section 5 requires in-sample 2010-2018 and out-of-sample 2019-2023. The original data source (EQUS.MINI) started 2023-03-28, so no OOS period existed and the Go/No-Go gate could not be tested.
+2. **The edge is behavioral, not structural.** Section 8.A concedes: "Treat Volume Profile here as a behavioral/statistical edge with finite half-life, not as a permanent market law."
+3. **High implementation cost for a weak prior** at the time.
+
+**Reopen was triggered by** new intraday data (Databento, back to 2013) enabling a genuine pre-2023 OOS period.

@@ -1,0 +1,101 @@
+{
+  "instrument": "NQ.n.0",
+  "is_window": [
+    "2014-01-01",
+    "2018-12-31"
+  ],
+  "oos_window": [
+    "2019-01-01",
+    "2023-12-31"
+  ],
+  "friction_base_pts": 0.5,
+  "is": {
+    "n_trades": 517,
+    "win_rate": 0.499,
+    "profit_factor": 0.802,
+    "gross_pts": -838.39,
+    "net_pts": -1096.89,
+    "max_dd_pts": -1279.34,
+    "avg_trades_per_day": 1.042,
+    "frac_days_killswitch": 0.4758,
+    "win_rate_trend": 0.5021,
+    "win_rate_mr": 0.4571,
+    "tf_win_rate": 0.5021,
+    "mr_win_rate": 0.4571,
+    "avg_equity_pct": 0.031184,
+    "worst_loss_pts": -95.83
+  },
+  "oos": {
+    "n_trades": 576,
+    "win_rate": 0.4792,
+    "profit_factor": 0.7839,
+    "gross_pts": -3407.53,
+    "net_pts": -3695.53,
+    "max_dd_pts": -3759.55,
+    "avg_trades_per_day": 1.063,
+    "frac_days_killswitch": 0.5185,
+    "win_rate_trend": 0.4859,
+    "win_rate_mr": 0.3953,
+    "tf_win_rate": 0.4859,
+    "mr_win_rate": 0.3953,
+    "avg_equity_pct": 0.000949,
+    "worst_loss_pts": -243.42
+  },
+  "gates": {
+    "gate1_oos_net_positive": {
+      "gate1_oos_net_positive": false,
+      "note": "OOS net_pts=-3695.53"
+    },
+    "gate2_oos_bootstrap_p5": {
+      "gate2_oos_bootstrap_p5": -11.371457564575644,
+      "gate2": false,
+      "note": "OOS per-day bootstrap p5=-11.37"
+    },
+    "gate3_oos_winrate_pf": {
+      "gate3_oos_winrate_pf": false,
+      "gate3": false,
+      "note": "OOS win_rate=0.4792 (min 0.5), PF=0.7839 (min 1.0), TF wr=0.4859 (min 0.4), MR wr=0.3953 (min 0.55)"
+    },
+    "gate4_tail_fragility": {
+      "gate4_tail_fragility": false,
+      "gate4": false,
+      "note": "frac_days_killswitch=0.5185 (limit 0.3), gross_pts=-3407.53 (must be > 0)"
+    },
+    "gate5_is_reproduction": {
+      "gate5_is_net_positive": false,
+      "gate5": false,
+      "note": "IS net_pts=-1096.89 (must be > 0)"
+    },
+    "gate6_lookahead": {
+      "gate6": true,
+      "note": "structural: prev-day profile/ATR, entry at next-bar open, intra-bar stops"
+    }
+  },
+  "blueprint_go_no_go": {
+    "pf_ge_1.3": {
+      "oos_pf": 0.7839,
+      "ok": false
+    },
+    "avg_trade_ge_0.2pct_equity": {
+      "oos_avg_equity_pct": 0.000949,
+      "ok": false
+    },
+    "max_dd_le_15pct": {
+      "oos_max_dd_pts": -3759.55,
+      "need_notional": true
+    },
+    "tf_winrate_ge_40": {
+      "oos_tf": 0.4859,
+      "ok": true
+    },
+    "mr_winrate_ge_55": {
+      "oos_mr": 0.3953,
+      "ok": false
+    },
+    "oos_ge_70pct_of_is": {
+      "is_net": -1096.89,
+      "oos_net": -3695.53
+    }
+  },
+  "verdict": "DISCONFIRMED"
+}
