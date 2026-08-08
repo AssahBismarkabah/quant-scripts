@@ -109,3 +109,22 @@ This probe decides whether the **intraday VWAP-anchored pullback** family — th
 ## 9. Status
 
 - **2026-08-08:** Spec created. Data confirmed owned (Databento intraday futures client + key already in repo `.env`; intraday OHLCV infra reused from the spx_gex/index_rebalancing stack). Rules and gates locked per §2 and §5. Next step: scaffold the probe in `research/nq-vwap-pullback/` + `src/quant_scripts/nq_vwap_pullback/`, fetch NQ 1-min, verify IS reproduction (gate 5), then run OOS (gates 1–4, 6).
+- **2026-08-08:** Probe executed. **DISCONFIRMED.** Results in §10.
+
+## 10. Results (2026-08-08)
+
+Ran the frozen rules over Databento NQ 1-min (2020-08-01..2026-08-06, 597,028 bars, 30-day resumable chunk fetch), cached to `research/nq-vwap-pullback/cache/`, outputs in `research/nq-vwap-pullback/outputs/`.
+
+**IS (2020-08-01..2024-12-31):** 2,708 trades, win rate **60.6%**, avg win +40.79 / avg loss −63.60, PF **0.98**, net **−2,383.5** pts (gross −1,030).
+**OOS (2025-01-01..2026-08-07):** 1,152 trades, win rate **61.6%**, avg win +41.74 / avg loss −70.42, PF **0.95**, net **−2,180.75** pts (gross −1,605).
+
+| Gate | Result | Outcome |
+|---|---|---|
+| 1. OOS net edge > 0 | net −2,181 | FAIL |
+| 2. OOS bootstrap p5 > 0 | p5 −13.45 | FAIL |
+| 3. OOS win-rate ≥55% & PF ≥1.0 | 61.6% / PF 0.95 | FAIL (PF) |
+| 4. Tail fragility (2-loss cap ≥30%, 4-trades ≥30%) | 32.5% / 36% | FAIL (cap) |
+| 5. IS reproduction (win ≈64% & net>0) | 60.6% / net −2,383 | FAIL (net) |
+| 6. Look-ahead | structural cap (1-min VWAP, next-bar-open entry) | PASS |
+
+**Interpretation:** the ~61% win rate reproduces the claimed high-win-rate character (the claim's headline figure is real), but the reward:risk economics do not: at +40/−65 with a 2:1 target/stop structure, the breakeven win rate is ~62%, and both IS and OOS are net-negative even **in gross** terms (before the 0.5-pt friction). The claimed +866/−1300 per-trade economics and the 2021→2026 "300%+" outcome are not reproduced on live NQ OHLCV under the frozen rules. The strategy is a clean disconfirmation and is not deployable as advertised.

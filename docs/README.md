@@ -18,7 +18,7 @@
 
 ## Strategy Specs
 
-- [NQ VWAP-Pullback / "Drift VWOP Pullback"](../strategies/nq-vwap-pullback/NQ_VWAP_PULLBACK.md) - UNDER RESEARCH (2026-08-08): pre-registered bounded probe, rules frozen, data owned (Databento NQ intraday); OOS 2025+ gates decide advance vs disconfirm
+- [NQ VWAP-Pullback / "Drift VWOP Pullback"](../strategies/nq-vwap-pullback/NQ_VWAP_PULLBACK.md) - DISCONFIRMED (2026-08-08): pre-registered probe on Databento NQ; ~61% win rate reproduces but net-negative IS and OOS (all 5 gates failed)
 - [10b5-1 Adoption Timing / "Cooling-Off Watch"](../strategies/10b5-1-timing/10B5-1_TIMING.md) - DISCONFIRMED (2026-08-07): real-time issuer 10b5-1 repurchase-adoption signal fails the pre-registered sparsity gate (2 distinct issuers vs >=30 in a 993-filing EDGAR harvest); intrinsically sparse, family closed
 - [Buyback Timing / "Buyback Put"](../strategies/buyback-timing/BUYBACK_TIMING.md) - Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (t 0.64, bootstrap p5<0), drop-best->zero; full multi-year sample pending
 - [Vol Targeting Flow Fade](../strategies/vol-targeting/VOL_TARGETING.md) - MEASURED-BUT-MARGINAL (2026-08-04): statistical significance on extended 1993-2026 sample (~840 events) but ~1-2 bps excess over a random long hold; no advance. Prior rejections: v2 p5 gate, v1 on verified data

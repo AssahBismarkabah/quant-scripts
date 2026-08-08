@@ -1,7 +1,7 @@
 # NQ VWAP-Pullback ("Drift VWOP Pullback" / Prop-Firm Golden Ticket)
 
-**Version:** 0.1 (pre-registered probe — not yet run)
-**Status:** UNDER RESEARCH — pre-registered bounded probe (2026-08-08); rules locked, data owned (Databento NQ intraday); gates decide advance vs disconfirm on an explicit out-of-sample window.
+**Version:** 0.2 (probe run → DISCONFIRMED)
+**Status:** DISCONFIRMED — pre-registered probe executed 2026-08-08 on Databento NQ intraday; all five gates failed. The ~61% win rate reproduces, but the negative reward:risk is net-negative in both IS and OOS, even before friction.
 **Classification:** Execution microstructure — VWAP-anchored-at-open intraday pullback mean reversion in NQ futures, claimed to expose institutional execution-algorithm flow
 **Research spec:** `IA/nq-vwap-pullback-research-spec.md`
 **Source:** public interview strategy (M. Kanti, ex-market-maker / quant CIO, SQR Capital) marketed as a "prop firm golden ticket" for passing funded challenges. Rules below are extracted verbatim and frozen unchanged.
@@ -56,11 +56,31 @@ The edge (if real) is institutional execution-algorithm flow: when price pulls t
 ## 7. Status / Log
 
 - **2026-08-08:** Spec + strategy doc created; rules locked; data confirmed owned (Databento NQ intraday, key+client in repo); intraday infra reused from the spx_gex/index_rebalancing stack. Probe not yet run.
+- **2026-08-08:** Fetched NQ 1-min (Databento `GLBX.MDP3`, 2020-08-01..2026-08-06; 597,028 1-min bars in 30-day resumable chunks). Ran the frozen rules on IS (2,708 trades) and OOS (1,152 trades). **DISCONFIRMED — see §9.**
 
-## 8. Next Steps
+## 8. Probe Results (2026-08-08)
 
-1. Scaffold `research/nq-vwap-pullback/` (`Makefile`, fetch/resample/run scripts) + `src/quant_scripts/nq_vwap_pullback/` (bars, vwap, event/backtest engine).
-2. Fetch NQ 1-min (Databento `GLBX.MDP3`), cache to `research/nq-vwap-pullback/cache/`.
-3. Gate 5 first: in-sample (2020–2024) reproduction of the claimed ~64% win rate with frozen rules.
-4. Run OOS (2025-01-01 → 2026-08-07) through gates 1–4, 6; write readout to `outputs/`.
-5. Record advance vs disconfirm in both this doc and the spec.
+Regime/backtest is mechanically correct (VWAP anchored on 1-min base, entry at next-bar open, no look-ahead). The signal actively trades nightly (avg ~2.4–2.9 trades/day) with a **persistent ~61% win rate** — reproducing the core claim. The edge claim fails on economics:
+
+| Metric | IS 2020–2024 | OOS 2025–2026 | Claimed |
+|---|---|---|---|
+| Trades | 2,708 | 1,152 | ~4,000+ |
+| Win rate | 60.6% | 61.6% | ~64% (reproduces ✓) |
+| Avg win | +40.8 | +41.7 | +866 |
+| Avg loss | −63.6 | −70.4 | −1300 |
+| Profit factor | 0.98 | 0.95 | — |
+| Net pts | −2,383 | −2,181 | 300%+ (✗) |
+| Gross pts | −1,030 | −1,605 | — |
+
+**Verdict: DISCONFIRMED.** All five pre-registered gates failed:
+- Gate 1 (OOS net>0): FAIL (net −2,181).
+- Gate 2 (OOS per-day bootstrap p5>0): FAIL (p5 −13.45).
+- Gate 3 (OOS win-rate ≥0.55 AND PF ≥1.0): FAIL (PF 0.95).
+- Gate 4 (tail fragility): FAIL (32.5% of active days hit the 2-loss cap, above the 30% limit).
+- Gate 5 (IS reproduction of net-positivity): FAIL (net −2,383 even in-sample).
+
+Crucially, the strategy is **net-negative even in gross terms** on both windows. At ~61% win rate with ~+40/−65 reward:risk, the breakeven win rate (~62%) for that ratio is essentially hit but margin is consumed by the 2:1 target/stop structure and friction; the claimed ~64%+ and +866/−1300 per-trade economics do not reproduce. The 2021→2026 "300%+" figure is not supported by live NQ OHLCV under the frozen rules.
+
+## 9. Conclusion & Next Steps
+
+The claim is a clean, decisive disconfirmation: the high-win-rate framing is real but the reward:risk economics do not produce an edge after costs on owned NQ data — in-sample or out. Nothing further warrants deployment. The strategy doc, spec, README, and docs/README should be updated to DISCONFIRMED and the stage list handed off for commit/push.

@@ -1,0 +1,72 @@
+{
+  "instrument": "NQ.n.0",
+  "is_window": [
+    "2020-08-01",
+    "2024-12-31"
+  ],
+  "oos_window": [
+    "2025-01-01",
+    "2026-08-07"
+  ],
+  "friction_base_pts": 0.5,
+  "is": {
+    "n_trades": 2708,
+    "win_rate": 0.6056,
+    "avg_win": 40.79,
+    "avg_loss": -63.6,
+    "profit_factor": 0.9848,
+    "gross_pts": -1029.5,
+    "net_pts": -2383.5,
+    "max_dd_pts": -3089.0,
+    "avg_trades_per_day": 2.437,
+    "frac_days_2loss": 0.2259,
+    "frac_days_4trades": 0.189,
+    "worst_loss_pts": -80.0
+  },
+  "oos": {
+    "n_trades": 1152,
+    "win_rate": 0.6155,
+    "avg_win": 41.74,
+    "avg_loss": -70.42,
+    "profit_factor": 0.9486,
+    "gross_pts": -1604.75,
+    "net_pts": -2180.75,
+    "max_dd_pts": -4160.5,
+    "avg_trades_per_day": 2.88,
+    "frac_days_2loss": 0.325,
+    "frac_days_4trades": 0.36,
+    "worst_loss_pts": -80.0
+  },
+  "gates": {
+    "gate1_oos_net_positive": {
+      "gate1_oos_net_positive": false,
+      "note": "OOS net_pts=-2180.75"
+    },
+    "gate2_oos_bootstrap_p5": {
+      "gate2_oos_bootstrap_p5": -13.45028125,
+      "gate2": false,
+      "note": "OOS per-day bootstrap p5=-13.45"
+    },
+    "gate3_oos_winrate_pf": {
+      "gate3_oos_winrate": 0.6155,
+      "gate3_oos_pf": 0.9486,
+      "gate3": false,
+      "note": "OOS win_rate=0.6155 (min 0.55), PF=0.9486 (min 1.0)"
+    },
+    "gate4_tail_fragility": {
+      "gate4": false,
+      "note": "frac_days_2loss=0.325 (limit 0.3), frac_days_4trades=0.36 (need >= 0.3)"
+    },
+    "gate5_is_reproduction": {
+      "gate5_is_winrate_reproduced": true,
+      "gate5_is_net_positive": false,
+      "gate5": false,
+      "note": "IS win_rate=0.6056, net_pts=-2383.5 (expect ~0.64 and >0)"
+    },
+    "gate6_lookahead": {
+      "gate6": true,
+      "note": "structural: VWAP anchored on 1m base, entry at next-bar open, no future leak"
+    }
+  },
+  "verdict": "DISCONFIRMED"
+}
