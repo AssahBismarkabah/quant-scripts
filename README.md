@@ -15,6 +15,12 @@ A collection of quantitative trading strategies, research specs, and executable 
 | [Funding Basis](strategies/funding-basis/FUNDING_BASIS.md) | Relative Value / Funding Carry | Rejected Under Current Assumptions |
 | [Index Rebalancing](strategies/index-rebalancing/INDEX_REBALANCING.md) | Event-Driven Mean Reversion | Rejected Level 1-2, then CLOSED (2026-08-04): S&P 600 short-additions is a single March-2025 batch; year-breakdown shows 2024 n/s, 2025 +1542 bps, 2026 -786 bps - not persistent |
 
+## Candidates in Review
+
+| Strategy | Type | Status |
+|---|---|---|
+| [Short Vol / VRP](strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) | Options / Variance Risk Premium (short-vol premium capture) | Candidate spec only (2026-08-08): NO probe approved; unconditional VRP testable with owned VIX+SPY data, but premium well-documented as decayed (Dew-Becker 2025); conditional FOMC/earnings options version needs paid IV data |
+
 ## Documentation
 
 - [Documentation Index](docs/README.md)
