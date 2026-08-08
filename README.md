@@ -5,7 +5,8 @@ A collection of quantitative trading strategies, research specs, and executable 
 ## Tested Strategies
 
 | Strategy | Type | Status |
-|---|---|---|
+|---|---|--|
+| [NQ VWAP-Pullback / "Drift VWOP Pullback"](strategies/nq-vwap-pullback/NQ_VWAP_PULLBACK.md) | Execution microstructure (VWAP-anchored-at-open intraday pullback) | UNDER RESEARCH (2026-08-08): pre-registered bounded probe, rules frozen, data owned (Databento NQ intraday); gates decide advance vs disconfirm on OOS 2025+ |
 | [10b5-1 Adoption Timing / "Cooling-Off Watch"](strategies/10b5-1-timing/10B5-1_TIMING.md) | Data asymmetry (real-time EDGAR 10b5-1 adoption) + forced flow | DISCONFIRMED (2026-08-07): bounded probe fails sparsity gate — 3 events / 2 distinct issuers (TKO, SAM) vs required >=30 in a 993-filing harvest; intrinsic sparsity (issuers use program-authorization or lagged tables, not real-time adoption 8-Ks), family closed |
 | [Buyback Timing / "Buyback Put"](strategies/buyback-timing/BUYBACK_TIMING.md) | Structural forced-flow / data asymmetry | Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (bootstrap p5<0), drop-best->zero; full multi-year sample pending |
 | [Vol Targeting Flow Fade](strategies/vol-targeting/VOL_TARGETING.md) | Flow-Driven / Forced-Deleveraging Fade | Measured-but-marginal / no advance (2026-08-04): on extended 1993-2026 sample (~840 events) bootstrap p5 passes but effect is ~1-2 bps over market drift; v1 (1-day) and v2 (p5 gate on ~80 events) rejected earlier |

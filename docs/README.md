@@ -13,10 +13,12 @@
 - [Research Pipeline Review](../IA/research-pipeline-review.md)
 - [2025-2026 Structural Edge Survey](../IA/structural-edge-survey-2025-2026.md)
 - [Buyback Timing Research Spec](../IA/buyback-timing-research-spec.md)
+- [NQ VWAP-Pullback Research Spec](../IA/nq-vwap-pullback-research-spec.md)
 - [10b5-1 Adoption Timing Research Spec](../IA/10b5-1-adoption-timing-research-spec.md)
 
 ## Strategy Specs
 
+- [NQ VWAP-Pullback / "Drift VWOP Pullback"](../strategies/nq-vwap-pullback/NQ_VWAP_PULLBACK.md) - UNDER RESEARCH (2026-08-08): pre-registered bounded probe, rules frozen, data owned (Databento NQ intraday); OOS 2025+ gates decide advance vs disconfirm
 - [10b5-1 Adoption Timing / "Cooling-Off Watch"](../strategies/10b5-1-timing/10B5-1_TIMING.md) - DISCONFIRMED (2026-08-07): real-time issuer 10b5-1 repurchase-adoption signal fails the pre-registered sparsity gate (2 distinct issuers vs >=30 in a 993-filing EDGAR harvest); intrinsically sparse, family closed
 - [Buyback Timing / "Buyback Put"](../strategies/buyback-timing/BUYBACK_TIMING.md) - Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (t 0.64, bootstrap p5<0), drop-best->zero; full multi-year sample pending
 - [Vol Targeting Flow Fade](../strategies/vol-targeting/VOL_TARGETING.md) - MEASURED-BUT-MARGINAL (2026-08-04): statistical significance on extended 1993-2026 sample (~840 events) but ~1-2 bps excess over a random long hold; no advance. Prior rejections: v2 p5 gate, v1 on verified data
