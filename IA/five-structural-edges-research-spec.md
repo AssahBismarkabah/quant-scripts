@@ -1,6 +1,6 @@
 # "Five Structural Edges" — Research & Extraction Spec
 
-**Status:** Extraction / prioritization — REVIEW (2026-08-09)
+**Status:** 3 of 5 resolved (PEAD + ORB + VRP closed); 2 candidates remain (Congressional, Bitcoin MVRV) — awaiting reviewer scope + data (2026-08-09)
 **Source:** trading-education transcript (`transcribe.txt`, 14KB) claiming five "structural edges" — repetitive, predictable behaviors "drastically documented by institutional-level academic research" and "persistent over the last decade." Same speaker lineage as the earlier VWAP-pullback / IVAMR / opening-range-gap sources (Robins Cup / CME equity cup / trading-floor workshop). Purpose: capture what the transcript claims, separate already-tested/closed claims from new ones, and record the free-data reality for the actionable candidates — for compact review before any backtest.
 
 ---
@@ -9,13 +9,13 @@
 
 | # | Edge (name) | Mechanism claimed | Previously tested? |
 |---|---|---|---|
-| 1 | **Earnings Surprise Drift (PEAD)** | Positive (negative) earnings surprises drift up (down) for up to ~60 days after the announcement; SUE-standardized; "4% spread over 60 days in a single stock." Cites Ball-Brown 1968, Bernard-Thomas 1989, recent ML PEAD paper. | **NO — new candidate** |
+| 1 | **Earnings Surprise Drift (PEAD)** | Positive (negative) earnings surprises drift up (down) for up to ~60 days after the announcement; SUE-standardized; "4% spread over 60 days in a single stock." Cites Ball-Brown 1968, Bernard-Thomas 1989, recent ML PEAD paper. | **YES — DISCONFIRMED (2026-08-09)** on Kaggle US panel: drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94). See `IA/pead-research-spec.md` §7, `strategies/pead/PEAD.md`. |
 | 2 | **Initial Balance / Opening Range Breakout ("IVB")** | First 30-min range; breakout of it predicts rest of session; claims "13.5% upside skew; a 1:1 RR blind skew." Cites Toby Crabel, Barbon/Zarattini opening-range papers. | **YES — DISCONFIRMED as ORB** on NQ (opening-range-gap trio, 2026-08-09). Same family. **Do not re-run.** |
-| 3 | **Congressional / politician trading** | Copy the most active powerful committee members; Stock Act 2012 (45-day disclosure). Claims Pelosi family "outperforms nearly every hedge fund." Cites 2011 US House abnormal-return paper, 2025 "Talking Stocks of Democracies." | **NO — new candidate** (weak prior) |
+| 3 | **Congressional / politician trading** | Copy the most active powerful committee members; Stock Act 2012 (45-day disclosure). Claims Pelosi family "outperforms nearly every hedge fund." Cites 2011 US House abnormal-return paper, 2025 "Talking Stocks of Democracies." | **NO — REMAINS NEW** (weak prior; free Quiver data confirmed) |
 | 4 | **Option premium harvesting / VRP** | Systematic selling of OTM options to capture the volatility risk premium (IV > RV structurally). Cites Carr-Wu 2009, "Why are put options so expensive?" | **YES — CLOSED as short-vol/VRP** (V1/V2/V3, 2026-08-08; V2 naive harvest is ruin +452%/−95% DD/−83% single day, V3 overlay kills edge). Same family, same Carr-Wu paper. **Do not re-run.** |
-| 5 | **Bitcoin smart DCA / MVRV Z-score** | Use market-value-to-realized-value Z-score to dynamically size Bitcoin accumulation; buy capitulation, trim euphoria; vs buy-and-hold. Cites Grosjean/Nasman 2026 on-chain cycle papers. | **NO — new candidate** (different asset class) |
+| 5 | **Bitcoin smart DCA / MVRV Z-score** | Use market-value-to-realized-value Z-score to dynamically size Bitcoin accumulation; buy capitulation, trim euphoria; vs buy-and-hold. Cites Grosjean/Nasman 2026 on-chain cycle papers. | **NO — REMAINS NEW** (different asset class; free on-chain data) |
 
-**Bottom line:** 2 of 5 (ORB, VRP) are already-tested and closed in this repo. The three genuinely-new candidates are **PEAD**, **Congressional**, and **Bitcoin MVRV**.
+**Bottom line:** 3 of 5 resolved and closed in this repo (PEAD, ORB, VRP — all DISCONFIRMED/failed under pre-registered tests). **Congressional (#3)** and **Bitcoin MVRV (#5)** remain untested candidates.
 
 ---
 
@@ -51,26 +51,23 @@ The binding constraint is **point-in-time analyst consensus EPS**. Ranked source
 
 ---
 
-## 4. What we propose to test (recommended) — for review
+## 4. What we propose to test — current state
 
-Of the three new candidates, PEAD is the strongest academically-documented but has a **decision-cost on data** (consensus EPS). Congressional has clean free data but the weakest prior + 45-day lag. MVRV is a different-asset-class relative-timing claim.
+Of the five claims, **three are resolved** (PEAD, ORB, VRP — all DISCONFIRMED/closed). **Two remain untested**, both with confirmed free data sources, both with weaker priors than PEAD had:
 
-Recommendation (pick scope):
-1. **PEAD on owned/free data** — highest intrinsic merit;必须先 resolve whether to acquire consensus-EPS history (paid/free scrape) or accept a SUE proxy. Needs a data decision before pre-registration.
-2. **Congressional copy-trade** — cleanest free dataset (Quiver), but weak prior; model with **filed-date entry** and a multi-politician basket to avoid Pelosi cherry-picking.
-3. **Bitcoin MVRV smart DCA** — different asset class; free data; relative-timing claim (DD reduction), new scaffold.
-4. **Skip (already closed):** ORB #2, VRP #4.
+1. **Congressional copy-trade** — cleanest free dataset (Quiver congress-trades), but weak prior + 45-day lag; model with **filed-date entry** and a multi-politician basket to avoid Pelosi cherry-picking.
+2. **Bitcoin MVRV smart DCA** — different asset class; free realized-cap data; relative-timing claim (DD reduction vs buy-and-hold), not a clean alpha trade.
 
-House discipline for each, once a candidate is chosen and data secured: **pre-registered rules + IS/OOS + friction + bootstrap p5 + look-ahead audit**, DISCONFIRMED on any gate fail — same protocol as VWAP-pullback / IVAMR / opening-range-gap.
+House discipline for each, once chosen and data secured: **pre-registered rules + IS/OOS + friction + bootstrap p5 + look-ahead audit**, DISCONFIRMED on any gate fail — same protocol as PEAD/VWAP-pullback / IVAMR / opening-range-gap.
 
 ---
 
 ## 5. Decision for the reviewer
 
-Pick the test scope and, for PEAD, the data route:
-1. **PEAD** — (a) try to source historical analyst consensus free/cheap, or (b) proceed with a SUE proxy (actual vs prior-year, or event-window signed return as surprise proxy).
-2. **Congressional** — proceed with Quiver free data, filed-date entries, multi-member basket.
-3. **Bitcoin MVRV** — proceed with Blockchain.com/Coin Metrics free realized-cap data.
-4. Defer all — extraction-only documentation for now.
+Remaining open candidates to pick from:
+1. **Congressional** — proceed with Quiver free data, filed-date entries, multi-member basket.
+2. **Bitcoin MVRV** — proceed with Blockchain.com/Coin Metrics free realized-cap data.
+3. **Defer both** — extraction-only for now; register and close the umbrella.
 
-No backtest runs until scope + data are resolved and gates pre-registered. This doc is the compact review artifact.
+No backtest runs on a candidate until scope + data are resolved and gates pre-registered.
+
