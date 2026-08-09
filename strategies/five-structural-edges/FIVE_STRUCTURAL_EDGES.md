@@ -28,13 +28,13 @@ Two claims (ORB, VRP) duplicate families already falsified in this repo and are 
 
 ## 3. Data reality (confirmed via Tavily, 2026-08-09)
 
-- **PEAD:** prices owned; earnings dates free (Investing.com/SEC 8-K); **historical analyst consensus EPS not free** (FactSet/Capital IQ paid) → the binding constraint. Options: acquire consensus (paid), or use a SUE proxy (actual vs prior-year / event-window surprise proxy).
+- **PEAD:** prices owned; earnings dates free (Investing.com/SEC 8-K); **historical analyst consensus EPS not cleanly free** (IBES/FactSet/Capital IQ paid) → the binding constraint. Refined route (2026-08-09): **free Kaggle "US Historical Stock Prices With Earnings Data" + FMP** for estimate+actual; standardize historically; **explicitly qualify as analyst-expectation-based surprise, NOT IBES SUE**. Decisive gate: the estimate must be contemporaneous point-in-time BEFORE the announcement (else look-ahead). SEC EDGAR validates the actual-EPS leg.
 - **Congressional:** free Quiver Quantitative congress-trades (2016+, ticker/buy-sell/amount/traded date) + InsiderFinance tracker. **Entry must use the filed/reported date** (45-day lag), not the traded date, or the test is look-ahead (gate 6).
 - **Bitcoin MVRV:** free Blockchain.com MVRV/realized-value charts + Coin Metrics realized-cap history (2013+).
 
 ## 4. Status / Log
 
-- **2026-08-09:** New transcript extracted into this register + IA spec. Tavily confirmed free-data routes for congressional (Quiver) and MVRV (Blockchain.com/Coin Metrics); confirmed PEAD's analyst-consensus gap. ORB/VRP flagged as already-closed. Awaiting reviewer scope + PEAD data decision before any probe.
+- **2026-08-09:** New transcript extracted into this register + IA spec. Tavily confirmed free-data routes for congressional (Quiver) and MVRV (Blockchain.com/Coin Metrics); confirmed PEAD's analyst-consensus gap. **PEAD data route refined:** free Kaggle+FMP for analyst-expectation-based surprise, standardized historically, qualified as not-IBES-SUE, with a point-in-time-before-announcement consensus gate (avoids look-ahead). ORB/VRP flagged as already-closed. Awaiting reviewer scope before any probe.
 
 ## 5. Next steps
 

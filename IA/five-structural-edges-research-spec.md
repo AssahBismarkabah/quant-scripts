@@ -35,6 +35,20 @@
 | **Congressional** | Transaction-level congress trades with traded + filed/reported dates | **YES — Quiver Quantitative congress-trades** (2016+, ticker/buy-sell/amount/traded date), free visitor export / API ($30/mo). InsiderFinance tracker also free. | Good. Critical modeling rule: entry uses the **filed/reported date** (45-day lag), NOT the traded date — else look-ahead. |
 | **Bitcoin MVRV** | BTC price + realized cap → MVRV Z-score | **YES — Blockchain.com chart (MVRV/RV series), Coin Metrics** historical realized-cap/MVRV. | Good, free. Longer history 2013+ feasible. |
 
+### PEAD data route — refined (2026-08-09, cross-checked with data research)
+
+The binding constraint is **point-in-time analyst consensus EPS**. Ranked sources (best→worst for this repo):
+
+| Source | History | Consensus | Free? | Suitability |
+|---|---|---|---|---|
+| IBES / WRDS | 1975+ | Excellent | No (institutional) | Gold standard, not open |
+| Estimize | 2010+ | Excellent | Institutional access only | Very good but not open |
+| **FMP** (Financial Modeling Prep) | long | Yes | **Limited free tier** (surprise/consensus behind premium) | Good — worth testing account limits |
+| **Kaggle "US Historical Stock Prices With Earnings Data"** | ~20 yrs | estimate+actual | **YES** | Promising — needs validation |
+| SEC EDGAR (XBRL) | 1994+ | No consensus | **YES** | Great for **actual** EPS leg only |
+
+**Agreed approach (matches house discipline):** build an **analyst-expectation-based earnings surprise** from the free **Kaggle + FMP** combo (NOT IBES SUE), **standardize historically** to a SUE-like measure, and **explicitly qualify** the result as "analyst-expectation-based surprise from public estimates, not IBES SUE." The decisive methodological gate (mirrors gate-6 look-ahead): **the estimate must be the contemporaneous consensus available BEFORE the announcement date** — a retrospectively-recorded estimate is unusable. SEC EDGAR supplies the actual-EPS leg for validation.
+
 ---
 
 ## 4. What we propose to test (recommended) — for review
