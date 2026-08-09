@@ -1,7 +1,7 @@
 # Short Volatility / Variance Risk Premium (VRP)
 
-**Version:** 1.0
-**Status:** Candidate — exploratory spec only, NO probe approved yet (2026-08-08). Pre-registered probe + strict gates pending user decision. See `IA/vol-risk-premium-research-spec.md`.
+**Version:** 1.1
+**Status:** MEASURED-POSITIVE-LEVEL, NOT ADVANCED (2026-08-08) - V1 probe confirmed the average implied-vs-realized (VRP) premium is positive and persistent (+3.3 to +4.1 vol pts across 1990s-2020s) but this only validates the premium *level*, not a harvestable edge. Capturing it requires selling vol/options with real costs + a steep fat tail (V2 question). NOT approved to trade. Full spec: `IA/vol-risk-premium-research-spec.md`.
 **Classification:** Options / Variance Risk Premium (short-vol, premium capture / carry)
 **Source claim:** practitioner interview (Andrea) — "short options premium / profiting from the fear of billionaires," specifically selling implied volatility when it is overpriced, with FOMC and earnings "short the IV spike" setups.
 
@@ -9,7 +9,7 @@
 
 This document records the candidate for **collecting the volatility risk premium** — selling implied volatility (via options/vol exposure) to harvest the systematic tendency of implied vol to exceed realized vol. It is the first candidate in this program that is a *structural risk-premium* edge rather than a retail-behavioral intraday mechanic.
 
-**Current status: NOT proven, NOT approved.** The exploratory research spec is written. Key finding: the unconditional VRP is testable **now with owned data** (VIX 1990+ and SPY 1993+), but the premium is **well-documented as decaying toward zero over the last ~17 years** (Dew-Becker 2025). The `strategies/spx-gex` dealer-gamma candidate (the closest prior options work) was already rejected at the friction gate.
+**Current status: MEASURED-POSITIVE-LEVEL, NOT ADVANCED.** V1 probe (VIX² vs forward realized variance on owned VIX+SPY, frozen gates) passed its level-gates: the average implied-vs-realized premium is positive and persistent across IS and the modern OOS window (+3.33 IS, +3.97 OOS vol pts; no decay by this measure). This confirms the premium *level* is real — but that is a well-established fact, not a deployable edge. The harvestability question (real costs + the severe short-vol fat tail) is untested and moves to V2. NOT approved to trade.
 
 **Data note (corrected 2026-08-08):** all versions of the claim are testable with owned + **free** data — the short-vol P&L and conditional FOMC/earnings versions use **free short-vol ETPs (SVXY/VXX, Yahoo), free CFE VIX futures (2004+), and a free SPY EOD options dataset (2010-2023, Kaggle)**. No paid data is required; an earlier assessment that the event version needed paid IV data was wrong (see spec §4.D correction).
 
@@ -85,5 +85,7 @@ The exploratory spec (`IA/vol-risk-premium-research-spec.md`) documents the deci
 
 ## 9. Verified Status
 
-- **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make every version testable with no paid data. No code written, no probe run, no approval. Candidate is documentation-ready, not test-ready.
+- **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make every version testable with no paid data.
+- **2026-08-08 (later):** **V1 probe run** (pre-registered §11) on owned VIX+SPY. Result: **MEASURED-POSITIVE-LEVEL, NOT ADVANCED** — VRP level positive & persistent all eras (+3.3 to +4.0 vol pts), all level-gates pass, but this is the well-known unconditional premium level, not a deployable edge. Harvestability (costs + tail) is V2.
+- This is a **candidate with a measured level-phenomenon, not an approved strategy.** Treating it as tradeable before V2 models real short-vol costs and the tail would repeat the pattern of every prior candidate this program has disconfirmed.
 - This is a **candidate spec**, not an approved strategy. Treating it as approved before the data route is validated (esp. the free Kaggle options set) and gates are pinned would repeat the pattern of every prior candidate this program has disconfirmed.

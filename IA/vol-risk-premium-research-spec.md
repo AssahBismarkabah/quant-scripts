@@ -195,3 +195,63 @@ The decision this document produces is: **whether to approve the owned/free-data
 
 - **2026-08-08:** Spec drafted (exploratory). Source identified from a trader interview (short-vol / variance risk premium; FOMC/earnings event setup). Literature + data pass complete: VRP documented (Bollerslev 2009; Hansen et al. 2024), **decay** documented (Dew-Becker 2025), tail risk documented (Quantpedia; AQR). Data reality established, corrected, and then **confirmed via primary sources (2026-08-08)**: **owned** VIX (1990+) + SPY (1993+) run the unconditional VRP now; **free** short-vol ETPs (SVXY/VXX/XIV via Yahoo), free **CFE VIX futures** (2004+), and — source of record — **OptionsDX SPY Option Chains** (free, 2010-2023) with a **free arXiv cleaning method (2501.11164)** and a ready Kaggle Parquet copy make the short-vol P&L and conditional FOMC/earnings versions testable too. No paid data required for any version.
 - **Next (not yet done):** user decision on §8 open questions; pre-register the frozen gates + split for the approved version(s) only.
+
+---
+
+## 12. V1 Results (2026-08-08) — MEASURED-POSITIVE-LEVEL (NOT ADVANCED)
+
+**Verdict: MEASURED-POSITIVE-LEVEL, NOT ADVANCED.** V1 ran on the frozen design (§11) with owned VIX + SPY. It confirms the *level* of the variance risk premium is positive and persistent — but that is expected and does **not** validate a tradeable short-vol edge.
+
+### Numbers
+- Aligned days: 8,427 (1993-02 → 2026-07, VIX & SPY both present).
+- **Mean vol-point VRP by decade** (sqrt of %² premium): 1990s +4.07, 2000s +3.28, 2010s +3.68, 2020s +3.82. The premium does **not** decay in the modern window by this measure.
+- **IS (1993-02→2008-12, n=4,008):** mean VRP +3.33 vol pts, bootstrap p5 > 0.
+- **OOS/modern (2009-01→2026-07, n=4,398):** mean VRP +3.97 vol pts, bootstrap p5 > 0, net-after-cost + > 0.
+
+### Gates (frozen §11.D)
+All three level-gates passed (OOS p5>0, IS p5>0, survives 10% cost buffer) and the look-ahead audit passed by construction.
+
+### Interpretation — why this is NOT an advance
+A positive and persistent *average* implied-vs-realized gap is the **unconditional VRP level**, a well-established fact, not a discovery. It does not establish a deployable edge because:
+1. **Capturing it means selling vol/options** — which V1 does not model. Real costs (spread, margin, borrow) and, critically, the **severe fat tail** (short-vol can lose −800%-class in a single event; 2018 volmageddon) dominate the economics. A positive mean with a ruinous tail is not an edge.
+2. **The level persisting in the modern window does not contradict Dew-Becker**, who measured the *alpha-to-variance-swap* and *rolling-10yr excess*, a different object than the average level. The two are consistent: risk-aversion keeps VIX above realized on average even as the harvestable excess decayed.
+3. **V1's cost buffer (10% of premium) is a placeholder**, not an executable cost model.
+
+### What V1 decides
+V1 confirms the **premise is real** (implied > realized on average) but **does not advance to deployable**. The decision moves to **V2**: model the *tradeable* short-vol version (free SVXY/XIV/VXX + CFE VIX futures with real costs and tail simulation) and/or the conditional FOMC/earnings version (free OptionsDX SPY chains). If V2 shows the premium is not harvestable after costs and tails, the candidate is DISCONFIRMED as a tradeable claim despite the positive level.
+
+---
+
+## 11. V1 Probe Pre-registration (the unconditional VRP) — FROZEN 2026-08-08
+
+This registers the first probe. It tests the core structural claim (implied variance systematically exceeds realized variance) with the purely owned data (VIX + SPY). Per the standing protocol: rules and gates are frozen before results; a decision is recorded once, not tuned.
+
+### 11.A Data
+- **Implied:** CBOE VIX close (`research/vol-targeting/cache/VIXCLS.csv`, FRED, `observation_date` + `VIXCLS`), 1990-01-02 → 2026-07-31. Null `VIXCLS` rows (FRED non-trading days) dropped before alignment.
+- **Realized:** SPY daily close (`research/vol-targeting/cache/SPY_clean_long.parquet`, Yahoo; `ts_date` + `close`), 1993-02 → 2026-07.
+- **Align:** inner join on trading date, signal date `t` = a day with both VIX and SPY.
+
+### 11.B Definitions
+Let `r_i = ln(SPY_close_i / SPY_close_{i-1})` over the next `h = 21` trading days after `t`.
+
+- Realized variance (fwd), annualized: `RV_t = (252/h) * Σ_{i=1..h} r_{t+i}²`
+- Implied variance: `IV_t = VIX_t²`  (VIX is already an annualized vol in %)
+- Variance risk premium: `VRP_t = IV_t − RV_t`
+- Stated as **annualized vol points** for interpretability: `VRP_vol_t = sqrt(IV_t) − sqrt(RV_t)` (report, not a gate).
+
+A **positive** VRP at `t` means a premium existed that a short-vol seller would have captured over the next 21 days.
+
+### 11.C Split
+- **IS:** 1993-02-01 → 2008-12-31 (pre-GFC-expansion era where literature says the premium was largest).
+- **OOS / modern (the decay test):** 2009-01-01 → 2026-07-31. Dew-Becker predicts the premium here is ≈ 0.
+
+### 11.D Rejection gates (probe FAILS if ANY holds)
+1. **Overall premium exists in modern window?** bootstrap p5 of mean VRP over OOS ≤ 0  → **FAIL** (no premium to harvest now).
+2. **Overlap bias / look-ahead free?** the OOS mean VRP must be produced with only data ≤ t known. By construction VIX_t and past returns are used; the fwd realized var is a *tagged outcome*, not an input. Audit passes by construction; verify no reversal of time indices.
+3. **IS reproduction:** bootstrap p5 of mean VRP over IS > 0 (sanity: the historical premium must be detectable where literature says it existed). If IS also fails, the measure itself is suspect → FAIL.
+4. **Economic scale:** the OOS mean VRP, net of an executable short-vol cost approximation (10% of premium as cost buffer), must be > 0. If only pre-cost positive but eaten by costs → FAIL. Cost buffer is a conservative placeholder; refined in V2 with real ETP/options.
+
+**Verdict:** report PASS/FAIL as DISCONFIRMED if any of gates 1, 3, 4 fail.
+
+### 11.E Outputs
+`research/vol-risk-premium/outputs/v1_summary.json` — VRP means (IS, OOS, modern), bootstrap p5 (IS, OOS), per-gate boolean, verdict. Cache/raw stay out of git (`research/vol-risk-premium/cache/`).

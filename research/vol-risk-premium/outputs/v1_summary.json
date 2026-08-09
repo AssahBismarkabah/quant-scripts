@@ -1,0 +1,47 @@
+{
+  "probe": "v1_unconditional_vrp",
+  "instrument_implied": "CBOE VIX (FRED VIXCLS)",
+  "instrument_realized": "SPY daily (Yahoo)",
+  "frozen_ref": "IA/vol-risk-premium-research-spec.md section 11",
+  "h_fwd_days": 21,
+  "n_aligned_days": 8427,
+  "vrp_mean_by_decade": {
+    "1990-1999": 126.17859689066347,
+    "2000-2009": 88.69404274800432,
+    "2010-2019": 97.83145064909634,
+    "2020-2029": 78.03702950101469
+  },
+  "panels": {
+    "is": {
+      "window": "is",
+      "dates": "1993-02-01 -> 2008-12-31",
+      "n": 4008,
+      "mean_vrp": 84.79433055015824,
+      "mean_vrp_vol": 3.3340918661218786,
+      "bootstrap_p5": 71.19825626967518,
+      "net_mean_vrp": 76.31489749514242
+    },
+    "oos_modern": {
+      "window": "oos_modern",
+      "dates": "2009-01-02 -> 2026-07-01",
+      "n": 4398,
+      "mean_vrp": 108.40233521900394,
+      "mean_vrp_vol": 3.974008144785279,
+      "bootstrap_p5": 94.88527251043637,
+      "net_mean_vrp": 97.56210169710356
+    }
+  },
+  "gates": {
+    "gate1_oos_modern_premium": true,
+    "gate1_note": "OOS bootstrap p5=94.8853",
+    "gate3_is_reproduction": true,
+    "gate3_note": "IS bootstrap p5=71.1983",
+    "gate4_survives_cost": true,
+    "gate4_note": "OOS net mean VRP=97.5621 (cost buf 0.1)",
+    "gate2_lookahead": true,
+    "gate2_note": "VRP_t uses VIX_t and past returns only; fwd realized var is tagged outcome"
+  },
+  "failed_gates": [],
+  "verdict": "MEASURED-POSITIVE-LEVEL (NOT ADVANCED)",
+  "interpretation": "V1 gates passed: the average implied-vs-realized premium is positive and persistent across IS and the modern OOS window (see mean_vrp_vol by era). This confirms the LEVEL of the variance risk premium is real. It does NOT establish a deployable edge: capturing it requires selling vol/options with real costs and the severe fat tail, which V1 does not model. Whether the premium is *harvestable* after costs and survives its own tail, and whether event/conditional versions add anything, is the V2 question."
+}
