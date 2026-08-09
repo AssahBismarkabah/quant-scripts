@@ -19,7 +19,7 @@ A collection of quantitative trading strategies, research specs, and executable 
 
 | Strategy | Type | Status |
 |---|---|---|
-| [Short Vol / VRP](strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) | Options / Variance Risk Premium (short-vol premium capture) | Candidate spec only (2026-08-08): NO probe approved; unconditional VRP testable with owned VIX+SPY data, but premium well-documented as decayed (Dew-Becker 2025); conditional FOMC/earnings options version needs paid IV data |
+| [Short Vol / VRP](strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) | Options / Variance Risk Premium (short-vol premium capture) | Candidate spec only (2026-08-08): NO probe approved; all versions testable with owned+free data (VIX, SPY, short-vol ETPs, CFE VIX futures, free SPY EOD options 2010-2023); premium well-documented as decayed (Dew-Becker 2025) |
 
 ## Documentation
 

@@ -9,7 +9,9 @@
 
 This document records the candidate for **collecting the volatility risk premium** — selling implied volatility (via options/vol exposure) to harvest the systematic tendency of implied vol to exceed realized vol. It is the first candidate in this program that is a *structural risk-premium* edge rather than a retail-behavioral intraday mechanic.
 
-**Current status: NOT proven, NOT approved.** The exploratory research spec is written. Key finding: the unconditional VRP is testable **now with owned data** (VIX 1990+ and SPY 1993+), but the premium is **well-documented as decaying toward zero over the last ~17 years** (Dew-Becker 2025), and the conditional FOMC/earnings options version needs **option-price/IV history we do not own**. The `strategies/spx-gex` dealer-gamma candidate (the closest prior options work) was already rejected at the friction gate.
+**Current status: NOT proven, NOT approved.** The exploratory research spec is written. Key finding: the unconditional VRP is testable **now with owned data** (VIX 1990+ and SPY 1993+), but the premium is **well-documented as decaying toward zero over the last ~17 years** (Dew-Becker 2025). The `strategies/spx-gex` dealer-gamma candidate (the closest prior options work) was already rejected at the friction gate.
+
+**Data note (corrected 2026-08-08):** all versions of the claim are testable with owned + **free** data — the short-vol P&L and conditional FOMC/earnings versions use **free short-vol ETPs (SVXY/VXX, Yahoo), free CFE VIX futures (2004+), and a free SPY EOD options dataset (2010-2023, Kaggle)**. No paid data is required; an earlier assessment that the event version needed paid IV data was wrong (see spec §4.D correction).
 
 ## 2. The Economic Edge (the claim)
 
@@ -49,17 +51,24 @@ It must be assessed with **tail-aware** gates, not the intraday gates used on th
 
 **Cost model:** conservative friction for the chosen instrument (SPY or NQ). Model the bad tail explicitly: margin, financing, realized-vol spike marking the position down.
 
-## 6. Data (owned vs needed)
+## 6. Data (owned vs free — corrected 2026-08-08)
 
-**Owned (sufficient for the unconditional VRP probe):**
-- `research/vol-targeting/cache/VIXCLS.csv` — CBOE VIX close, daily 1990-01-02 → 2026-07-31.
-- `research/vol-targeting/cache/SPY_long.parquet` / `SPY_clean_long.parquet` — SPY daily 1993-02 → 2026-07.
+**Unconditional VRP — owned:**
+- `research/vol-targeting/cache/VIXCLS.csv` — CBOE VIX close, daily 1990-01-02 → 2026-07-31 (FRED, free).
+- `research/vol-targeting/cache/SPY_long.parquet` / `SPY_clean_long.parquet` — SPY daily 1993-02 → 2026-07 (Yahoo, free).
 - Databento NQ futures (2013+) for execution modeling.
 
-**Needed but NOT owned (for the conditional FOMC/earnings short-straddle version):**
-- Option prices / IV by strike + expiry (SPX/SPY or NQ). Free-at-scale source does not exist; CBOE DataShop surfaces (2011+, paid), OptionMetrics, IVolatility (pay-per-use), SpiderRock (commercial). Paid-data decision required.
+**Short-vol P&L — free:**
+- **SVXY** (short-vol ETP, −1× VIX short-term futures) and **VXX** (long-vol), free via Yahoo; simulated XIV/VXX backtests to 2004 available free.
+- **CFE VIX futures** per-contract history 2004+ — free from CBOE futures historical data page (term structure / contango signal).
 
-**=> Unconditional VRP: testable today with owned data. Conditional event options version: paid-data-gated.**
+**Conditional / event options version — free (source of record):**
+- **OptionsDX SPY Option Chains** — free ($0), full SPY chains 2010-2023 (all strikes × expiries, bid/ask/last, IV, Greeks, OI). Verified directly.
+- **Kaggle "SPY Options EOD 2010-2023"** (MIT) — ready Parquet copy of the OptionsDX chains; **Kaggle SPY IV 2014-25** (CC0).
+- **Cleaning method:** free arXiv paper (2501.11164, Visagie) — model-free procedure to strip arbitrage/outlier/duplicate prices from the recorded chains before backtesting.
+- **VIX Options:** OptionsDX sells VIX chains at $0-20/yr (cheap/free); CBOE DataShop is the premium alternative.
+
+**=> No paid data required for any version.** OptionsDX (primary), CFE VIX futures, and short-vol ETPs plus VIX/SPY (owned) cover all three versions. Paid professional IV surfaces / tick-level OPRA options are optional polish only. Free option-chain files must be run through the arXiv cleaning procedure and validated for completeness before use.
 
 ## 7. Validation & Rejection Gates (draft — to be frozen at probe time)
 
@@ -72,9 +81,9 @@ Reject if any:
 
 ## 8. Go / No-Go and Decision Points
 
-The exploratory spec (`IA/vol-risk-premium-research-spec.md`) documents the decision points: underlying choice (SPY vs NQ) for V1; whether to attempt a free-data conditional probe only if the Kaggle SPY-IV set validates; and whether to treat the event version as paid-data-gated. **No probe is approved until those are resolved and gates are pre-registered.**
+The exploratory spec (`IA/vol-risk-premium-research-spec.md`) documents the decision points: underlying choice (SPY vs NQ) for V1; which of the three free-data versions to run first (unconditional VRP, short-vol ETP/VIX-futures P&L, or conditional FOMC/earnings via free SPY EOD options); and validation of the free Kaggle options set. **No probe is approved until those are resolved, the free data is validated, and gates are pre-registered.**
 
 ## 9. Verified Status
 
-- **2026-08-08:** Spec + strategy record created (exploratory). No code written, no probe run, no approval. Candidate is documentation-ready, not test-ready.
-- This is a **candidate spec**, not an approved strategy. Treating it as approved before the data route and gates are pinned would repeat the pattern of every prior candidate this program has disconfirmed.
+- **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make every version testable with no paid data. No code written, no probe run, no approval. Candidate is documentation-ready, not test-ready.
+- This is a **candidate spec**, not an approved strategy. Treating it as approved before the data route is validated (esp. the free Kaggle options set) and gates are pinned would repeat the pattern of every prior candidate this program has disconfirmed.

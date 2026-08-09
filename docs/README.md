@@ -27,7 +27,7 @@
 - [SPX GEX](../strategies/spx-gex/SPX_GEX.md) - rejected Level 1, L2 declined (2026-08-04)
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
-- [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - CANDIDATE spec only (2026-08-08): no probe approved; owned-data VRP testable, premium decayed (Dew-Becker 2025), event version needs paid IV data
+- [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - CANDIDATE spec only (2026-08-08): no probe approved; all versions testable with owned+free data, premium decayed (Dew-Becker 2025)
 
 ## Code
 
