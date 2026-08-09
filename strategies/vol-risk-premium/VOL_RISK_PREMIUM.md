@@ -1,7 +1,7 @@
 # Short Volatility / Variance Risk Premium (VRP)
 
-**Version:** 1.1
-**Status:** MEASURED-POSITIVE-LEVEL, NOT ADVANCED (2026-08-08) - V1 probe confirmed the average implied-vs-realized (VRP) premium is positive and persistent (+3.3 to +4.1 vol pts across 1990s-2020s) but this only validates the premium *level*, not a harvestable edge. Capturing it requires selling vol/options with real costs + a steep fat tail (V2 question). NOT approved to trade. Full spec: `IA/vol-risk-premium-research-spec.md`.
+**Version:** 1.2
+**Status:** DISCONFIRMED (2026-08-08) - V1 confirmed the VRP *level* is positive (+3.3..+4.1 vol pts all eras); V2 showed it is NOT a harvestable edge: long short-vol (SVXY, free data) returned +452% but with −83% single-day (2018-02-06) and −95% max drawdown (COVID); even a "sell rich premium" gate can't dodge the tail. Ruin risk dominates collected premium. Candidate CLOSED. Full spec: `IA/vol-risk-premium-research-spec.md`.
 **Classification:** Options / Variance Risk Premium (short-vol, premium capture / carry)
 **Source claim:** practitioner interview (Andrea) — "short options premium / profiting from the fear of billionaires," specifically selling implied volatility when it is overpriced, with FOMC and earnings "short the IV spike" setups.
 
@@ -9,7 +9,7 @@
 
 This document records the candidate for **collecting the volatility risk premium** — selling implied volatility (via options/vol exposure) to harvest the systematic tendency of implied vol to exceed realized vol. It is the first candidate in this program that is a *structural risk-premium* edge rather than a retail-behavioral intraday mechanic.
 
-**Current status: MEASURED-POSITIVE-LEVEL, NOT ADVANCED.** V1 probe (VIX² vs forward realized variance on owned VIX+SPY, frozen gates) passed its level-gates: the average implied-vs-realized premium is positive and persistent across IS and the modern OOS window (+3.33 IS, +3.97 OOS vol pts; no decay by this measure). This confirms the premium *level* is real — but that is a well-established fact, not a deployable edge. The harvestability question (real costs + the severe short-vol fat tail) is untested and moves to V2. NOT approved to trade.
+**Current status: DISCONFIRMED.** V1 (owned VIX+SPY) confirmed the VRP *level* is positive and persistent. V2 (free SVXY data, including the 2018 volmageddon and 2020 COVID tails) showed it is **not a harvestable edge**: buy-and-hold long short-vol returned +452% but with a **−82.96% single-day loss (2018-02-06)** and a **−95.25% max drawdown**; the regime gate barely helped (−90.9% DD) because premium is richest right before the crash. Per the frozen tail-survival gate, this is ruin risk, not an edge. **NOT approved to trade; candidate CLOSED.**
 
 **Data note (corrected 2026-08-08):** all versions of the claim are testable with owned + **free** data — the short-vol P&L and conditional FOMC/earnings versions use **free short-vol ETPs (SVXY/VXX, Yahoo), free CFE VIX futures (2004+), and a free SPY EOD options dataset (2010-2023, Kaggle)**. No paid data is required; an earlier assessment that the event version needed paid IV data was wrong (see spec §4.D correction).
 
@@ -86,6 +86,7 @@ The exploratory spec (`IA/vol-risk-premium-research-spec.md`) documents the deci
 ## 9. Verified Status
 
 - **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make every version testable with no paid data.
-- **2026-08-08 (later):** **V1 probe run** (pre-registered §11) on owned VIX+SPY. Result: **MEASURED-POSITIVE-LEVEL, NOT ADVANCED** — VRP level positive & persistent all eras (+3.3 to +4.0 vol pts), all level-gates pass, but this is the well-known unconditional premium level, not a deployable edge. Harvestability (costs + tail) is V2.
-- This is a **candidate with a measured level-phenomenon, not an approved strategy.** Treating it as tradeable before V2 models real short-vol costs and the tail would repeat the pattern of every prior candidate this program has disconfirmed.
+- **2026-08-08 (later):** **V1 probe run** (pre-registered §11) on owned VIX+SPY: VRP level positive all eras → MEASURED-POSITIVE-LEVEL, not an edge.
+- **2026-08-08 (later):** **V2 probe run** (pre-registered §13) on free SVXY data: **DISCONFIRMED** — +452% total but −95% max drawdown, −83% single day; tail survives no conditioning. Candidate closed.
+- This is a **closed, disconfirmed candidate**, not an approved strategy. V1's positive VRP level is real but a positive-mean-with-ruinous-tail premium is not deployable; V2 measured exactly that.
 - This is a **candidate spec**, not an approved strategy. Treating it as approved before the data route is validated (esp. the free Kaggle options set) and gates are pinned would repeat the pattern of every prior candidate this program has disconfirmed.

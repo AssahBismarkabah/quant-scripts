@@ -14,12 +14,7 @@ A collection of quantitative trading strategies, research specs, and executable 
 | [SPX GEX](strategies/spx-gex/SPX_GEX.md) | Intraday Bias / Regime Filter | Rejected at Level 1 (friction gate); Level-2 upgrade declined (2026-08-04) |
 | [Funding Basis](strategies/funding-basis/FUNDING_BASIS.md) | Relative Value / Funding Carry | Rejected Under Current Assumptions |
 | [Index Rebalancing](strategies/index-rebalancing/INDEX_REBALANCING.md) | Event-Driven Mean Reversion | Rejected Level 1-2, then CLOSED (2026-08-04): S&P 600 short-additions is a single March-2025 batch; year-breakdown shows 2024 n/s, 2025 +1542 bps, 2026 -786 bps - not persistent |
-
-## Candidates in Review
-
-| Strategy | Type | Status |
-|---|---|---|
-| [Short Vol / VRP](strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) | Options / Variance Risk Premium (short-vol premium capture) | MEASURED-POSITIVE-LEVEL, NOT ADVANCED (2026-08-08): V1 confirmed VRP level +3.3..+4.1 vol pts all eras (own+fee data) but premium *level* is not a deployed edge; harvestability incl. tail is V2 |
+| [Short Vol / VRP](strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) | Options / Variance Risk Premium (short-vol premium capture) | DISCONFIRMED (2026-08-08): VRP level positive all eras (V1) but not harvestable (V2); long short-vol (SVXY) +452% yet −95% max DD, −83% single-day (2018 volmageddon); ruin tail dominates premium. Candidate closed |
 
 ## Documentation
 

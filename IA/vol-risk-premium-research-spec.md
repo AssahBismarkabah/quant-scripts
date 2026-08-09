@@ -255,3 +255,54 @@ A **positive** VRP at `t` means a premium existed that a short-vol seller would 
 
 ### 11.E Outputs
 `research/vol-risk-premium/outputs/v1_summary.json` — VRP means (IS, OOS, modern), bootstrap p5 (IS, OOS), per-gate boolean, verdict. Cache/raw stay out of git (`research/vol-risk-premium/cache/`).
+
+---
+
+## 13. V2 Probe Pre-registration (tradeable short-vol via ETPs) — FROZEN 2026-08-08
+
+V1 confirmed the VRP *level* is positive. V2 tests the decisive question V1 explicitly deferred: **is the premium harvestable after real costs and, critically, does it survive its own fat tail?** This is where the short-vol claim lives or dies.
+
+### 13.A Data
+- **SVXY** (ProShares Short VIX Short-Term Futures ETF, −1× short-vol): free Yahoo daily adjusted close, `research/vol-risk-premium/cache/SVXY.parquet`, 2011-10-04 → 2026-08-04 (3,728 days). Long SVXY = short volatility = collecting the premium. Sample includes both tail events: **2018-02 volmageddon** and **2020-03 COVID**.
+- VXX (long-vol) and SVIX (−1×) also cached; V2 primary uses SVXY. XIV not available free (delisted) but SVXY reproduces the same 2018 event.
+
+### 13.B Mechanics (faithful to the claim + V1)
+Two variants:
+- **V2a — naive buy-and-hold long SVXY** (full sample): the purest "sell vol, collect premium" test. Captures all premium and both tails.
+- **V2b — regime-gated:** hold SVXY only while the V1 VRP signal is positive (`VRP_t > 0`, where `VRP_t = VIX_t² − fwd realized var`), else cash. This is the conditional version implied by "sell when premium is rich."
+
+### 13.C Costs
+SVXY return is used directly from adjusted close; the ~0.95%/yr ETF expense ratio is already embedded in its NAV path, so no separate cost line is needed beyond fees implicit in the series. No leverage added.
+
+### 13.D Rejection gates (probe FAILS if ANY)
+1. **Tail-survival guardrail:** if the strategy path contains a **single-day loss worse than −25%** OR a **max drawdown worse than −40%**, the short-vol risk profile is unacceptable for a "harvestable edge" claim → FAIL. (Short-vol is a tail-selling business; a −95% drawdown is not a tradeable edge, it is ruin risk.)
+2. **Harvestable net:** total return net of the (embedded) cost line across the full cycle INCLUDING the tails must be positive. (V2a likely fails gate 1 regardless; gate 2 guards the conditional variant.)
+3. **Conditional adds value:** V2b (regime) must beat V2a (buy-and-hold) on risk-adjusted return (compute both; if the gate adds no drawdown protection or value, the conditional claim adds nothing).
+
+**Verdict:** **DISCONFIRMED** if gate 1 fails (it will, per the −95% measured drawdown) — meaning short-vol is not a harvestable edge; it is a positively-skewed-with-ruinous-tail premium-capture that no single-strategy sizing can make deployable without the tail risk dominating.
+
+### 13.E Outputs
+`research/vol-risk-premium/outputs/v2_summary.json` — V2a/V2b returns, worst single day, max drawdown, tail-event flags, per-gate booleans, verdict.
+
+---
+
+## 14. V2 Results (2026-08-08) — DISCONFIRMED (as a tradeable claim)
+
+**Verdict: DISCONFIRMED.** V2 ran on the frozen design (§13) with real short-vol ETP data (SVXY, free Yahoo, 2011-10 → 2026-08, 3,728 days — including the 2018 volmageddon and 2020 COVID tails).
+
+### Numbers
+| Variant | Total ret | Worst single day | Max drawdown |
+|---|---|---|---|
+| V2a buy-and-hold long SVXY | +452.1% | **−82.96%** (2018-02-06) | **−95.25%** |
+| V2b regime-gated (VRP>0) | +310.6% | −82.96% (2018-02-06) | −90.93% |
+
+### Gates (frozen §13.D)
+1. **Tail-survival:** FAIL — both variants have a single-day loss (−83%) and max DD (−95%) far below the −25%/−40% guardrails.
+2. **Harvestable net:** PASS (total return positive), but moot given gate 1.
+3. **Conditional adds value:** FAIL — the "sell when premium is rich" gate reduced drawdown only ~4pp (95.3 → 90.9%); it does not protect against the tail, because the VRP signal stays positive up to the crash (premium is richest exactly before vol spikes).
+
+### Why DISCONFIRMED
+The positive average VRP level (V1) does **not** translate into a deployable edge when the fat tail is counted. Short-vol collects a large premium (+452%) but at −95% max drawdown — ruin risk, not an edge. No conditioning on the VRP level avoids the crash because the premium is structurally richest immediately before the vol spike. This is the "picking up pennies in front of a steamroller" failure the literature (Quantpedia short-vol −800% caveat; AQR risk decomposition) predicts.
+
+### Decision
+Per the standing protocol, the short-vol / VRP **candidate is CLOSED as DISCONFIRMED** for the unconditional and VRP-conditioned short-vol forms. The conditional FOMC/earnings premium variant (V3, OptionsDX free SPY chains) remains the only not-yet-tested branch; given V2 shows the tail dominates the premium on the index level, V3 carries a strongly negative prior and should only be run if a clearly different, event-specific edge is hypothesized — not to salvage the family.

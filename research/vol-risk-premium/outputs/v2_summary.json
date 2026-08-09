@@ -1,0 +1,29 @@
+{
+  "probe": "v2_tradeable_short_vol",
+  "instrument": "SVXY (short-vol ETP, Yahoo, 2011-10 -> 2026-08)",
+  "frozen_ref": "IA/vol-risk-premium-research-spec.md section 13",
+  "sample_days": 3728,
+  "variant_buy_hold": {
+    "total_return_pct": 452.11,
+    "worst_single_day_pct": -82.96,
+    "worst_single_day_date": "2018-02-06",
+    "max_drawdown_pct": 95.25,
+    "n_days_in_market": 3714
+  },
+  "variant_regime_gated": {
+    "total_return_pct": 310.6,
+    "worst_single_day_pct": -82.96,
+    "worst_single_day_date": "2018-02-06",
+    "max_drawdown_pct": 90.93,
+    "n_days_in_market": 3113
+  },
+  "gates": {
+    "gate1_v2a_tail_survival": false,
+    "gate1_v2b_tail_survival": false,
+    "gate2_v2a_harvestable": true,
+    "gate2_v2b_harvestable": true,
+    "gate3_conditional_adds_value": false
+  },
+  "verdict": "DISCONFIRMED",
+  "interpretation": "Short-vol premium income is large (buy-and-hold long SVXY returns positive over the full cycle) but the cost is a -90%+ class max drawdown including the 2018-02 volmageddon (-83% single day) and 2020 COVID (-95% drawdown). Per frozen gate 1, that tail risk disqualifies short-vol as a harvestable single-strategy edge: the ruin risk dominates the collected premium. V1's positive average VRP level does not translate into a tradeable edge once the fat tail is counted."
+}

@@ -27,7 +27,7 @@
 - [SPX GEX](../strategies/spx-gex/SPX_GEX.md) - rejected Level 1, L2 declined (2026-08-04)
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
-- [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - MEASURED-POSITIVE-LEVEL, NOT ADVANCED (2026-08-08): V1 VRP level positive all eras; harvestability incl. tail is V2
+- [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - DISCONFIRMED (2026-08-08): VRP level positive (V1) but not harvestable (V2, SVXY): +452% yet −95% max DD, ruin tail
 
 ## Code
 
