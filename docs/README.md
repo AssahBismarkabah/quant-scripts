@@ -17,6 +17,7 @@
 - [10b5-1 Adoption Timing Research Spec](../IA/10b5-1-adoption-timing-research-spec.md)
 - [Vol Risk Premium Research Spec](../IA/vol-risk-premium-research-spec.md)
 - [Short Vol: Tail-Overlay Premium Capture (V3)](../strategies/vol-risk-premium/V3_TAIL_OVERLAY.md)
+- [Opening Range & Gap Strategies Research Spec](../IA/opening-range-gap-strategies-research-spec.md)
 
 ## Strategy Specs
 
