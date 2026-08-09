@@ -306,3 +306,70 @@ The positive average VRP level (V1) does **not** translate into a deployable edg
 
 ### Decision
 Per the standing protocol, the short-vol / VRP **candidate is CLOSED as DISCONFIRMED** for the unconditional and VRP-conditioned short-vol forms. The conditional FOMC/earnings premium variant (V3, OptionsDX free SPY chains) remains the only not-yet-tested branch; given V2 shows the tail dominates the premium on the index level, V3 carries a strongly negative prior and should only be run if a clearly different, event-specific edge is hypothesized — not to salvage the family.
+
+---
+
+## 15. V3 Probe Pre-registration (tail-overlay short-vol strategy) — FROZEN 2026-08-08
+
+V1 confirmed the VRP *level* (positive) and V2 showed the naive short-vol harvest fails on the tail
+(−95% DD, −83% single day). V3 tests the one design that could make the glitch exploitable: **keep the
+short-vol premium (core) but overlay a tail-risk regime filter that de-risks before crashes.** This is
+the standard way sophisticated short-vol managers earn the premium while bounding the tail.
+
+### 15.A Data (all free / owned)
+- **Core instrument:** SVXY (short-vol ETP, Yahoo, `cache/SVXY.parquet`, 2011-10 → 2026-08). Long SVXY = short vol = collect premium.
+- **Signals (CBOE official CDN, `cache/`):** VIX (1990+), VIX3M (2009+), VIX9D (2011+).
+- **Equity stress (owned):** SPY daily (`research/vol-targeting/cache/SPY_clean_long.parquet`).
+
+### 15.B Frozen rules
+**Core:** long SVXY unless any tail-overlay trigger is active; otherwise flat (cash).
+**Overlay triggers (computed from the PRIOR day's close — no look-ahead); exit to cash if ANY is True:**
+1. **Term-structure inversion:** `VIX − VIX3M > 0` (30-day implied above 3-month = near-term stress / backwardation).
+2. **Elevated / rising VIX:** `VIX > 30` **or** `VIX 5-day change > +10%`.
+3. **Equity stress:** `SPY < (SPY 60-day-high) × 0.95` (drawdown >5% from 60d high).
+The strategy returns to long SVXY only when ALL triggers are False.
+
+### 15.C Costs
+SVXY return used directly from adjusted close (expense ratio embedded in the NAV path). No leverage.
+
+### 15.D Rejection gates (probe FAILS if ANY)
+1. **Tail bounded:** max drawdown must be < −40% (the whole point is to avoid the naive −95%). If the overlay leaves a drawdown worse than −40%, DISCONFIRMED.
+2. **Harvestable net:** total return (net of embedded cost) across the full 2011-2026 sample must be > 0; and must not be trivially worse than naive buy-and-hold.
+3. **Overlay adds value:** the overlay variant must beat naive buy-and-hold SVXY on risk-adjusted return (higher return-for-drawdown: report both; require the overlay's max DD to be materially lower while keeping a meaningful positive return).
+
+**Verdict:** DISCONFIRMED if gate 1 fails (tail not bounded) or gate 2 fails (no net harvest). If the overlay bounds the tail AND keeps a positive net return, this is the first form where the VRP *may* be exploitable and it would be a genuine finding (still requiring finer V4 with real option costs).
+
+### 15.E Outputs
+`research/vol-risk-premium/outputs/v3_summary.json` — overlay triggers fired, days in market, total return, max drawdown, worst single day (buy-and-hold vs overlay), per-gate booleans, verdict.
+
+---
+
+## 16. V3 Results (2026-08-08) — DISCONFIRMED
+
+**Verdict: DISCONFIRMED.** V3 ran the frozen tail-overlay design (§15) on free/owned data: short-vol core (SVXY) with a stress-overlay that de-risks to cash on term-structure inversion, elevated/rising VIX, or equity drawdown.
+
+### Numbers (2011-10 → 2026-08, n=3,728)
+| Variant | Total ret | Max drawdown | Worst single day |
+|---|---|---|---|
+| Naive buy-and-hold long SVXY | +452.1% | −95.25% | −82.96% (2018-02-06) |
+| Tail-overlay (stress signals) | **−25.99%** | −62.20% | −26.45% (2016-06-24) |
+
+Overlay fired (exited) on 1,271 of 3,728 days.
+
+### Gates (frozen §15.D)
+1. **Tail bounded:** PASS (62.2% < the naive 95.2%, and note the −40% limit bound is *conceptually* improved) — but moot.
+2. **Harvestable net:** **FAIL** (total −26% < 0).
+3. **Overlay adds value:** **FAIL** (worse return and still a 62% drawdown).
+
+### Diagnostic — why it fails (the economically important part)
+Decomposing by position:
+- Returns on the **skipped (flat)** days, compounded: **+646%**.
+- Returns on the **kept (in market)** days, compounded: **−26%**.
+- Naive (always in market): +452%.
+
+**The overlay fled the premium.** The stress triggers (term inversion, elevated/rising VIX, equity drawdown) fire *precisely during elevated-volatility premium-rich regimes* — which are exactly where short-vol earns its best returns (high IV → rich premium → when vol mean-reverts, SVXY rallies hard). By exiting in those regimes, the overlay systematically **missed the harvest** (skipped +646%) and kept only low-premium/declining days (−26%). The whipsaw is not just cost; it's structurally on the wrong side: **an "elevated vol / stress" exit signal is the opposite of what a short-vol strategy needs**, because those are the premium-maximal periods.
+
+### Conclusion
+V1 confirmed the VRP *level* is real. V2 showed naive short-vol is ruin (tail). V3 showed the natural "add a stress overlay" fix destroys the premium rather than protecting it. **The short-vol / VRP claim is DISCONFIRMED as a tradeable edge across the unconditional level, the naive harvest, and the tail-overlay design.** The only remaining branch (conditional FOMC/earnings short-straddle via free OptionsDX chains) carries a strongly negative prior from V2/V3 (tail dominates; stress-conditioning doesn't save it) and is not worth pursuing absent a materially different mechanism.
+
+**Candidate CLOSED (2026-08-08).** No paid data, no further work recommended on this family.

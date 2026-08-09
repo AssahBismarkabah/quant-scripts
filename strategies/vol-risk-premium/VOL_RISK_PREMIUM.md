@@ -1,7 +1,7 @@
 # Short Volatility / Variance Risk Premium (VRP)
 
-**Version:** 1.2
-**Status:** DISCONFIRMED (2026-08-08) - V1 confirmed the VRP *level* is positive (+3.3..+4.1 vol pts all eras); V2 showed it is NOT a harvestable edge: long short-vol (SVXY, free data) returned +452% but with −83% single-day (2018-02-06) and −95% max drawdown (COVID); even a "sell rich premium" gate can't dodge the tail. Ruin risk dominates collected premium. Candidate CLOSED. Full spec: `IA/vol-risk-premium-research-spec.md`.
+**Version:** 1.3
+**Status:** DISCONFIRMED (2026-08-08) - short-vol / VRP claim fully tested and closed. V1: level positive (+3.3..+4.1 vol pts). V2: naive harvest is ruin (+452% but −95% DD, −83% single day). V3: a stress-overlay fix FAILS — it flees the premium-rich regimes (skipped +646%, kept −26%), proving the tail can't be dodged without killing the harvest. Candidate CLOSED. Full spec: `IA/vol-risk-premium-research-spec.md`; V3 design: `V3_TAIL_OVERLAY.md`.
 **Classification:** Options / Variance Risk Premium (short-vol, premium capture / carry)
 **Source claim:** practitioner interview (Andrea) — "short options premium / profiting from the fear of billionaires," specifically selling implied volatility when it is overpriced, with FOMC and earnings "short the IV spike" setups.
 
@@ -85,8 +85,10 @@ The exploratory spec (`IA/vol-risk-premium-research-spec.md`) documents the deci
 
 ## 9. Verified Status
 
-- **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make every version testable with no paid data.
-- **2026-08-08 (later):** **V1 probe run** (pre-registered §11) on owned VIX+SPY: VRP level positive all eras → MEASURED-POSITIVE-LEVEL, not an edge.
-- **2026-08-08 (later):** **V2 probe run** (pre-registered §13) on free SVXY data: **DISCONFIRMED** — +452% total but −95% max drawdown, −83% single day; tail survives no conditioning. Candidate closed.
-- This is a **closed, disconfirmed candidate**, not an approved strategy. V1's positive VRP level is real but a positive-mean-with-ruinous-tail premium is not deployable; V2 measured exactly that.
+- **2026-08-08:** Spec + strategy record created (exploratory). Data route confirmed via primary sources the same day: **OptionsDX SPY Option Chains ($0, 2010-2023)** + a free arXiv cleaning method (2501.11164) + free short-vol ETPs / CFE VIX futures make the candidate testable with no paid data.
+- **2026-08-08 (later):** **V1** (owned VIX+SPY): VRP level positive all eras → not an edge by itself.
+- **2026-08-08 (later):** **V2** (free SVXY): naive short-vol +452% but −95% DD → **DISCONFIRMED** (tail).
+- **2026-08-08 (later):** **V3** (free SVXY + CBOE VIX/VIX3M/VIX9D term-structure overlay): overlay bounded the tail (62%) but **destroyed the harvest** (skipped +646% of the premium, kept −26%) → **DISCONFIRMED**. The stress-overlay flees the premium-rich regimes.
+- **This candidate is CLOSED.** The short-vol / VRP "glitch" is a real premium *level* that is not tradeable: naive capture is ruin, and the natural tail-overlay fix kills the edge. No remaining branch warrants pursuit absent a materially different mechanism.
+
 - This is a **candidate spec**, not an approved strategy. Treating it as approved before the data route is validated (esp. the free Kaggle options set) and gates are pinned would repeat the pattern of every prior candidate this program has disconfirmed.

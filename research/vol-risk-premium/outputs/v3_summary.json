@@ -1,0 +1,28 @@
+{
+  "probe": "v3_tail_overlay_short_vol",
+  "frozen_ref": "IA/vol-risk-premium-research-spec.md section 15",
+  "sample_days": 3728,
+  "sample_range": "2011-10-04 -> 2026-08-04",
+  "overlay_fired_days": 278,
+  "naive_buy_hold": {
+    "total_return_pct": 452.11,
+    "worst_single_day_pct": -82.96,
+    "worst_single_day_date": "2018-02-06",
+    "max_drawdown_pct": 95.25,
+    "days_in_market": 3714
+  },
+  "tail_overlay": {
+    "total_return_pct": -25.99,
+    "worst_single_day_pct": -26.45,
+    "worst_single_day_date": "2016-06-24",
+    "max_drawdown_pct": 62.2,
+    "days_in_market": 2447
+  },
+  "gates": {
+    "gate1_tail_bounded": true,
+    "gate2_harvestable_net": false,
+    "gate3_overlay_adds_value": false
+  },
+  "verdict": "DISCONFIRMED",
+  "interpretation": "V3 tests whether a short-vol core + a tail-risk overlay (term-structure inversion, elevated/rising VIX, equity drawdown) can keep the premium while bounding the tail that killed the naive version. Gate 1 requires max DD better than -40%; gate 2 requires positive net return; gate 3 requires the overlay to beat naive buy-and-hold on drawdown while staying profitable."
+}
