@@ -26,6 +26,7 @@
 - [Buyback Timing / "Buyback Put"](../strategies/buyback-timing/BUYBACK_TIMING.md) - Bounded study NOT ADVANCED (2026-08-04): 47 events, 20d point positive but insignificant (t 0.64, bootstrap p5<0), drop-best->zero; full multi-year sample pending
 - [Vol Targeting Flow Fade](../strategies/vol-targeting/VOL_TARGETING.md) - MEASURED-BUT-MARGINAL (2026-08-04): statistical significance on extended 1993-2026 sample (~840 events) but ~1-2 bps excess over a random long hold; no advance. Prior rejections: v2 p5 gate, v1 on verified data
 - [IVAMR](../strategies/ivamr/IVAMR.md) - DISCONFIRMED (2026-08-08): all 5 pre-registered gates failed on Databento NQ 1-min
+- [Opening-Range / Gap trio (ORB, Gap Fill, Oops)](../strategies/opening-range-gap/OPENING_RANGE_GAP.md) - DISCONFIRMED (2026-08-09): ORB + Oops fail all pre-registered gates on NQ; Gap Fill not falsifiable as a trade (no stop/exit in source) and its raw gap-fill rate fails OOS (0.5885 < 0.60)
 - [SPX GEX](../strategies/spx-gex/SPX_GEX.md) - rejected Level 1, L2 declined (2026-08-04)
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
@@ -35,4 +36,5 @@
 
 - `src/quant_scripts/funding_basis.py` contains the current executable research scaffold for funding-basis validation.
 - `src/quant_scripts/buyback_timing/` contains the buyback-timing pipeline (harvest/classify, mapping, bars, bounded event study). Research workflow: `research/buyback-timing/Makefile` (`make harvest`, `make study`).
+- `src/quant_scripts/opening_range_gap/` contains the opening-range / gap trio probe (ORB, Gap Fill, Oops). Research workflow: `research/opening-range-gap/Makefile` (`make probe`); reads the owned NQ 1-min caches, no new fetch.
 

@@ -1,0 +1,202 @@
+{
+  "instrument": "NQ.n.0",
+  "is_window": [
+    "2014-01-01",
+    "2018-12-31"
+  ],
+  "oos_window": [
+    "2019-01-01",
+    "2026-08-07"
+  ],
+  "friction_base_pts": 0.5,
+  "strategies": {
+    "orb": {
+      "is": {
+        "n_trades": 1123,
+        "win_rate": 0.3972,
+        "profit_factor": 0.8524,
+        "gross_pts": -2004.0,
+        "net_pts": -2565.5,
+        "max_dd_pts": -2672.5,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.5922,
+        "avg_equity_pct": -0.053564,
+        "worst_loss_pts": -107.0
+      },
+      "oos": {
+        "n_trades": 1801,
+        "win_rate": 0.4736,
+        "profit_factor": 1.1422,
+        "gross_pts": 10373.75,
+        "net_pts": 9473.25,
+        "max_dd_pts": -2662.25,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.5219,
+        "avg_equity_pct": 0.076065,
+        "worst_loss_pts": -363.25
+      },
+      "gates": {
+        "gate1_oos_net_positive": {
+          "ok": true,
+          "net_pts": 9473.25
+        },
+        "gate2_oos_bootstrap_p5": {
+          "ok": true,
+          "p5": 0.8685660744031094
+        },
+        "gate3_oos_winrate_pf": {
+          "ok": true,
+          "win_rate": 0.4736,
+          "pf": 1.1422,
+          "min_winrate": 0.4,
+          "min_pf": 1.0
+        },
+        "gate4_tail_fragility": {
+          "ok": false,
+          "frac_days_killswitch": 0.5219,
+          "gross_pts": 10373.75
+        },
+        "gate5_is_reproduction": {
+          "ok": false,
+          "is_net_pts": -2565.5
+        },
+        "gate6_lookahead": {
+          "ok": true,
+          "note": "structural: prev-day levels/range complete before trigger, fill at next-bar open, intra-bar stops"
+        }
+      },
+      "verdict": "DISCONFIRMED"
+    },
+    "gap_fill": {
+      "is": {
+        "n_trades": 1213,
+        "win_rate": 0.7131,
+        "profit_factor": 3.6745,
+        "gross_pts": 11565.0,
+        "net_pts": 10958.5,
+        "max_dd_pts": -208.75,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.2729,
+        "avg_equity_pct": 0.395638,
+        "worst_loss_pts": -200.0
+      },
+      "oos": {
+        "n_trades": 1960,
+        "win_rate": 0.7087,
+        "profit_factor": 4.0265,
+        "gross_pts": 79857.5,
+        "net_pts": 78877.5,
+        "max_dd_pts": -723.5,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.274,
+        "avg_equity_pct": 0.421146,
+        "worst_loss_pts": -352.5
+      },
+      "gates": {
+        "gate1_oos_net_positive": {
+          "ok": true,
+          "net_pts": 78877.5
+        },
+        "gate2_oos_bootstrap_p5": {
+          "ok": true,
+          "p5": 36.66580994897959
+        },
+        "gate3_oos_winrate_pf": {
+          "ok": true,
+          "win_rate": 0.7087,
+          "pf": 4.0265,
+          "min_winrate": 0.4,
+          "min_pf": 1.0
+        },
+        "gate4_tail_fragility": {
+          "ok": true,
+          "frac_days_killswitch": 0.274,
+          "gross_pts": 79857.5
+        },
+        "gate5_is_reproduction": {
+          "ok": true,
+          "is_net_pts": 10958.5
+        },
+        "gate6_lookahead": {
+          "ok": true,
+          "note": "structural: prev-day levels/range complete before trigger, fill at next-bar open, intra-bar stops"
+        }
+      },
+      "verdict": "CLEARS-OOS",
+      "is_gap_fill_rate": {
+        "total_days": 1213,
+        "gapped_days": 1207,
+        "filled_days": 758,
+        "fill_rate": 0.628
+      },
+      "oos_gap_fill_rate": {
+        "total_days": 1960,
+        "gapped_days": 1954,
+        "filled_days": 1150,
+        "fill_rate": 0.5885
+      },
+      "gap_fill_rate_gate": {
+        "ok": true,
+        "min": 0.6,
+        "note": "raw fill-rate stat (dir-agnostic), not a P&L gate"
+      }
+    },
+    "oops": {
+      "is": {
+        "n_trades": 7,
+        "win_rate": 0.1429,
+        "profit_factor": 0.6615,
+        "gross_pts": -11.0,
+        "net_pts": -14.5,
+        "max_dd_pts": -31.5,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.8571,
+        "avg_equity_pct": -0.42535,
+        "worst_loss_pts": -13.0
+      },
+      "oos": {
+        "n_trades": 304,
+        "win_rate": 0.3322,
+        "profit_factor": 1.0449,
+        "gross_pts": 108.0,
+        "net_pts": -44.0,
+        "max_dd_pts": -365.75,
+        "avg_trades_per_day": 1.0,
+        "frac_days_killswitch": 0.6678,
+        "avg_equity_pct": 0.021357,
+        "worst_loss_pts": -58.0
+      },
+      "gates": {
+        "gate1_oos_net_positive": {
+          "ok": false,
+          "net_pts": -44.0
+        },
+        "gate2_oos_bootstrap_p5": {
+          "ok": false,
+          "p5": -2.3684210526315788
+        },
+        "gate3_oos_winrate_pf": {
+          "ok": false,
+          "win_rate": 0.3322,
+          "pf": 1.0449,
+          "min_winrate": 0.5,
+          "min_pf": 1.0
+        },
+        "gate4_tail_fragility": {
+          "ok": false,
+          "frac_days_killswitch": 0.6678,
+          "gross_pts": 108.0
+        },
+        "gate5_is_reproduction": {
+          "ok": false,
+          "is_net_pts": -14.5
+        },
+        "gate6_lookahead": {
+          "ok": true,
+          "note": "structural: prev-day levels/range complete before trigger, fill at next-bar open, intra-bar stops"
+        }
+      },
+      "verdict": "DISCONFIRMED"
+    }
+  }
+}

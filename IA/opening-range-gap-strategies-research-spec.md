@@ -78,3 +78,51 @@ Pick the test scope:
 4. **Rule of Four** — defer unless DAX/FTSE futures data is acquired.
 
 This doc is the compact review artifact. No backtest runs until the scope is chosen and the specific froze rules + gates are pre-registered.
+
+---
+
+## 8. REVISION — scope, split, and structure frozen (2026-08-09)
+
+Reviewer decision: **run each of the trio independently** (each a distinct falsifiable claim: ORB "outperforms S&P", Gap Fill "65-70% fill", Oops "validated on DAX 2012-2024"). Split frozen **IS 2014-01-01 .. 2018-12-31 / OOS 2019-01-01 .. 2026-08-07** (IVAMR-style, long clean OOS; data prefix from 2013-11 supplies prev-day levels).
+
+Pre-registered per-strategy mechanics (frozen before any run; see the code in `src/quant_scripts/opening_range_gap/`):
+
+| Strategy | Entry | Stop | Target | Fill-rate candidate eval |
+|---|---|---|---|---|
+| **ORB** | First 15-min RTH range (09:30-09:45 ET). After 09:45, enter on first 5-min close beyond the range. | Opposite side of the range ("slightly below the other side") | 1:2 RR (2x stop distance) | — |
+| **Gap Fill** | Day opens gap'd. Enter in the fill direction on a break of structure (5-min close) after 09:45. | Opp side of gap-fill level / fixed | Exit on full fill (prev-day close) or 15:55 session close | Report raw fill rate + net-of-friction P&L |
+| **Oops** | Prev-day high/low known. Next-day gap ≥20 pts beyond it. Enter on 5-min close breaking back THROUGH the level. | Fixed stop (pts or beyond level) | **NEXT 5-min bar close** (transcript: "we sell until the next candle closes with a fixed stop-loss"); per-day single entry | — |
+
+House discipline identical across all three: **IS/OOS, 0.5 pts/turn friction base (1.0 stress), bootstrap p5 (n=5000, seed 42), look-ahead audit (gate 6 structural)**, verdict **DISCONFIRMED** if any pre-registered gate fails. Same protocol as NQ VWAP-pullback and IVAMR probes so results are directly comparable.
+
+**Transcript-confirmed refinements locked 2026-08-09** (verified against `transcribe.txt`):
+- **One entry per day** per strategy — the transcript describes a single setup ("we wait for a candle to close... that's where we buy/sell"). The 20-trades/day churn from an over-loose trigger is an implementation artifact, not the strategy.
+- **Oops exit = next 5-min bar close** with a fixed stop-loss ("we sell until the next candle closes with a fixed stop-loss"). No profit target. Replaces the earlier 1:1 draft.
+- **Oops gap = minimum 20 points**, literal ("Ideally, the gap should be minimum 20 points").
+- **Stops/targets are computed from the actual FILL price** (next-bar open), not the signal-bar open — fixing a look-ahead-alignment bug that inflated ORB/Gap-Fill and zeroed Oops in the first run.
+- **Gap Fill fill-rate gate = 0.60** — transcript says "65 to 70% of gaps are filled in the S&P 500; in the NASDAQ is even higher", so 0.60 is a conservative bound for NQ.
+
+Data: combine the two owned NQ RTH 1-min caches (`research/ivamr/cache/NQ_n_0_1m.parquet` + `research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet`), dedup on `ts`, giving **2013-11 → 2026-08**. No new fetch required.
+
+---
+
+## 9. RESULTS — probe executed 2026-08-09
+
+Engine + data: combined owned NQ RTH 1-min (2013-11→2026-08), 5-min execution bars, one entry/day, 0.5 pts/turn friction, bootstrap p5 (n=5000, seed 42), look-ahead audit structural (gate 6 PASS by construction: prev-day levels / opening range complete before trigger, fill at next-bar open, intra-bar stops). Outputs in `research/opening-range-gap/outputs/`, code in `src/quant_scripts/opening_range_gap/`.
+
+| Strategy | IS trades / net | OOS trades / net | OOS win% / PF | Verdict |
+|---|---|---|---|---|
+| **ORB** | 1,123 / **−2,565.5** | 1,801 / +9,473.3 | 47.4% / 1.14 | **DISCONFIRMED** |
+| **Gap Fill** | 1,213 / **artifact** | 1,960 / **artifact** | — / — | **NOT FALSIFIABLE AS A TRADE** (raw fill-rate OOS 0.5885 < 0.60) |
+| **Oops** | 7 / **−14.5** | 304 / **−44.0** | 33.2% / 1.04 | **DISCONFIRMED** |
+
+**ORB (DISCONFIRMED):** IS reproduction fails (net −2,565.5 < 0 → gate 5) and OOS tail-fragility fails (52.2% of active days eat the kill-switch cap → gate 4). Stop is the well-defined range-other-side; mechanics clean; no edge by the pre-registered gates.
+
+**Gap Fill (NOT falsifiable as a trade):** the transcript specifies **no stop and no concrete exit** — only "wait for a break of structure" and "fill the gap." The placeholder stop bug (placed on the wrong side of entry when a gap-down opens below yesterday's low) produced a phantom false positive (871 of 1,244 "stop" exits were actually wins; PF 4.0). Under the house rule — only falsify what the source actually specifies — the P&L side is **not pre-trade-falsifiable** and is not reported as a result. The one objective, falsifiable claim is the **raw gap-fill rate**: **IS 0.628 / OOS 0.5885** — OOS below the 0.60 bound and below IS. The "65-70% fill, NASDAQ higher" claim does **not clear on clean OOS**.
+
+**Oops (DISCONFIRMED):** all P&L gates fail (IS −14.5, OOS −44.0, 33.2% win rate). Caveat: the transcript's literal "minimum 20 points" gap is not level-invariant — NQ rose ~3500 (2014) to ~20000 (2026), so IS has only 7 qualifying trades vs 304 OOS; the verdict rests almost entirely on OOS.
+
+**Overall:** two clean disconfirmations (ORB, Oops) + Gap Fill's fill-rate fails OOS. Consistent with the prior VWAP-pullback and IVAMR disconfirmations from the same trading-education lineage. Candidate family closed. Details in `strategies/opening-range-gap/OPENING_RANGE_GAP.md`.
+
+- **2026-08-09:** Spec §8 frozen, transcript-confirmed refinements locked, probe run, results recorded above.
+
