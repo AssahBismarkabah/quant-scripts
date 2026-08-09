@@ -19,6 +19,7 @@
 - [Short Vol: Tail-Overlay Premium Capture (V3)](../strategies/vol-risk-premium/V3_TAIL_OVERLAY.md)
 - [Opening Range & Gap Strategies Research Spec](../IA/opening-range-gap-strategies-research-spec.md)
 - [Five Structural Edges Research Spec](../IA/five-structural-edges-research-spec.md)
+- [PEAD Research Spec](../IA/pead-research-spec.md)
 
 ## Strategy Specs
 
@@ -32,7 +33,8 @@
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
 - [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - DISCONFIRMED (2026-08-08): V1 level positive; V2 naive harvest is ruin (+452%/-95% DD); V3 stress-overlay kills edge - [V3](vol-risk-premium/V3_TAIL_OVERLAY.md)
-- [Five Structural Edges (PEAD / Congressional / Bitcoin MVRV)](../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md) - EXTRACTION/REGISTERED (2026-08-09): 2 of 5 claims closed (ORB, VRP); 3 new candidates awaiting scope + data decision
+- [Five Structural Edges (PEAD / Congressional / Bitcoin MVRV)](../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md) - EXTRACTION/REGISTERED (2026-08-09): 2 of 5 claims closed (ORB, VRP); 1 of 3 new candidates now tested (PEAD below); Congressional + MVRV awaiting scope + data
+- [PEAD (Earnings-Surprise Drift)](../strategies/pead/PEAD.md) - DISCONFIRMED (2026-08-09): drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94) on Kaggle US panel 2012-2021; no net OOS edge
 
 ## Code
 

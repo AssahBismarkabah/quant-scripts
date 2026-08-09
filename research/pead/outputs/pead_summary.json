@@ -1,0 +1,62 @@
+{
+  "instrument": "US equities (Kaggle panel)",
+  "data_span": "2012-2021 (earnings), 1998-2021 (prices)",
+  "is_window": [
+    "2013-01-01",
+    "2017-12-31"
+  ],
+  "oos_window": [
+    "2018-01-01",
+    "2021-06-14"
+  ],
+  "hold_days": 60,
+  "decile": "top/bottom 10%",
+  "friction_per_side": 0.002,
+  "is": {
+    "n_long": 5175,
+    "n_short": 5156,
+    "long_ret": 3.6946947557976735,
+    "short_ret": 1.6209175302203098,
+    "spread_gross": 2.0737772255773637,
+    "spread_net": 1.2737772255773636,
+    "spread_mktadj": 1.9802025729051622,
+    "pf": 1.1144926541805327
+  },
+  "oos": {
+    "n_long": 4159,
+    "n_short": 4146,
+    "long_ret": 3.894060640095149,
+    "short_ret": 4.155945463822309,
+    "spread_gross": -0.2618848237271598,
+    "spread_net": -1.0618848237271599,
+    "spread_mktadj": 0.03499918360019144,
+    "pf": 0.9351054900093791
+  },
+  "gates": {
+    "gate1_oos_net_positive": {
+      "ok": false,
+      "spread_net_bps": -106.19
+    },
+    "gate2_oos_bootstrap_p5": {
+      "ok": false,
+      "p5_bps": -98.22
+    },
+    "gate3_oos_pf": {
+      "ok": false,
+      "pf": 0.9351054900093791
+    },
+    "gate4_oos_drop_best_cohort": {
+      "ok": false,
+      "note": "drop best OOS quarter 2019Q2"
+    },
+    "gate5_is_gross_positive": {
+      "ok": true,
+      "is_spread_gross_bps": 207.38
+    },
+    "gate6_lookahead": {
+      "ok": true,
+      "note": "entry next day after announcement, no future prices"
+    }
+  },
+  "verdict": "DISCONFIRMED"
+}

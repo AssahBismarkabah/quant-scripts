@@ -10,7 +10,7 @@
 
 | # | Claim | Status | Where documented |
 |---|---|---|---|
-| 1 | Earnings Surprise Drift (PEAD) | **REGISTERED — not advanced** (data decision pending: analyst-consensus EPS) | this doc, IA spec §3-4 |
+| 1 | Earnings Surprise Drift (PEAD) | **DISCONFIRMED (2026-08-09)** — drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94); no OOS edge | `strategies/pead/PEAD.md`, `IA/pead-research-spec.md` |
 | 2 | Opening Range Breakout ("IVB") | **CLOSED** — same family as ORB, DISCONFIRMED 2026-08-09 | `strategies/opening-range-gap/OPENING_RANGE_GAP.md` |
 | 3 | Congressional trading | **REGISTERED — not advanced** (weak prior; free Quiver data) | this doc, IA spec §3-4 |
 | 4 | Option harvest / VRP | **CLOSED** — short-vol/VRP family, V1/V2/V3 disconfirmed/ruin 2026-08-08 | `strategies/vol-risk-premium/VOL_RISK_PREMIUM.md`, `V3_TAIL_OVERLAY.md` |
