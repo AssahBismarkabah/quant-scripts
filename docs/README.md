@@ -34,9 +34,9 @@
 - [Funding Basis](../strategies/funding-basis/FUNDING_BASIS.md) - rejected
 - [Index Rebalancing](../strategies/index-rebalancing/INDEX_REBALANCING.md) - Rejected L1-2, then CLOSED (2026-08-04): single March-2025 S&P 600 batch; year-breakdown not persistent (2024 n/s, 2025 +1542, 2026 -786 bps)
 - [Short Vol / VRP](../strategies/vol-risk-premium/VOL_RISK_PREMIUM.md) - DISCONFIRMED (2026-08-08): V1 level positive; V2 naive harvest is ruin (+452%/-95% DD); V3 stress-overlay kills edge - [V3](vol-risk-premium/V3_TAIL_OVERLAY.md)
-- [Five Structural Edges (PEAD / Congressional / Bitcoin MVRV)](../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md) - EXTRACTION/REGISTERED (2026-08-09): 3 of 5 claims closed (ORB, VRP, Congressional); 1 of 3 new candidates tested (PEAD below, DISCONFIRMED); Bitcoin MVRV is the sole active candidate (below, REGISTERED)
+- [Five Structural Edges (PEAD / Congressional / Bitcoin MVRV)](../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md) - EXTRACTION/CLOSED (2026-08-10): all 5 claims resolved — PEAD + Bitcoin MVRV DISCONFIRMED by probes, ORB + VRP DISCONFIRMED (duplicate families), Congressional CLOSED; no deployable edge
 - [PEAD (Earnings-Surprise Drift)](../strategies/pead/PEAD.md) - DISCONFIRMED (2026-08-09): drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94) on Kaggle US panel 2012-2021; no net OOS edge
-- [Bitcoin MVRV Smart DCA](../strategies/bitcoin-mvrv/BITCOIN_MVRV.md) - REGISTERED / NOT TESTED (2026-08-09): pre-registration drafted (frozen rules, IS/OOS, friction, gates); free data (Blockchain.com/Coin Metrics realized-cap, 2013+) confirmed; awaiting reviewer scope
+- [Bitcoin MVRV Smart DCA](../strategies/bitcoin-mvrv/BITCOIN_MVRV.md) - DISCONFIRMED (2026-08-10): dynamic DCA drawdown benefit not reproducible in-sample (IS −83.7% vs −84.5% DD, CAGR 76% vs 161%); only OOS 2021-26 shows it (−53% vs −77%); Coin Metrics community data
 
 ## Code
 

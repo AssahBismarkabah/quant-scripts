@@ -1,6 +1,6 @@
 # "Five Structural Edges" — Research & Extraction Spec
 
-**Status:** 4 of 5 resolved (PEAD + ORB + VRP closed; Congressional closed on judgment); 1 candidate remains (Bitcoin MVRV) — docs created, awaiting reviewer scope + data (2026-08-09)
+**Status:** **5 of 5 resolved/closed (2026-08-10).** PEAD + Bitcoin MVRV DISCONFIRMED by pre-registered probes; ORB + VRP DISCONFIRMED (duplicate families); Congressional CLOSED on judgment. No deployable edge from this transcript in this repo.
 **Source:** trading-education transcript (`transcribe.txt`, 14KB) claiming five "structural edges" — repetitive, predictable behaviors "drastically documented by institutional-level academic research" and "persistent over the last decade." Same speaker lineage as the earlier VWAP-pullback / IVAMR / opening-range-gap sources (Robins Cup / CME equity cup / trading-floor workshop). Purpose: capture what the transcript claims, separate already-tested/closed claims from new ones, and record the free-data reality for the actionable candidates — for compact review before any backtest.
 
 ---
@@ -11,11 +11,11 @@
 |---|---|---|---|
 | 1 | **Earnings Surprise Drift (PEAD)** | Positive (negative) earnings surprises drift up (down) for up to ~60 days after the announcement; SUE-standardized; "4% spread over 60 days in a single stock." Cites Ball-Brown 1968, Bernard-Thomas 1989, recent ML PEAD paper. | **YES — DISCONFIRMED (2026-08-09)** on Kaggle US panel: drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94). See `IA/pead-research-spec.md` §7, `strategies/pead/PEAD.md`. |
 | 2 | **Initial Balance / Opening Range Breakout ("IVB")** | First 30-min range; breakout of it predicts rest of session; claims "13.5% upside skew; a 1:1 RR blind skew." Cites Toby Crabel, Barbon/Zarattini opening-range papers. | **YES — DISCONFIRMED as ORB** on NQ (opening-range-gap trio, 2026-08-09). Same family. **Do not re-run.** |
-| 3 | **Congressional / politician trading** | Copy the most active powerful committee members; Stock Act 2012 (45-day disclosure). Claims Pelosi family "outperforms nearly every hedge fund." Cites 2011 US House abnormal-return paper, 2025 "Talking Stocks of Democracies." | **NO — REMAINS NEW** (weak prior; free Quiver data confirmed) |
+| 3 | **Congressional / politician trading** | Copy the most active powerful committee members; Stock Act 2012 (45-day disclosure). Claims Pelosi family "outperforms nearly every hedge fund." Cites 2011 US House abnormal-return paper, 2025 "Talking Stocks of Democracies." | **CLOSED (2026-08-09)** — weak prior/selection risk, not tested. **Do not pursue.** |
 | 4 | **Option premium harvesting / VRP** | Systematic selling of OTM options to capture the volatility risk premium (IV > RV structurally). Cites Carr-Wu 2009, "Why are put options so expensive?" | **YES — CLOSED as short-vol/VRP** (V1/V2/V3, 2026-08-08; V2 naive harvest is ruin +452%/−95% DD/−83% single day, V3 overlay kills edge). Same family, same Carr-Wu paper. **Do not re-run.** |
-| 5 | **Bitcoin smart DCA / MVRV Z-score** | Use market-value-to-realized-value Z-score to dynamically size Bitcoin accumulation; buy capitulation, trim euphoria; vs buy-and-hold. Cites Grosjean/Nasman 2026 on-chain cycle papers. | **NO — REMAINS NEW** (different asset class; free on-chain data) |
+| 5 | **Bitcoin smart DCA / MVRV Z-score** | Use market-value-to-realized-value Z-score to dynamically size Bitcoin accumulation; buy capitulation, trim euphoria; vs buy-and-hold. Cites Grosjean/Nasman 2026 on-chain cycle papers. | **YES — DISCONFIRMED (2026-08-10)**: DD gates pass only on sign (corrected comparison); not reproducible in-sample (IS dynamic −83.7% vs buyhold −84.5% DD, CAGR 76% vs 161%; OOS only shows the benefit −53% vs −77%). See `IA/bitcoin-mvrv-research-spec.md` §7, `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`. |
 
-**Bottom line:** 3 of 5 resolved and closed in this repo (PEAD, ORB, VRP — all DISCONFIRMED/failed under pre-registered tests). **Congressional (#3)** and **Bitcoin MVRV (#5)** remain untested candidates.
+**Bottom line:** **5 of 5 resolved and closed.** PEAD + Bitcoin MVRV DISCONFIRMED under pre-registered probes; ORB + VRP DISCONFIRMED (duplicate families); Congressional CLOSED on judgment. No deployable edge from this transcript in this repo.
 
 ---
 
@@ -51,25 +51,26 @@ The binding constraint is **point-in-time analyst consensus EPS**. Ranked source
 
 ---
 
-## 4. What we propose to test — current state
+## 4. Current state — all five resolved
 
-Of the five claims, **four are resolved** (PEAD, ORB, VRP — DISCONFIRMED; Congressional — CLOSED on judgment). **One remains active**: Bitcoin MVRV, with a confirmed free data source and a relative-timing prior (DD reduction vs buy-and-hold), not a clean alpha trade.
+Of the five claims, **all five are now resolved**: PEAD + Bitcoin MVRV DISCONFIRMED under pre-registered probes; ORB + VRP DISCONFIRMED (duplicate families); Congressional CLOSED on judgment.
 
 **Congressional (#3) decided CLOSED (2026-08-09):** low prior (selection/survivorship — Pelosi is the highlighted standout, most politicians underperform), small sample, and the 45-day public lag means any testable benefit is not true insider timing. Not pursued.
 
-**Bitcoin MVRV (#5) is the sole active candidate**, pre-registered in docs awaiting reviewer scope: dedicated spec (`IA/bitcoin-mvrv-research-spec.md`) and strategy doc (`strategies/bitcoin-mvrv/BITCOIN_MVRV.md`), not yet tested.
+**Bitcoin MVRV (#5) DISCONFIRMED (2026-08-10):** pre-registered probe on Coin Metrics `CapMVRVCur` (BTC 2013-2026). DD gates pass only on sign after a comparison-direction correction; the edge is not reproducible in-sample (IS dynamic −83.7% vs buyhold −84.5% DD with CAGR 76% vs 161%; only the single OOS window 2021-26 shows the benefit, −53% vs −77%). See `IA/bitcoin-mvrv-research-spec.md` §7 and `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`.
 
-House discipline for each, once chosen and data secured: **pre-registered rules + IS/OOS + friction + bootstrap p5 + look-ahead audit**, DISCONFIRMED on any gate fail — same protocol as PEAD/VWAP-pullback / IVAMR / opening-range-gap.
+House discipline applied throughout: **pre-registered rules + IS/OOS + friction + look-ahead audit**, same protocol as PEAD/VWAP-pullback / IVAMR / opening-range-gap.
 
 ---
 
 ## 5. Decision for the reviewer
 
-**One candidate remains active:**
-1. **Bitcoin MVRV** — proceed with Blockchain.com/Coin Metrics free realized-cap data (pre-registration drafted in `IA/bitcoin-mvrv-research-spec.md`).
-2. **Or defer** — extraction-only for now; MVRV stays REGISTERED, not tested.
+All five structural-edge claims from the transcript are **closed**:
+- PEAD — DISCONFIRMED (probe)
+- ORB/IVB — DISCONFIRMED (duplicate family)
+- VRP — closed (duplicate family, ruin)
+- Congressional — closed on judgment
+- Bitcoin MVRV — DISCONFIRMED (probe)
 
-Congressional is **closed** and out of scope.
-
-No backtest runs on a candidate until scope + data are resolved and gates pre-registered.
+No further backtests are warranted on this family. Nothing remains open; all docs + register reflect the fully-closed state.
 

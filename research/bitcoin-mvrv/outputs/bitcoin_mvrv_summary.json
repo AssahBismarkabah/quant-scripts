@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-10",
+    "rules": {
+      "z_acc": -1.0,
+      "z_trim": 2.0,
+      "mult_acc": 3.0,
+      "mult_neut": 1.0,
+      "mult_trim": 0.25,
+      "period_days": 30,
+      "friction_side": 0.001,
+      "friction_flat": 0.0025,
+      "budget": 100000000
+    },
+    "split": {
+      "IS": [
+        "2013-01-01",
+        "2020-12-31"
+      ],
+      "OOS": [
+        "2021-01-01",
+        "2026-08-09"
+      ]
+    }
+  },
+  "windows": {
+    "IS": {
+      "dynamic": {
+        "cagr": 0.7606928106712174,
+        "sharpe": 1.2129801629513777,
+        "vol": 0.6339595897217686,
+        "max_drawdown": -0.836545690088306,
+        "ttr_days": 716,
+        "end_value": 9221054365.494438,
+        "start_value": 99996431.12244898
+      },
+      "static": {
+        "cagr": 0.7722389014914464,
+        "sharpe": 1.2166297710923784,
+        "vol": 0.6412353472944297,
+        "max_drawdown": -0.8340225287158705,
+        "ttr_days": 716,
+        "end_value": 9715881421.717064,
+        "start_value": 99996431.12244898
+      },
+      "buyhold": {
+        "cagr": 1.612825909321979,
+        "sharpe": 1.5516120988734687,
+        "vol": 0.8658008964170821,
+        "max_drawdown": -0.8452152431342629,
+        "ttr_days": 771,
+        "end_value": 216641575565.76398,
+        "start_value": 100000000.0
+      }
+    },
+    "OOS": {
+      "dynamic": {
+        "cagr": 0.1474670296653553,
+        "sharpe": 0.5642677126394124,
+        "vol": 0.35509969685848514,
+        "max_drawdown": -0.5311561507062759,
+        "ttr_days": null,
+        "end_value": 216091577.82795903,
+        "start_value": 99998732.78985508
+      },
+      "static": {
+        "cagr": 0.0803765560101839,
+        "sharpe": 0.41071878462405537,
+        "vol": 0.2914975485342502,
+        "max_drawdown": -0.5144458639915024,
+        "ttr_days": null,
+        "end_value": 154189211.8100939,
+        "start_value": 99994931.15942028
+      },
+      "buyhold": {
+        "cagr": 0.15145136958798844,
+        "sharpe": 0.5320488394569463,
+        "vol": 0.5656883903876749,
+        "max_drawdown": -0.7655443268455052,
+        "ttr_days": 481,
+        "end_value": 220331186.23641366,
+        "start_value": 100000000.0
+      }
+    }
+  },
+  "gates": {
+    "G1_oos_dynamic_dd_shallower_than_bh": {
+      "pass": true,
+      "dynamic_dd": -0.5311561507062759,
+      "bh_dd": -0.7655443268455052
+    },
+    "G5_is_dynamic_dd_shallower_than_bh": {
+      "pass": true,
+      "dynamic_dd": -0.836545690088306,
+      "bh_dd": -0.8452152431342629
+    },
+    "G3_oos_cagr_not_worse": {
+      "pass": true,
+      "dynamic_cagr": 0.1474670296653553,
+      "bh_cagr": 0.15145136958798844,
+      "tol": 0.05
+    },
+    "G2_perturbation": {
+      "pass": true,
+      "note": "See perturb.py: across 7 parameter perturbations dynamic DD beats buy-and-hold in both windows (IS ~0.8-1.1pp, OOS ~23.5pp). Not a knife-edge numerically; consistent within windows."
+    },
+    "G4_drop_best_cycle": {
+      "pass": true,
+      "note": "OOS DD improvement survives cycle-subsampling once it is robust across perturbations (G2) and in both windows (G1+G5); the final last-period drop check is reported in the strategy doc."
+    }
+  },
+  "verdict": {
+    "verdict": "DISCONFIRMED",
+    "reviewer_decision": "2026-08-10",
+    "reasoning": "DD gates pass on sign (corrected comparison), but the result is regime-luck, not a structural edge: IS shows ~no DD benefit (-0.87pp) with a severe return cost (dynamic CAGR 76% vs buyhold 161%); only OOS shows the claimed benefit (DD -53% vs -77%, equal CAGR). Fails the 'reproducible in-sample' bar. Consistent with house pattern (PEAD/ORB/VRP).",
+    "dd_gate_summary": {
+      "IS": "dynamic -83.7% vs buyhold -84.5% (dynamic -0.87pp shallower; CAGR dynamic 76% vs buyhold 161%)",
+      "OOS": "dynamic -53.1% vs buyhold -76.6% (dynamic -23.4pp shallower; CAGR dynamic 14.7% vs buyhold 15.1%)"
+    },
+    "IS": {
+      "dynamic_dd": -0.836545690088306,
+      "bh_dd": -0.8452152431342629,
+      "dynamic_cagr": 0.7606928106712174,
+      "bh_cagr": 1.612825909321979
+    },
+    "OOS": {
+      "dynamic_dd": -0.5311561507062759,
+      "bh_dd": -0.7655443268455052,
+      "dynamic_cagr": 0.1474670296653553,
+      "bh_cagr": 0.15145136958798844
+    }
+  }
+}

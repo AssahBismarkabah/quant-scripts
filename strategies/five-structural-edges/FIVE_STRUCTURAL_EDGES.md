@@ -1,7 +1,7 @@
 # "Five Structural Edges" — Extraction Register
 
-**Version:** 0.2 (register updated, 2026-08-09)
-**Status:** 3 of 5 claims RESOLVED/CLOSED (PEAD, ORB, VRP); **Congressional CLOSED (weak prior)**; **Bitcoin MVRV = active remaining candidate (registered, awaiting scope)**.
+**Version:** 0.3 (register updated, 2026-08-10)
+**Status:** **5 of 5 claims RESOLVED/CLOSED.** PEAD + Bitcoin MVRV DISCONFIRMED under pre-registered probes; ORB + VRP DISCONFIRMED (duplicate families); Congressional CLOSED (weak prior). No deployable edge from this transcript in this repo.
 **Classification:** Five independent structural/behavioral claims: PEAD, opening-range breakout, congressional trading, option VRP harvest, Bitcoin MVRV DCA.
 **Research spec:** `IA/five-structural-edges-research-spec.md`
 **Source:** trading-education transcript (`transcribe.txt`) — same speaker lineage as VWAP-pullback / IVAMR / opening-range-gap. Claims supported by named academic papers and "decades of data"; to be pre-registered and falsified on owned/free data like prior candidates.
@@ -14,9 +14,9 @@
 | 2 | Opening Range Breakout ("IVB") | **CLOSED** — same family as ORB, DISCONFIRMED 2026-08-09 | `strategies/opening-range-gap/OPENING_RANGE_GAP.md` |
 | 3 | Congressional trading | **CLOSED (2026-08-09)** — weak prior, selection/survivorship risk (Pelosi cherry-pick), 45-day lag removes true-insider timing; agrees with decision to not test | this doc, IA spec §2 |
 | 4 | Option harvest / VRP | **CLOSED** — short-vol/VRP family, V1/V2/V3 disconfirmed/ruin 2026-08-08 | `strategies/vol-risk-premium/VOL_RISK_PREMIUM.md`, `V3_TAIL_OVERLAY.md` |
-| 5 | Bitcoin MVRV smart DCA | **ACTIVE — REGISTERED, not yet tested** (different asset class; free on-chain data) | `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`, `IA/bitcoin-mvrv-research-spec.md` |
+| 5 | Bitcoin MVRV smart DCA | **DISCONFIRMED (2026-08-10)** — DD gates pass only on sign (corrected comparison); not reproducible in-sample (IS dynamic −83.7% vs buyhold −84.5% DD with CAGR 76% vs 161%; only OOS 2021-26 shows the benefit −53% vs −77%) | `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`, `IA/bitcoin-mvrv-research-spec.md` |
 
-Two claims (ORB, VRP) duplicate families already falsified in this repo and are **not re-run**. This is consistent with the house pattern: marketed high-confidence claims from the same lineage repeatedly fail strict pre-registered tests.
+Two claims (ORB, VRP) duplicate families already falsified in this repo and are **not re-run**. This is consistent with the house pattern: marketed high-confidence claims from the same lineage repeatedly fail strict pre-registered tests. **All five claims from the transcript are now resolved** (PEAD, ORB, VRP, Congressional, Bitcoin MVRV — all closed).
 
 ## 2. The three new candidates (extraction)
 
@@ -36,7 +36,8 @@ Two claims (ORB, VRP) duplicate families already falsified in this repo and are 
 
 - **2026-08-09:** New transcript extracted into this register + IA spec. Tavily confirmed free-data routes for congressional (Quiver) and MVRV (Blockchain.com/Coin Metrics); confirmed PEAD's analyst-consensus gap. PEAD data route refined (free Kaggle+FMP, qualified not-IBES-SUE, point-in-time gate). ORB/VRP flagged as already-closed.
 - **2026-08-09 (later):** **PEAD DISCONFIRMED** (drift reproduces IS, fades OOS — see `strategies/pead/PEAD.md`). **Congressional CLOSED** (weak prior, not tested). **Bitcoin MVRV set as the active remaining candidate** — dedicated docs created (`strategies/bitcoin-mvrv/`, `IA/bitcoin-mvrv-research-spec.md`).
+- **2026-08-10:** **Bitcoin MVRV DISCONFIRMED** under pre-registered probe (Coin Metrics `CapMVRVCur`, BTC 2013-2026) — DD gates pass only on sign after a comparison-direction fix; the edge is not reproducible in-sample and OOS shows it in one window only. With this, **all five claims are resolved**.
 
 ## 5. Next steps
 
-Bitcoin MVRV is the last open candidate. On reviewer go: pre-register rules + IS/OOS + friction + bootstrap p5 + look-ahead audit for the MVRV dynamic-DCA, then scaffold the probe under `research/bitcoin-mvrv/` and update this register + README per house pattern.
+All five structural-edge claims from the transcript are now closed (2 DISCONFIRMED by probes in this repo, 2 duplicate-family DISCONFIRMED, 1 CLOSED on judgment). No further backtests warranted on this family. The register + umbrella + strategy docs + `docs/README.md` reflect the fully-closed state.

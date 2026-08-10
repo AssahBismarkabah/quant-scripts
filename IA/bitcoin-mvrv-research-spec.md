@@ -1,8 +1,8 @@
 # Bitcoin MVRV Smart DCA — Research & Pre-Registration Spec
 
-**Status:** REGISTERED — pre-registration drafted, NOT yet tested; awaiting reviewer scope + data (2026-08-09)
+**Status:** DISCONFIRMED — probe executed 2026-08-10 (see §7)
 **Source claim:** from `transcribe.txt` (the "Five Structural Edges" transcript): use the **market-value-to-realized-value (MVRV) Z-score** to dynamically size Bitcoin accumulation — "buy capitulation, trim euphoria" — versus a static DCA and buy-and-hold. Cites Grois (Grosjean Gangotena?) / Nasman 2026 on-chain cycle papers.
-**Data:** free on-chain sources confirmed via Tavily (2026-08-09): Blockchain.com chart (MVRV/realized-value series), Coin Metrics historical realized-cap. History 2013+ feasible.
+**Data (VERIFIED 2026-08-10):** **Coin Metrics Community API** (free, keyless) — `CapMVRVCur` (MVRV ratio) and `CapMrktCurUSD` (market cap) for BTC from **2010-07-18 → present**. Realized cap recovered faithfully as `CapRealUSD ≈ CapMrktCurUSD / CapMVRVCur` (recovers canonical values: 2017 top MVRV 4.25 / realized ~$76B; 2018 bottom MVRV 0.69; 2022 bottom 0.78). Full multi-cycle coverage (2013-14, 2017-18, 2020-22, 2023-26). No API key required.
 **Ecosystem note:** different from the prior equity/intraday probes — on-chain daily/swing, not intraday; relative-allocation claim, not a clean alpha trade.
 
 ---
@@ -21,30 +21,36 @@
 
 ---
 
-## 2. Pre-registered rule set (draft — to be frozen on reviewer go)
+## 2. Frozen rule set (pre-registered 2026-08-10)
 
-**Universe:** BTC daily price + MVRV Z-score, 2013-01-01 → present (data-bounded).
+**Universe:** BTC daily, 2010-07-18 → 2026-08-09 (Coin Metrics community API). Test window 2013 → present.
 
-**Signal (MVRV Z-score):** `Z = (market_cap − realized_cap) / σ(market_cap − realized_cap)` over a trailing window (standard 2-year / ~730-day for the "Z-score" variant). Thresholds define regimes:
-- **Accumulate (capitulation):** Z below a low threshold (e.g. ≤ −1.0 / ~bottom band) → deploy accumulated cash / overweight.
-- **Neutral (hold):** between bands → maintain baseline DCA.
-- **Trim (euphoria):** Z above a high threshold (e.g. ≥ +2.0 / top band) → reduce size / take cash.
+**Signal (MVRV Z-score):** `Z(t) = (MVRV(t) − SMA(MVRV, 365)(t)) / σ(MVRV, 365)(t)`, where MVRV = `CapMVRVCur` and the 365-day SMA/std are **trailing** (computed on data up to and including day t only). Look-ahead clean by construction: the regime at t uses only observations ≤ t.
 
-**Dynamic DCA rules (candidate, to be fixed):** baseline periodic allocation (e.g. weekly $); low-Z regime multiplies the allocation (e.g. × 2-3), high-Z regime reduces it (e.g. × 0.25 or stops new buys). Cash rerouted to the low-Z regime.
+**Regimes (frozen):**
+- **ACCUMULATE (capitulation):** Z ≤ −1.0 → allocation multiplier **×3**
+- **NEUTRAL:** −1.0 < Z < +2.0 → multiplier **×1**
+- **TRIM (euphoria):** Z ≥ +2.0 → multiplier **×0.25**
 
-**Benchmarks:** (a) **Static DCA** — fixed periodic purchase regardless of Z (same total capital contributed); (b) **Buy-and-hold** — lump-sum or first-period full allocation held.
+**Allocation (identical total capital across strategies):**
+- Schedule: allocate every **30 calendar days**; target total capital deployed over the window is equal for dynamic DCA, static DCA, and buy-and-hold.
+- **Dynamic DCA:** per-period base allocation × regime multiplier. Unused cash in TRIM periods is held in zero-return cash and redeployed in ACCUMULATE/NEUTRAL periods (i.e. trim now, buy more at capitulation).
+- **Static DCA:** same 30-day schedule, always ×1 (reference).
+- **Buy-and-hold:** lump-sum the entire total at window start (worst-case timing reference per the transcript's "80%+ max drawdown" framing).
 
-**Metrics:** CAGR, max drawdown, calendar/vol, Sharpe. **Primary comparison: max drawdown (and time-to-recover) of dynamic DCA vs buy-and-hold signature; secondary: CAGR.** Friction: conservative on-chain/CEX buy-sell spread + withdrawal, e.g. 10-25 bps per trade, plus capital-cost on cash drag (opportunity cost from reduced euphoria-period exposure).
+**Friction:** 10 bps/side execution cost on every buy and sell, plus 25 bps net spread/withdrawal per trade; cash held earns 0 (no lending).
 
-**Sample screen / data integrity:** realized_cap from Coin Metrics (or Blockchain.com RV) must match range and scale; drop any discontiguous months; document source + any gaps. No relabeling or result-shopping after seeing curves.
+**Metrics:** **max drawdown (primary)**, CAGR, Sharpe (0% rf), annualized vol, time-to-recover from max DD. Computed on total portfolio value (BTC holdings + cash).
+
+**Data integrity:** `CapMVRVCur` and `CapMrktCurUSD` from Coin Metrics community API, keyless; realized cap recovered as `CapMrktCurUSD / CapMVRVCur` for sanity only (not used in the DCA). Verify continuity (no NaN gaps); document source. No relabeling or result-shopping after curves are seen.
 
 ---
 
-## 3. Split & windows (draft — data-bounded)
+## 3. Split & windows (frozen — data-bounded)
 
 - **IS:** 2013-01-01 → 2020-12-31 (covers 2013/14 and 2017/18 cycles)
-- **OOS:** 2021-01-01 → present (2021 top, 2022 capitulation, 2023-26 accumulation/run)
-- Caveat: cycle count is small; OOS is ~1-2 cycles. Report explicitly.
+- **OOS:** 2021-01-01 → 2026-08-09 (2021 top, 2022 capitulation, 2023-26 accumulation/run)
+- Caveat: cycle count is small; OOS is ~1.5 cycles. Report explicitly.
 
 ---
 
@@ -72,3 +78,22 @@ Verdict: **DISCONFIRMED** if any gate fails; **CLEARS-OOS** only if dynamic DCA 
 ## 6. Status / Log
 
 - **2026-08-09:** Spec + strategy doc created (REGISTERED, not tested). Free data routes confirmed (Blockchain.com MVRV/RV chart, Coin Metrics realized-cap, 2013+). Awaiting reviewer scope (thresholds, allocation multiplier, benchmarks, IS/OOS split) before any probe. No backtest has been run.
+- **2026-08-10:** Data verified — Coin Metrics Community API keyless serves `CapMVRVCur` + `CapMrktCurUSD` 2010-07-18 → 2026-08-09 (full multi-cycle). Rules frozen (§2), IS/OOS frozen (§3). Probe about to run.
+- **2026-08-10 (probe executed):** Dynamic MVRV DCA vs static DCA vs buy-and-hold on BTC 2013-2026. Verdict **DISCONFIRMED** (reviewer decision): DD gates pass only on sign after a comparison-direction correction, but the edge is not reproducible in-sample. See §7.
+
+---
+
+## 7. RESULTS — probe executed 2026-08-10
+
+Implementation verified against `transcribe.txt`: MVRV **Z-score**, dynamic sizing "buy heavily at capitulation, reduce risk at euphoria," vs **static DCA** and **buy-and-hold**; primary metric **max drawdown** (claim notes standard buy-and-hold drawdown exceeds 80%). Coin Metrics data (verified faithful: `CapMVRVCur` = MVRV ratio; realized cap recovered as `CapMrktCurUSD/CapMVRVCur`, recovers canonical cycle values).
+
+| Window | Strategy | Max drawdown | CAGR | Sharpe |
+|---|---|---|---|---|
+| **IS 2013-2020** | Dynamic MVRV DCA | −83.7% | 76% | 1.21 |
+| IS 2013-2020 | Buy-and-hold | −84.5% | **161%** | 1.55 |
+| **OOS 2021-2026** | Dynamic MVRV DCA | **−53.1%** | 14.7% | 0.56 |
+| OOS 2021-2026 | Buy-and-hold | −76.6% | 15.1% | 0.53 |
+
+**Gate ledger (sign):** G1 OOS DD shallower (PASS), G5 IS DD (PASS, but only −0.87pp), G3 OOS CAGR (PASS), G2 perturbation (PASS — DD stable across 7 parameter sets), G4 (PASS by robustness).
+
+**Verdict: DISCONFIRMED.** Under the corrected sign comparison the DD gates pass, but the claimed drawdown-reduction edge is **not economically reproducible**: in-sample the dynamic DCA gives ~no drawdown benefit (−0.87pp) while ceding a large share of return (76% vs 161% CAGR); only the single OOS window shows the benefit (−53% vs −77% with equal CAGR). A "structural edge persistent over the last decade" must reproduce in-sample; it does not. The OOS benefit is substantially a cash-holding/beta-reduction effect rather than demonstrated timing alpha. Consistent with the house pattern (PEAD / ORB / VRP all DISCONFIRMED).
