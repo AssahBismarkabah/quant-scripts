@@ -1,7 +1,7 @@
 # "Five Structural Edges" — Extraction Register
 
-**Version:** 0.1 (extraction / registration, 2026-08-09)
-**Status:** EXTRACTION — no backtest run yet. 2 of 5 claims already closed elsewhere; 3 new candidates registered awaiting scope + data resolution.
+**Version:** 0.2 (register updated, 2026-08-09)
+**Status:** 3 of 5 claims RESOLVED/CLOSED (PEAD, ORB, VRP); **Congressional CLOSED (weak prior)**; **Bitcoin MVRV = active remaining candidate (registered, awaiting scope)**.
 **Classification:** Five independent structural/behavioral claims: PEAD, opening-range breakout, congressional trading, option VRP harvest, Bitcoin MVRV DCA.
 **Research spec:** `IA/five-structural-edges-research-spec.md`
 **Source:** trading-education transcript (`transcribe.txt`) — same speaker lineage as VWAP-pullback / IVAMR / opening-range-gap. Claims supported by named academic papers and "decades of data"; to be pre-registered and falsified on owned/free data like prior candidates.
@@ -12,9 +12,9 @@
 |---|---|---|---|
 | 1 | Earnings Surprise Drift (PEAD) | **DISCONFIRMED (2026-08-09)** — drift reproduces IS (+2.07%, PF 1.11) but fades OOS (≈0, PF 0.94); no OOS edge | `strategies/pead/PEAD.md`, `IA/pead-research-spec.md` |
 | 2 | Opening Range Breakout ("IVB") | **CLOSED** — same family as ORB, DISCONFIRMED 2026-08-09 | `strategies/opening-range-gap/OPENING_RANGE_GAP.md` |
-| 3 | Congressional trading | **REGISTERED — not advanced** (weak prior; free Quiver data) | this doc, IA spec §3-4 |
+| 3 | Congressional trading | **CLOSED (2026-08-09)** — weak prior, selection/survivorship risk (Pelosi cherry-pick), 45-day lag removes true-insider timing; agrees with decision to not test | this doc, IA spec §2 |
 | 4 | Option harvest / VRP | **CLOSED** — short-vol/VRP family, V1/V2/V3 disconfirmed/ruin 2026-08-08 | `strategies/vol-risk-premium/VOL_RISK_PREMIUM.md`, `V3_TAIL_OVERLAY.md` |
-| 5 | Bitcoin MVRV smart DCA | **REGISTERED — not advanced** (different asset class; free on-chain data) | this doc, IA spec §3-4 |
+| 5 | Bitcoin MVRV smart DCA | **ACTIVE — REGISTERED, not yet tested** (different asset class; free on-chain data) | `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`, `IA/bitcoin-mvrv-research-spec.md` |
 
 Two claims (ORB, VRP) duplicate families already falsified in this repo and are **not re-run**. This is consistent with the house pattern: marketed high-confidence claims from the same lineage repeatedly fail strict pre-registered tests.
 
@@ -22,7 +22,7 @@ Two claims (ORB, VRP) duplicate families already falsified in this repo and are 
 
 **1. Earnings Surprise Drift (PEAD).** Positive/negative earnings surprises drift for ~60 days. Mechanism: slow information diffusion, alpha-execution/fractionalized orders (VWOP-style accumulation), short-sale/liquidity constraints. Claim: "4% spread over 60 days in a single stock." **Prior deflated** by independent large-cap evidence (FinLab 2016-2026: +2.75% ann. L/S, IC 0.012; miss-side stronger than beat-side). Needs SUE via historical analyst consensus — the hard data input.
 
-**3. Congressional trading.** Copy powerful committee members. Stock Act 2012 = 45-day disclosure. Claim: Pelosi family "outperforms nearly every hedge fund." **Selection/survivorship risk** (most politicians underperform); the 45-day public lag means any testable alpha is not true insider timing.
+**3. Congressional trading (CLOSED — not tested).** Copy powerful committee members. Stock Act 2012 = 45-day disclosure. Claim: Pelosi family "outperforms nearly every hedge fund." **Selected not to test**: selection/survivorship bias (most politicians underperform; Pelosi is the cherry-picked standout), small sample, and the 45-day public lag means any testable alpha is not true insider timing. Lowest-prior of the set; closed on judgment consistent with the reviewer decision.
 
 **5. Bitcoin MVRV smart DCA.** Use MVRV Z-score (market value / realized value, z-scored by market-cap volatility) to size accumulation — heavy at capitulation, reduce at euphoria. Claim: lower max drawdown vs buy-and-hold. Expected win = **risk reduction**, not necessarily higher CAGR.
 
@@ -34,8 +34,9 @@ Two claims (ORB, VRP) duplicate families already falsified in this repo and are 
 
 ## 4. Status / Log
 
-- **2026-08-09:** New transcript extracted into this register + IA spec. Tavily confirmed free-data routes for congressional (Quiver) and MVRV (Blockchain.com/Coin Metrics); confirmed PEAD's analyst-consensus gap. **PEAD data route refined:** free Kaggle+FMP for analyst-expectation-based surprise, standardized historically, qualified as not-IBES-SUE, with a point-in-time-before-announcement consensus gate (avoids look-ahead). ORB/VRP flagged as already-closed. Awaiting reviewer scope before any probe.
+- **2026-08-09:** New transcript extracted into this register + IA spec. Tavily confirmed free-data routes for congressional (Quiver) and MVRV (Blockchain.com/Coin Metrics); confirmed PEAD's analyst-consensus gap. PEAD data route refined (free Kaggle+FMP, qualified not-IBES-SUE, point-in-time gate). ORB/VRP flagged as already-closed.
+- **2026-08-09 (later):** **PEAD DISCONFIRMED** (drift reproduces IS, fades OOS — see `strategies/pead/PEAD.md`). **Congressional CLOSED** (weak prior, not tested). **Bitcoin MVRV set as the active remaining candidate** — dedicated docs created (`strategies/bitcoin-mvrv/`, `IA/bitcoin-mvrv-research-spec.md`).
 
 ## 5. Next steps
 
-On reviewer go: pre-register rules + IS/OOS + friction + bootstrap p5 + look-ahead audit for the chosen candidate(s), then scaffold the probe under `research/` and update this doc + spec + README per house pattern. Recommended first candidate: **PEAD** (highest intrinsic merit) once the SUE-data route is chosen.
+Bitcoin MVRV is the last open candidate. On reviewer go: pre-register rules + IS/OOS + friction + bootstrap p5 + look-ahead audit for the MVRV dynamic-DCA, then scaffold the probe under `research/bitcoin-mvrv/` and update this register + README per house pattern.

@@ -1,6 +1,6 @@
 # "Five Structural Edges" — Research & Extraction Spec
 
-**Status:** 3 of 5 resolved (PEAD + ORB + VRP closed); 2 candidates remain (Congressional, Bitcoin MVRV) — awaiting reviewer scope + data (2026-08-09)
+**Status:** 4 of 5 resolved (PEAD + ORB + VRP closed; Congressional closed on judgment); 1 candidate remains (Bitcoin MVRV) — docs created, awaiting reviewer scope + data (2026-08-09)
 **Source:** trading-education transcript (`transcribe.txt`, 14KB) claiming five "structural edges" — repetitive, predictable behaviors "drastically documented by institutional-level academic research" and "persistent over the last decade." Same speaker lineage as the earlier VWAP-pullback / IVAMR / opening-range-gap sources (Robins Cup / CME equity cup / trading-floor workshop). Purpose: capture what the transcript claims, separate already-tested/closed claims from new ones, and record the free-data reality for the actionable candidates — for compact review before any backtest.
 
 ---
@@ -53,10 +53,11 @@ The binding constraint is **point-in-time analyst consensus EPS**. Ranked source
 
 ## 4. What we propose to test — current state
 
-Of the five claims, **three are resolved** (PEAD, ORB, VRP — all DISCONFIRMED/closed). **Two remain untested**, both with confirmed free data sources, both with weaker priors than PEAD had:
+Of the five claims, **four are resolved** (PEAD, ORB, VRP — DISCONFIRMED; Congressional — CLOSED on judgment). **One remains active**: Bitcoin MVRV, with a confirmed free data source and a relative-timing prior (DD reduction vs buy-and-hold), not a clean alpha trade.
 
-1. **Congressional copy-trade** — cleanest free dataset (Quiver congress-trades), but weak prior + 45-day lag; model with **filed-date entry** and a multi-politician basket to avoid Pelosi cherry-picking.
-2. **Bitcoin MVRV smart DCA** — different asset class; free realized-cap data; relative-timing claim (DD reduction vs buy-and-hold), not a clean alpha trade.
+**Congressional (#3) decided CLOSED (2026-08-09):** low prior (selection/survivorship — Pelosi is the highlighted standout, most politicians underperform), small sample, and the 45-day public lag means any testable benefit is not true insider timing. Not pursued.
+
+**Bitcoin MVRV (#5) is the sole active candidate**, pre-registered in docs awaiting reviewer scope: dedicated spec (`IA/bitcoin-mvrv-research-spec.md`) and strategy doc (`strategies/bitcoin-mvrv/BITCOIN_MVRV.md`), not yet tested.
 
 House discipline for each, once chosen and data secured: **pre-registered rules + IS/OOS + friction + bootstrap p5 + look-ahead audit**, DISCONFIRMED on any gate fail — same protocol as PEAD/VWAP-pullback / IVAMR / opening-range-gap.
 
@@ -64,10 +65,11 @@ House discipline for each, once chosen and data secured: **pre-registered rules 
 
 ## 5. Decision for the reviewer
 
-Remaining open candidates to pick from:
-1. **Congressional** — proceed with Quiver free data, filed-date entries, multi-member basket.
-2. **Bitcoin MVRV** — proceed with Blockchain.com/Coin Metrics free realized-cap data.
-3. **Defer both** — extraction-only for now; register and close the umbrella.
+**One candidate remains active:**
+1. **Bitcoin MVRV** — proceed with Blockchain.com/Coin Metrics free realized-cap data (pre-registration drafted in `IA/bitcoin-mvrv-research-spec.md`).
+2. **Or defer** — extraction-only for now; MVRV stays REGISTERED, not tested.
+
+Congressional is **closed** and out of scope.
 
 No backtest runs on a candidate until scope + data are resolved and gates pre-registered.
 
