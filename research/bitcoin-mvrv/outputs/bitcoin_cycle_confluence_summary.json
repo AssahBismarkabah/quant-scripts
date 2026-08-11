@@ -1,0 +1,190 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-11",
+    "purpose": "Does Bitcoin-Cycle x MVRV-Z confluence beat buy-hold and MVRV-Z alone?",
+    "rules": {
+      "mvrv_z": "rawZ=(MC-RC)/std(MC,730); Z=rescale(rawZ,-0.57,9.4,0,100)",
+      "lowB": "ema(lowest(Z,1500),900)+5",
+      "highB": "ema(highest(Z,1200),900)-20",
+      "cycle_top": "crossunder(2*SMA365,SMA116)",
+      "cycle_bottom": "crossunder(SMA232,SMA2Y)",
+      "friction_side": 0.001,
+      "friction_flat": 0.0025
+    },
+    "split": {
+      "IS": [
+        "2013-01-01",
+        "2020-12-31"
+      ],
+      "OOS": [
+        "2021-01-01",
+        "2026-08-09"
+      ]
+    }
+  },
+  "windows": {
+    "IS": {
+      "buyhold": {
+        "cagr": 1.6139703212524394,
+        "sharpe": 1.5520095802848781,
+        "vol": 0.8659428287330699,
+        "max_drawdown": -0.8452501172355373,
+        "ttr_days": 771,
+        "end_value": 216641225815.76398,
+        "start_value": 99650250.0
+      },
+      "confluence_longonly": {
+        "cagr": 0.2987366336782382,
+        "sharpe": 0.9152947471956535,
+        "vol": 0.3579211977319211,
+        "max_drawdown": -0.6139958892305075,
+        "ttr_days": 224,
+        "end_value": 808831252.3434407,
+        "start_value": 100000000.0
+      },
+      "confluence_longshort": {
+        "cagr": 0.43332272136535943,
+        "sharpe": 1.1188877139554736,
+        "vol": 0.39207422534727476,
+        "max_drawdown": -0.6139958892305075,
+        "ttr_days": 224,
+        "end_value": 1779605901.1652858,
+        "start_value": 100000000.0
+      },
+      "either_longonly": {
+        "cagr": 1.022141328802023,
+        "sharpe": 1.5709688412617218,
+        "vol": 0.5438546669885927,
+        "max_drawdown": -0.6138721043771533,
+        "ttr_days": 224,
+        "end_value": 27903249171.793236,
+        "start_value": 100000000.0
+      },
+      "either_longshort": {
+        "cagr": 1.5811584501895393,
+        "sharpe": -0.30551464464387607,
+        "vol": 209.09448644204295,
+        "max_drawdown": -4.8700600354869605,
+        "ttr_days": 457,
+        "end_value": 196512344432.85815,
+        "start_value": 100000000.0
+      },
+      "mvrv_longonly": {
+        "cagr": 0.23733660038919036,
+        "sharpe": 0.759568819258807,
+        "vol": 0.3765513536590501,
+        "max_drawdown": -0.6138721043771533,
+        "ttr_days": 224,
+        "end_value": 549097742.6712079,
+        "start_value": 100000000.0
+      },
+      "mvrv_longshort": {
+        "cagr": 0.33225421255859433,
+        "sharpe": 0.8513020315249384,
+        "vol": 0.4649466203106587,
+        "max_drawdown": -0.6138721043771533,
+        "ttr_days": 224,
+        "end_value": 991643835.0554087,
+        "start_value": 100000000.0
+      }
+    },
+    "OOS": {
+      "buyhold": {
+        "cagr": 0.15184507382436974,
+        "sharpe": 0.5327441062305279,
+        "vol": 0.5671691430194655,
+        "max_drawdown": -0.766713097240405,
+        "ttr_days": 481,
+        "end_value": 219981436.23641366,
+        "start_value": 99650250.0
+      },
+      "confluence_longonly": {
+        "cagr": 0.2060996834601887,
+        "sharpe": 0.6662933947200197,
+        "vol": 0.40254470833597017,
+        "max_drawdown": -0.5308180182732833,
+        "ttr_days": null,
+        "end_value": 285679862.7532337,
+        "start_value": 100000000.0
+      },
+      "confluence_longshort": {
+        "cagr": 0.2060996834601887,
+        "sharpe": 0.6662933947200197,
+        "vol": 0.40254470833597017,
+        "max_drawdown": -0.5308180182732833,
+        "ttr_days": null,
+        "end_value": 285679862.7532337,
+        "start_value": 100000000.0
+      },
+      "either_longonly": {
+        "cagr": 0.1508146390567633,
+        "sharpe": 0.6364457362154415,
+        "vol": 0.2840797177136303,
+        "max_drawdown": -0.3537000760227458,
+        "ttr_days": 100,
+        "end_value": 219649555.90179586,
+        "start_value": 100000000.0
+      },
+      "either_longshort": {
+        "cagr": 0.7065485173287485,
+        "sharpe": -0.3943945445838844,
+        "vol": 19.338867439598893,
+        "max_drawdown": -1.294359156682763,
+        "ttr_days": 184,
+        "end_value": 1996391383.2906737,
+        "start_value": 100000000.0
+      },
+      "mvrv_longonly": {
+        "cagr": 0.20045894446172619,
+        "sharpe": 0.8023619108939589,
+        "vol": 0.27470462087775566,
+        "max_drawdown": -0.3537000760227458,
+        "ttr_days": 100,
+        "end_value": 278275704.50794154,
+        "start_value": 100000000.0
+      },
+      "mvrv_longshort": {
+        "cagr": 0.4280991193592514,
+        "sharpe": -0.42446968756557074,
+        "vol": 19.276493282655192,
+        "max_drawdown": -1.294359156682763,
+        "ttr_days": 184,
+        "end_value": 736039278.0894175,
+        "start_value": 100000000.0
+      }
+    }
+  },
+  "gate_summary": {
+    "IS_conflongonly_vs_bh": {
+      "cagr": 0.2987366336782382,
+      "bh_cagr": 1.6139703212524394,
+      "delta_cagr": -1.3152336875742012,
+      "max_dd": -0.6139958892305075,
+      "bh_max_dd": -0.8452501172355373,
+      "dd_pp_shallower": -23.12542280050298,
+      "sharpe": 0.9152947471956535,
+      "bh_sharpe": 1.5520095802848781
+    },
+    "OOS_conflongonly_vs_bh": {
+      "cagr": 0.2060996834601887,
+      "bh_cagr": 0.15184507382436974,
+      "delta_cagr": 0.05425460963581896,
+      "max_dd": -0.5308180182732833,
+      "bh_max_dd": -0.766713097240405,
+      "dd_pp_shallower": -23.58950789671217,
+      "sharpe": 0.6662933947200197,
+      "bh_sharpe": 0.5327441062305279
+    },
+    "IS_conflongonly_vs_mvrv": {
+      "delta_cagr": 0.06140003328904786,
+      "confluence_cagr": 0.2987366336782382,
+      "mvrv_cagr": 0.23733660038919036
+    },
+    "OOS_conflongonly_vs_mvrv": {
+      "delta_cagr": 0.005640738998462513,
+      "confluence_cagr": 0.2060996834601887,
+      "mvrv_cagr": 0.20045894446172619
+    }
+  },
+  "verdict": "SEE DATA \u2014 reviewer decision pending (no pre-judged outcome)."
+}

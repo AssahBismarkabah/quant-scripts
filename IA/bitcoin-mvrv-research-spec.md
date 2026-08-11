@@ -97,3 +97,31 @@ Implementation verified against `transcribe.txt`: MVRV **Z-score**, dynamic sizi
 **Gate ledger (sign):** G1 OOS DD shallower (PASS), G5 IS DD (PASS, but only −0.87pp), G3 OOS CAGR (PASS), G2 perturbation (PASS — DD stable across 7 parameter sets), G4 (PASS by robustness).
 
 **Verdict: DISCONFIRMED.** Under the corrected sign comparison the DD gates pass, but the claimed drawdown-reduction edge is **not economically reproducible**: in-sample the dynamic DCA gives ~no drawdown benefit (−0.87pp) while ceding a large share of return (76% vs 161% CAGR); only the single OOS window shows the benefit (−53% vs −77% with equal CAGR). A "structural edge persistent over the last decade" must reproduce in-sample; it does not. The OOS benefit is substantially a cash-holding/beta-reduction effect rather than demonstrated timing alpha. Consistent with the house pattern (PEAD / ORB / VRP all DISCONFIRMED).
+
+---
+
+## 8. Follow-up 2026-08-11 — Bitcoin Cycle × MVRV-Z band confluence (CLOSED, not testable N=2)
+
+**Question (asked during triage, not part of the original pre-registered spec):** does combining the "Bitcoin Cycle" indicator (1Y-MA ×2 vs 116D → CycleTop; 232D vs 2Y-MA → CycleBottom) with the MVRV-Z low/high bands give a valid buy-at-bottom / sell-at-top signal — i.e., does the confluence rescue / improve the MVRV signal?
+
+**Script:** `research/bitcoin-mvrv/cycle_confluence_probe.py` (faithful port of the two TradingView Pine indicators; rescale-Pine MVRV Z: `(MC−RCap)/σ(MC,730)` → rescale[−0.57,9.40]→[0,100]; lowB=EMA(lowest(Z,1500),900)+5; highB=EMA(highest(Z,1200),900)−20; cycle via crossunder only). Same data (Coin Metrics), same friction (10bp side + 25bp flat), same IS/OOS split.
+
+**Key empirical findings:**
+
+*Event counts (the decisive fact):* Cycle indicator fires only **4 CycleTops / 4 CycleBottoms over 2010-2026**. The strict **confluence** signal (cycle event AND band) fires **1 buy / 1 sell in IS and 1 buy / 0 sell in OOS — 2 trades in 16 years.** Not testable — anecdote, not an edge.
+
+| Variant | IS CAGR | IS DD | OOS CAGR | OOS DD |
+|---|---|---|---|---|
+| buy-and-hold | 161.4% | −84.5% | 15.2% | −76.7% |
+| confluence_longonly | 29.9% | −61.4% | 20.6% | −53.1% |
+| either_longonly | 102.2% | −61.4% | 15.1% | −35.4% |
+| mvrv_longonly (band only) | 23.7% | −61.4% | 20.0% | −35.4% |
+| mvrv_longshort (band only) | 33.2% | −61.4% | 42.8% | **−129.4%** |
+
+*Reading:*
+- **MVRV band timing alone was already tested** (rows above): buying the low band / selling the high band cuts drawdown vs B&H (OOS −35% vs −77%) but gives up return badly in IS (24% vs 161%) and ~matches B&H OOS (20% vs 15%) — same profile as the original DISCONFIRMED MVRV DCA.
+- **The cycle filter adds ~nothing over MVRV alone** (IS +6pp, OOS +0.6pp on long-only) — the two indicators select mostly overlapping days and the rare cycle crossunder contributes no independent, testable information.
+- **Long-short is worse** — shorting BTC in this simple model is unreliable (DD −129%, unstable across IS/OOS).
+- No variant beats buy-and-hold on return in-sample; the confluence's only OOS "win" is beta-avoidance/rent, not alpha, and it does not reproduce IS.
+
+**Verdict: CLOSED (not testable — N=2 confluence events; relaxed variants neither beat B&H nor add value over MVRV alone).** Consistent with, and reinforcing, the original DISCONFIRMED MVRV result. Recorded here so the cycle-confluence idea is not re-surfaced as a candidate.
