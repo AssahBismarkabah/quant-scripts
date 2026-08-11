@@ -127,27 +127,59 @@ def _clean(s: str) -> str:
 
 
 def fetch_arxiv(cats: list[str], max_results: int) -> list[dict]:
-    query = " OR ".join(f"cat:{c}" for c in cats)
-    params = {
-        "search_query": query,
-        "sortBy": "submittedDate",
-        "sortOrder": "descending",
-        "start": 0,
-        "max_results": max_results,
-    }
-    r = requests.get(ARXIV_API, params=params, headers={"User-Agent": "research"}, timeout=60)
-    r.raise_for_status()
     rows = []
-    for e in re.findall(r"<entry>(.*?)</entry>", r.text, re.S):
-        def g(pat):
-            m = re.search(pat, e, re.S)
-            return m.group(1) if m else ""
-        title = _clean(re.sub(r"<.*?>", "", g(r"<title>(.*?)</title>")))
-        abstract = _clean(re.sub(r"<.*?>", "", g(r"<summary>(.*?)</summary>")))
-        pub = g(r"<published>(.*?)</published>")
-        link = g(r"<id>(.*?)</id>")
-        rows.append({"date": pub[:10] if pub else "", "title": title, "abstract": abstract, "url": link, "source": "arxiv"})
+    per_cat = max(1, max_results // len(cats))
+    for cat in cats:
+        params = {
+            "search_query": f"cat:{cat}",
+            "sortBy": "submittedDate",
+            "sortOrder": "descending",
+            "start": 0,
+            "max_results": per_cat,
+        }
+        r = _arxiv_get(params)
+        for e in re.findall(r"<entry>(.*?)</entry>", r.text, re.S):
+            def g(pat):
+                m = re.search(pat, e, re.S)
+                return m.group(1) if m else ""
+            title = _clean(re.sub(r"<.*?>", "", g(r"<title>(.*?)</title>")))
+            abstract = _clean(re.sub(r"<.*?>", "", g(r"<summary>(.*?)</summary>")))
+            pub = g(r"<published>(.*?)</published>")
+            link = g(r"<id>(.*?)</id>")
+            rows.append({"date": pub[:10] if pub else "", "title": title, "abstract": abstract, "url": link, "source": "arxiv"})
+        time.sleep(3.0)
     return rows
+
+
+def _arxiv_get(params: dict) -> requests.Response:
+    """GET arXiv honoring Retry-After on 429/503, with backoff."""
+    last = None
+    for attempt in range(6):
+        try:
+            resp = requests.get(
+                ARXIV_API, params=params, headers={"User-Agent": "research"}, timeout=60
+            )
+        except requests.exceptions.RequestException as exc:
+            last = exc
+            time.sleep(3.0 * (attempt + 1))
+            continue
+        if resp.status_code in (429, 503):
+            wait = 3.0
+            try:
+                wait = float(resp.headers.get("Retry-After", wait))
+            except ValueError:
+                pass
+            wait = max(wait, 3.0) * (attempt + 1)
+            last = resp
+            time.sleep(wait)
+            continue
+        resp.raise_for_status()
+        return resp
+    if isinstance(last, requests.exceptions.RequestException):
+        raise last
+    assert last is not None
+    last.raise_for_status()
+    return last
 
 
 def _inverted_to_text(inv: dict | None) -> str:
