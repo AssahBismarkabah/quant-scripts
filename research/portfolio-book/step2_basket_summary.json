@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-12",
+    "purpose": "Aggregation test: does a vol-scaled book of 5 weak index-timing signals clear costs OOS? (neutral prior: likely fails)",
+    "members": [
+      "time_series_mom",
+      "reversal_1m",
+      "turn_of_month",
+      "january_effect",
+      "seasonality_novapr"
+    ],
+    "combination": "equal-weight mean of IS-z-scored member weights; vol-scaled to 10%",
+    "benchmarks": [
+      "long_vol(self-scaled buyhold)",
+      "cash"
+    ],
+    "friction_bps": 10.0,
+    "target_vol": 0.1,
+    "dropped": "IWM size-tilt member dropped (IWM cached history starts 2023; too short for relative-momentum).",
+    "split_is": [
+      "1993-09-01",
+      "2008-12-31"
+    ],
+    "split_oos": [
+      "2010-01-01",
+      "2026-07-31"
+    ]
+  },
+  "members_WITHIN": {
+    "IS": {
+      "time_series_mom": {
+        "cagr": 0.09965962065551826,
+        "sharpe": 0.9751243263152143,
+        "days_long": 2766
+      },
+      "reversal_1m": {
+        "cagr": -0.2810402903166449,
+        "sharpe": -3.0938899227060217,
+        "days_long": 1530
+      },
+      "turn_of_month": {
+        "cagr": 0.017992758276158982,
+        "sharpe": 0.3699978582763411,
+        "days_long": 920
+      },
+      "january_effect": {
+        "cagr": 0.008659619262284757,
+        "sharpe": 0.30545090889778165,
+        "days_long": 308
+      },
+      "seasonality_novapr": {
+        "cagr": 0.03752462318023819,
+        "sharpe": 0.5483404179246506,
+        "days_long": 1895
+      }
+    },
+    "OOS": {
+      "time_series_mom": {
+        "cagr": 0.12679984401322608,
+        "sharpe": 1.2057131528773035,
+        "days_long": 3629
+      },
+      "reversal_1m": {
+        "cagr": -0.2729283714684363,
+        "sharpe": -2.9931696867428776,
+        "days_long": 1361
+      },
+      "turn_of_month": {
+        "cagr": 0.007803720125145519,
+        "sharpe": 0.17512305172810985,
+        "days_long": 995
+      },
+      "january_effect": {
+        "cagr": 0.005787807567277481,
+        "sharpe": 0.20357056793662334,
+        "days_long": 343
+      },
+      "seasonality_novapr": {
+        "cagr": 0.05402230086556581,
+        "sharpe": 0.7421931819921935,
+        "days_long": 2055
+      }
+    }
+  },
+  "windows": {
+    "IS": {
+      "book": {
+        "cagr": -0.03333370025047955,
+        "sharpe": -0.6970072792817935,
+        "max_dd": -0.4263921335701395,
+        "bootstrap_p5_mean_excess": -0.0002078363988574218,
+        "profit_factor": 0.8537527922212479,
+        "end_value": 0.5950219668391211
+      },
+      "buyhold_vol": {
+        "cagr": 0.00607339541813956,
+        "sharpe": 0.31836571632674454,
+        "max_dd": -0.06395838229047512,
+        "end_value": 1.0971584422033425
+      }
+    },
+    "OOS": {
+      "book": {
+        "cagr": -0.04097579219379388,
+        "sharpe": -0.8473542676210881,
+        "max_dd": -0.5393251469088256,
+        "bootstrap_p5_mean_excess": -0.00024350565504892993,
+        "profit_factor": 0.8153390776580965,
+        "end_value": 0.5007385910795129
+      },
+      "buyhold_vol": {
+        "cagr": 0.012916239762642556,
+        "sharpe": 0.7512310396901015,
+        "max_dd": -0.03826177032407618,
+        "end_value": 1.2363466321426595
+      }
+    }
+  },
+  "gates": {
+    "G2A_oos_p5_gt_0": {
+      "pass": false,
+      "p5": -0.00024350565504892993
+    },
+    "G2B_oos_pf_ge_1": {
+      "pass": false,
+      "pf": 0.8153390776580965
+    },
+    "G2C_oos_holdout_robust": {
+      "pass": false,
+      "half1_mean": -0.00015436816940185368,
+      "half2_mean": -0.00016963039291523863
+    }
+  },
+  "step2_verdict": "FAILS-OOS",
+  "conclusion": "Free-data portfolio (index-timing aggregation) is measured-dead OOS net of friction -> per memo Step 3, remaining choice is buy-data (a) or stop (b)."
+}

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-12",
+    "purpose": "Positive control: can the production harness detect a KNOWN embedded alpha?",
+    "harness": "src/quant_scripts/index_rebalancing/validation.py (unchanged, imported)",
+    "n_sims": 2000,
+    "cost_bps": 4.0,
+    "seed": 7
+  },
+  "cells": {
+    "alpha_alpha_mid_n": {
+      "n": 800,
+      "true_mean_bps": 8.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 0.4166666666666667,
+      "claimed_alpha_reps": 5,
+      "n_replications": 12
+    },
+    "alpha_alpha_large_n": {
+      "n": 3000,
+      "true_mean_bps": 8.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 0.6666666666666666,
+      "claimed_alpha_reps": 8,
+      "n_replications": 12
+    },
+    "alpha_alpha_strong": {
+      "n": 800,
+      "true_mean_bps": 15.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 1.0,
+      "claimed_alpha_reps": 12,
+      "n_replications": 12
+    },
+    "alpha_alpha_very_large_n": {
+      "n": 20000,
+      "true_mean_bps": 8.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 1.0,
+      "claimed_alpha_reps": 12,
+      "n_replications": 12
+    },
+    "alpha_alpha_strong_highvol": {
+      "n": 3000,
+      "true_mean_bps": 15.0,
+      "sd_bps": 160.0,
+      "retrieval_rate": 1.0,
+      "claimed_alpha_reps": 12,
+      "n_replications": 12
+    },
+    "null_null_mid": {
+      "n": 800,
+      "true_mean_bps": 0.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 0.0,
+      "claimed_alpha_reps": 0,
+      "n_replications": 12
+    },
+    "null_null_large": {
+      "n": 3000,
+      "true_mean_bps": 0.0,
+      "sd_bps": 90.0,
+      "retrieval_rate": 0.0,
+      "claimed_alpha_reps": 0,
+      "n_replications": 12
+    }
+  },
+  "gates": {
+    "G1A_alpha_detected": {
+      "pass": true,
+      "strong_cell_retrieval": {
+        "alpha_alpha_strong": 1.0,
+        "alpha_alpha_strong_highvol": 1.0,
+        "null_null_mid": 0.0,
+        "null_null_large": 0.0
+      },
+      "full_table": {
+        "alpha_alpha_mid_n": 0.4166666666666667,
+        "alpha_alpha_large_n": 0.6666666666666666,
+        "alpha_alpha_strong": 1.0,
+        "alpha_alpha_very_large_n": 1.0,
+        "alpha_alpha_strong_highvol": 1.0,
+        "null_null_mid": 0.0,
+        "null_null_large": 0.0
+      },
+      "note": "Harness must retrieve CLEARLY-detectable (t>=~2.5) alpha cells at >=90% and never claim nulls. Marginal cells (t~1.3-2.4) are correctly power-limited and are NOT counted as harness failure."
+    },
+    "G1B_null_not_claimed": {
+      "pass": true,
+      "note": "Zero-mean (net-negative) cells claimed as alpha in <=20% of 12 replications."
+    }
+  },
+  "testA_verdict": "PASS",
+  "conclusion": "Harness is sound: retrieves strong edges ~100% and never false-positives on nulls; single-signal gates are low-powered for realistic weak edges (t<2 detected only 40-70%), which is correct statistics and directly motivates Step 2 aggregation."
+}

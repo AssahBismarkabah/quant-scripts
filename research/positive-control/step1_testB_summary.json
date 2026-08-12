@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-12",
+    "purpose": "Smoke test: harness must detect the large, established long-equity-vs-cash premium",
+    "equity": "SPY close-to-close (no dividends; conservative)",
+    "risk_free": "FRED DTB3 3M T-bill",
+    "note": "SMOKE test only; Test A is the load-bearing control.",
+    "split": {
+      "IS": [
+        "1993-02-01",
+        "2008-12-31"
+      ],
+      "OOS": [
+        "2010-01-01",
+        "2026-07-31"
+      ]
+    }
+  },
+  "windows": {
+    "IS": {
+      "cagr": 0.008598946119845241,
+      "sharpe": 0.1411163410897171,
+      "vol": 0.19407219749407367,
+      "max_drawdown": -0.6171706265550423,
+      "end_value": 1.1459355603858055,
+      "bootstrap_p5_excess_mean": -0.00020261164273923128,
+      "sample_days": 4007
+    },
+    "OOS": {
+      "cagr": 0.10460318441519534,
+      "sharpe": 0.667495625198481,
+      "vol": 0.1715075017529585,
+      "max_drawdown": -0.3414792996178141,
+      "end_value": 5.198828234739861,
+      "bootstrap_p5_excess_mean": 0.00018592667942668556,
+      "sample_days": 4167
+    },
+    "FULL": {
+      "cagr": 0.0618879875351086,
+      "sharpe": 0.4164880929207863,
+      "vol": 0.18600327165339545,
+      "max_drawdown": -0.654561119866969,
+      "end_value": 7.470678417552479,
+      "bootstrap_p5_excess_mean": 9.803417292606903e-05,
+      "sample_days": 8426
+    }
+  },
+  "gates": {
+    "G1B_long_equity_premium_detected": {
+      "pass": true,
+      "FULL": {
+        "cagr": 0.0618879875351086,
+        "sharpe": 0.4164880929207863,
+        "bootstrap_p5_excess_mean": 9.803417292606903e-05,
+        "max_drawdown": -0.654561119866969
+      },
+      "IS": {
+        "cagr": 0.008598946119845241,
+        "sharpe": 0.1411163410897171,
+        "note": "1993-2008 ends at the GFC trough; weak IS is an artifact of the break point + price-only (no dividends), not a harness failure."
+      },
+      "OOS": {
+        "cagr": 0.10460318441519534,
+        "sharpe": 0.667495625198481,
+        "bootstrap_p5_excess_mean": 0.00018592667942668556,
+        "max_drawdown": -0.3414792996178141
+      },
+      "note": "Smoke test: harness must detect a large long-equity-vs-cash premium over the FULL sample (CAGR>3%, Sharpe>0, bootstrap p5 of mean excess >0). IS ending at the 2008 trough is expected weak; the full-sample signal is load-bearing here."
+    }
+  },
+  "testB_verdict": "PASS"
+}
