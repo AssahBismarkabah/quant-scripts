@@ -147,7 +147,40 @@ Objective condition tested (point-in-time, no lookahead): trailing-21d fraction 
 
 **Notable for future passes:** the stale/illiquid universe is where fake edges live. Any future derived observation from this panel must be screened to liquid-only from the start or it will repeat this artifact. The tradable direction seen here (mildly higher forward return on the most-liquid end) is weak and non-monotonic — not pursued without a stronger, mechanistically-grounded why.
 
-### 7.2 Next options (to choose with user)
-1. Refine liquidity into a **conditional** hypothesis (e.g. liquidity interacted with a return/momentum state) — only if a concrete why justifies it; not automatic.
-2. Move to the next observation class: **reversal/short-horizon** on the CLEANED, liquid-only panel (the per-name jump/stale structure suggests overnight vs intraday spread may be measurable).
-3. Move to the **fresh intraday** NQ panel (2020-2026) for the microstructure direction.
+### 7.2 Second derive pass — short-horizon momentum & conditional liquidity (measured, friction-eaten)
+
+Built on the first-pass finding by restricting to the **liquid-only universe** from the start (median price > $5 AND stale_share < 25%; 18.4M rows, 7,409 symbols). Script `research/pead/derive2_liquid_scan.py`, outputs `derive2_reversal_summary.csv`, `derive2_conditional_summary.csv`. Split IS (<2010) / OOS (≥2010). All features point-in-time/no-lookahead.
+
+**Observation A — short-horizon prior-return momentum (NOT reversal):** tiling the liquid cross-section by prior-1d (and prior-5d) return, forward equal-weight returns are **monotone momentum**: prior winners keep winning, losers keep losing. Consistent both halves.
+
+| Prior-5d tile (0=winners → 4=losers) | 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|---|
+| OOS 5d | 50.3 bps | 28.5 | 24.9 | 20.5 | 14.9 |
+| OOS 21d | 163.8 | 113.8 | 103.5 | 96.1 | 82.0 |
+
+Gross long-winner minus short-loser spread (OOS): 5d = **35.4 bps**, 21d = **81.8 bps**. Strong and consistent IS/OOS.
+
+**Net-of-friction verdict (the decisive gate):**
+
+| Horizon | Gross spread | @10bps/side (4 sides) | @20bps/side (4 sides) | @50bps/side |
+|---|---|---|---|---|
+| 5d | 35.4 bps | −4.6 bps | **−44.6 bps** | −164.6 bps |
+| 21d | 81.8 bps | 41.8 bps | **+1.8 bps** | −118.2 bps |
+
+At 5d the momentum spread is friction-eaten at any realistic cost; at 21d it barely reaches breakeven at 20bps/side and is deeply negative at 50bps/side (and the equal-weight small/liquid names plus short-borrow costs would push it negative). **This is a gross cross-sectional momentum phenomenon that does not survive honest friction. Not a tradeable edge.**
+
+**Observation B — conditional liquidity (stale_share tile) × prior-5d sign:** at 21d, within most-liquidity tile, prior-5d LOSERS show higher forward return than winners (OOS: 143.4 vs 89.0 bps) — i.e. reversal in the most-liquid names. This conflicts with Observation A's momentum framing (different marginal vs conditional cuts) and is equally gross/untested net-of-cost; **not claimed as an edge.**
+
+**Verdict:** second derived observation also **measured dead-end under friction** — the PEAD panel's cross-sectional price structure produces gross anomalies (liquidity, short-horizon momentum) that all fail to survive realistic costs, consistent with the program's history and step2b. The derive method is working as designed: cheaply rejecting false edges on the panel.
+
+### 7.3 Overall Stage-1 PEAD-panel status and next options
+
+- PEAD panel has now contributed THREE measured dead-ends: (1) liquidity/staleness standalone, (2) short-horizon momentum net-of-friction, (3) conditional liquidity inconsistent/friction-untested. The panel's cross-sectional price-only structure (daily CLOSE only) offers gross effects but nothing that survives costs — consistent with the free-data, no-moat outcome the program already concluded.
+- **Limitation surfaced:** the panel has daily CLOSE only (no open/high/low, no volume). It cannot measure overnight-vs-intraday, order size, or any microstructure — the dimensions the docs flag as needing a data moat. The PEAD panel is likely near its useful end for derive work.
+- **Next options (to choose with user):**
+  1. Move to the **fresh intraday NQ panel (2020-2026)** — the one free dataset that DOES have the microstructure dimension (O/H/L/C + volume at 1-min) and is the direction the docs flag as having a genuine moat (order flow). Highest-value next step.
+  2. Try a genuinely different PEAD angle not yet covered (e.g. fwd-return conditioned on relative-volume-like proxies) — but the panel lacks volume/float, so limited.
+  3. Accept that free-data cross-sectional derivation is exhausted on this panel and treat the intraday dataset as the remaining free lane before any paid-data Stage 2.
+
+## 8. Status (updated)
+- **2026-08-13 (second derive pass complete):** Ran derive2_liquid_scan.py on the liquid-only PEAD universe. Observation A = short-horizon momentum (gross, strong IS/OOS) but friction-eaten net-of-cost (5d: -44.6 bps at 20bps/side; 21d: +1.8 bps breakeven). Observation B = conditional liquidity x sign reversal, inconsistent with A and untested net-of-cost. Both recorded as measured dead-ends/not-claimed in sec 7.2. The PEAD panel (price-only) appears near its useful end for derive work; the fresh intraday NQ panel (has volume + O/H/L/C) is the leading remaining free-data lane.
