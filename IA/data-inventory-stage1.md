@@ -248,9 +248,26 @@ Observed relationship: ES & NQ 1-min return correlation = 0.92 (extremely tight 
 | PEAD cross-section | conditional liquidity x sign | dead (inconsistent, no-why) |
 | NQ intraday (combined 2013-2026) | opening-direction persistence | dead (bootstrap p5, no-why) |
 | ES vs NQ intraday | relative value / pairs / lead-lag | dead (no mean reversion, no structure) |
-| **SPY + vol suite (VIX/SVXY/VXX/SVIX)** | **var-risk-premium V2 (short-vol tradeable + conditional event)** | **OPEN - not yet a dead end** |
-| **index-rebal single-name bars (1,259 names)** | **(not yet derive-testable objective rule)** | **NOT run** |
+| **SPY + vol suite (VIX/SVXY/VXX/SVIX)** | **vol-risk-premium family (V1 level, V2 short-vol, V3 tail-overlay)** | **CLOSED as DISCONFIRMED 2026-08-08** |
+| **index-rebal single-name bars (1,259 names)** | **index-rebalancing price-pressure (Level-1 + Level-2)** | **CLOSED as REJECTED 2026-08-04** |
 
 Every derived observation run was put through the harness (IS/OOS, friction, bootstrap p5) and recorded — no re-selection, no member-dropping.
 
-**Honest Stage-1 conclusion:** several free lanes ARE measured dead, but the derive pass is NOT yet exhausted. The strongest open free-data thread is the **vol-risk-premium V2** already formally queued in `IA/vol-risk-premium-research-spec.md` §8: V1 confirmed the variance-risk-premium *level* is real (2026-08-08) but did NOT test the *tradeable* short-vol version (real costs + tail simulation) or the conditional FOMC/earnings event version. That is why-grounded (short-vol sellers capture implied>realized; the tail is the risk), owned/free data (SVXY/VXX + VIX + SPY), and explicitly not closed. This is the genuine next Stage-1 step before any Stage-2 fork.
+### 8.5b CORRECTION — the "last lane" (index-rebal bars) is ALSO already closed
+
+**Correction (2026-08-13):** this document earlier listed the index-rebalancing single-name bars (1,259 names, 2023-2026) as the only owned dataset "NOT yet run through the derive method." On inspection this is wrong: those bars are the **same universe used by the index-rebalancing study**, which was **already fully adjudicated and REJECTED** in `IA/index-rebalancing-research-spec.md` (Level-1 study 2026-08-04, Level-2 robustness/capacity/borrow 2026-08-04, candidate closed). Its event tables (`events/spdji_reconciled.parquet`, `events/r2000_events.parquet`, `events/study_events.parquet`) and complete outputs (`outputs/results_base.parquet`, `level2_*.parquet`, `s10_validation.parquet`) are all on disk. The short-additions 10td edge was rejected on the pre-registered "single-year dependence" gate (one March 2025 batch); long-deletions failed in-sample; Russell 2000 inverted. **The index-rebal bars are not a fresh lane** — they are the already-closed study's data.
+
+### 8.5c COMPLETE Stage-1 ledger — every owned free dataset is now accounted for
+
+Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (derive→dead), SPY+vol (already closed), buyback/10b5-1 (already closed), BTC MVRV (already closed), index-rebal bars (already closed). **There is no owned free dataset left to derive on that is not already measured/closed.** Stage 1 (free-data derive at cost 0) is genuinely exhausted across the complete inventory. The remaining decision is the genuine Stage-2 fork: (2a) buy a data moat (order flow / options microstructure / long intraday history) and run the SAME derive method on it, or (2b) STOP and preserve capital — both legitimate, data-backed, non-failure outcomes per `edge-discovery-direction.md` §7 and `institutional-approach.md` §Data-moat.
+
+### 8.5a CORRECTION — the vol-risk-premium family is ALREADY CLOSED (not "open")
+
+**Correction (2026-08-13):** an earlier draft of this section wrongly labeled the VRP family "OPEN - not yet a dead end." This was incorrect. `IA/vol-risk-premium-research-spec.md` already ran and adjudicated the ENTIRE family on 2026-08-08:
+- **V1** (unconditional VRP level): MEASURED-POSITIVE-LEVEL (premium exists) — but a level is NOT an edge.
+- **V2** (naive short-vol buy-and-hold SVXY + VRP-regime-gated): **DISCONFIRMED** — −95% max DD / −83% single day; gate FAIL.
+- **V3** (tail-overlay: term-inversion / elevated-rising-VIX / equity-drawdown exits): **DISCONFIRMED** — total −26%, skips the premium-rich regimes. Candidate **CLOSED 2026-08-08**; doc says "No paid data, no further work recommended on this family."
+
+**What I derived fresh this session (2026-08-13), and why it is NOT a new edge:** I observed that short-vol gated to "VIX < 90th percentile of prior year" (hold short-vol in normal vol, flat when VIX already extreme) gives +2,699% total but **max DD −66% / worst day −26%**. That measured result **still FAILS the VRP V3 tail gate (bound: max DD < −40%)** — same tail-dominance failure that closed the family. The 2018 volmageddon tail comes through regardless of VIX-level gating, exactly as V2/V3's diagnostics established. This is a re-confirmation of the closed conclusion, NOT a new edge, and I nearly mis-read it as promising before checking the spec. **Verdict: the vol suite is not an open lane; the family is closed.** No further short-vol/VRP derive work is justified on this data.
+
+**Data note (worth keeping):** SVXY/VXX/SVIX + VIX/VIX3M/VIX9D + SPY_long remain on disk and are free/owned, but their entire tradeable short-vol conclusion is already recorded as DISCONFIRMED. The index-rebal single-name bars (1,259 names) remain the one owned dataset not yet run through the derive method.
