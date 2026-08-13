@@ -72,5 +72,25 @@ The value of the data is **creating an asymmetry** (info other market participan
 
 ## 6. Decision status
 
-- **2026-08-13:** Resolution recorded. Free-data anomaly phase: **closed** (measured-dead). The only remaining route to a non-decayed edge is the **data-moat + derive-from-data + objective-rule + validate** path (memo Step 3 option (a), now with the direction made explicit). The fork is still genuinely: (a) commit to buying a microstructure/data moat and doing the uncertain derivation, or (b) stop. No third "free candidate" option.
+- **2026-08-13:** Resolution recorded. Free-data ***pre-specified-anomaly*** phase: **closed** (measured-dead) — see §7 correction: this refers to the set of public anomalies we tested, NOT to the derive-from-data method, which remains open on free data. The fork broadens accordingly: free-data derive pass FIRST (Stage 1), then paid moat (Stage 2), then stop. No "buy before exhausting free" and no "free candidate #1" loop — the derive method is the forward path on free data.
 - Open sub-decision if (a): which data moat to buy — order-flow (order book/MBO/delta) vs options microstructure (OI/IV/dealer gamma) vs long intraday history (for the already-scoped IVAMR/dealer-gamma candidates). Each is a separate pre-registered program with a hard no-go.
+
+---
+
+## 7. CORRECTION (recorded 2026-08-13): free data CAN be mined with the same process — exhaust it FIRST
+
+The prior framing risked overstating "free data is dead." That is **too absolute.** What was actually measured-dead was a specific, narrow set of **public pre-specified anomalies** on free data (PEAD, MVRV, momentum, reversal, index-timing, etc.) — NOT the derive-from-data method itself, which we never actually ran on any data source.
+
+**The method is data-source-agnostic.** "Mine data -> observe -> objective rule -> why -> validate" runs IDENTICALLY on free data, paid data, or years-old data. There is nothing about the derive process that requires paid data. So we are **wrong if we imply paid data is needed to run the derive step.**
+
+**Free vs paid data differ only in asymmetry, not method:**
+- The derive method is the same on both.
+- On **free data**, any observation we derive, others can derive at the same cost -> no moat cushion -> the derived edge must be strong enough to survive entirely on its own. Higher (but not zero) chance of being noise-fit or already-arbitraged.
+- On **paid data**, the asymmetry is structural/temporary -> a weaker-but-real derived edge has a better chance of persisting because fewer participants see the input.
+
+**Correct sequencing (adopted 2026-08-13) — exhaust free derivation BEFORE paid:**
+1. **Stage 1 (cost = 0):** Run the derive-from-data method on the free data we already own (incl. the years of historical data we have). Mine it for objective, machine-executable observations with a why; run each through the harness. No purchase required to at least try.
+2. **Stage 2 (decision point):** If free-data derivation is genuinely exhausted AND a promising derived condition keeps failing only because the signal is too public (the moat matters), THEN — and only then — move to paid data, knowing we have genuinely exhausted the free lane first.
+3. **No-waste rule:** We do not buy data before exhausting free derivation. This keeps the paid decision honest and bounded: paid data is justified only when the free barrier (lack of moat) is the binding constraint, not laziness or impatience.
+
+**This is the forward direction to try now:** a free-data derive pass on our existing datasets. If it yields something objective that survives the harness -> we have an edge. If it fails across our data, we move to Stage 2 paid with the clean conscience that free is truly mined out.
