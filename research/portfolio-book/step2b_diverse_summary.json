@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-12 (IA/step2b-diverse-basket-spec.md)",
+    "members": [
+      "mom12_1",
+      "rev1m",
+      "lowvol",
+      "term",
+      "fx_carry",
+      "commodity_season"
+    ],
+    "combination": "RISK-PARITY inverse-vol weighting of member return streams (1/sigma_IS, normalized); book vol-scaled to 10%. NOT z-scoring returns (that was a leverage blow-up bug).",
+    "risk_weights": {
+      "mom12_1": 0.29002726949199775,
+      "rev1m": 0.33720279438563583,
+      "lowvol": 0.2093458980515402,
+      "term": 0.014280329361541883,
+      "fx_carry": 0.08305632139806986,
+      "commodity_season": 0.0660873873112143
+    },
+    "friction_bps": 10.0,
+    "xs_borrow_bps_yr": 500.0,
+    "short_leg": "XS L/S with 150bps/yr borrow; multi-asset spot no borrow",
+    "split_is": [
+      "2000-01-01",
+      "2008-12-31"
+    ],
+    "split_oos": [
+      "2010-01-01",
+      "2021-06-14"
+    ],
+    "data": "PEAD panel (local) + FRED (keyless); Yahoo/Stooq excluded (blocked)"
+  },
+  "members": {
+    "mom12_1": {
+      "is_mean": -2.539227141777207,
+      "oos_mean": -3.0446941068781204,
+      "is_days_nonzero": 2263,
+      "oos_days_nonzero": 2882
+    },
+    "rev1m": {
+      "is_mean": 5.915368246188056,
+      "oos_mean": 3.3714801835548616,
+      "is_days_nonzero": 2263,
+      "oos_days_nonzero": 2882
+    },
+    "lowvol": {
+      "is_mean": 0.04396156003416777,
+      "oos_mean": 0.01255457708907546,
+      "is_days_nonzero": 2263,
+      "oos_days_nonzero": 2882
+    },
+    "term": {
+      "is_mean": 11.97245668591737,
+      "oos_mean": -17.151832460732983,
+      "is_days_nonzero": 2073,
+      "oos_days_nonzero": 2617
+    },
+    "fx_carry": {
+      "is_mean": 2.22085810516577,
+      "oos_mean": -0.06879056826475044,
+      "is_days_nonzero": 2225,
+      "oos_days_nonzero": 2832
+    },
+    "commodity_season": {
+      "is_mean": 3.3153033967742465,
+      "oos_mean": 0.39991585682395864,
+      "is_days_nonzero": 581,
+      "oos_days_nonzero": 729
+    }
+  },
+  "windows": {
+    "IS": {
+      "book": {
+        "cagr": 0.08164714274919072,
+        "sharpe": 1.6798651939804206,
+        "max_dd": -0.20089295776294547,
+        "end_value": 2.0266113313061953
+      },
+      "book_boot_p5": 0.00021182761730980268,
+      "book_pf": 1.3243926321793242,
+      "book_daily_mean_pp": 0.03158145839901198
+    },
+    "OOS": {
+      "book": {
+        "cagr": 0.0007119008900864365,
+        "sharpe": 0.027285636222081133,
+        "max_dd": -0.40997408965697324,
+        "end_value": 1.0081890558980597
+      },
+      "book_boot_p5": -7.777764906977725e-05,
+      "book_pf": 1.0062987649220956,
+      "book_daily_mean_pp": 0.0006717921462163931
+    }
+  },
+  "gates": {
+    "G2B1_oos_p5_gt0": {
+      "pass": false,
+      "p5": -7.777764906977725e-05
+    },
+    "G2B2_oos_pf_ge1": {
+      "pass": true,
+      "pf": 1.0062987649220956
+    },
+    "G2B3_oos_holdout": {
+      "pass": false,
+      "half1_mean": 0.3372313185945215,
+      "half2_mean": -0.18991768706605816
+    }
+  },
+  "step2b_verdict": "FAILS-OOS",
+  "conclusion": "Diverse basket FAILS-OOS net of friction. FINAL: free-data portfolio alpha at our scale is measured-dead. Fork decided: (a) buy data for paid-lane candidates, or (b) stop the systematic phase.",
+  "borrow_cost_sensitivity": {
+    "short_borrow_0pct": {
+      "oos_boot_p5_bps": 2.551231257905485,
+      "oos_pf": 1.3742460880959628,
+      "passes_p5": true
+    },
+    "short_borrow_1pct": {
+      "oos_boot_p5_bps": 1.5539753257598512,
+      "oos_pf": 1.251535849848985,
+      "passes_p5": true
+    },
+    "short_borrow_5pct": {
+      "oos_boot_p5_bps": -0.7777764906977725,
+      "oos_pf": 1.0062987649220956,
+      "passes_p5": false
+    },
+    "short_borrow_10pct": {
+      "oos_boot_p5_bps": -4.117211660051617,
+      "oos_pf": 0.7370479421520415,
+      "passes_p5": false
+    },
+    "short_borrow_15pct": {
+      "oos_boot_p5_bps": -7.466133046271305,
+      "oos_pf": 0.5392934833201696,
+      "passes_p5": false
+    }
+  }
+}
