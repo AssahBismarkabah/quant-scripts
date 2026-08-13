@@ -225,3 +225,32 @@ Built the pre-registered probe `research/opening-direction/run_probe.py` on the 
 **Verdict: DISCONFIRMED.** Mean net PnL IS positive in both halves and clears friction (gates g1/g3/g5 pass), but gate g2 (bootstrap p5 > 0) fails badly (p5 = -13 to -16 pts/day). Root cause: the edge is a thin mean tilt (+1.85 pts/day) buried under huge daily PnL variance (std ~220 pts, range -1,153..+1,783 pts on OOS W30; 47% of days negative). The mean positive tilt is NOT statistically distinguishable from zero under the house significance bar. This mirrors vol-fade/step2: a real-looking mean effect rejected on statistical robustness due to fat tails. Correct disciplined outcome; no re-selection performed.
 
 **Data note:** combining the two owned NQ panels doubled the sample to 3,197 days for free (overlap verified byte-identical). This is a reusable free-data extension; the same combined panel is available for any future intraday derive on NQ.
+
+### 8.4 Relative-value derive on ES vs NQ (no structure — dead end)
+
+Pulled ES continuous 1-min OHLCV RTH from Databento (`research/relative-value/cache/ES_n_0_1m.parquet`, 2020-08..2026-08, 597k bars, same window as NQ). Ran the derive method on the relative-value family (the doc's why-grounded, direction-agnostic family).
+
+Observed relationship: ES & NQ 1-min return correlation = 0.92 (extremely tight co-movement); daily NQ-on-ES beta = 1.28. But:
+- **No mean reversion:** hedged spread daily autocorr = 0.999, sign-flip rate 0.4% (random-walk drift, no spring). Time-varying NQ/ES ratio reflects tech-vs-market drift, not a reverting spread.
+- **No short-horizon relative reversion:** after NQ outperforms ES in a 5-min window, next-5m relative deviation ~ 0, sign-reverse ~49-50% (coin flip). A pairs-fade on the relative deviation yields ~0 bps.
+- **No lead-lag / no autocorrelation:** corr(ES_t, NQ_{t+1}) ~ 0.009, corr(NQ_t, ES_{t+1}) ~ 0.015, own-minute autocorr ~ 0.006-0.013 — all effectively zero. No exploitable lead-lag.
+
+**Verdict: dead end.** The ES/NQ relative-value family shows no mean reversion, no lead-lag, no autocorrelation — structurally nothing to trade. Recorded; no re-tuning / no selection.
+
+### 8.5 Stage-1 free-data derive pass — status (correction 2026-08-13)
+
+**Correction:** the prior framing "free is measured exhausted" was too absolute. What the derive method has been run on this session: PEAD cross-section, NQ intraday, ES/NQ relative value — all dead-ended. BUT the derive lane is NOT fully exhausted yet:
+
+| Data | Family/observation | Result |
+|---|---|---|
+| PEAD cross-section | liquidity/staleness | dead (microcap artifact) |
+| PEAD cross-section | short-horizon momentum | dead (friction-eaten) |
+| PEAD cross-section | conditional liquidity x sign | dead (inconsistent, no-why) |
+| NQ intraday (combined 2013-2026) | opening-direction persistence | dead (bootstrap p5, no-why) |
+| ES vs NQ intraday | relative value / pairs / lead-lag | dead (no mean reversion, no structure) |
+| **SPY + vol suite (VIX/SVXY/VXX/SVIX)** | **var-risk-premium V2 (short-vol tradeable + conditional event)** | **OPEN - not yet a dead end** |
+| **index-rebal single-name bars (1,259 names)** | **(not yet derive-testable objective rule)** | **NOT run** |
+
+Every derived observation run was put through the harness (IS/OOS, friction, bootstrap p5) and recorded — no re-selection, no member-dropping.
+
+**Honest Stage-1 conclusion:** several free lanes ARE measured dead, but the derive pass is NOT yet exhausted. The strongest open free-data thread is the **vol-risk-premium V2** already formally queued in `IA/vol-risk-premium-research-spec.md` §8: V1 confirmed the variance-risk-premium *level* is real (2026-08-08) but did NOT test the *tradeable* short-vol version (real costs + tail simulation) or the conditional FOMC/earnings event version. That is why-grounded (short-vol sellers capture implied>realized; the tail is the risk), owned/free data (SVXY/VXX + VIX + SPY), and explicitly not closed. This is the genuine next Stage-1 step before any Stage-2 fork.
