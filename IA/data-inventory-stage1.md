@@ -94,7 +94,60 @@ A hard rule: the derive method, not another pre-specified public anomaly, and no
 
 ---
 
-## 6. Status
+## 6. Stage 1 first pass — observed data behavior (PEAD panel)
 
-- **2026-08-13:** Document created as the working inventory + Stage 1 sequencing record. No code written yet. Next action: decide the first derivation to run on the PEAD panel (or, if preferred, on the fresh intraday) before opening the first Stage-1 attempt.
+Explored the PEAD panel on 2026-08-13 (raw observation, no hypothesis yet). Recorded so the derive pass accounts for these structural facts.
+
+### 6.1 Verified panel structure
+- 7,786 symbols, 5,901 unique trading dates (daily), 1998-01-02 → 2021-06-14.
+- Real full-market cross-section: AAPL/MSFT/IBM/F/XOM present; ETFs like SPY NOT present (no `SPY` row). So this is single-name equities, not index/ETF.
+- Breadth grows over time: ~2,035 active symbols in 1998 → ~6-7,000 in 2017-2021.
+- Symbols enter/exit over time (long-lived names have ~5,900 obs; median ~2,816; min 12).
+
+### 6.2 Data-quality behaviors that MUST be handled in any derivation
+1. **Adjustment artifacts:** 19,646 rows (0.08%) have |one-day change| > 50%, including ±inf and a min of −4,996x. These are split/dividend-adjusted close artifacts, not real returns. Any momentum/reversal/low-vol feature is contaminated unless these are excluded or capped. A corrupted symbol exists at median price ~$27.7M (exclude).
+2. **Stale/unchanged prices:** 7.9% of symbol-days are an **exact 0.0 change**. Per-year 15-17% in 1998-2002 falling to ~4-8% by 2019-2021. This is concentrated in illiquid/microcap names: 14% of symbols have >20% stale days; worst is 98% (dead/delisted shell). Real median cross-sectional daily return is exactly 0.000000 over the full sample because the median falls on a stale row.
+3. **Microcap/penny weight:** 17% of symbols have median price < $5; ~3.7% are sub-$1 penny. Cross-sectional signals are therefore dominated by illiquid, hard-to-trade names unless liquidity-filtered.
+
+### 6.3 Cleaned cross-sectional median daily return by year (excl. artifacts & stale zeros)
+Sensible economic signature: + (2003, 2009, 2013, 2016, 2017, 2019, 2021) ; − (1998-2000, 2002, 2008). Confirms that after excluding the two artifact classes the panel reflects real market behavior.
+
+### 6.4 Implication for the derive pass (candidate directions, not yet hypotheses)
+- Any cross-sectional factor MUST (a) exclude/cap |one-day move| > ~50-100%, and (b) apply a liquidity screen (price + stale-share) or the signal is a microcap/low-liquidity artifact, not a tradeable edge.
+- The strong, persistent, concentrated **stale-price dimension itself** is an observable worth inspecting: a "how dead is this name" / liquidity-graded universe is a derived structure we can build objective rules on top of.
+- The cleaned panel supports standard cross-sectional factorizations (momentum, reversal, low-vol, size) once the two noise classes are stripped.
+- NOTE: panel ends 2021-06 — it is history for discovery, not recent/live validation.
+
+---
+
+## 7. Status
+
+- **2026-08-13:** Document created as the working inventory + Stage 1 sequencing record. First exploration of the PEAD panel completed (Section 6 records the observed data behavior). Next action: convert one observed behavior into an objective, machine-executable condition with a why, then run it through the harness (IS/OOS, Monte Carlo, friction).
+- **2026-08-13 (first derive pass):** Ran the liquidity/staleness descriptive scan (`research/pead/derive_liquidity_scan.py`, outputs `research/pead/outputs/liquidity_scan_summary.csv`). Result and verdict below.
 - All changes uncommitted (per standing policy). This file is a reference; it does not pre-register gates.
+
+### 7.1 First derive-pass result — liquidity/staleness dimension (measured, not an edge)
+
+Objective condition tested (point-in-time, no lookahead): trailing-21d fraction of exact-0 daily changes (stale_share) + trailing median price, rank-tiled cross-section into 5 quintiles per date; forward equal-weight returns at 1/5/21d. Split IS (<2010) / OOS (≥2010). Run in `research/pead/derive_liquidity_scan.py`.
+
+| Set | 1d tile0→tile4 | 5d tile0→tile4 | 21d tile0→tile4 |
+|---|---|---|---|
+| IS-all | 6.8→14.5 bps | 31.8→52.2 | 118.6→162.5 |
+| OOS-all | 5.7→12.4 | 26.8→41.6 | 104.6→126.7 |
+| **IS-liquid** | 4.8→2.5 | 22.1→15.1 | 81.1→51.6 |
+| **OOS-liquid** | 4.7→2.1 | 23.1→11.7 | 94.0→44.8 |
+
+(tile 0 = least stale/most liquid; tile 4 = most stale/least liquid. "liquid" = median price > $5 AND stale_share < 25%.)
+
+**Finding:**
+- On ALL names, the most-stale tile has HIGHER forward returns than the least-stale at every horizon (IS and OOS) — e.g. OOS 21d 126.7 vs 104.6 bps. Pattern is consistent across both halves.
+- On the LIQUID-ONLY screen (the names we could actually trade), the direction REVERSES: most-stale tile now earns LESS (OOS-liquid 21d 94.0 vs 44.8). No monotone, economically strong spread survives in the tradable universe; the residual is weak and horizon-dependent.
+
+**Verdict:** the "staleness → higher forward return" pattern is a **microcap/illiquid-price artifact**, not a tradeable edge. It fails exactly the honesty control (liquid-only screen) the plan built in — mirroring step2b's short-side microcap trap. **Measured dead-end for this dimension as a standalone signal.** No member-dropping / no re-tuning / no cell-selection; this is the recorded outcome.
+
+**Notable for future passes:** the stale/illiquid universe is where fake edges live. Any future derived observation from this panel must be screened to liquid-only from the start or it will repeat this artifact. The tradable direction seen here (mildly higher forward return on the most-liquid end) is weak and non-monotonic — not pursued without a stronger, mechanistically-grounded why.
+
+### 7.2 Next options (to choose with user)
+1. Refine liquidity into a **conditional** hypothesis (e.g. liquidity interacted with a return/momentum state) — only if a concrete why justifies it; not automatic.
+2. Move to the next observation class: **reversal/short-horizon** on the CLEANED, liquid-only panel (the per-name jump/stale structure suggests overnight vs intraday spread may be measurable).
+3. Move to the **fresh intraday** NQ panel (2020-2026) for the microstructure direction.
