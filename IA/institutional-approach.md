@@ -12,6 +12,8 @@
     - structure and mechanics(forced flows, rebalances,hedging,participants who must trade)
     - behavioral observation(you notice x after y, the different here is that the observation is the bagining of the work is not the end, instituotionals interogate it the idea arrives with a why attached to it.)
 
+**Direction of discovery (recorded 2026-08-13, see IA/edge-discovery-direction.md):** the edge is **derived from data -> observation -> objective rule -> why -> validate**, NOT copied and NOT "found in a paper." Academic papers give a *predefined stale test* (public -> arbed/decayed, which is exactly what our free-data phase measured as dead). The durable edge comes from mining YOUR data for a repeatable behavior, then converting it into an **objective, machine-executable condition** with a why, then running it through the harness (IS/OOS, Monte Carlo, friction). The hard, uncertain step is that conversion — if an observation cannot be stated so a machine executes it unconditionally on every bar, it is discretionary craft (not an edge), and buying data alone does not fix it.
+
 ### **all of this anomalies the whys will most likely fall undo one of this strategies**
 
 - Trend following(logic what has been moving in one direction tend to keep moving, low winrate big winners)
@@ -80,3 +82,5 @@ Infrastrcute vs process(while the instituining process doesnt transger the micro
 - the why and the pipeline
 - the monte carlo
 - volatily based sizing automated execution
+
+**Data moat (recorded 2026-08-13, see IA/edge-discovery-direction.md):** the process is necessary but not enough. On FREE public data, a durable edge is exhausted/decayed (measured-dead). To find a non-decayed edge the INPUT must be a **data asymmetry** (order flow / depth / MBO / options OI+IV / long intraday history) you act on faster or better than consensus — the one pillar we never executed. Data is necessary but NOT sufficient: it only becomes an edge after the derive-from-data + objective-rule + validate steps in section "where does ideas come from" above. If we neither buy a moat nor derive an objective edge, the disciplined answer is to not deploy (capital preservation), not to trade discretion.
