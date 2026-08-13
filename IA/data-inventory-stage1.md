@@ -183,4 +183,45 @@ At 5d the momentum spread is friction-eaten at any realistic cost; at 21d it bar
   3. Accept that free-data cross-sectional derivation is exhausted on this panel and treat the intraday dataset as the remaining free lane before any paid-data Stage 2.
 
 ## 8. Status (updated)
-- **2026-08-13 (second derive pass complete):** Ran derive2_liquid_scan.py on the liquid-only PEAD universe. Observation A = short-horizon momentum (gross, strong IS/OOS) but friction-eaten net-of-cost (5d: -44.6 bps at 20bps/side; 21d: +1.8 bps breakeven). Observation B = conditional liquidity x sign reversal, inconsistent with A and untested net-of-cost. Both recorded as measured dead-ends/not-claimed in sec 7.2. The PEAD panel (price-only) appears near its useful end for derive work; the fresh intraday NQ panel (has volume + O/H/L/C) is the leading remaining free-data lane.
+
+- **2026-08-13 (second derive pass complete):** Ran derive2_liquid_scan.py on the liquid-only PEAD universe. Observation A = short-horizon momentum (gross, strong IS/OOS) but friction-eaten net-of-cost (5d: -44.6 bps at 20bps/side; 21d: +1.8 bps breakeven). Observation B = conditional liquidity x sign reversal, inconsistent with A and untested net-of-cost. Both recorded as measured dead-ends/not-claimed in sec 7.2. The PEAD panel (price-only) appears near its useful end for derive work.
+- **2026-08-13 (intraday observation begun):** Moved to the fresh intraday NQ panel (Databento GLBX.MDP3 continuous NQ futures, RTH 09:30-16:00 ET, 1-min OHLCV, 2020-08 to 2026-08, 1,551 days). Observed intraday structure (vol/volume U-shape, daily range ~229 pts median) and a NEW DERIVED signal (opening-range direction persistence) that is the first observation to hold IS and OOS. See 8.1.
+- All changes uncommitted (per standing policy). Reference doc, not a gate pre-registration.
+
+### 8.1 Derived intraday observation — opening-range direction persistence (first promising signal)
+
+Data: research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet.
+
+Observation: if the first 30 (or 60) minutes of the session close UP vs the open, the rest of the day (30-to-close / 60-to-close) tends to close UP too (+); if DOWN, rest-of-day tends DOWN. This is intraday open-direction momentum/persistence, structurally distinct from the already-disconfirmed claim-copied strategies (VWAP mean-reversion, ORB, IVAMR).
+
+| Window | Split | N up/down | Long-up - short-down spread, rest-of-day |
+|---|---|---|---|
+| 30 min | IS | 589/550 | +5.4 bps |
+| 30 min | OOS | 227/184 | +3.9 bps |
+| 60 min | IS | 583/557 | +10.8 bps |
+| 60 min | OOS | 220/191 | +4.2 bps |
+
+Long-side (up-open to rest-day-up) is the robust leg: +4.5/+4.6 bps IS and OOS at both windows. The short side is weaker/noisier OOS. Effect is real, consistent sign across IS/OOS, but THIN (4-11 bps per day, gross before friction). NQ futures friction is small (~0.25 bps/side), so net survivability is plausible but NOT yet established.
+
+Status: this is a derived observation (not a marketed-claim copy), survives the simple IS/OOS sign check, and is the first such candidate in the program. NOT yet a rule/an edge - needs the full house harness (pre-registered gate, bootstrap p5, friction, look-ahead audit) to decide. Next step: formalize into a proper pre-registered probe.
+
+### 8.2 Intraday context (already-disconfirmed claim candidates on the same data)
+- NQ VWAP-pullback (2026-08-08): DISCONFIRMED - intraday trend-follow-with-pullback + VWAP mean-reversion.
+- IVAMR (Break-in-Breakout, 2026-08-08): DISCONFIRMED.
+- ORB / Gap-Fill / Oops (2026-08-09): ORB and Oops DISCONFIRMED; gap-fill grouped.
+The derive method on this data must therefore find something structurally new (as 8.1 does), not re-test these.
+
+### 8.3 Pre-registered probe of the opening-direction signal (DISCONFIRMED on significance gate)
+
+Built the pre-registered probe `research/opening-direction/run_probe.py` on the COMBINED NQ panel (IVAMR 2013-2023 + vwap-pullback 2020-2026; overlap verified identical, deduped -> 3,197 trading days, 2013-11..2026-08). Rule: each RTH day, enter at close of first 30/60 min in the direction of that open-to-W-min return, hold to session close. Split IS 2013-2024 / OOS 2025-2026. Friction 0.5 (base) / 1.0 (stress) pts/turn. House gates incl. bootstrap p5 (n=5000).
+
+| Window_friction | IS net pts/d | OOS net pts/d | OOS PF | OOS boot p5 |
+|---|---|---|---|---|
+| W30 base | +1.20 | +1.85 | 1.03 | -15.95 |
+| W30 stress | +0.70 | +1.35 | 1.02 | -16.45 |
+| W60 base | +2.22 | +3.97 | 1.06 | -13.20 |
+| W60 stress | +1.72 | +3.47 | 1.05 | -13.70 |
+
+**Verdict: DISCONFIRMED.** Mean net PnL IS positive in both halves and clears friction (gates g1/g3/g5 pass), but gate g2 (bootstrap p5 > 0) fails badly (p5 = -13 to -16 pts/day). Root cause: the edge is a thin mean tilt (+1.85 pts/day) buried under huge daily PnL variance (std ~220 pts, range -1,153..+1,783 pts on OOS W30; 47% of days negative). The mean positive tilt is NOT statistically distinguishable from zero under the house significance bar. This mirrors vol-fade/step2: a real-looking mean effect rejected on statistical robustness due to fat tails. Correct disciplined outcome; no re-selection performed.
+
+**Data note:** combining the two owned NQ panels doubled the sample to 3,197 days for free (overlap verified byte-identical). This is a reusable free-data extension; the same combined panel is available for any future intraday derive on NQ.
