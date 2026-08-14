@@ -271,3 +271,51 @@ Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (der
 **What I derived fresh this session (2026-08-13), and why it is NOT a new edge:** I observed that short-vol gated to "VIX < 90th percentile of prior year" (hold short-vol in normal vol, flat when VIX already extreme) gives +2,699% total but **max DD −66% / worst day −26%**. That measured result **still FAILS the VRP V3 tail gate (bound: max DD < −40%)** — same tail-dominance failure that closed the family. The 2018 volmageddon tail comes through regardless of VIX-level gating, exactly as V2/V3's diagnostics established. This is a re-confirmation of the closed conclusion, NOT a new edge, and I nearly mis-read it as promising before checking the spec. **Verdict: the vol suite is not an open lane; the family is closed.** No further short-vol/VRP derive work is justified on this data.
 
 **Data note (worth keeping):** SVXY/VXX/SVIX + VIX/VIX3M/VIX9D + SPY_long remain on disk and are free/owned, but their entire tradeable short-vol conclusion is already recorded as DISCONFIRMED. The index-rebal single-name bars (1,259 names) remain the one owned dataset not yet run through the derive method.
+
+### 8.6 Stage-2 first paid-data test — NQ order flow (trades + bbo-1s), RESULT: DEAD
+
+**Test (2026-08-14):** Bounded first paid-data purchase per Stage-2 moat direction #1 (order flow). Current Databento key already has access — no upgrade needed (verified: full MBO pull works; unit prices GLBX.MDP3 historical: mbo $1.80/GB, mbp-10 $0.50/GB, bbo-1s $18/GB, trades $28/GB).
+
+**Key finding on size:** full MBO is NOT needed for a first derive pass — it's 4.4 GB/10d vs bbo-1s 0.04 GB and trades 0.12 GB. The two core order-flow observations (aggression delta, quote imbalance) only need `trades` (aggressor side) + `bbo-1s` (top-of-book sizes).
+
+**What was bought:** 3 months of NQ continuous (2026-05-01 → 2026-08-01), $43.53 total: `research/order-flow/cache/NQ_trades_2026q2.parquet` (26.7M trades, columns action/side/price/size/sequence), `research/order-flow/cache/NQ_bbo-1s_2026q2.parquet` (5.3M 1-sec snapshots, bid_px/ask_px/sizes/counts). Fetch script `research/order-flow/fetch_flow.py`. Degraded days flagged: 2026-05-24, 2026-07-30. RTH filter applied (09:30-16:00 ET).
+
+**Derive scan** (`research/order-flow/derive_scan.py`, `derive_scan5.py`), aggressor delta and quote imbalance vs next-period return, RTH only, bucket-quintile spread in bps:
+
+| Horizon | delta_vol corr | delta_vol spread | imb corr | imb spread |
+|---|---|---|---|---|
+| 1 min | 0.057 | +0.7 bps | 0.012 | +0.1 bps |
+| 5 min | 0.029 | +1.3 bps | −0.008 | −0.2 bps |
+| 15 min | 0.002 | +0.9 bps | 0.015 | +1.3 bps |
+| 60 min | −0.012 | +0.7 bps | 0.032 | +1.9 bps |
+
+**Verdict: DEAD.** All spreads 0.1-1.9 bps vs NQ friction of ~1 tick (≈1.4 bps at these prices) — every observation is at or below friction, correlations near zero, sign unstable across horizons. The two classic order-flow observations (aggression delta, quote imbalance) show no exploitable structure on NQ futures at 1-60 min horizons. This mirrors every prior free-data derive: measured dead under honest costs. The order-flow moat purchase did not change the outcome at this level.
+
+### 8.7 Stage-2 second paid-data test — single-stock order flow (40 mega/large-cap names), RESULT: DISCONFIRMED at pre-registered probe
+
+**Test (2026-08-14):** The right venue for order-flow asymmetry is single stocks (retail/informed flow), not hyper-efficient NQ. Bought 3 months (2026-05-01 → 2026-08-01) of `trades` + `bbo-1s` for 40 mega/large-cap names via EQUS.MINI — **$23 total** (trades $11.28, bbo-1s $11.75; equities unit prices: trades $6/GB, bbo-1s $4/GB — far cheaper than futures). Files: `research/order-flow/cache/EQ_trades_2026q2.parquet` (26.7M rows), `EQ_bbo-1s_2026q2.parquet` (36.7M rows). Fetch `research/order-flow/fetch_equs.py`.
+
+**Naive 5-min scan** (`derive_equs.py`, `derive_equs2.py`) — aggression delta (buy−sell vol) and quote imbalance (bid−ask size) vs next-bin return, RTH, per-symbol quintiles:
+- delta_vol: mean spread **+3.16 bps** (IS +3.39 / OOS +2.97), 22/40 names > 2 bps; top MU +16.6, INTC +11.9, AMD +8.0, TSLA +7.0
+- imb: mean spread **+4.50 bps** (IS +3.68 / OOS +4.85), 24/40 names > 3 bps OOS
+
+First observation in the whole program with magnitude above friction. Monotonicity was poor (12%/2%) — a warning that went into the probe.
+
+**Pre-registered probe** (`research/order-flow/run_probe_equs.py`): long when delta_vol in top quintile, flat otherwise, 1-bin hold, 3 bps round-trip friction, point-in-time rolling 200-bin threshold, IS first 60% dates / OOS last 40%, bootstrap n=5000 seed 42, drop-best-symbol. **Result: DISCONFIRMED.**
+- IS: −0.134 bps/trade (t=−1.96); OOS: −0.240 bps/trade (t=−2.76); **bootstrap p5 = −0.389 bps/trade (gate p5>0: FAIL)**; drop-best (MSFT): −0.272 bps/trade.
+
+**Why the naive scan lied:** full-sample quintiles = lookahead; top-minus-bottom bucket contrast ≠ tradeable long-leg; friction 3 bps dwarfs the residual. Under honest rules the observation is negative. **Verdict: DEAD** — same conclusion as NQ order flow, free-data PEAD/NQ/ES, and the already-closed vol/index-rebal/event families. The order-flow data moat — the docs' highest-ranked Stage-2 direction — does not survive the harness on either venue (futures or single stocks).
+
+### 8.8 Stage-2 options lane — free SPY options EOD data (2010-2023), RESULT: all four observations DEAD (2 confirm closed families)
+
+**Context (2026-08-14):** The options-lane paid pull (Databento OPRA.PILLAR cbbo-1m SPY, planned $1.24) never ran — the Databento account was locked (`403 auth_account_locked`; new signups blocked at signup email stage). Per user instruction ("check the free sources then search well"), obtained the free **Kaggle `dudesurfin/spy-options-eod-volatility-surface-2010-2023`** dataset (MIT license, 486 MB, 14 files `research/options/cache/spy_eod_{2010..2023}.parquet`, **9,468,584 rows**, 3,508 trading days) — full SPY EOD chains with both call+put sides per row: bid/ask/last/volume, IV, delta/gamma/vega/theta/rho, DTE, strike distance, underlying close. **No open interest** (noted: OI-based dealer-gamma observation untestable on this source; DoltHub also lacks OI; optionsDX has it but is not needed for the verdict below).
+
+**Observation 1 — put/call volume ratio → next-day return** (`derive_scan.py`): spread +4.6 bps, non-monotone (buckets +2.8/+3.4/+5.0/+4.7/+7.4), corr ≈ 0. DEAD.
+
+**Observation 2 — ATM IV level (30-60 DTE) → forward return** (`derive_scan.py`, `derive_scan2.py`): monotone and IS/OOS-stable — fwd5 spread +36.2 bps IS / +54.1 bps OOS; fwd21 +141.7 / +315.6 bps; corr 0.09-0.17. **BUT this is the VRP premium restated, not a new edge.** Pre-registered V3-style tail gate (`tail_check.py`: long SPY when 250-day rolling IV > 80th pct): max drawdown **83.7% (gate <40%: FAIL)**, total **−163%**, worst days 2020-03-16 (−11.5%), 2020-03-12 (−9.6%), 2011-08-08 (−6.5%) — the entire premium is earned by eating tail days that cost more than the premium. **Confirms the closed VRP family with independent data; the gate that killed V2/V3 kills this too.** DEAD by adjudication.
+
+**Observation 3 — options flow / hedging pressure** (Σ call_vol×Δ − Σ put_vol×|Δ|, chain-wide, normalized by total volume) → return (`derive_scan3.py`): naive fwd5 spread −40.7 bps with a *put-heavy → up* sign — the OPPOSITE of the flow mechanism (put-heavy should push dealers to sell SPY short-term), i.e. fear-premium contamination. corr(hedge_norm, IV) = −0.257; after demeaning within IV quintiles (`derive_scan6.py`) the gradient collapses to 4 flat buckets (≈+27-31 bps baseline) + one anomalous bucket (+2.4), spread −29.1 bps with no monotonicity (IS −26.7 / OOS −35.5 driven by a single bucket). DEAD — no distinct flow signal above the premium.
+
+**Observation 4 — skew** (mean OTM put IV − OTM call IV, |strike−spot|>8%, 30-60 DTE) → return (`derive_scan6.py`): normal level +23.2 pts; fwd5 spread **−1.0 bps**, corr ≈ 0. DEAD.
+
+**Verdict: options lane DEAD.** Four observation classes tested on 14 years of free full-chain data; none survives. Two are the closed VRP/risk-premium family (levels that only pay for tail risk we cannot bear at this scale), two are flat. Combined with §8.6/§8.7 (order flow), every Stage-2 moat direction is now adjudicated. Only the OI-based dealer-gamma variant remains untested, and it is the same premium family (gamma exposure = vol risk) with no reason to survive the tail gate that killed V2/V3/Obs 2.
