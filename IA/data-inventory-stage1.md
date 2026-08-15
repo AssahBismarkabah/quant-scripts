@@ -319,3 +319,32 @@ First observation in the whole program with magnitude above friction. Monotonici
 **Observation 4 — skew** (mean OTM put IV − OTM call IV, |strike−spot|>8%, 30-60 DTE) → return (`derive_scan6.py`): normal level +23.2 pts; fwd5 spread **−1.0 bps**, corr ≈ 0. DEAD.
 
 **Verdict: options lane DEAD.** Four observation classes tested on 14 years of free full-chain data; none survives. Two are the closed VRP/risk-premium family (levels that only pay for tail risk we cannot bear at this scale), two are flat. Combined with §8.6/§8.7 (order flow), every Stage-2 moat direction is now adjudicated. Only the OI-based dealer-gamma variant remains untested, and it is the same premium family (gamma exposure = vol risk) with no reason to survive the tail gate that killed V2/V3/Obs 2.
+
+### 8.9 OI-based dealer-gamma variant — RESULT: CLOSED (untestable-free)
+
+**Question:** does dealer gamma (Σ OI×gamma, signed call/put) regime predict SPY forward returns/vol? The last untested variant of the options family (§8.8).
+
+**Data requirement:** historical per-strike open interest for SPY, ~500 trading days.
+
+**Free-source search result (exhaustive):**
+- OCC Series Search (`marketdata.theocc.com/series-search`) — per-strike Call/Put OI but **current-only**: `reportDate` param ignored (20240102/20250102/20260813 return byte-identical output, 7294 SPY rows), UI date picker offers only the most recent settlement date (2026-08-14, Fri, the last trading day; today is 2026-08-15) forward. User-confirmed: no past dates available.
+- OCC Daily Open Interest (`daily-open-interest?reportDate=MM/DD/YYYY&action=download`) — historical works (June 2026 downloaded) but **aggregate by class** (Equity/Index total), not per-strike.
+- OCC Volume Query — per-underlying volume only, no OI, no strike.
+- Kaggle dudesurfin / optionsDX free EOD — no OI field at all.
+- DoltHub — no OI. Cboe DataShop Optsum — paid, ^SPX/^OEX/^VIX index only. Polygon as_of chains — paid (~$29/mo). FirstRate Data — paid.
+
+**Verdict: CLOSED — untestable-free.** Historical per-strike OI requires paid data. The signal is the same vol-risk-premium family that failed the tail gate four times (§8.8 Obs 2, V2/V3). Volume-proxy of the same positioning concept was already flat after IV control (§8.8 Obs 3). Options lane: fully adjudicated, complete.
+
+### 8.10 OI-based dealer-gamma variant — RESULT: DEAD (tested, LambdaClass free data)
+
+**Data found:** GitHub LambdaClass `options_portfolio_backtester` release `data-v1` — `SPY_options.parquet` (24,681,665 rows, 2008-01-02..2025-12-12, per-strike bid/ask/volume/`open_interest` 100% populated/IV/delta/gamma/theta/vega/rho, types call/put) + `SPY_underlying.parquet` (daily OHLC, clean close series). SHA256 verified. MIT. **Historical per-strike OI exists free after all — §8.9's "untestable-free" verdict superseded.**
+
+**Scan (`derive_scan7.py`):** dealer dollar gamma = Σ OI×γ×strike×100, signed −call/+put (dealers assumed short calls/long puts). 4,508 trading days, 2008-2025.
+
+**Results:**
+- Returns: corr(gex, fwd5) +0.02-0.05. Quintiles non-monotone: fwd5 +10.8/+22.6/+1.6/+34.5/+34.6 bps (spread +23.7 raw, +12.3 norm); IS spread −0.1 / OOS +26.2 bps. No stable gradient. DEAD.
+- Realized vol: strongly monotone (fwd5 vol 56→150 bps/day, corr +0.47) — mechanism real: low-gamma regime = high forward vol.
+
+**Verdict: DEAD.** Signal predicts vol, not returns; monetizing it = short-vol, the closed VRP family already failed by tail gate four times (§8.8 Obs 2, V2/V3, tail_check). Options lane: fully adjudicated and tested on 17 years of per-strike data, both OI-free and OI-based variants.
+
+**Options lane FINAL: closed.** 5 observation classes, all DEAD, recorded §8.8/§8.10.
