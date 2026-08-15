@@ -47,6 +47,23 @@ Then the full harness (bootstrap p5 > 0 after friction 3-6 bps, IS/OOS, tail gat
 - **2026-08-15c:** Dataset B complete — 5/12 cross-sectional survivors are all re-discoveries of public anomalies already killed in Step 2b (rev1m/mom12-1/lowvol families on the same panel); calendar family (time-series method, 3 tests) all dead; earnings axis underpowered (0.7% match). No new observation → no harness candidate. Grid exhausted (§8.12). **Method note recorded: cross-sectional candidates are tested via daily rank-IC series (~5,900 days), NOT row-count t-stats; calendar dummies are constant cross-sectionally so they are tested as time-series market effects, not rank IC.**
 - **2026-08-15d:** Dataset C grid frozen (below) BEFORE scan code. Next: implement + run.
 - **2026-08-15e:** Dataset C complete — 0/12 survivors on NQ, 0/12 on ES (§8.13). Two contemporaneous self-correlation artifacts (cc_ret vs today-OC; f_vol_pct vs today-h1) caught via absurd t-stats and fixed by lagging before accepting any verdict. **Derive pass FINAL (§8.14): all three datasets exhausted — Dataset A 2/56 rejected, B 5/12 public rediscoveries, C 0/24. No objective edge above friction in owned free data. Stage-2 paid-vs-stop decision point reached.**
+- **2026-08-15f:** **Dataset D (unsupervised joint-state scan) grid frozen below — the last untried blueprint method (Phase 2 unsupervised anomaly/regime detection, IA/Blueprint-for-the-Independent-Quant.md).** Rationale: all prior scans were single-feature LINEAR tests; unsupervised joint-state detection (Isolation Forest anomaly score + K-means regimes) asks "is today's COMBINATION of features unusual, and do joint states predict forward returns?" — a different functional form that linear correlations cannot see. Weak prior (everything else on this data died), cheap, data owned. Either finds a joint-state observation or closes the method inventory completely.
+- **2026-08-15g:** Dataset D complete — **0 survivors of 12** (6 NQ, 6 ES; ES best T1 tIS +1.37/tOOS +3.01 fails IS bar). §8.15. Anomaly score ≈ vol+volume in disguise, both already dead. **Method inventory COMPLETE: every blueprint method runnable on owned free data has now been run (supervised-linear AND unsupervised-joint). The "zero edges in owned free data" verdict now covers both functional forms. Derive pass FINAL stands (§8.14) — the buy-vs-stop fork is decided on evidence; nothing in the Stage-2 list requires purchase.**
+
+## 6. Dataset D (NQ/ES intraday, unsupervised joint-state) — frozen grid (2026-08-15)
+
+Data: same as Dataset C. Unit: **one day**. Features (all known at time t, from first hour + prior days): h1_ret, h1_vol, h1_range/close, h1_volume (log), h1_vol/prev20d_vol, gap, prev-cc_ret, h1 vol skew (max 1-min |move| / h1_vol). Standardized cross-sectionally (z-score over days, rolling-60d for vol percentile) BEFORE any model.
+
+**Method (frozen, 6 pre-registered tests):**
+1. **ISO-ANOM → rest-of-day (10:30→16:00):** Isolation Forest (n_estimators=200, contamination=0.10) trained on IS days only; anomaly score (rank-normalized) correlated with same-day remainder return. IS/OOS same sign, |t|>=3.29 both halves.
+2. **ISO-ANOM → next-day OC:** same score, next-day open-to-close return.
+3. **ISO top-decile vs rest → rest-of-day:** mean remainder return of top-10% anomaly days vs all others, Welch t-test, both halves.
+4. **ISO top-decile vs rest → next-day OC.**
+5. **KMEANS-3 regime → rest-of-day:** K-means (k=3, n_init=10) on the 9 features, IS-trained; forward return mean of the highest-anomaly cluster vs the rest, Welch t-test, IS/OOS.
+6. **KMEANS-3 regime → next-day OC.**
+ES (2020-2026) = out-of-sample asset check for any survivor (model refit, same frozen features).
+
+**Anti-result-hunting (pre-registered):** features and k fixed before results; contamination 0.10 fixed; no hyperparameter tuning after seeing scores; a survivor without a why is discarded; VRP family closed. Zero survivors is a valid result — the method inventory is then complete. Any survivor gets the interrogation pattern (controls vs vol/momentum/calendar, why) then full harness.
 
 ## 5. Dataset C (NQ/ES intraday) — frozen grid (2026-08-15)
 
