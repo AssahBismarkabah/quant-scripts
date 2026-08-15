@@ -49,4 +49,16 @@ First-ever execution of the derive-from-data method (`derive-pass-stage1-spec.md
 
 **Per spec §4, the Stage-2 decision point is reached**: the free-data derive pass found no objective machine-executable edge above friction 3-6 bps in any owned dataset. This is consistent with (and now formally executes) the Step 2b-earned claim "free-data portfolio alpha at our scale is measured-dead". Options before the user: (a) Stage-2 paid data for the remaining untested candidate (IVAMR long-intraday — `research/ivamr/`), (b) stop the systematic phase, (c) expand the derive grid (not recommended per anti-result-hunting rules — grid expansion after full-dataset exhaustion is post-hoc).
 
+### 8.15 Stage-1 derive pass — Dataset D (unsupervised joint-state, NQ/ES) — RESULT: 0 survivors of 12; method inventory COMPLETE
+
+`derive_mine4.py`, spec §6 (frozen before any results). The last untried blueprint method (Blueprint Phase 2: unsupervised anomaly/regime detection — Isolation Forest + K-means). Rationale: all prior scans were single-feature LINEAR tests; this asks whether JOINT combinations of features (h1 ret/vol/range/logvol, vol_ratio, gap, prev-cc, skew — 9 features, z-scored) predict forward returns. Weak prior recorded in the spec; cheap; owned data.
+
+**Results (6 pre-registered tests per asset):**
+- NQ (2,426 days): T1 anom→rest +0.23/−0.66 (sign flip), T2 anom→nxtOC −0.46/+0.34 (flip), T3 top-decile→rest +0.69/+0.02 (top decile +15 bps IS but +3 bps OOS — dies), T4 top-decile→nxtOC −0.09/−0.16, T5 K3-hot→rest +0.41/+0.30, T6 K3-hot→nxtOC −0.05/−0.23. **0 survivors.**
+- ES (1,478 days, OOS asset check): best was T1 anom→rest tIS +1.37/tOOS +3.01 — fails the IS bar (1.37 < 3.29), so not a survivor under the frozen same-sign |t|>=3.29 gate. All others |t|<1.4. **0 survivors.**
+
+**Interpretation:** joint-state anomaly and regime structure in first-hour NQ/ES microstructure carries no forward-return information beyond what the linear scans already measured. The anomaly score is essentially vol-plus-volume in disguise (both already dead). The blueprint's Phase-2 unsupervised discovery method is executed on the owned data and finds nothing.
+
+**Method inventory is now COMPLETE:** Phase 1 (data) done, Phase 2 (unsupervised discovery) done — dead, Phase 3 (validation incl. positive control) done, Phase 4/5 blocked upstream by zero survivors. Every method in `IA/Blueprint-for-the-Independent-Quant.md` that can be run on owned free data has now been run. The derive pass closure in §8.14 stands and is strengthened: the "zero edges in owned free data" verdict now covers supervised-linear AND unsupervised-joint methods.
+
 **CORRECTION RECORDED 2026-08-15 (session-memory error fixed): IVAMR is NOT untested and requires NO paid data.** The pre-registered probe ran 2026-08-08 on the cached Databento NQ 1-min 2013-2023 (fetched before the account lock) — DISCONFIRMED, all 5 gates failed (IS net −1096.89, OOS net −3695.53, OOS wr 0.479, PF 0.78, kill-switch days 51.9%; gate 6 look-ahead PASSED). Evidence: `strategies/ivamr/IVAMR.md` §10, `research/ivamr/outputs/probe_summary.json`. **All three Stage-2 moat candidates are now CLOSED on evidence: order-flow DEAD, dealer-gamma DEAD, IVAMR DISCONFIRMED. The buy-vs-stop fork on paid intraday data is decided — there is nothing left in the Stage-2 list that requires purchase.**
