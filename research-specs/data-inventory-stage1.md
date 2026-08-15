@@ -1,14 +1,14 @@
 # Data Inventory for Stage 1 Free-Data Derive Pass
 
 **Date:** 2026-08-13
-**Type:** Data inventory / working reference. Records what data assets we own, their shape and limits, so the Stage 1 free-data derive pass (`edge-discovery-direction.md` §7) has a single source of truth for what can be tested. Not a research spec; no gates pre-registered here.
+**Type:** Data inventory / working reference. Records what data assets we own, their shape and limits, so the Stage 1 free-data derive pass (`../IA/edge-discovery-direction.md` §7) has a single source of truth for what can be tested. Not a research spec; no gates pre-registered here.
 **Audience:** self. Used to pick what to run the derive method on and to avoid re-verifying data repeatedly.
 
 ---
 
 ## 1. Purpose
 
-`edge-discovery-direction.md` §7 established the forward path: run the derive-from-data method (mine data -> observe -> objective rule -> why -> validate) on **free data we already own** before considering any paid moat (Stage 2). This document is the inventory of that free data: exactly what we have, where, its coverage, and its known caveats. It also records the SEQUENCING decision: which dataset the Stage 1 pass starts with.
+`../IA/edge-discovery-direction.md` §7 established the forward path: run the derive-from-data method (mine data -> observe -> objective rule -> why -> validate) on **free data we already own** before considering any paid moat (Stage 2). This document is the inventory of that free data: exactly what we have, where, its coverage, and its known caveats. It also records the SEQUENCING decision: which dataset the Stage 1 pass starts with.
 
 Everything here is local, already-paid-for, cost-0 to use. No purchase, no new API dependency required for the ones marked as have.
 
@@ -20,40 +20,40 @@ Everything here is local, already-paid-for, cost-0 to use. No purchase, no new A
 
 | Item | Source path | Shape | Coverage | Notes |
 |---|---|---|---|---|
-| PEAD price panel | `research/pead/cache/prices_adj_long.parquet` | 24,390,016 rows × [symbol, date, close_adjusted] | 7,786 symbols, 1998-01-02 → 2021-06-14 | **Best asset for a cross-sectional derive pass.** Daily adjusted close, near-full US market breadth, 23 years. Supports size/reversal/momentum/low-vol/liquidity/seasonality factorizations with real statistical power. |
-| Raw stock prices | `research/pead/cache/stock_prices_latest.csv` | 1.9G CSV | (full sample) | Unhandled/greater coverage for the same universe; use `prices_adj_long` for clean adjusted work. |
+| PEAD price panel | `../research/pead/cache/prices_adj_long.parquet` | 24,390,016 rows × [symbol, date, close_adjusted] | 7,786 symbols, 1998-01-02 → 2021-06-14 | **Best asset for a cross-sectional derive pass.** Daily adjusted close, near-full US market breadth, 23 years. Supports size/reversal/momentum/low-vol/liquidity/seasonality factorizations with real statistical power. |
+| Raw stock prices | `../research/pead/cache/stock_prices_latest.csv` | 1.9G CSV | (full sample) | Unhandled/greater coverage for the same universe; use `prices_adj_long` for clean adjusted work. |
 
-### 2.2 Intraday / microstructure (the direction `edge-discovery-direction.md` pushes toward)
+### 2.2 Intraday / microstructure (the direction `../IA/edge-discovery-direction.md` pushes toward)
 
 | Item | Source path | Shape | Coverage | Notes |
 |---|---|---|---|---|
-| NQ 1-min (fresh) | `research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet` | 597,028 rows × [ts,date,o,h,l,c,volume] | 2020-08-03 → 2026-08-06 (~1,551 days) | **Freshest intraday we own.** Includes the recent 2024-26 regime. Natural home for microstructure-derived observations. |
-| NQ 1-min (older) | `research/ivamr/cache/NQ_n_0_1m.parquet` | 973,224 rows × [ts,date,o,h,l,c,volume] | 2013-11-01 → 2023-12-29 (~2,527 days) | IVAMR's dataset. Longer history, stops before 2024. |
-| NQ 1-min chunks | `research/ivamr/cache/chunks/`, `research/nq-vwap-pullback/cache/chunks/` (124 months) | monthly parquet | extends the two 1m files | Full granular monthly breakdown; use to extend/recompute either 1m series. |
+| NQ 1-min (fresh) | `../research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet` | 597,028 rows × [ts,date,o,h,l,c,volume] | 2020-08-03 → 2026-08-06 (~1,551 days) | **Freshest intraday we own.** Includes the recent 2024-26 regime. Natural home for microstructure-derived observations. |
+| NQ 1-min (older) | `../research/ivamr/cache/NQ_n_0_1m.parquet` | 973,224 rows × [ts,date,o,h,l,c,volume] | 2013-11-01 → 2023-12-29 (~2,527 days) | IVAMR's dataset. Longer history, stops before 2024. |
+| NQ 1-min chunks | `../research/ivamr/cache/chunks`, `../research/nq-vwap-pullback/cache/chunks` (124 months) | monthly parquet | extends the two 1m files | Full granular monthly breakdown; use to extend/recompute either 1m series. |
 
 ### 2.3 Index / vol / macro series
 
 | Item | Source path | Coverage | Notes |
 |---|---|---|---|
-| SPY clean long | `research/vol-targeting/cache/SPY_clean_long.parquet` | 1993-02-01 → 2026-07-31 (8,427 rows) | **Verified clean** OHLCV; the reliable long-equity line. |
-| SPY variants | `research/vol-targeting/cache/SPY_clean.parquet`, `SPY_long.parquet`, `SPY_yahoo.parquet` | short / long / raw | Use `SPY_clean_long` for analysis; `SPY_clean` is short research series. |
-| VIX / S&P | `research/vol-targeting/cache/VIXCLS.csv`, `SP500.csv` | 1990s → present | Closes. |
-| CBOE vol idx | `research/vol-risk-premium/cache/VIX.csv`, `VIX3M.csv`, `VIX9D.csv` | official | Structure products (VIX3M/VIX9D). |
-| Vol ETPs | `research/vol-risk-premium/cache/SVIX.parquet`, `SVXY.parquet`, `VXX.parquet` | | Implied/realized vol exposures for vol-risk work. |
-| Single-name bars | `research/index-rebalancing/cache/bars/` (1,259 daily parquet) + `benchmark` + `calendar.parquet` | | Universe for index-rebal / rebal-date microstructure. |
+| SPY clean long | `../research/vol-targeting/cache/SPY_clean_long.parquet` | 1993-02-01 → 2026-07-31 (8,427 rows) | **Verified clean** OHLCV; the reliable long-equity line. |
+| SPY variants | `../research/vol-targeting/cache/SPY_clean.parquet`, `SPY_long.parquet`, `SPY_yahoo.parquet` | short / long / raw | Use `SPY_clean_long` for analysis; `SPY_clean` is short research series. |
+| VIX / S&P | `../research/vol-targeting/cache/VIXCLS.csv`, `SP500.csv` | 1990s → present | Closes. |
+| CBOE vol idx | `../research/vol-risk-premium/cache/VIX.csv`, `VIX3M.csv`, `VIX9D.csv` | official | Structure products (VIX3M/VIX9D). |
+| Vol ETPs | `../research/vol-risk-premium/cache/SVIX.parquet`, `SVXY.parquet`, `VXX.parquet` | | Implied/realized vol exposures for vol-risk work. |
+| Single-name bars | `../research/index-rebalancing/cache/bars` (1,259 daily parquet) + `benchmark` + `calendar.parquet` | | Universe for index-rebal / rebal-date microstructure. |
 
 ### 2.4 Event / corporate-action panels
 
 | Item | Source path | Notes |
 |---|---|---|
-| Buyback events | `research/buyback-timing/events/buyback_events.parquet`, `buyback_programs`, `buyback_events_ticker` + `cache/*.parquet` (~50 names) | BUFO-style corporate action timing. |
-| 10b5-1 adoptions | `research/10b5-1-timing/events/adoption_events.parquet` + `cache/{SAM,SPY,TKO}.parquet` | Insider-trading-program adoption timing. |
+| Buyback events | `../research/buyback-timing/events/buyback_events.parquet`, `buyback_programs`, `buyback_events_ticker` + `cache/*.parquet` (~50 names) | BUFO-style corporate action timing. |
+| 10b5-1 adoptions | `../research/10b5-1-timing/events/adoption_events.parquet` + `cache/{SAM,SPY,TKO}.parquet` | Insider-trading-program adoption timing. |
 
 ### 2.5 Crypto
 
 | Item | Source path | Notes |
 |---|---|---|
-| MVRV | `research/bitcoin-mvrv/cache/mvrv.parquet` (5,867 rows × [asset,CapMVRVCur,CapMrktCurUSD,CapRealUSD,supply,price]) | Coin Metrics, keyless. BTC realized/market cap. |
+| MVRV | `../research/bitcoin-mvrv/cache/mvrv.parquet` (5,867 rows × [asset,CapMVRVCur,CapMrktCurUSD,CapRealUSD,supply,price]) | Coin Metrics, keyless. BTC realized/market cap. |
 
 ---
 
@@ -64,7 +64,7 @@ Everything here is local, already-paid-for, cost-0 to use. No purchase, no new A
 | FRED (keyless) | DGS10, DGS2, T10Y2Y, DTB3, DEXUSAL, DEXUSEU, DCOILWTICO, IR3TIB01AUM156N/USM156N | **Working** — used in step2b. Terms/FX/oil/rates. |
 | Yahoo Finance | chart API | **429 rate-limited** — not dependable for new pulls. |
 | Stooq | | **Blocked** (JS proof-of-work). |
-| CryptoQuant (`.env`) | | 403 on realized-cap. |
+| CryptoQuant (`../.env`) | | 403 on realized-cap. |
 
 Rule of thumb: for NEW symbols rely on what is cached + FRED. Do not depend on Yahoo/Stooq.
 
@@ -76,7 +76,7 @@ Rule of thumb: for NEW symbols rely on what is cached + FRED. Do not depend on Y
 - The freshest recent intraday is the **nq-vwap-pullback** 1m (2020-2026); IVAMR 1m ends 2023-12.
 - `SPY_clean` is a short research series; use `SPY_clean_long` for long-history work.
 - Crypto: only BTC MVRV lineage; Yahoo/Stooq/CryptoQuant unreliable.
-- Do not use the corrupted EQUS.MINI cache (per `data-and-portfolio-roadmap.md` rejects) — only the verified SPY lineage.
+- Do not use the corrupted EQUS.MINI cache (per `../IA/data-and-portfolio-roadmap.md` rejects) — only the verified SPY lineage.
 
 ---
 
@@ -123,12 +123,12 @@ Sensible economic signature: + (2003, 2009, 2013, 2016, 2017, 2019, 2021) ; − 
 ## 7. Status
 
 - **2026-08-13:** Document created as the working inventory + Stage 1 sequencing record. First exploration of the PEAD panel completed (Section 6 records the observed data behavior). Next action: convert one observed behavior into an objective, machine-executable condition with a why, then run it through the harness (IS/OOS, Monte Carlo, friction).
-- **2026-08-13 (first derive pass):** Ran the liquidity/staleness descriptive scan (`research/pead/derive_liquidity_scan.py`, outputs `research/pead/outputs/liquidity_scan_summary.csv`). Result and verdict below.
+- **2026-08-13 (first derive pass):** Ran the liquidity/staleness descriptive scan (`../research/pead/derive_liquidity_scan.py`, outputs `../research/pead/outputs/liquidity_scan_summary.csv`). Result and verdict below.
 - All changes uncommitted (per standing policy). This file is a reference; it does not pre-register gates.
 
 ### 7.1 First derive-pass result — liquidity/staleness dimension (measured, not an edge)
 
-Objective condition tested (point-in-time, no lookahead): trailing-21d fraction of exact-0 daily changes (stale_share) + trailing median price, rank-tiled cross-section into 5 quintiles per date; forward equal-weight returns at 1/5/21d. Split IS (<2010) / OOS (≥2010). Run in `research/pead/derive_liquidity_scan.py`.
+Objective condition tested (point-in-time, no lookahead): trailing-21d fraction of exact-0 daily changes (stale_share) + trailing median price, rank-tiled cross-section into 5 quintiles per date; forward equal-weight returns at 1/5/21d. Split IS (<2010) / OOS (≥2010). Run in `../research/pead/derive_liquidity_scan.py`.
 
 | Set | 1d tile0→tile4 | 5d tile0→tile4 | 21d tile0→tile4 |
 |---|---|---|---|
@@ -149,7 +149,7 @@ Objective condition tested (point-in-time, no lookahead): trailing-21d fraction 
 
 ### 7.2 Second derive pass — short-horizon momentum & conditional liquidity (measured, friction-eaten)
 
-Built on the first-pass finding by restricting to the **liquid-only universe** from the start (median price > $5 AND stale_share < 25%; 18.4M rows, 7,409 symbols). Script `research/pead/derive2_liquid_scan.py`, outputs `derive2_reversal_summary.csv`, `derive2_conditional_summary.csv`. Split IS (<2010) / OOS (≥2010). All features point-in-time/no-lookahead.
+Built on the first-pass finding by restricting to the **liquid-only universe** from the start (median price > $5 AND stale_share < 25%; 18.4M rows, 7,409 symbols). Script `../research/pead/derive2_liquid_scan.py`, outputs `derive2_reversal_summary.csv`, `derive2_conditional_summary.csv`. Split IS (<2010) / OOS (≥2010). All features point-in-time/no-lookahead.
 
 **Observation A — short-horizon prior-return momentum (NOT reversal):** tiling the liquid cross-section by prior-1d (and prior-5d) return, forward equal-weight returns are **monotone momentum**: prior winners keep winning, losers keep losing. Consistent both halves.
 
@@ -213,7 +213,7 @@ The derive method on this data must therefore find something structurally new (a
 
 ### 8.3 Pre-registered probe of the opening-direction signal (DISCONFIRMED on significance gate)
 
-Built the pre-registered probe `research/opening-direction/run_probe.py` on the COMBINED NQ panel (IVAMR 2013-2023 + vwap-pullback 2020-2026; overlap verified identical, deduped -> 3,197 trading days, 2013-11..2026-08). Rule: each RTH day, enter at close of first 30/60 min in the direction of that open-to-W-min return, hold to session close. Split IS 2013-2024 / OOS 2025-2026. Friction 0.5 (base) / 1.0 (stress) pts/turn. House gates incl. bootstrap p5 (n=5000).
+Built the pre-registered probe `../research/opening-direction/run_probe.py` on the COMBINED NQ panel (IVAMR 2013-2023 + vwap-pullback 2020-2026; overlap verified identical, deduped -> 3,197 trading days, 2013-11..2026-08). Rule: each RTH day, enter at close of first 30/60 min in the direction of that open-to-W-min return, hold to session close. Split IS 2013-2024 / OOS 2025-2026. Friction 0.5 (base) / 1.0 (stress) pts/turn. House gates incl. bootstrap p5 (n=5000).
 
 | Window_friction | IS net pts/d | OOS net pts/d | OOS PF | OOS boot p5 |
 |---|---|---|---|---|
@@ -228,7 +228,7 @@ Built the pre-registered probe `research/opening-direction/run_probe.py` on the 
 
 ### 8.4 Relative-value derive on ES vs NQ (no structure — dead end)
 
-Pulled ES continuous 1-min OHLCV RTH from Databento (`research/relative-value/cache/ES_n_0_1m.parquet`, 2020-08..2026-08, 597k bars, same window as NQ). Ran the derive method on the relative-value family (the doc's why-grounded, direction-agnostic family).
+Pulled ES continuous 1-min OHLCV RTH from Databento (`../research/relative-value/cache/ES_n_0_1m.parquet`, 2020-08..2026-08, 597k bars, same window as NQ). Ran the derive method on the relative-value family (the doc's why-grounded, direction-agnostic family).
 
 Observed relationship: ES & NQ 1-min return correlation = 0.92 (extremely tight co-movement); daily NQ-on-ES beta = 1.28. But:
 - **No mean reversion:** hedged spread daily autocorr = 0.999, sign-flip rate 0.4% (random-walk drift, no spring). Time-varying NQ/ES ratio reflects tech-vs-market drift, not a reverting spread.
@@ -255,15 +255,15 @@ Every derived observation run was put through the harness (IS/OOS, friction, boo
 
 ### 8.5b CORRECTION — the "last lane" (index-rebal bars) is ALSO already closed
 
-**Correction (2026-08-13):** this document earlier listed the index-rebalancing single-name bars (1,259 names, 2023-2026) as the only owned dataset "NOT yet run through the derive method." On inspection this is wrong: those bars are the **same universe used by the index-rebalancing study**, which was **already fully adjudicated and REJECTED** in `IA/index-rebalancing-research-spec.md` (Level-1 study 2026-08-04, Level-2 robustness/capacity/borrow 2026-08-04, candidate closed). Its event tables (`events/spdji_reconciled.parquet`, `events/r2000_events.parquet`, `events/study_events.parquet`) and complete outputs (`outputs/results_base.parquet`, `level2_*.parquet`, `s10_validation.parquet`) are all on disk. The short-additions 10td edge was rejected on the pre-registered "single-year dependence" gate (one March 2025 batch); long-deletions failed in-sample; Russell 2000 inverted. **The index-rebal bars are not a fresh lane** — they are the already-closed study's data.
+**Correction (2026-08-13):** this document earlier listed the index-rebalancing single-name bars (1,259 names, 2023-2026) as the only owned dataset "NOT yet run through the derive method." On inspection this is wrong: those bars are the **same universe used by the index-rebalancing study**, which was **already fully adjudicated and REJECTED** in `index-rebalancing-research-spec.md` (Level-1 study 2026-08-04, Level-2 robustness/capacity/borrow 2026-08-04, candidate closed). Its event tables (`events/spdji_reconciled.parquet`, `events/r2000_events.parquet`, `events/study_events.parquet`) and complete outputs (`outputs/results_base.parquet`, `level2_*.parquet`, `s10_validation.parquet`) are all on disk. The short-additions 10td edge was rejected on the pre-registered "single-year dependence" gate (one March 2025 batch); long-deletions failed in-sample; Russell 2000 inverted. **The index-rebal bars are not a fresh lane** — they are the already-closed study's data.
 
 ### 8.5c COMPLETE Stage-1 ledger — every owned free dataset is now accounted for
 
-Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (derive→dead), SPY+vol (already closed), buyback/10b5-1 (already closed), BTC MVRV (already closed), index-rebal bars (already closed). **There is no owned free dataset left to derive on that is not already measured/closed.** Stage 1 (free-data derive at cost 0) is genuinely exhausted across the complete inventory. The remaining decision is the genuine Stage-2 fork: (2a) buy a data moat (order flow / options microstructure / long intraday history) and run the SAME derive method on it, or (2b) STOP and preserve capital — both legitimate, data-backed, non-failure outcomes per `edge-discovery-direction.md` §7 and `institutional-approach.md` §Data-moat.
+Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (derive→dead), SPY+vol (already closed), buyback/10b5-1 (already closed), BTC MVRV (already closed), index-rebal bars (already closed). **There is no owned free dataset left to derive on that is not already measured/closed.** Stage 1 (free-data derive at cost 0) is genuinely exhausted across the complete inventory. The remaining decision is the genuine Stage-2 fork: (2a) buy a data moat (order flow / options microstructure / long intraday history) and run the SAME derive method on it, or (2b) STOP and preserve capital — both legitimate, data-backed, non-failure outcomes per `../IA/edge-discovery-direction.md` §7 and `institutional-approach.md` §Data-moat.
 
 ### 8.5a CORRECTION — the vol-risk-premium family is ALREADY CLOSED (not "open")
 
-**Correction (2026-08-13):** an earlier draft of this section wrongly labeled the VRP family "OPEN - not yet a dead end." This was incorrect. `IA/vol-risk-premium-research-spec.md` already ran and adjudicated the ENTIRE family on 2026-08-08:
+**Correction (2026-08-13):** an earlier draft of this section wrongly labeled the VRP family "OPEN - not yet a dead end." This was incorrect. `vol-risk-premium-research-spec.md` already ran and adjudicated the ENTIRE family on 2026-08-08:
 - **V1** (unconditional VRP level): MEASURED-POSITIVE-LEVEL (premium exists) — but a level is NOT an edge.
 - **V2** (naive short-vol buy-and-hold SVXY + VRP-regime-gated): **DISCONFIRMED** — −95% max DD / −83% single day; gate FAIL.
 - **V3** (tail-overlay: term-inversion / elevated-rising-VIX / equity-drawdown exits): **DISCONFIRMED** — total −26%, skips the premium-rich regimes. Candidate **CLOSED 2026-08-08**; doc says "No paid data, no further work recommended on this family."
@@ -278,9 +278,9 @@ Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (der
 
 **Key finding on size:** full MBO is NOT needed for a first derive pass — it's 4.4 GB/10d vs bbo-1s 0.04 GB and trades 0.12 GB. The two core order-flow observations (aggression delta, quote imbalance) only need `trades` (aggressor side) + `bbo-1s` (top-of-book sizes).
 
-**What was bought:** 3 months of NQ continuous (2026-05-01 → 2026-08-01), $43.53 total: `research/order-flow/cache/NQ_trades_2026q2.parquet` (26.7M trades, columns action/side/price/size/sequence), `research/order-flow/cache/NQ_bbo-1s_2026q2.parquet` (5.3M 1-sec snapshots, bid_px/ask_px/sizes/counts). Fetch script `research/order-flow/fetch_flow.py`. Degraded days flagged: 2026-05-24, 2026-07-30. RTH filter applied (09:30-16:00 ET).
+**What was bought:** 3 months of NQ continuous (2026-05-01 → 2026-08-01), $43.53 total: `research/order-flow/cache/NQ_trades_2026q2.parquet` (26.7M trades, columns action/side/price/size/sequence), `research/order-flow/cache/NQ_bbo-1s_2026q2.parquet` (5.3M 1-sec snapshots, bid_px/ask_px/sizes/counts). Fetch script `../research/order-flow/fetch_flow.py`. Degraded days flagged: 2026-05-24, 2026-07-30. RTH filter applied (09:30-16:00 ET).
 
-**Derive scan** (`research/order-flow/derive_scan.py`, `derive_scan5.py`), aggressor delta and quote imbalance vs next-period return, RTH only, bucket-quintile spread in bps:
+**Derive scan** (`../research/order-flow/derive_scan.py`, `derive_scan5.py`), aggressor delta and quote imbalance vs next-period return, RTH only, bucket-quintile spread in bps:
 
 | Horizon | delta_vol corr | delta_vol spread | imb corr | imb spread |
 |---|---|---|---|---|
@@ -293,7 +293,7 @@ Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (der
 
 ### 8.7 Stage-2 second paid-data test — single-stock order flow (40 mega/large-cap names), RESULT: DISCONFIRMED at pre-registered probe
 
-**Test (2026-08-14):** The right venue for order-flow asymmetry is single stocks (retail/informed flow), not hyper-efficient NQ. Bought 3 months (2026-05-01 → 2026-08-01) of `trades` + `bbo-1s` for 40 mega/large-cap names via EQUS.MINI — **$23 total** (trades $11.28, bbo-1s $11.75; equities unit prices: trades $6/GB, bbo-1s $4/GB — far cheaper than futures). Files: `research/order-flow/cache/EQ_trades_2026q2.parquet` (26.7M rows), `EQ_bbo-1s_2026q2.parquet` (36.7M rows). Fetch `research/order-flow/fetch_equs.py`.
+**Test (2026-08-14):** The right venue for order-flow asymmetry is single stocks (retail/informed flow), not hyper-efficient NQ. Bought 3 months (2026-05-01 → 2026-08-01) of `trades` + `bbo-1s` for 40 mega/large-cap names via EQUS.MINI — **$23 total** (trades $11.28, bbo-1s $11.75; equities unit prices: trades $6/GB, bbo-1s $4/GB — far cheaper than futures). Files: `research/order-flow/cache/EQ_trades_2026q2.parquet` (26.7M rows), `EQ_bbo-1s_2026q2.parquet` (36.7M rows). Fetch `../research/order-flow/fetch_equs.py`.
 
 **Naive 5-min scan** (`derive_equs.py`, `derive_equs2.py`) — aggression delta (buy−sell vol) and quote imbalance (bid−ask size) vs next-bin return, RTH, per-symbol quintiles:
 - delta_vol: mean spread **+3.16 bps** (IS +3.39 / OOS +2.97), 22/40 names > 2 bps; top MU +16.6, INTC +11.9, AMD +8.0, TSLA +7.0
@@ -301,7 +301,7 @@ Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (der
 
 First observation in the whole program with magnitude above friction. Monotonicity was poor (12%/2%) — a warning that went into the probe.
 
-**Pre-registered probe** (`research/order-flow/run_probe_equs.py`): long when delta_vol in top quintile, flat otherwise, 1-bin hold, 3 bps round-trip friction, point-in-time rolling 200-bin threshold, IS first 60% dates / OOS last 40%, bootstrap n=5000 seed 42, drop-best-symbol. **Result: DISCONFIRMED.**
+**Pre-registered probe** (`../research/order-flow/run_probe_equs.py`): long when delta_vol in top quintile, flat otherwise, 1-bin hold, 3 bps round-trip friction, point-in-time rolling 200-bin threshold, IS first 60% dates / OOS last 40%, bootstrap n=5000 seed 42, drop-best-symbol. **Result: DISCONFIRMED.**
 - IS: −0.134 bps/trade (t=−1.96); OOS: −0.240 bps/trade (t=−2.76); **bootstrap p5 = −0.389 bps/trade (gate p5>0: FAIL)**; drop-best (MSFT): −0.272 bps/trade.
 
 **Why the naive scan lied:** full-sample quintiles = lookahead; top-minus-bottom bucket contrast ≠ tradeable long-leg; friction 3 bps dwarfs the residual. Under honest rules the observation is negative. **Verdict: DEAD** — same conclusion as NQ order flow, free-data PEAD/NQ/ES, and the already-closed vol/index-rebal/event families. The order-flow data moat — the docs' highest-ranked Stage-2 direction — does not survive the harness on either venue (futures or single stocks).

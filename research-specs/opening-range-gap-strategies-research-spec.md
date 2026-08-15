@@ -44,8 +44,8 @@ The claim style is the same as our prior disconfirmations: high-confidence, mark
 The three intraday **gap/range-at-open** strategies are the coherent, highest-fidelity set to the transcript's claims, on the same testbed we already use:
 
 **Instrument / data:** NQ (`GLBX.MDP3`, `NQ.n.0` continuous lead), RTH-only 1-min OHLCV from Databento. We own two overlapping caches that combine to **2013-11 → 2026-08**:
-- `research/ivamr/cache/NQ_n_0_1m.parquet` (2013-11 → 2023-12, 973K rows)
-- `research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet` (2020-08 → 2026-08, 597K rows)
+- `../research/ivamr/cache/NQ_n_0_1m.parquet` (2013-11 → 2023-12, 973K rows)
+- `../research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet` (2020-08 → 2026-08, 597K rows)
 
 **Frozen rules to pre-register (per strategy):**
 - Gr/Oops: gap ≥20 pts beyond prev-day high/low; enter on a 5-min close back through the level; fixed stop, 1:1 target.
@@ -85,7 +85,7 @@ This doc is the compact review artifact. No backtest runs until the scope is cho
 
 Reviewer decision: **run each of the trio independently** (each a distinct falsifiable claim: ORB "outperforms S&P", Gap Fill "65-70% fill", Oops "validated on DAX 2012-2024"). Split frozen **IS 2014-01-01 .. 2018-12-31 / OOS 2019-01-01 .. 2026-08-07** (IVAMR-style, long clean OOS; data prefix from 2013-11 supplies prev-day levels).
 
-Pre-registered per-strategy mechanics (frozen before any run; see the code in `src/quant_scripts/opening_range_gap/`):
+Pre-registered per-strategy mechanics (frozen before any run; see the code in `../src/quant_scripts/opening_range_gap`):
 
 | Strategy | Entry | Stop | Target | Fill-rate candidate eval |
 |---|---|---|---|---|
@@ -102,13 +102,13 @@ House discipline identical across all three: **IS/OOS, 0.5 pts/turn friction bas
 - **Stops/targets are computed from the actual FILL price** (next-bar open), not the signal-bar open — fixing a look-ahead-alignment bug that inflated ORB/Gap-Fill and zeroed Oops in the first run.
 - **Gap Fill fill-rate gate = 0.60** — transcript says "65 to 70% of gaps are filled in the S&P 500; in the NASDAQ is even higher", so 0.60 is a conservative bound for NQ.
 
-Data: combine the two owned NQ RTH 1-min caches (`research/ivamr/cache/NQ_n_0_1m.parquet` + `research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet`), dedup on `ts`, giving **2013-11 → 2026-08**. No new fetch required.
+Data: combine the two owned NQ RTH 1-min caches (`../research/ivamr/cache/NQ_n_0_1m.parquet` + `../research/nq-vwap-pullback/cache/NQ_n_0_1m.parquet`), dedup on `ts`, giving **2013-11 → 2026-08**. No new fetch required.
 
 ---
 
 ## 9. RESULTS — probe executed 2026-08-09
 
-Engine + data: combined owned NQ RTH 1-min (2013-11→2026-08), 5-min execution bars, one entry/day, 0.5 pts/turn friction, bootstrap p5 (n=5000, seed 42), look-ahead audit structural (gate 6 PASS by construction: prev-day levels / opening range complete before trigger, fill at next-bar open, intra-bar stops). Outputs in `research/opening-range-gap/outputs/`, code in `src/quant_scripts/opening_range_gap/`.
+Engine + data: combined owned NQ RTH 1-min (2013-11→2026-08), 5-min execution bars, one entry/day, 0.5 pts/turn friction, bootstrap p5 (n=5000, seed 42), look-ahead audit structural (gate 6 PASS by construction: prev-day levels / opening range complete before trigger, fill at next-bar open, intra-bar stops). Outputs in `../research/opening-range-gap/outputs`, code in `../src/quant_scripts/opening_range_gap`.
 
 | Strategy | IS trades / net | OOS trades / net | OOS win% / PF | Verdict |
 |---|---|---|---|---|
@@ -122,7 +122,7 @@ Engine + data: combined owned NQ RTH 1-min (2013-11→2026-08), 5-min execution 
 
 **Oops (DISCONFIRMED):** all P&L gates fail (IS −14.5, OOS −44.0, 33.2% win rate). Caveat: the transcript's literal "minimum 20 points" gap is not level-invariant — NQ rose ~3500 (2014) to ~20000 (2026), so IS has only 7 qualifying trades vs 304 OOS; the verdict rests almost entirely on OOS.
 
-**Overall:** two clean disconfirmations (ORB, Oops) + Gap Fill's fill-rate fails OOS. Consistent with the prior VWAP-pullback and IVAMR disconfirmations from the same trading-education lineage. Candidate family closed. Details in `strategies/opening-range-gap/OPENING_RANGE_GAP.md`.
+**Overall:** two clean disconfirmations (ORB, Oops) + Gap Fill's fill-rate fails OOS. Consistent with the prior VWAP-pullback and IVAMR disconfirmations from the same trading-education lineage. Candidate family closed. Details in `../strategies/opening-range-gap/OPENING_RANGE_GAP.md`.
 
 - **2026-08-09:** Spec §8 frozen, transcript-confirmed refinements locked, probe run, results recorded above.
 

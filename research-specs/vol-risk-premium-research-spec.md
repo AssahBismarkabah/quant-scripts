@@ -76,8 +76,8 @@ The distinguishing feature: this is not a *directional move* bet; it is a *premi
 **Correction (2026-08-08):** an earlier draft of this section gated the conditional/event version on paid data. A follow-up free-data verification shows that is wrong — the short-vol mechanic is testable with **owned plus genuinely free** sources. Paid sources exist for premium convenience but are **not required** for any version of the claim.
 
 **Owned / already on disk:**
-- `research/vol-targeting/cache/VIXCLS.csv` — **CBOE VIX close, daily 1990-01-02 → 2026-07-31** (9,544 rows). Model-free 1-month implied-vol proxy. Source: FRED (free).
-- `research/vol-targeting/cache/SPY_clean_long.parquet` / `SPY_long.parquet` — **SPY daily 1993-02-01 → 2026-07-31**, OHLCV. Source: Yahoo (free). Sufficient for realized variance.
+- `../research/vol-targeting/cache/VIXCLS.csv` — **CBOE VIX close, daily 1990-01-02 → 2026-07-31** (9,544 rows). Model-free 1-month implied-vol proxy. Source: FRED (free).
+- `../research/vol-targeting/cache/SPY_clean_long.parquet` / `SPY_long.parquet` — **SPY daily 1993-02-01 → 2026-07-31**, OHLCV. Source: Yahoo (free). Sufficient for realized variance.
 - Databento NQ futures intraday (2013+) — tradable instrument the guest names; for execution modeling.
 - SPX dealer-GEX options chain (gamma/OI) — not option prices/IV; not for premium capture.
 
@@ -227,8 +227,8 @@ V1 confirms the **premise is real** (implied > realized on average) but **does n
 This registers the first probe. It tests the core structural claim (implied variance systematically exceeds realized variance) with the purely owned data (VIX + SPY). Per the standing protocol: rules and gates are frozen before results; a decision is recorded once, not tuned.
 
 ### 11.A Data
-- **Implied:** CBOE VIX close (`research/vol-targeting/cache/VIXCLS.csv`, FRED, `observation_date` + `VIXCLS`), 1990-01-02 → 2026-07-31. Null `VIXCLS` rows (FRED non-trading days) dropped before alignment.
-- **Realized:** SPY daily close (`research/vol-targeting/cache/SPY_clean_long.parquet`, Yahoo; `ts_date` + `close`), 1993-02 → 2026-07.
+- **Implied:** CBOE VIX close (`../research/vol-targeting/cache/VIXCLS.csv`, FRED, `observation_date` + `VIXCLS`), 1990-01-02 → 2026-07-31. Null `VIXCLS` rows (FRED non-trading days) dropped before alignment.
+- **Realized:** SPY daily close (`../research/vol-targeting/cache/SPY_clean_long.parquet`, Yahoo; `ts_date` + `close`), 1993-02 → 2026-07.
 - **Align:** inner join on trading date, signal date `t` = a day with both VIX and SPY.
 
 ### 11.B Definitions
@@ -254,7 +254,7 @@ A **positive** VRP at `t` means a premium existed that a short-vol seller would 
 **Verdict:** report PASS/FAIL as DISCONFIRMED if any of gates 1, 3, 4 fail.
 
 ### 11.E Outputs
-`research/vol-risk-premium/outputs/v1_summary.json` — VRP means (IS, OOS, modern), bootstrap p5 (IS, OOS), per-gate boolean, verdict. Cache/raw stay out of git (`research/vol-risk-premium/cache/`).
+`../research/vol-risk-premium/outputs/v1_summary.json` — VRP means (IS, OOS, modern), bootstrap p5 (IS, OOS), per-gate boolean, verdict. Cache/raw stay out of git (`../research/vol-risk-premium/cache`).
 
 ---
 
@@ -263,7 +263,7 @@ A **positive** VRP at `t` means a premium existed that a short-vol seller would 
 V1 confirmed the VRP *level* is positive. V2 tests the decisive question V1 explicitly deferred: **is the premium harvestable after real costs and, critically, does it survive its own fat tail?** This is where the short-vol claim lives or dies.
 
 ### 13.A Data
-- **SVXY** (ProShares Short VIX Short-Term Futures ETF, −1× short-vol): free Yahoo daily adjusted close, `research/vol-risk-premium/cache/SVXY.parquet`, 2011-10-04 → 2026-08-04 (3,728 days). Long SVXY = short volatility = collecting the premium. Sample includes both tail events: **2018-02 volmageddon** and **2020-03 COVID**.
+- **SVXY** (ProShares Short VIX Short-Term Futures ETF, −1× short-vol): free Yahoo daily adjusted close, `../research/vol-risk-premium/cache/SVXY.parquet`, 2011-10-04 → 2026-08-04 (3,728 days). Long SVXY = short volatility = collecting the premium. Sample includes both tail events: **2018-02 volmageddon** and **2020-03 COVID**.
 - VXX (long-vol) and SVIX (−1×) also cached; V2 primary uses SVXY. XIV not available free (delisted) but SVXY reproduces the same 2018 event.
 
 ### 13.B Mechanics (faithful to the claim + V1)
@@ -282,7 +282,7 @@ SVXY return is used directly from adjusted close; the ~0.95%/yr ETF expense rati
 **Verdict:** **DISCONFIRMED** if gate 1 fails (it will, per the −95% measured drawdown) — meaning short-vol is not a harvestable edge; it is a positively-skewed-with-ruinous-tail premium-capture that no single-strategy sizing can make deployable without the tail risk dominating.
 
 ### 13.E Outputs
-`research/vol-risk-premium/outputs/v2_summary.json` — V2a/V2b returns, worst single day, max drawdown, tail-event flags, per-gate booleans, verdict.
+`../research/vol-risk-premium/outputs/v2_summary.json` — V2a/V2b returns, worst single day, max drawdown, tail-event flags, per-gate booleans, verdict.
 
 ---
 
@@ -319,7 +319,7 @@ the standard way sophisticated short-vol managers earn the premium while boundin
 ### 15.A Data (all free / owned)
 - **Core instrument:** SVXY (short-vol ETP, Yahoo, `cache/SVXY.parquet`, 2011-10 → 2026-08). Long SVXY = short vol = collect premium.
 - **Signals (CBOE official CDN, `cache/`):** VIX (1990+), VIX3M (2009+), VIX9D (2011+).
-- **Equity stress (owned):** SPY daily (`research/vol-targeting/cache/SPY_clean_long.parquet`).
+- **Equity stress (owned):** SPY daily (`../research/vol-targeting/cache/SPY_clean_long.parquet`).
 
 ### 15.B Frozen rules
 **Core:** long SVXY unless any tail-overlay trigger is active; otherwise flat (cash).
@@ -340,7 +340,7 @@ SVXY return used directly from adjusted close (expense ratio embedded in the NAV
 **Verdict:** DISCONFIRMED if gate 1 fails (tail not bounded) or gate 2 fails (no net harvest). If the overlay bounds the tail AND keeps a positive net return, this is the first form where the VRP *may* be exploitable and it would be a genuine finding (still requiring finer V4 with real option costs).
 
 ### 15.E Outputs
-`research/vol-risk-premium/outputs/v3_summary.json` — overlay triggers fired, days in market, total return, max drawdown, worst single day (buy-and-hold vs overlay), per-gate booleans, verdict.
+`../research/vol-risk-premium/outputs/v3_summary.json` — overlay triggers fired, days in market, total return, max drawdown, worst single day (buy-and-hold vs overlay), per-gate booleans, verdict.
 
 ---
 

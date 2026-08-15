@@ -2,7 +2,7 @@
 
 **Status:** Test complete (2026-08-04) — adjudicated **MEASURED-BUT-MARGINAL: NO ADVANCE**. On the full 1993-2026 sample (~840 events per cell, a ~10x event increase over v2's ~80), the fade becomes statistically detectable (t≈2.0-2.2, bootstrap p5 > 0 in BOTH cells) but the effect size collapses to roughly **market-drift parity**: ~+17-18 bps hold5 vs an unconditional ~+16 bps random-long baseline, an excess of only ~1-2 bps that does not survive as a tradeable edge. The candidate does not advance. See Current Decision.
 
-**Supersedes / extends:** `IA/vol-targeting-revisit-research-spec.md` (v2.0), which rejected the candidate on the bootstrap p5 gate at n≈80. This document pre-registers the registered option (VOL_TARGETING.md section 9) to **extend the sample** and re-test. It does NOT reverse the v1/v2 rejections; it measures the effect at a sample size where significance is achievable and records what the true effect size is.
+**Supersedes / extends:** `vol-targeting-revisit-research-spec.md` (v2.0), which rejected the candidate on the bootstrap p5 gate at n≈80. This document pre-registers the registered option (VOL_TARGETING.md section 9) to **extend the sample** and re-test. It does NOT reverse the v1/v2 rejections; it measures the effect at a sample size where significance is achievable and records what the true effect size is.
 
 **Purpose:** Freeze the extended-sample design, gates, and split before running; apply them uniformly to both co-base cells; record the verdict.
 
@@ -20,11 +20,11 @@ This is a hypothesis test with a power pre-registration: at ~10x the v2 event co
 
 Acquired freely, per the roadmap (IA/data-and-portfolio-roadmap.md section 3.2):
 
-- **SPY daily OHLC** from Yahoo Finance (free, no key) — SPY since launch Feb 1993 through 2026-07-31. Fetched in daily 8-year windows via the chart API to preserve daily granularity. `research/vol-targeting/cache/SPY_long.parquet` (8429 daily rows).
+- **SPY daily OHLC** from Yahoo Finance (free, no key) — SPY since launch Feb 1993 through 2026-07-31. Fetched in daily 8-year windows via the chart API to preserve daily granularity. `../research/vol-targeting/cache/SPY_long.parquet` (8429 daily rows).
 - **VIXCLS** from FRED — full 1990-2026 history already cached, reused.
 - **Verification:** SPY_long overlaps the trusted `SPY_clean.parquet` (2023-2026) with **0 bps close difference** on all 838 overlap days (bit-for-bit agreement). OHLC sanity: 0 violations across 8429 rows. FRED SP500 cross-check (2016+): SPY*10/SPX ratio std 15 bps; return diffs mean 4.3 bps, largest only on known extreme trading days. VIXCLS alignment: 8427/8429 sessions carry a valid VIX close; the 2 exceptions (1997-01-31, 1997-11-26, both pre-2000 holidays) are **excluded** from the study frame — no VIX value is fabricated.
-- Working series: `research/vol-targeting/cache/SPY_clean_long.parquet` (8427 rows, 1993-02-01 → 2026-07-31).
-- Acquisition script: `research/vol-targeting/acquire_long_spy.py` (re-fetchable; cache is gitignored).
+- Working series: `../research/vol-targeting/cache/SPY_clean_long.parquet` (8427 rows, 1993-02-01 → 2026-07-31).
+- Acquisition script: `../research/vol-targeting/acquire_long_spy.py` (re-fetchable; cache is gitignored).
 
 ---
 

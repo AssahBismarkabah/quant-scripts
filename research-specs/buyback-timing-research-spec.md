@@ -2,7 +2,7 @@
 
 **Status:** Pre-research specification (deep dive in progress, 2026-08-04)
 **Classification:** Candidate mechanic / Structural forced-flow + data asymmetry / Mandate & legal-constraint category (Category 4: behavioral/regulatory overlay on Category 2 mandate)
-**Supersedes/extends:** Selected as the #1 testable candidate from `IA/structural-edge-survey-2025-2026.md`. This document is the research + pre-registration spec for that candidate, written before any collection or backtest code.
+**Supersedes/extends:** Selected as the #1 testable candidate from `../IA/structural-edge-survey-2025-2026.md`. This document is the research + pre-registration spec for that candidate, written before any collection or backtest code.
 **Purpose:** Define the research question, the evidence, the data, the execution assumptions, and the rejection gates before writing code — exactly as the funding-basis spec did for its candidate.
 
 ---

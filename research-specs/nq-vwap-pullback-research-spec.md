@@ -82,8 +82,8 @@ The OOS window is the decision window. The probe fails if any of the following h
 
 ## 6. Data & tools (owned — cheap)
 
-- **Databento** (`DATABENTO_API_KEY`, set in `.env`; client 0.82.0 installed): NQ (and /ES proxy) `ohlcv-1m` futures bars, resampled to 5-min/15-min RTH. Intraday OHLCV infra already exists in `src/quant_scripts/spx_gex/databento.py` and `index_rebalancing/databento.py`.
-- **Caching:** parquet cache per instrument + per window under `research/nq-vwap-pullback/cache/`; resumable (reuse the 10b5-1 pattern).
+- **Databento** (`DATABENTO_API_KEY`, set in `../.env`; client 0.82.0 installed): NQ (and /ES proxy) `ohlcv-1m` futures bars, resampled to 5-min/15-min RTH. Intraday OHLCV infra already exists in `../src/quant_scripts/spx_gex/databento.py` and `index_rebalancing/databento.py`.
+- **Caching:** parquet cache per instrument + per window under `../research/nq-vwap-pullback/cache`; resumable (reuse the 10b5-1 pattern).
 - **No additional key/license needed.** yfinance 5-min is NOT a viable fallback (≈7-day lookback only) — Databento is the sole source.
 - **Computing edge:** VWAP from the 1-min base, not from 5/15-min close — this is a correctness requirement (gate 6).
 
@@ -108,12 +108,12 @@ This probe decides whether the **intraday VWAP-anchored pullback** family — th
 
 ## 9. Status
 
-- **2026-08-08:** Spec created. Data confirmed owned (Databento intraday futures client + key already in repo `.env`; intraday OHLCV infra reused from the spx_gex/index_rebalancing stack). Rules and gates locked per §2 and §5. Next step: scaffold the probe in `research/nq-vwap-pullback/` + `src/quant_scripts/nq_vwap_pullback/`, fetch NQ 1-min, verify IS reproduction (gate 5), then run OOS (gates 1–4, 6).
+- **2026-08-08:** Spec created. Data confirmed owned (Databento intraday futures client + key already in repo `../.env`; intraday OHLCV infra reused from the spx_gex/index_rebalancing stack). Rules and gates locked per §2 and §5. Next step: scaffold the probe in `../research/nq-vwap-pullback` + `../src/quant_scripts/nq_vwap_pullback`, fetch NQ 1-min, verify IS reproduction (gate 5), then run OOS (gates 1–4, 6).
 - **2026-08-08:** Probe executed. **DISCONFIRMED.** Results in §10.
 
 ## 10. Results (2026-08-08)
 
-Ran the frozen rules over Databento NQ 1-min (2020-08-01..2026-08-06, 597,028 bars, 30-day resumable chunk fetch), cached to `research/nq-vwap-pullback/cache/`, outputs in `research/nq-vwap-pullback/outputs/`.
+Ran the frozen rules over Databento NQ 1-min (2020-08-01..2026-08-06, 597,028 bars, 30-day resumable chunk fetch), cached to `../research/nq-vwap-pullback/cache`, outputs in `../research/nq-vwap-pullback/outputs`.
 
 **IS (2020-08-01..2024-12-31):** 2,708 trades, win rate **60.6%**, avg win +40.79 / avg loss −63.60, PF **0.98**, net **−2,383.5** pts (gross −1,030).
 **OOS (2025-01-01..2026-08-07):** 1,152 trades, win rate **61.6%**, avg win +41.74 / avg loss −70.42, PF **0.95**, net **−2,180.75** pts (gross −1,605).

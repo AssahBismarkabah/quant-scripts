@@ -1,8 +1,8 @@
 ### **target volatility fund rebalancing — revisit research specification (v2.0)**
 
-**Status:** Test complete (2026-08-04) — candidate REJECTED at the pre-registered bootstrap p5 gate in both co-base cells (p5 -4.84 bps Cell A, -5.39 bps Cell B at the 5-day primary). All other gates passed, including the episode check that failed in v1. Data verification additionally found the v1 bar cache corrupted on 35/839 days; all v2 results use the verified clean series. See Current Decision and `strategies/vol-targeting/VOL_TARGETING.md` section 7.
+**Status:** Test complete (2026-08-04) — candidate REJECTED at the pre-registered bootstrap p5 gate in both co-base cells (p5 -4.84 bps Cell A, -5.39 bps Cell B at the 5-day primary). All other gates passed, including the episode check that failed in v1. Data verification additionally found the v1 bar cache corrupted on 35/839 days; all v2 results use the verified clean series. See Current Decision and `../strategies/vol-targeting/VOL_TARGETING.md` section 7.
 
-**Supersedes:** The v1.0 specification's 20d-RV base cell, which was tested and REJECTED on 2026-08-04 (see `strategies/vol-targeting/VOL_TARGETING.md` section 6). This document pre-registers a NEW construction justified by the documented practice of the vol-target complex, not by the v1 results.
+**Supersedes:** The v1.0 specification's 20d-RV base cell, which was tested and REJECTED on 2026-08-04 (see `../strategies/vol-targeting/VOL_TARGETING.md` section 6). This document pre-registers a NEW construction justified by the documented practice of the vol-target complex, not by the v1 results.
 
 **Purpose:** Define the revised research question, the evidence for the revised construction, the data, the execution assumptions, and the rejection gates before writing or modifying backtest code.
 
@@ -282,7 +282,7 @@ The revisit research pass is complete. Eight focused Tavily queries across both 
 
 Resolved since v1 rejection:
 
-- **Implemented:** SPY bars cached; VIXCLS route verified; v1 study scaffold runs (`research/vol-targeting/`).
+- **Implemented:** SPY bars cached; VIXCLS route verified; v1 study scaffold runs (`../research/vol-targeting`).
 - **Diagnosed and documented:** v1's flow construction missed Aug 2024 because 20d realized vol was already elevated pre-spike; top v1 flow days were cap-threshold crossings; the only positive robustness corners (60d window, 5-day horizon) are now independently justified by documentation.
 - **Pre-registered:** co-base cells A (60d RV) and B (VIX close), cap 2.0x, target 10%, 5-day primary horizon, joint gate, robustness grid, split boundary, friction, episode checks.
 
@@ -295,10 +295,10 @@ Still unresolved before coding, and who resolves each item:
 
 Resolved during implementation (2026-08-04):
 
-- **Data quality:** The three Databento-flagged days are minor (<=26 bps), but the full three-way check (Databento cache vs FRED SP500 vs Yahoo) found the cached EQUS.MINI bars corrupted on 35/839 sessions (up to -349 bps level errors on 2025-04-02, +220 bps on 2026-04-07). Yahoo and FRED SP500 agree throughout (11 bps std). All v2 results use `research/vol-targeting/cache/SPY_clean.parquet` (Yahoo OHLC). The v1 re-run on clean bars is recorded in the strategy doc section 6.A: H1 rejection stands; the split-sample and episode gate failures recorded in v1 were cache artifacts.
+- **Data quality:** The three Databento-flagged days are minor (<=26 bps), but the full three-way check (Databento cache vs FRED SP500 vs Yahoo) found the cached EQUS.MINI bars corrupted on 35/839 sessions (up to -349 bps level errors on 2025-04-02, +220 bps on 2026-04-07). Yahoo and FRED SP500 agree throughout (11 bps std). All v2 results use `../research/vol-targeting/cache/SPY_clean.parquet` (Yahoo OHLC). The v1 re-run on clean bars is recorded in the strategy doc section 6.A: H1 rejection stands; the split-sample and episode gate failures recorded in v1 were cache artifacts.
 - **VIXCLS:** downloaded from FRED (free CSV), aligned to SPY sessions 839/839 with zero missing.
 - **Cell B episode signs:** verified before the study — Aug 5 2024 flow -$168B, Apr 4 2025 flow -$112B under the base VIX construction.
-- **Study:** `research/vol-targeting/run_study_v2.py` implemented and run (`make study-v2`); JSON output at `research/vol-targeting/outputs/v2_study.json`.
+- **Study:** `../research/vol-targeting/run_study_v2.py` implemented and run (`make study-v2`); JSON output at `../research/vol-targeting/outputs/v2_study.json`.
 
 ### **current known limitations**
 
@@ -327,7 +327,7 @@ The outcome of this document may be approval to code, revision of the hypothesis
 
 The revisit was tested on 2026-08-04 and the candidate is REJECTED per the pre-registered gates. The v1 rejection stands and is not reversed by this document; this is a NEW pre-registration justified by documented practice (IMF 60-day construction; VIX as a complex input), not by v1 data. The joint gate (both cells must pass) is designed to prevent the single-corner selection that the v1 robustness grid exposed.
 
-Results in brief (full record: `strategies/vol-targeting/VOL_TARGETING.md` section 7; JSON: `research/vol-targeting/outputs/v2_study.json`):
+Results in brief (full record: `../strategies/vol-targeting/VOL_TARGETING.md` section 7; JSON: `../research/vol-targeting/outputs/v2_study.json`):
 
 1. **The v2 construction is validated as a flow measure.** Both cells pass the same-day diagnostic (corr +0.12 / +0.75) and the episode check (Aug 5 2024 and Apr 4 2025 in the bottom decile of flow, ranks 0.005-0.012) — the v1 failure mode is fixed. Top flow days are now vol events, not cap-threshold crossings.
 2. **H1 (fade) point estimates are positive in both cells:** hold5 net-of-base-friction +37.75 bps (t=1.46, n=79) and +31.92 bps (t=1.42, n=80). Split samples same-sign; drop-best, random-day control, t+1-close entry, stop-adjusted, and single-episode independence all pass; the robustness grid is positive in 36/36 cells at 3/5/10-day horizons.

@@ -1,8 +1,8 @@
 # IVAMR (Intraday Value Area Momentum & Mean Reversion) — Research & Pre-Registration Specification
 
-**Status:** Pre-research specification (bounded falsifiable probe, 2026-08-08). Reopened from a prior decline (see §10 of `strategies/ivamr/IVAMR.md`) because a genuine pre-2023 intraday out-of-sample window is now available (Databento NQ 1-min from 2013).
+**Status:** Pre-research specification (bounded falsifiable probe, 2026-08-08). Reopened from a prior decline (see §10 of `../strategies/ivamr/IVAMR.md`) because a genuine pre-2023 intraday out-of-sample window is now available (Databento NQ 1-min from 2013).
 **Classification:** Intraday Volume Profile — Value Area breakout momentum + Value Area break-in mean reversion, on NQ futures, RTH only.
-**Source claim:** the machine-executable blueprint in `strategies/ivamr/IVAMR.md` (Volume Profile / Auction Market Theory; explicitly NOT the Gao-Han-Li-Zhou "Market Intraday Momentum" paper — §8.A). Rules are extracted from that blueprint verbatim and frozen for the probe.
+**Source claim:** the machine-executable blueprint in `../strategies/ivamr/IVAMR.md` (Volume Profile / Auction Market Theory; explicitly NOT the Gao-Han-Li-Zhou "Market Intraday Momentum" paper — §8.A). Rules are extracted from that blueprint verbatim and frozen for the probe.
 **Purpose:** Decide, with pre-registered gates and an explicit pre-2023 out-of-sample window, whether the volume-profile mechanic earns a live friction-adjusted edge on NQ — or should remain permanently binned.
 
 ---
@@ -103,8 +103,8 @@ The probe FAILS (disconfirmed) if ANY of the following holds on the OOS window; 
 
 ## 6. Data & tools (owned — cheap)
 
-- **Databento** (`DATABENTO_API_KEY` in repo `.env`; client installed): NQ `ohlcv-1m` futures, `GLBX.MDP3`, `NQ.n.0` continuous lead contract; RTH filter + session-anchored computations in-feed. Verified clean 2013→present.
-- **Caching:** parquet cache under `research/ivamr/cache/`, resumable chunked fetch (reuse the NQ VWAP-pullback fetch pattern: 30-day chunks, per-chunk retry on transient Databento 504/stream drops, trailing boundary clamped to dataset availability).
+- **Databento** (`DATABENTO_API_KEY` in repo `../.env`; client installed): NQ `ohlcv-1m` futures, `GLBX.MDP3`, `NQ.n.0` continuous lead contract; RTH filter + session-anchored computations in-feed. Verified clean 2013→present.
+- **Caching:** parquet cache under `../research/ivamr/cache`, resumable chunked fetch (reuse the NQ VWAP-pullback fetch pattern: 30-day chunks, per-chunk retry on transient Databento 504/stream drops, trailing boundary clamped to dataset availability).
 - **No additional key/license needed.** yfinance is explicitly prohibited by the blueprint and is not viable intraday anyway.
 - **Volume at price:** computed from the 1-min RTH base with a fixed 0.25-pt bin (§8.B); never from 15-min OHLCV as if it were a histogram.
 
@@ -128,4 +128,4 @@ This probe decides whether the **volume-profile Value Area breakout/fade family*
 ## 9. Status
 
 - **2026-08-08:** Spec pre-registered. Reopen condition met (Databento NQ 1-min clean 2013→present verified). Rules frozen per §2, split per §4, gates per §5.
-- **2026-08-08 (later):** Probe executed. Full 2013-2023 NQ 1-min cache built (973,224 rows); engine scaffolded (`src/quant_scripts/ivamr/`), verified on synthetic + real data. **Verdict: DISCONFIRMED** — all five gates failed (IS 2014-2018: 517 trades, wr 49.9%, PF 0.80, net -1,096.89; OOS 2019-2023: 576 trades, wr 47.9%, PF 0.78, net -3,695.53). Gate 6 look-ahead passed; all economic gates failed. Blueprint Go/No-Go gates also fail (PF 0.78<1.3, avg trade ~0.09% equity<0.2%, MR wr 39.5%<55%). Play breakdown, kill-switch, and interpretation recorded in `strategies/ivamr/IVAMR.md` §10. Candidate closed.
+- **2026-08-08 (later):** Probe executed. Full 2013-2023 NQ 1-min cache built (973,224 rows); engine scaffolded (`../src/quant_scripts/ivamr`), verified on synthetic + real data. **Verdict: DISCONFIRMED** — all five gates failed (IS 2014-2018: 517 trades, wr 49.9%, PF 0.80, net -1,096.89; OOS 2019-2023: 576 trades, wr 47.9%, PF 0.78, net -3,695.53). Gate 6 look-ahead passed; all economic gates failed. Blueprint Go/No-Go gates also fail (PF 0.78<1.3, avg trade ~0.09% equity<0.2%, MR wr 39.5%<55%). Play breakdown, kill-switch, and interpretation recorded in `../strategies/ivamr/IVAMR.md` §10. Candidate closed.

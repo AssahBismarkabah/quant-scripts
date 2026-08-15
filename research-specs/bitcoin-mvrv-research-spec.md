@@ -71,7 +71,7 @@ Verdict: **DISCONFIRMED** if any gate fails; **CLEARS-OOS** only if dynamic DCA 
 
 ## 5. Outputs
 
-`research/bitcoin-mvrv/` — `bitcoin_mvrv_summary.json` (metrics + all gates), BTC/MVRV panel parquet (source-documented), regime/DCA series. Strategy register: `strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md` + `strategies/bitcoin-mvrv/BITCOIN_MVRV.md`.
+`../research/bitcoin-mvrv` — `bitcoin_mvrv_summary.json` (metrics + all gates), BTC/MVRV panel parquet (source-documented), regime/DCA series. Strategy register: `../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md` + `../strategies/bitcoin-mvrv/BITCOIN_MVRV.md`.
 
 ---
 
@@ -104,7 +104,7 @@ Implementation verified against `transcribe.txt`: MVRV **Z-score**, dynamic sizi
 
 **Question (asked during triage, not part of the original pre-registered spec):** does combining the "Bitcoin Cycle" indicator (1Y-MA ×2 vs 116D → CycleTop; 232D vs 2Y-MA → CycleBottom) with the MVRV-Z low/high bands give a valid buy-at-bottom / sell-at-top signal — i.e., does the confluence rescue / improve the MVRV signal?
 
-**Script:** `research/bitcoin-mvrv/cycle_confluence_probe.py` (faithful port of the two TradingView Pine indicators; rescale-Pine MVRV Z: `(MC−RCap)/σ(MC,730)` → rescale[−0.57,9.40]→[0,100]; lowB=EMA(lowest(Z,1500),900)+5; highB=EMA(highest(Z,1200),900)−20; cycle via crossunder only). Same data (Coin Metrics), same friction (10bp side + 25bp flat), same IS/OOS split.
+**Script:** `../research/bitcoin-mvrv/cycle_confluence_probe.py` (faithful port of the two TradingView Pine indicators; rescale-Pine MVRV Z: `(MC−RCap)/σ(MC,730)` → rescale[−0.57,9.40]→[0,100]; lowB=EMA(lowest(Z,1500),900)+5; highB=EMA(highest(Z,1200),900)−20; cycle via crossunder only). Same data (Coin Metrics), same friction (10bp side + 25bp flat), same IS/OOS split.
 
 **Key empirical findings:**
 

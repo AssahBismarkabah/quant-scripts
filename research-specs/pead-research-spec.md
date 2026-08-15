@@ -2,7 +2,7 @@
 
 **Status:** PRE-REGISTERED — probe about to run (2026-08-09)
 **Source claim:** from `transcribe.txt` (the "Five Structural Edges" transcript): positive (negative) earnings surprises drift for up to ~60 days after the announcement; cites Ball-Brown 1968, Bernard-Thomas 1989, recent ML PEAD work; claims "4% spread over 60 days in a single stock."
-**Data:** Kaggle "US Historical Stock Prices With Earnings Data" (`tsaustin/...`, 486MB zip, downloaded 2026-08-09 into `research/pead/cache/`).
+**Data:** Kaggle "US Historical Stock Prices With Earnings Data" (`tsaustin/...`, 486MB zip, downloaded 2026-08-09 into `../research/pead/cache`).
 
 ---
 
@@ -70,7 +70,7 @@ Mechanism (claimed): slow information diffusion, limited attention, alpha-execut
 
 ## 6. Outputs
 
-`research/pead/outputs/` — `pead_summary.json` (metrics + all gates), `pead_events.parquet` (per-event rows with SUE, decile, leg, ret, net_ret). Strategy register: `strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md` + `strategies/pead/PEAD.md`.
+`../research/pead/outputs` — `pead_summary.json` (metrics + all gates), `pead_events.parquet` (per-event rows with SUE, decile, leg, ret, net_ret). Strategy register: `../strategies/five-structural-edges/FIVE_STRUCTURAL_EDGES.md` + `../strategies/pead/PEAD.md`.
 
 ---
 

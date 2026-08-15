@@ -92,7 +92,7 @@ Binance is selected provisionally because its official USDⓈ-M documentation ex
 
 The Binance-first research scaffold is now implemented and runnable in the local workspace.
 
-- The edge-specific workflow lives in `research/funding-basis/Makefile`.
+- The edge-specific workflow lives in `../research/funding-basis/Makefile`.
 - The CLI supports live smoke checks, funding/mark/spot downloads, fixture dumps, and replay.
 - The CLI accepts explicit `--start-time`, `--end-time`, and `--limit` arguments so the capture window is not artificially capped at a tiny sample.
 - The current wider BTCUSDT fixture set contains 23 funding rows, 181 mark rows, and 181 spot rows.

@@ -1,13 +1,13 @@
 # Step 2b — Diverse Free-Data Basket (preregistered spec)
 
 **Status:** PRE-REGISTERED 2026-08-12 — frozen before any run. No post-hoc member/parameter/data selection.
-**Purpose:** The last free-data aggregation test (per `IA/path-forward-decision-memo.md` §3 Step 2, corrected by the 2026-08-12e scoping audit). Tests whether a GENUINELY diverse book (multi-asset + cross-sectional, long/short — not all-long-equity) clears the pre-registered OOS gates. If it fails, "free-data portfolio alpha at our scale is measured-dead" is finally earned and the buy-data-vs-stop fork is decided.
+**Purpose:** The last free-data aggregation test (per `../IA/path-forward-decision-memo.md` §3 Step 2, corrected by the 2026-08-12e scoping audit). Tests whether a GENUINELY diverse book (multi-asset + cross-sectional, long/short — not all-long-equity) clears the pre-registered OOS gates. If it fails, "free-data portfolio alpha at our scale is measured-dead" is finally earned and the buy-data-vs-stop fork is decided.
 
 ## Data (all reliable, free, keyless; NO dependency on blocked Yahoo/Stooq)
 
 | Leg | Data | Source | Freq | Range |
 |---|---|---|---|---|
-| XS momentum / reversal / low-vol | PEAD panel: `research/pead/cache/prices_adj_long.parquet` (7,786 symbols, adj close) | local (Kaggle) | daily→monthly | 1998-01 → 2021-06 |
+| XS momentum / reversal / low-vol | PEAD panel: `../research/pead/cache/prices_adj_long.parquet` (7,786 symbols, adj close) | local (Kaggle) | daily→monthly | 1998-01 → 2021-06 |
 | Term premium | `DGS10` (10Y yield), `DGS2` (2Y) | FRED | daily | 1990+ |
 | FX carry | `DEXUSAL` (US/AUD USD-per-AUD), `IR3TIB01USM156N` (US 3M), `IR3TIB01AUM156N` (AU 3M) | FRED | FX daily / rates monthly | 1990+ |
 | Commodity seasonality | `DCOILWTICO` (WTI spot) | FRED | daily | 1990+ |
@@ -53,6 +53,6 @@ Costs are charged where positions actually change (per member), NOT as a global 
 Verdict: **CLEARS-OOS** only if all three pass; else **FAILS-OOS** → free-data portfolio alpha is measured-dead at our scale → fork to (a) buy data or (b) stop.
 
 ## Status
-- **2026-08-12:** Spec frozen. Data verified: PEAD panel loaded (7,786 sym, 1998-06/2021); FRED keys confirmed (DGS10/DGS2/DTB3/IR3TIB/USM/DEXUSAL/DEXUSEU/DCOILWTICO all 200). Yahoo/Stooq blocked (429 / JS challenge) — explicitly excluded; FRED + local panel cover all legs. Next: build `research/portfolio-book/step2b_diverse_basket.py`.
+- **2026-08-12:** Spec frozen. Data verified: PEAD panel loaded (7,786 sym, 1998-06/2021); FRED keys confirmed (DGS10/DGS2/DTB3/IR3TIB/USM/DEXUSAL/DEXUSEU/DCOILWTICO all 200). Yahoo/Stooq blocked (429 / JS challenge) — explicitly excluded; FRED + local panel cover all legs. Next: build `../research/portfolio-book/step2b_diverse_basket.py`.
 - **2026-08-12f (RESULT — FAILS-OOS under honest shorting costs):** Run complete. Risk-parity combination of the 6 members; three construction bugs (spike, per-day friction, z-score vol-scale blow-up) found and fixed during the build. **Key finding:** the book only clears OOS under an optimistic 1.5%/yr short-borrow cost; at a realistic **5%/yr hard-to-borrow cost it FAILS-OOS** (p5 = −0.78bps < 0, PF 1.006, holdout 2nd half negative). The apparent edge is carried by `rev1m` shorting unborrowable bottom-quintile small caps — a short-leg-cost illusion. **Verdict: FAILS-OOS.** This earns the memo's "free-data portfolio alpha at our scale is measured-dead" claim and closes the buy-data-vs-stop fork (a) vs (b).
   - Borrow-cost sensitivity (OOS p5 / PF): 0% → +2.55bps/1.37 ; 1.5% → +1.55bps/1.25 ; **5% → −0.78bps/1.006 (FAIL)** ; 10% → −4.12bps/0.74 ; 15% → −7.47bps/0.54.
