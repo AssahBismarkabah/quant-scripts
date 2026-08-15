@@ -259,7 +259,7 @@ Every derived observation run was put through the harness (IS/OOS, friction, boo
 
 ### 8.5c COMPLETE Stage-1 ledger — every owned free dataset is now accounted for
 
-Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (derive→dead), SPY+vol (already closed), buyback/10b5-1 (already closed), BTC MVRV (already closed), index-rebal bars (already closed). **There is no owned free dataset left to derive on that is not already measured/closed.** Stage 1 (free-data derive at cost 0) is genuinely exhausted across the complete inventory. The remaining decision is the genuine Stage-2 fork: (2a) buy a data moat (order flow / options microstructure / long intraday history) and run the SAME derive method on it, or (2b) STOP and preserve capital — both legitimate, data-backed, non-failure outcomes per `../IA/edge-discovery-direction.md` §7 and `institutional-approach.md` §Data-moat.
+Running the full inventory: PEAD (derive→dead), NQ (derive→dead), ES/NQ (derive→dead), SPY+vol (already closed), buyback/10b5-1 (already closed), BTC MVRV (already closed), index-rebal bars (already closed). **There is no owned free dataset left to derive on that is not already measured/closed.** Stage 1 (free-data derive at cost 0) is genuinely exhausted across the complete inventory. The remaining decision is the genuine Stage-2 fork: (2a) buy a data moat (order flow / options microstructure / long intraday history) and run the SAME derive method on it, or (2b) STOP and preserve capital — both legitimate, data-backed, non-failure outcomes per `../IA/edge-discovery-direction.md` §7 and `../IA/institutional-approach.md` §Data-moat.
 
 ### 8.5a CORRECTION — the vol-risk-premium family is ALREADY CLOSED (not "open")
 
