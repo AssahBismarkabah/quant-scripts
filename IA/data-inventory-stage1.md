@@ -62,3 +62,21 @@ First-ever execution of the derive-from-data method (`derive-pass-stage1-spec.md
 **Method inventory is now COMPLETE:** Phase 1 (data) done, Phase 2 (unsupervised discovery) done — dead, Phase 3 (validation incl. positive control) done, Phase 4/5 blocked upstream by zero survivors. Every method in `IA/Blueprint-for-the-Independent-Quant.md` that can be run on owned free data has now been run. The derive pass closure in §8.14 stands and is strengthened: the "zero edges in owned free data" verdict now covers supervised-linear AND unsupervised-joint methods.
 
 **CORRECTION RECORDED 2026-08-15 (session-memory error fixed): IVAMR is NOT untested and requires NO paid data.** The pre-registered probe ran 2026-08-08 on the cached Databento NQ 1-min 2013-2023 (fetched before the account lock) — DISCONFIRMED, all 5 gates failed (IS net −1096.89, OOS net −3695.53, OOS wr 0.479, PF 0.78, kill-switch days 51.9%; gate 6 look-ahead PASSED). Evidence: `strategies/ivamr/IVAMR.md` §10, `research/ivamr/outputs/probe_summary.json`. **All three Stage-2 moat candidates are now CLOSED on evidence: order-flow DEAD, dealer-gamma DEAD, IVAMR DISCONFIRMED. The buy-vs-stop fork on paid intraday data is decided — there is nothing left in the Stage-2 list that requires purchase.**
+
+### 8.16 Stage-1 derive pass — Dataset E (crypto perps, BTC/ETH) — RESULT: 1 gate-survivor, DISCARDED on interrogation; 0 harness candidates
+
+`derive_mine5.py` + `interrogate_mine5.py`, spec `research-specs/crypto-perps-derive-spec.md` (frozen 2026-08-16 before any fetch or code). The final untested asset class: Binance USDⓈ-M perpetuals, free `data.binance.vision` monthly 1m klines + 8h funding, 2020-01-01 → 2026-07-31 (2,404 full UTC days, zero missing minutes, zero OHLC violations — QA clean). BTC primary, ETH as pre-registered OOS asset check. 12 pre-registered tests, 3 axes (time-of-day, session/funding-anchor + calendar, vol/funding-state). Closed cells honored: hedged funding-carry construction and MVRV timing NOT re-tested. Binance key verified working before the scan.
+
+**Results:** 11/12 dead outright. **1 gate-survivor: tds2 (first-hour 00:00-01:00 UTC vol → rest-of-day return): BTC tIS +4.06/tOOS +4.02 (r +0.106/+0.129), ETH asset check tIS +3.10/tOOS +2.83 — passes the frozen same-sign |t|>=3.29 + asset-check bar.** Calendar family all dead (Mon/Sun/weekday effects |t|<2.1); funding-state directional predictor vs4 dead (t −1.05/+0.80); vol-state vs1-vs3 dead.
+
+**Interrogation (per protocol): DISCARDED.** The survivor fails every robustness test and has no stable why:
+- Spearman ≈ 0 (BTC rho +0.025/+0.047, t 0.95/1.46; ETH +0.039/+0.003) — relationship is not monotonic; the Pearson is carried by a handful of extreme days.
+- Trimming |rest-of-day| ≥ 5% (~9% of days) collapses it: BTC t 4.06→0.39; ETH OOS flips sign (t −0.67).
+- Quintiles U-shaped, not monotonic (Q1 and Q5 positive, Q2-Q4 ≈ 0/negative) — no implementable "high vol → long" rule.
+- The tradable high-quintile-vs-low-quintile spread fails the bar: t 1.04/1.80 (BTC), 0.83/0.34 (ETH).
+- By-year decomposition shows regime dependence: effect INVERTED in the 2022 bear year (BTC hi −27bp vs lo −12bp) and in 2023/2024 on both assets — present only in bull phases, i.e. a bull-market beta artifact, not a structural edge.
+- Vol-clustering check: h1_vol is persistent (r=+0.51 vs prev-day vol6) but prev-day vol predicts nothing (r=+0.02) — the correlation lives only in same-day extremes.
+
+**Verdict: Dataset E exhausted — 0 harness candidates. The derive program is now complete across ALL owned free-data asset classes (equity panel, US equity options, equity-index futures, crypto perpetuals) and both functional forms (supervised-linear, unsupervised-joint). The §8.14 closure ("zero objective edge above friction in owned free data at our scale") now covers the final untested market. No paid-data purchase is warranted by any surviving observation.**
+
+Data and scripts: `research/crypto-perps/` (fetch_data.py, derive_mine5.py, interrogate_mine5.py; raw monthly zips + parquets in gitignored cache/). Note: fetch required two structural fixes (2022+ kline files carry a header row; funding files use calc_time/last_funding_rate) — recorded in the spec's QA log.
