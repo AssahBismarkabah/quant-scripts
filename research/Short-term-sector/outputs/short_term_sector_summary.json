@@ -1,0 +1,17 @@
+{
+  "window": "2015-10-01",
+  "end": "2026-08-15",
+  "final_value": 3.508,
+  "cagr_pct": 12.31,
+  "sharpe": 0.71,
+  "max_drawdown_pct": -34.51,
+  "avg_turnover_per_rebalance_pct": 156.7,
+  "n_rebalances": 131,
+  "fees_paid_units": 0.0225,
+  "bench_qqq_cagr_pct": 20.39,
+  "bench_qqq_sharpe": 0.95,
+  "bench_qqq_maxdd_pct": -35.12,
+  "bench_equal-weight_basket_cagr_pct": 15.06,
+  "bench_equal-weight_basket_sharpe": 0.88,
+  "bench_equal-weight_basket_maxdd_pct": -32.35
+}
