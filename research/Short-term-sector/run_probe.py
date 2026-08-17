@@ -33,7 +33,7 @@ END = date(2026, 8, 15)
 def load_prices() -> pd.DataFrame:
     import yfinance as yf
     df = yf.download(TICKERS, start=START, end=END, interval="1d",
-                     auto_adjust=True, progress=False, threads=True)
+                     auto_adjust=False, progress=False, threads=True)
     close = df["Close"]
     close = close.ffill().dropna(how="any")
     return close
@@ -41,7 +41,10 @@ def load_prices() -> pd.DataFrame:
 
 def simulate(close: pd.DataFrame) -> dict:
     prices = close  # rows = trading days, cols = tickers
-    roc = prices.pct_change(MOM_WINDOW)  # 21-day rate of change
+    # point-in-time ROC: shift(1) so the rebalance-day signal only uses
+    # closes through the previous trading day (matches QC indicator state
+    # at 10:30 ET on the rebalance day)
+    roc = prices.pct_change(MOM_WINDOW).shift(1)
     month_first = prices.index.to_series().groupby(
         [prices.index.year, prices.index.month]).first()
 
