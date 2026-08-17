@@ -28,7 +28,6 @@ A collection of quantitative trading strategies, research specs, and executable 
 | [Positive control — harness validation](research/positive-control/) | Method | PASS (2026-08-12): harness retrieves known embedded strong edges ~100% and claims nothing on nulls (0% false positives) — every DISCONFIRMED above is interpretable as candidate failure, not pipeline failure |
 | [Liquidity provision (crypto perps)](research/liquidity-provision/LP_PROBE_SPEC.md) | Market making | DISCONFIRMED (2026-08-17): pre-registered mid-quote passive-fill probe, BTC/ETH 1-min 2020-2026, ~1.7M round trips: BTC mean −9.42 bps/trade (hit rate 7%, p5 −9.50), ETH −10.82 bps — fills concentrate on adverse trade-throughs, continuation eats the exit, fees finish; all 4 gates failed. LP at retail execution (no queue priority / L2) closed on evidence |
 
-**Summary: 21 tests. 0 surviving edges. Full record (evidence links, closed families, reopen conditions): [docs/PROJECT_RECORD.md](docs/PROJECT_RECORD.md).**
 
 ## Documentation
 

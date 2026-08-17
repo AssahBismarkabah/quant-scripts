@@ -48,8 +48,6 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 | 20 | 2026-08-16 | Short-term sector momentum (QC) | Cross-sectional momentum | **DISCONFIRMED** | Reproduced 1:1 (raw px, point-in-time ROC, fees): CAGR 9.6%/Sharpe 0.58 vs SPY 13.8%/0.81, QQQ 19.5%/0.91. Lags both in every window; only 2022 dodge (+2.1% vs −18.6%) which does not compound. QC-cloud's 62.6% (order log d274f46d) verified real but QQQ was +33.4% CAGR in that window |
 | 21 | 2026-08-17 | **Liquidity provision (crypto perps)** | Market making | **DISCONFIRMED** | Mid-quote passive fills, BTC/ETH 1m 2020-2026, ~1.7M round trips: BTC mean −9.42 bps/trade (p5 −9.50), ETH −10.82; fills concentrate on adverse trade-throughs, continuation eats exit, fees finish. All 4 gates failed. Real MMs earn via queue priority/L2/colocation — none available to retail |
 
-**Record: 21 entries. 0 surviving edges.**
-
 ---
 
 ## 4. Additional records (mined, not probed)
