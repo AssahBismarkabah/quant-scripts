@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "pre_registered": "2026-08-17",
+    "spec": "/Users/adorsys123/dev/quant-scripts/research/liquidity-provision/LP_PROBE_SPEC.md",
+    "spread_bps": {
+      "BTCUSDT": 1.0,
+      "ETHUSDT": 2.0
+    },
+    "robust_spread_bps": 5.0,
+    "k_quote_validity_min": 60,
+    "maker_fee_bps_each_side": 2.0,
+    "exit": "open of minute after fill (maker, no-lookahead)",
+    "bootstrap_note": "iid p5 on 100k-trade subsample (conservative SE); day-block p5 on 50k subsample, 1000 resamples",
+    "seed": 7
+  },
+  "full_window": {
+    "BTCUSDT": {
+      "n_trades": 1714492,
+      "fills_per_day": 713.18,
+      "mean_edge_bps": -9.418505311153888,
+      "median_edge_bps": -7.285578485792695,
+      "hit_rate": 0.07017238925582621,
+      "p5_bootstrap_mean_bps": -9.497404136660114,
+      "p5_day_block_mean_bps": -9.536227409163512,
+      "n_buys": 1134776,
+      "n_sells": 579716
+    },
+    "ETHUSDT": {
+      "n_trades": 1717495,
+      "fills_per_day": 714.43,
+      "mean_edge_bps": -10.820461505324175,
+      "median_edge_bps": -8.106917840894786,
+      "hit_rate": 0.09225179694846274,
+      "p5_bootstrap_mean_bps": -10.906683054005054,
+      "p5_day_block_mean_bps": -10.903141314025266,
+      "n_buys": 1129730,
+      "n_sells": 587765
+    }
+  },
+  "sub_window_2023plus": {
+    "BTCUSDT": {
+      "n_trades": 927561,
+      "fills_per_day": 709.14,
+      "mean_edge_bps": -8.289261878022723,
+      "median_edge_bps": -6.730006336563173,
+      "hit_rate": 0.0546605560173401,
+      "p5_bootstrap_mean_bps": -8.341710199218642,
+      "p5_day_block_mean_bps": -8.369534883788821,
+      "n_buys": 599334,
+      "n_sells": 328227
+    },
+    "ETHUSDT": {
+      "n_trades": 929389,
+      "fills_per_day": 710.54,
+      "mean_edge_bps": -9.278264969481327,
+      "median_edge_bps": -7.293237769248503,
+      "hit_rate": 0.07556685090957607,
+      "p5_bootstrap_mean_bps": -9.330603044734719,
+      "p5_day_block_mean_bps": -9.358553562778672,
+      "n_buys": 596383,
+      "n_sells": 333006
+    }
+  },
+  "robustness_5bps": {
+    "BTCUSDT": {
+      "n_trades": 1565223,
+      "fills_per_day": 651.09,
+      "mean_edge_bps": -8.551462684489904,
+      "median_edge_bps": -6.292804148984473,
+      "hit_rate": 0.07575789520087553,
+      "p5_bootstrap_mean_bps": -8.627874352665172,
+      "p5_day_block_mean_bps": -8.636799210756607,
+      "n_buys": 903490,
+      "n_sells": 661733
+    },
+    "ETHUSDT": {
+      "n_trades": 1654152,
+      "fills_per_day": 688.08,
+      "mean_edge_bps": -10.093168008376328,
+      "median_edge_bps": -7.246020018133899,
+      "hit_rate": 0.09589566134188394,
+      "p5_bootstrap_mean_bps": -10.054200421977747,
+      "p5_day_block_mean_bps": -10.294397826386806,
+      "n_buys": 994728,
+      "n_sells": 659424
+    }
+  },
+  "gates": {
+    "G1_btc_p5_gt_0": false,
+    "G2_btc_median_gt_0_hitrate_gt_45": false,
+    "G3_eth_mean_positive": false,
+    "G4_2023plus_btc_p5_gt_0": false
+  },
+  "verdict": "FAIL"
+}

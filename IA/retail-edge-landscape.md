@@ -51,6 +51,29 @@ Neither is yet a registered research spec; both need one (and a pre-registered p
 
 ---
 
+# Appendix C — Liquidity-provision lane: measured dead (2026-08-17)
+
+The one structural position that appeared genuinely open to retail — market-making / passive liquidity provision in crypto perps (small capital OK, free 1-min klines, infra already in the repo) — was pre-registered and probed (`research/liquidity-provision/LP_PROBE_SPEC.md`, `lp_probe.py`). **Verdict: DISCONFIRMED, all four gates failed.**
+
+- **Method (frozen):** quote at mid on 1-min BTC/ETH klines 2020→2026, fill at trade-through (low ≤ bid / high ≥ ask within 60 min), exit at next-minute open, maker fees 4 bps round trip, 1-unit inventory, bootstrap p5 gate. ~1.7M round trips per symbol.
+- **Result:** BTC mean **−9.42 bps/trade** (median −7.29, hit rate 7.0%, p5 −9.50); ETH −10.82 bps (p5 −10.91). 2023+ sub-window and 5-bps-spread robustness: same sign, worse. All four gates FAIL.
+- **Mechanism of death (why, not just what):** fills concentrate on trade-throughs (BTC 1.13M buy fills vs 580k sells — price dips through our level far more often than it spikes through it), the 1-minute continuation eats the exit, and 4 bps maker fees finish it. Passive fills at the mid at retail queue position are toxic-flow food: you get filled exactly when price is moving against you.
+- **Scope of the disconfirmation:** mid-quote passive fills without queue priority, without L2/order-book data, without inventory-management execution — i.e., LP as retail can actually do it. Real market makers earn the spread via colocation, queue priority, and inventory control; those lanes were never open to us, and the sim's optimistic fill/exit assumptions still lost. LP as a retail strategy is closed on evidence, not on priors.
+- **Integrity note:** the first implementation run printed a false PASS (+3.18 bps) from a classification bug (trade side inferred by comparing entry vs exit price, flipping every loss into a fake win). Fixed by carrying the true fill side; corrected run is the verdict above. Exactly the harness-level error the positive-control program exists to catch.
+
+## Where this leaves the structural-position list
+
+| Position | Status |
+|---|---|
+| Liquidity provision (maker) | **DISCONFIRMED (2026-08-17)** — this probe |
+| Risk-carry (short-vol / VRP) | **DISCONFIRMED (2026-08-08)** — +452% but −95% DD, tail-overlay flees the premium |
+| Faster-than-local / latency | Closed — infra, never open to retail |
+| Capacity-constrained corners | Untested and by definition unverifiable at our scale |
+
+The research phase is complete: harness validated (Test A PASS), free-data alpha measured-dead, and now the most reachable structural position measured-dead on evidence. The answer to "is it me or the market" is no longer a question — it's a record.
+
+---
+
 # Appendix A — Why the retail toolkit fails
 
 Almost every retail tool — trendlines, chart patterns, gaps, order flow, volume profiles — has the same three structural problems, and they can be quantified:
