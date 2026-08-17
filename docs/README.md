@@ -1,5 +1,9 @@
 # Documentation Index
 
+## Status (read this first)
+
+- [PROJECT RECORD — everything tested, where we are now](PROJECT_RECORD.md) — the complete, consolidated record: 21 tests, 0 surviving edges, validated harness, terminal fork (stop or cost-bearing). Single source of truth; supersedes this index as the status document.
+
 ## Research Framework
 
 - [Institutional Approach](../IA/institutional-approach.md)
