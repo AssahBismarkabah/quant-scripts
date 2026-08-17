@@ -3,6 +3,7 @@
 ## Status (read this first)
 
 - [PROJECT RECORD — everything tested, where we are now](PROJECT_RECORD.md) — the complete, consolidated record: 21 tests, 0 surviving edges, validated harness, terminal fork (stop or cost-bearing). Single source of truth; supersedes this index as the status document.
+- [Turning Point — Capacity-Constrained Arenas](../IA/turning-point-capacity-constrained.md) — re-opens the fork for one class: lanes where retail size is the advantage (prediction markets, micro-cap long-only, small-cap options, obscure crypto). Triage of probeability with free data; the next probe must be pre-registered, with "unverifiable" accepted as a legitimate verdict.
 
 ## Research Framework
 

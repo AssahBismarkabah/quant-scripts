@@ -1,0 +1,56 @@
+# Turning Point — Capacity-Constrained Arenas (the untested class)
+
+**Date:** 2026-08-17
+**Type:** Decision / turning-point document. Records the main agent's critique of the entire liquid-market search, triages it against our measured record, and re-opens the decision fork for exactly one class of candidate — capacity-constrained lanes where retail size is the advantage, not the handicap.
+**Audience:** self.
+
+## 1. Why this document exists
+
+The record (21 tests, 0 surviving edges, validated harness) closed the liquid-market search: directional alpha from liquid, arbitraged assets with retail data and retail execution is measured dead. The main agent's response says this was the wrong arena, not the wrong method — and its argument is logically coherent: institutions are capacity-constrained; a strategy that makes $100k-$500k/yr but caps at $1M is worthless to a $5B fund and invisible to Citadel. That blindspot is the one place retail is structurally advantaged. Our own synthesis (`IA/retail-edge-landscape.md`, category 2) already named this: "capacity-constrained edges not worth institutional overhead — the one genuine gap available to retail." We recorded it, then never probed it. This document fixes that omission.
+
+## 2. The thesis (recorded in substance)
+
+- **The fantasy to bury:** a solo operator with a Python script and a retail feed out-predicting Citadel/Renaissance/Jump in SPX/NQ/BTC-perps — the most competitive zero-sum arena on earth. That business has not been possible for a decade.
+- **The physics:** funds' binding constraint is capacity, not edge. A 20%/Sharpe-2.0 strategy with $2M capacity is $400k/yr — a rounding error against a $5B fund's fee income. They structurally cannot allocate resources to it. The independent quant's advantage is agility + low capacity requirement.
+- **The four candidate arenas:** (1) micro-cap/nano-cap equities (<$50M-$100M market cap — no coverage, slow price discovery, messy data, EDGAR-parsing with LLMs); (2) obscure crypto/DeFi (DEXs on L2s, tier-1↔tier-3 cross-exchange arb, MEV/AMM bots — smart-contract engineering, not pandas); (3) prediction markets and sports betting (Polymarket/Kalshi, recreational flow, lines set to balance books not probability); (4) illiquid small-cap options (persistent structural skew from lottery-ticket retail buying; slow MMs, exploitable surface gaps).
+- **The capital-to-strategy matrix (agent's, recorded):** $10-50k → no financial markets; sports/prediction/airdrops. $50-250k → micro-cap, obscure crypto arb, small-cap options (high DD, operational burden). $250k-$2M → capacity-constrained stat arb, pairs, commodity trend. $2M-10M → boutique fund, mid-cap options. $10M+ → liquid markets, but only with $2M+ in co-location/FPGA/L3 feeds.
+- **The infrastructure pivot:** if the illiquid lanes are refused, sell the shovel — the validation harness, backtest audit consulting, alternative-data products (agent's framing; user's position: not interested unless trading itself sustains the family).
+
+## 3. Where the thesis is consistent with our measured record
+
+- Binance USDT-M perps dead (LP probe, −9.42 bps) — confirms the *most* liquid crypto is co-location territory; consistent with "edge lives in the long tail, not the flagship market."
+- SPY/SPX VRP dead (V1-V3) — confirms the *most* liquid options market is arbitraged; consistent with "skew lives in small-cap chains, not SPY."
+- Free-data cross-sectional equity alpha dead on the *liquid* panel — consistent with "inefficiency survives where coverage dies."
+- The capital matrix's tier logic matches our own friction findings: costs, capacity, and operational burden are the binding constraints at every scale we tested.
+
+## 4. Where the thesis must be tempered by our record (the honest caveats)
+
+1. **The unverifiability problem cuts both ways.** These corners survive *because* they are hard to verify — low event counts, messy data, no OOS analog. That is precisely the failure mode our harness already met: 10b5-1 died on sparsity (3 events vs ≥30 required); MVRV confluence was N=2. **A capacity-constrained probe may legitimately return "unverifiable" rather than "edge" — and that verdict must be recorded as such, not dressed up.** Low prior applies to every lane below.
+2. **Small-cap shorting is an illusion factory.** Step 2b's surviving edge was entirely "rev1m shorting unborrowable bottom-quintile small caps" — the basket only cleared OOS under a 1.5%/yr borrow cost and died at a realistic 5%. Any micro-cap construction must be **long-only or borrow-costed honestly**. This is our own measured result, not speculation.
+3. **The EDGAR pipeline exists and is not magic.** The agent's "LLM parses 8-Ks before the market reacts" is exactly the pipeline behind the 10b5-1 family (sparse) and buyback timing (insignificant). The *filing signal* is slow, lagged, and crowded; the micro-cap argument only survives if the edge is in **price-discovery slowness of the name itself**, not in faster parsing of public filings.
+4. **Wide spreads are friction, not edge.** The agent frames wide spreads as the opportunity; our discipline says they are the cost that must be beaten first. Every micro-cap probe needs the brutal friction model (market-impact-aware execution, slice orders), not the naive 5-bps model.
+5. **Operational risk becomes the dominant risk** (account bans in sports/prediction, withdrawal friction in tier-3 crypto, broker execution limits in micro-caps). This is not quant risk; it is ops risk, and it consumes the time budget.
+
+## 5. Triage: what is actually probeable with free/owned data and our existing harness
+
+| Arena | Agent's claim | Free-data probeability | Our known risks (measured) | Status |
+|---|---|---|---|---|
+| **Prediction markets / sports** | Recreational flow → mispriced lines vs model probability | **HIGH** — Polymarket/Kalshi have public APIs + free historical data; harness transfers directly; costs = platform fees + edge, modeled like any market | None measured yet (untested class) | **REGISTERED — most probeable next** |
+| **Micro/nano-cap equities, long-only** | Slow price discovery, no coverage | **MEDIUM-HIGH** — EDGAR free, price data messy/free via limited feeds; wide-spread friction must be modeled brutally | Small-cap shorting = illusion (step2b); EDGAR signals sparse/insignificant (10b5-1, buyback); low event counts | **REGISTERED — probeable with friction-first design** |
+| **Illiquid small-cap options** | Structural skew, slow MMs | **LOW-MEDIUM** — OptionsDX free chains exist (VRP V3 used SPY chains); small-cap chain depth/quality unverified | VRP family closed for liquid; unverifiable MM-speed claims without L2 | **REGISTERED — data friction first** |
+| **Obscure crypto / DeFi / MEV** | Cross-exchange arb, AMM/MEV bots | **LOW** — needs smart-contract engineering + node infra; different skill set than this repo | None measured; funding-basis hedged carry rejected at conservative model | **NOT NOW — infra/skill barrier, not a search barrier** |
+
+## 6. What this changes
+
+The decision fork is no longer "stop or cost-bearing." It is:
+
+1. **Stop** — unchanged and still legitimate; the liquid-market record stands as a complete negative study.
+2. **Probe the capacity-constrained class with the same pre-registered harness on free data** — for the first time, there exists a class of candidate where retail size is the advantage, and two arenas (prediction markets, micro-cap long-only) are probeable today at zero data cost.
+3. **Cost-bearing lanes** — unchanged (L2/infra/capital).
+
+**The rule for the next probe (frozen):** exactly one arena, one pre-registered spec (method, data sources, spread/friction model, gates, capacity cap at which deployment stops), three possible verdicts — certified edge, dead, or **unverifiable (insufficient events)** recorded honestly as such. The spec is written before any code. If the first capacity-constrained probe returns unverifiable or dead, the class is not re-litigated; the fork returns to stop.
+
+## 7. Status
+
+- **2026-08-17:** Document written. Fork re-opened for the capacity-constrained class only. User's constraint set recorded: wants trading income (not selling the process) to sustain family; willing to spend the time; prop capital available as execution vehicle for a *machine-executable, non-discretionary* edge (user's clarification: prop is the vehicle, never the strategy; manual discretion is excluded by construction).
+- **Next action:** pre-register one capacity-constrained probe. Highest probeability and cleanest free data: **prediction markets (Polymarket/Kalshi)** — cross-sectional model-vs-market divergence on recreational-flow markets, harness-compatible. Alternative if user prefers equities: micro-cap long-only with friction-first design. Choice is the user's; the spec discipline is not.
