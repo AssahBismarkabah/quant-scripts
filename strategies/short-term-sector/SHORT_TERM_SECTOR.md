@@ -36,3 +36,7 @@ Monthly top-2 sector momentum rotation: score 11 sector SPDRs + QQQ by trailing 
 ## 4. Replication
 
 `research/Short-term-sector/run_probe.py` → `outputs/short_term_sector_summary.json`
+
+## 5. Meta-lesson
+
+Recorded in [Retail Edge Landscape — Post-Test Synthesis](../IA/retail-edge-landscape.md): this test is the repo's cleanest demonstration that a documented public-OHLCV pattern on liquid ETFs does not survive honest execution + benchmarking. The strategy's only genuine deliverable was modest, regime-dependent drawdown reduction.

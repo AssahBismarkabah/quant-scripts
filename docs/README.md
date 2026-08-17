@@ -12,6 +12,7 @@
 - [Data and Portfolio Roadmap](../IA/data-and-portfolio-roadmap.md)
 - [Research Pipeline Review](../IA/research-pipeline-review.md)
 - [2025-2026 Structural Edge Survey](../IA/structural-edge-survey-2025-2026.md)
+- [Retail Edge Landscape — Post-Test Synthesis](../IA/retail-edge-landscape.md)
 - [Buyback Timing Research Spec](../IA/buyback-timing-research-spec.md)
 - [NQ VWAP-Pullback Research Spec](../IA/nq-vwap-pullback-research-spec.md)
 - [10b5-1 Adoption Timing Research Spec](../IA/10b5-1-adoption-timing-research-spec.md)
