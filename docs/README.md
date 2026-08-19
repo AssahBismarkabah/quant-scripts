@@ -3,7 +3,9 @@
 ## Status (read this first)
 
 - [PROJECT RECORD — everything tested, where we are now](PROJECT_RECORD.md) — the complete, consolidated record: 21 tests, 0 surviving edges, validated harness, terminal fork (stop or cost-bearing). Single source of truth; supersedes this index as the status document.
-- [Turning Point — Capacity-Constrained Arenas](../IA/turning-point-capacity-constrained.md) — re-opens the fork for one class: lanes where retail size is the advantage (prediction markets, micro-cap long-only, small-cap options, obscure crypto). Triage of probeability with free data; the next probe must be pre-registered, with "unverifiable" accepted as a legitimate verdict.
+- [Turning Point — Capacity-Constrained Arenas](../IA/turning-point/01-capacity-constrained-arenas.md) — re-opens the fork for one class: lanes where retail size is the advantage (prediction markets, micro-cap long-only, small-cap options, obscure crypto). Triage of probeability with free data; the next probe must be pre-registered, with "unverifiable" accepted as a legitimate verdict.
+- [Probe #22 Plan — Prediction Markets](../IA/turning-point/02-PROBE-22-PLAN.md) — the full recorded plan: two corrections (execution vehicle doesn't fit the arena; 2026 base rate), target selection, Phase 0-3 research sequence with gates, ranked candidates A-D, pre-registration contents, five-way pre-mortem, timeline (8-13 weeks to terminal verdict).
+- [Probe #22 Spec — Phase 0 (FROZEN)](../research-specs/prediction-markets-probe22-spec.md) — the data census, overlap census, friction model, and adverse-selection measurement, pre-registered before any code. Decisions D1-D3 recorded. Gate: one family with ≥30 liquid resolved markets/quarter, <2-3¢ round-trip friction, book depth sufficient; FAIL = "dead on friction."
 
 ## Research Framework
 
