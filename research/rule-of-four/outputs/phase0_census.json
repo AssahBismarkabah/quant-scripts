@@ -1,0 +1,24 @@
+{
+  "markets": {
+    "dax": {
+      "events_total": 243,
+      "events_full_c5": 241,
+      "coverage": 0.9918,
+      "pass_coverage_gate": true,
+      "events_with_data": 242,
+      "c5_volatility_spike_frac": 0.9876,
+      "events_excluded": 1
+    },
+    "ftse": {
+      "events_total": 268,
+      "events_full_c5": 263,
+      "coverage": 0.9813,
+      "pass_coverage_gate": true,
+      "events_with_data": 263,
+      "c5_volatility_spike_frac": 0.9771,
+      "events_excluded": 0
+    }
+  },
+  "gate": "C1..C5 present (5/5 bars) for >=90% of events",
+  "pass": true
+}

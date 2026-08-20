@@ -108,6 +108,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 - Mid-quote passive liquidity provision without L2/queue priority — measured −9.4 bps/trade (2026-08-17)
 - Index-rebalancing family — single-batch artifact
 - Prediction markets / sports betting (Kalshi, Polymarket, soft-book sports) — Probe #22 (exchange side) + Probe #23 (soft-book side, user's one-shot amendment) both measured DEAD 2026-08-20; sports lane terminal on measurement; class not re-litigated per turning-point §5
+- ORB / opening-range breakout on EU index CFDs — Probe #24 (2026-08-20) per explicit user request: same breakout mechanics re-anchored to macro news events (NFP/FOMC) on DAX + FTSE 100. Full frozen protocol run: Phase 0 census passed, but every configuration with sufficient sample failed OOS (primary trigger UNVERIFIABLE per-market, DEAD pooled; V2 trigger DEAD on both markets). Per §6 the ORB/opening-range family is closed permanently — terminal record (see `research-specs/rule-of-four-probe24-spec.md`).
 
 ---
 

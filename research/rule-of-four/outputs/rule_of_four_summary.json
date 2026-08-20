@@ -1,0 +1,158 @@
+{
+  "markets": {
+    "dax": {
+      "primary": {
+        "market": "dax",
+        "variant": "primary",
+        "is_n": 15,
+        "oos_n": 20,
+        "is_net_roi_pts": -2.981999999999971,
+        "oos_net_roi_pts": -2.7003999999998087,
+        "is_win_rate": 0.4666666666666667,
+        "is_avg_r": 0.715026185625298,
+        "oos_win_rate": 0.55,
+        "is_first_half": -6.7888571428567435,
+        "is_second_half": 0.3489999999997053,
+        "is_long": 10,
+        "is_short": 5,
+        "oos_long": 11,
+        "oos_short": 9,
+        "friction": 4.0,
+        "gates": {
+          "g1_existence": false,
+          "g2_realization": false,
+          "g3_breakeven": false,
+          "g4_persistence": false,
+          "g5_oos": false
+        },
+        "all_pass": false,
+        "verdict": "UNVERIFIABLE"
+      },
+      "v2": {
+        "market": "dax",
+        "variant": "v2",
+        "is_n": 54,
+        "oos_n": 105,
+        "is_net_roi_pts": 1.3308518518518515,
+        "oos_net_roi_pts": -2.843085714285518,
+        "is_win_rate": 0.5,
+        "is_avg_r": 0.8934815111616032,
+        "oos_win_rate": 0.49523809523809526,
+        "is_first_half": -0.7917037037037786,
+        "is_second_half": 3.453407407407482,
+        "is_long": 28,
+        "is_short": 26,
+        "oos_long": 57,
+        "oos_short": 48,
+        "friction": 4.0,
+        "gates": {
+          "g1_existence": true,
+          "g2_realization": true,
+          "g3_breakeven": false,
+          "g4_persistence": false,
+          "g5_oos": false
+        },
+        "all_pass": false,
+        "verdict": "DEAD"
+      }
+    },
+    "ftse": {
+      "primary": {
+        "market": "ftse",
+        "variant": "primary",
+        "is_n": 15,
+        "oos_n": 25,
+        "is_net_roi_pts": 0.3593999999999748,
+        "oos_net_roi_pts": -10.189640000000145,
+        "is_win_rate": 0.6,
+        "is_avg_r": 0.8278649243096093,
+        "oos_win_rate": 0.44,
+        "is_first_half": -9.870142857142907,
+        "is_second_half": 9.310249999999996,
+        "is_long": 11,
+        "is_short": 4,
+        "oos_long": 16,
+        "oos_short": 9,
+        "friction": 3.0,
+        "gates": {
+          "g1_existence": false,
+          "g2_realization": false,
+          "g3_breakeven": false,
+          "g4_persistence": false,
+          "g5_oos": false
+        },
+        "all_pass": false,
+        "verdict": "UNVERIFIABLE"
+      },
+      "v2": {
+        "market": "ftse",
+        "variant": "v2",
+        "is_n": 74,
+        "oos_n": 111,
+        "is_net_roi_pts": 0.1911351351351137,
+        "oos_net_roi_pts": -5.033558558558545,
+        "is_win_rate": 0.5,
+        "is_avg_r": 0.8304107119965647,
+        "oos_win_rate": 0.44144144144144143,
+        "is_first_half": 1.0248648648648178,
+        "is_second_half": -0.6425945945945902,
+        "is_long": 42,
+        "is_short": 32,
+        "oos_long": 70,
+        "oos_short": 41,
+        "friction": 3.0,
+        "gates": {
+          "g1_existence": true,
+          "g2_realization": true,
+          "g3_breakeven": false,
+          "g4_persistence": false,
+          "g5_oos": false
+        },
+        "all_pass": false,
+        "verdict": "DEAD"
+      }
+    }
+  },
+  "pooled": {
+    "primary": {
+      "variant": "primary",
+      "is_n": 30,
+      "oos_n": 45,
+      "is_net_roi_r": 0.07098582292711629,
+      "oos_net_roi_r": -0.08902546599366735,
+      "is_first_half_r": -0.022497758873064985,
+      "is_second_half_r": 0.1644694047272976,
+      "is_win_rate": 0.5333333333333333,
+      "oos_win_rate": 0.4888888888888889,
+      "gates": {
+        "g1": true,
+        "g2": true,
+        "g3": false,
+        "g4": false,
+        "g5": false
+      },
+      "all_pass": false,
+      "verdict": "DEAD"
+    },
+    "v2": {
+      "variant": "v2",
+      "is_n": 128,
+      "oos_n": 216,
+      "is_net_roi_r": 0.06508924975074026,
+      "oos_net_roi_r": -0.13894469158178016,
+      "is_first_half_r": 0.12361243714174353,
+      "is_second_half_r": 0.00656606235973696,
+      "is_win_rate": 0.5,
+      "oos_win_rate": 0.4675925925925926,
+      "gates": {
+        "g1": true,
+        "g2": true,
+        "g3": false,
+        "g4": true,
+        "g5": false
+      },
+      "all_pass": false,
+      "verdict": "DEAD"
+    }
+  }
+}
