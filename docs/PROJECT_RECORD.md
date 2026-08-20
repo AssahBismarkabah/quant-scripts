@@ -72,7 +72,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 
 ## 6. Where we are now (the answer)
 
-1. **The question is closed, by evidence.** "Is it me, or is the edge gone?" — the harness is validated (Test A PASS) and every reachable lane is measured dead. The answer: at retail scale with retail execution and retail-priced data, the accessible surface contains no deployable edge. The missing piece was never a strategy — it is that the remaining lanes cost what a retail account cannot pay (L2 feeds, execution infrastructure, capital that can warehouse risk).
+1. **The question is closed, by evidence.** "Is it me, or is the edge gone?" — the harness is validated (Test A PASS) and every reachable lane is measured dead. The answer: at retail scale with retail execution and retail-priced data, the accessible surface contains no deployable edge. The missing piece was never a strategy — it is that the remaining lanes cost what a retail account cannot pay (L2 feeds, execution infrastructure, capital that can warehouse risk). The capacity-constrained re-open (Probe #22 prediction markets; Probe #23 soft-book sports via the user's one-shot amendment) is also measured dead (2026-08-20) — both sides of the sports lane fail the pre-registered gates on realized outcomes.
 2. **The two honest options (the decision memo's terminal fork):**
    - **(a) Stop.** The record is complete; the repo is a finished, trustworthy negative study — one of the only such records a retail trader is likely to ever see. Effort redirects to income work. No further research.
    - **(b) Change the game, not the search.** The only remaining lanes are cost-bearing: paid L2/order-book data + colocation-class execution (market making with real queue priority), or capacity-constrained corners that are by definition unverifiable at our scale, or capital large enough to warehouse risk (risk-carry with a ruin-accepting mandate). Each requires a capital commitment and a different operating model — a business decision, not a research question. If ever pursued, it must be pre-registered and gated exactly like everything above.
@@ -107,6 +107,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 - 10b5-1 / buyback-timing family — sparse or insignificant
 - Mid-quote passive liquidity provision without L2/queue priority — measured −9.4 bps/trade (2026-08-17)
 - Index-rebalancing family — single-batch artifact
+- Prediction markets / sports betting (Kalshi, Polymarket, soft-book sports) — Probe #22 (exchange side) + Probe #23 (soft-book side, user's one-shot amendment) both measured DEAD 2026-08-20; sports lane terminal on measurement; class not re-litigated per turning-point §5
 
 ---
 
