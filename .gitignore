@@ -25,3 +25,7 @@ research/crypto-perps/cache/
 # prediction-markets probe: raw downloads, crawl checkpoints, logs are
 # re-fetchable/regenerable; scripts + spec + derived summaries only are tracked
 research/prediction-markets/outputs/
+
+# Microstructure probe - large data files
+research/microstructure/cache/
+research/microstructure/cache/*
