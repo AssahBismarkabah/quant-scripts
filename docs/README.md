@@ -3,6 +3,8 @@
 ## Status (read this first)
 
 - [PROJECT RECORD — everything tested, where we are now](PROJECT_RECORD.md) — the complete, consolidated record: 21 tests, 0 surviving edges, validated harness, terminal fork (stop or cost-bearing). Single source of truth; supersedes this index as the status document.
+- [BVMAC/CEMAC Retail-Scale Trading Feasibility](../IA/bvmac-cemac-feasibility.md) — primary-source local-market assessment (2026-08-21): account/data access exists, but the daily cash fixing, thin equity market, high published transaction costs, and no identified mechanism make active trading a NO-GO under current evidence.
+- [BVMAC Broker Capability Audit](../IA/bvmac-broker-capability-audit.md) — broker-by-broker evidence audit (2026-08-21): service differences exist, but no published customer capability changes BVMAC’s active-trading feasibility; four documented-active brokers are the only sensible written-verification shortlist.
 - [Turning Point — Capacity-Constrained Arenas](../IA/turning-point/01-capacity-constrained-arenas.md) — re-opens the fork for one class: lanes where retail size is the advantage (prediction markets, micro-cap long-only, small-cap options, obscure crypto). Triage of probeability with free data; the next probe must be pre-registered, with "unverifiable" accepted as a legitimate verdict.
 - [Probe #22 Plan — Prediction Markets](../IA/turning-point/02-PROBE-22-PLAN.md) — the full recorded plan: two corrections (execution vehicle doesn't fit the arena; 2026 base rate), target selection, Phase 0-3 research sequence with gates, ranked candidates A-D, pre-registration contents, five-way pre-mortem, timeline (8-13 weeks to terminal verdict).
 - [Probe #22 Spec — Phase 0 (FROZEN)](../research-specs/prediction-markets-probe22-spec.md) — the data census, overlap census, friction model, and adverse-selection measurement, pre-registered before any code. Decisions D1-D3 recorded. Gate: one family with ≥30 liquid resolved markets/quarter, <2-3¢ round-trip friction, book depth sufficient; FAIL = "dead on friction."
@@ -53,4 +55,3 @@
 - `src/quant_scripts/funding_basis.py` contains the current executable research scaffold for funding-basis validation.
 - `src/quant_scripts/buyback_timing/` contains the buyback-timing pipeline (harvest/classify, mapping, bars, bounded event study). Research workflow: `research/buyback-timing/Makefile` (`make harvest`, `make study`).
 - `src/quant_scripts/opening_range_gap/` contains the opening-range / gap trio probe (ORB, Gap Fill, Oops). Research workflow: `research/opening-range-gap/Makefile` (`make probe`); reads the owned NQ 1-min caches, no new fetch.
-
