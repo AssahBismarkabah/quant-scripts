@@ -1,0 +1,179 @@
+{
+  "status": "COMPLETED",
+  "spec": "IA/earnings-anchored-vwap-research-gate.md",
+  "phase0": {
+    "status": "PENDING_OR_FAILED",
+    "event_source": "research/pead/cache/earnings_latest.csv",
+    "events_after_source_filters": 80446,
+    "symbols": 4599,
+    "date_min": "2012-07-16",
+    "date_max": "2021-06-14",
+    "duplicate_events_dropped": 0,
+    "timing_audit": {
+      "required_rows": 100,
+      "template_path": "research/earnings-anchored-vwap/outputs/timing_audit_template.csv",
+      "audit_path": "research/earnings-anchored-vwap/outputs/timing_audit.csv",
+      "minimum_agreement": 0.95,
+      "status": "FAIL",
+      "audited_rows": 96,
+      "matching_rows": 90,
+      "agreement": 0.9375
+    }
+  },
+  "params": {
+    "warmup_start": "2012-01-01",
+    "is_start": "2013-01-01",
+    "is_end": "2016-12-31",
+    "oos_start": "2017-01-01",
+    "oos_end": "2021-06-14",
+    "timing_audit_size": 100,
+    "timing_min_agreement": 0.95,
+    "atr_sessions": 20,
+    "min_price": 5.0,
+    "min_median_dollar_volume": 10000000.0,
+    "reaction_search_sessions": 10,
+    "max_holding_sessions": 10,
+    "friction_base_bps_per_side": 20.0,
+    "friction_stress_bps_per_side": 50.0,
+    "min_oos_trades_per_side": 300,
+    "max_gap_stop_loss_fraction": 0.4,
+    "min_positive_complete_oos_years": 3,
+    "complete_oos_years": [
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "bootstrap_simulations": 5000,
+    "bootstrap_seed": 42
+  },
+  "data_integrity": {
+    "candidate_events": 80446,
+    "retained_events": 78321,
+    "retained_fraction": 0.9735847649354846,
+    "minimum_retained_fraction": 0.9,
+    "reason_counts": {
+      "incomplete_integrity_window": 416,
+      "invalid_raw_ohlcv_or_split_window": 1078,
+      "missing_symbol_bars": 466,
+      "no_anchor_session": 165,
+      "valid": 78321
+    },
+    "gate_passed": true
+  },
+  "trade_counts": {
+    "avwap": 4844,
+    "unweighted": 5197,
+    "gap_hold": 6077
+  },
+  "event_audit_reasons": {
+    "avwap": {
+      "direction_or_gap_not_eligible": 31596,
+      "liquidity_below_minimum": 31758,
+      "no_reaction_signal": 1114,
+      "nonpositive_initial_risk": 119,
+      "price_below_minimum": 8890,
+      "trade": 4844
+    },
+    "unweighted": {
+      "direction_or_gap_not_eligible": 31596,
+      "liquidity_below_minimum": 31758,
+      "no_reaction_signal": 752,
+      "nonpositive_initial_risk": 128,
+      "price_below_minimum": 8890,
+      "trade": 5197
+    },
+    "gap_hold": {
+      "direction_or_gap_not_eligible": 31596,
+      "liquidity_below_minimum": 31758,
+      "price_below_minimum": 8890,
+      "trade": 6077
+    }
+  },
+  "sides": {
+    "long": {
+      "is": {
+        "trades": 1674,
+        "gross_mean_bps": 32.24458886533026,
+        "net_base_mean_bps": -7.755411134669747,
+        "net_stress_mean_bps": -67.75541113466974,
+        "net_base_pf": 0.9307746664191003,
+        "net_base_bootstrap_p5_bps": -19.515966322020248,
+        "gap_stop_loss_fraction": 0.06583850931677018,
+        "positive_complete_oos_years": []
+      },
+      "oos": {
+        "trades": 1583,
+        "gross_mean_bps": 3.631330623032355,
+        "net_base_mean_bps": -36.368669376967645,
+        "net_stress_mean_bps": -96.36866937696765,
+        "net_base_pf": 0.7393258268178369,
+        "net_base_bootstrap_p5_bps": -50.78852954304749,
+        "gap_stop_loss_fraction": 0.06854345165238677,
+        "positive_complete_oos_years": []
+      },
+      "incremental_vs_gap_hold": {
+        "matched_trades": 1583,
+        "mean_difference_bps": -83.639239543093,
+        "bootstrap_p5_bps": -111.81562645658136
+      },
+      "incremental_vs_unweighted": {
+        "matched_trades": 1566,
+        "mean_difference_bps": 3.428616310920286,
+        "bootstrap_p5_bps": -1.2563374432192014
+      },
+      "gates": {
+        "gate1_oos_net_positive_base_and_stress": false,
+        "gate2_oos_cluster_bootstrap_p5_positive": false,
+        "gate3_oos_pf_and_gap_stop_limit": false,
+        "gate4_oos_year_persistence": false,
+        "gate5_incremental_value_over_controls": false,
+        "gate6_is_gross_positive": true
+      }
+    },
+    "short": {
+      "is": {
+        "trades": 764,
+        "gross_mean_bps": -0.9728066643564589,
+        "net_base_mean_bps": -40.972806664356455,
+        "net_stress_mean_bps": -100.97280666435645,
+        "net_base_pf": 0.7102943490757813,
+        "net_base_bootstrap_p5_bps": -61.16993496996347,
+        "gap_stop_loss_fraction": 0.05825242718446602,
+        "positive_complete_oos_years": []
+      },
+      "oos": {
+        "trades": 708,
+        "gross_mean_bps": 10.761579678043447,
+        "net_base_mean_bps": -29.238420321956553,
+        "net_stress_mean_bps": -89.23842032195655,
+        "net_base_pf": 0.8202783745494087,
+        "net_base_bootstrap_p5_bps": -55.532196095249105,
+        "gap_stop_loss_fraction": 0.05027932960893855,
+        "positive_complete_oos_years": [
+          2020
+        ]
+      },
+      "incremental_vs_gap_hold": {
+        "matched_trades": 708,
+        "mean_difference_bps": -144.14132257054285,
+        "bootstrap_p5_bps": -176.82171332646385
+      },
+      "incremental_vs_unweighted": {
+        "matched_trades": 702,
+        "mean_difference_bps": -3.7831482034851165,
+        "bootstrap_p5_bps": -13.17605790107989
+      },
+      "gates": {
+        "gate1_oos_net_positive_base_and_stress": false,
+        "gate2_oos_cluster_bootstrap_p5_positive": false,
+        "gate3_oos_pf_and_gap_stop_limit": false,
+        "gate4_oos_year_persistence": false,
+        "gate5_incremental_value_over_controls": false,
+        "gate6_is_gross_positive": false
+      }
+    }
+  },
+  "verdict": "DISCONFIRMED",
+  "deployment": "NOT AUTHORIZED \u2014 all data ends in 2021; a pass only earns a current-data stage."
+}
