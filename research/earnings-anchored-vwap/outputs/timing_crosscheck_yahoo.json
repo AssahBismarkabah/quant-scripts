@@ -1,0 +1,185 @@
+{
+  "method": "yfinance.Ticker(%s).get_earnings_dates(limit=100) against fixed release_date/release_time",
+  "template": "timing_audit_template.csv",
+  "fixed_sample_rows": 100,
+  "strata": "20 (10 years x pre/post) x 5 rows",
+  "as_of": "2026-08-22",
+  "source_type": "yahoo_free_calendar",
+  "counts": {
+    "match": 63,
+    "mismatch": 1,
+    "missing_ticker": 31,
+    "missing_date": 5,
+    "error": 0
+  },
+  "full_sample_agreement": 0.63,
+  "agreement_among_covered_rows": 0.9844,
+  "mismatch_rows": [
+    {
+      "sample_id": 41,
+      "symbol": "TRIP",
+      "release_date": "2016-02-11",
+      "expected": "post",
+      "yahoo": "2016-02-11 06:00:00-05:00 (pre)"
+    }
+  ],
+  "missing_ticker_rows": [
+    {
+      "sample_id": 5,
+      "symbol": "XEC"
+    },
+    {
+      "sample_id": 7,
+      "symbol": "THR"
+    },
+    {
+      "sample_id": 8,
+      "symbol": "JEC"
+    },
+    {
+      "sample_id": 12,
+      "symbol": "PCMI"
+    },
+    {
+      "sample_id": 21,
+      "symbol": "CRAY"
+    },
+    {
+      "sample_id": 22,
+      "symbol": "SP"
+    },
+    {
+      "sample_id": 29,
+      "symbol": "MCF"
+    },
+    {
+      "sample_id": 32,
+      "symbol": "DNR"
+    },
+    {
+      "sample_id": 33,
+      "symbol": "WLH"
+    },
+    {
+      "sample_id": 34,
+      "symbol": "BCEI"
+    },
+    {
+      "sample_id": 37,
+      "symbol": "TVPT"
+    },
+    {
+      "sample_id": 40,
+      "symbol": "AMBR"
+    },
+    {
+      "sample_id": 43,
+      "symbol": "GCP"
+    },
+    {
+      "sample_id": 44,
+      "symbol": "PSTG"
+    },
+    {
+      "sample_id": 53,
+      "symbol": "KEM"
+    },
+    {
+      "sample_id": 54,
+      "symbol": "PZN"
+    },
+    {
+      "sample_id": 56,
+      "symbol": "DATA"
+    },
+    {
+      "sample_id": 61,
+      "symbol": "HRS"
+    },
+    {
+      "sample_id": 66,
+      "symbol": "HRC"
+    },
+    {
+      "sample_id": 68,
+      "symbol": "IIVI"
+    },
+    {
+      "sample_id": 72,
+      "symbol": "BXG"
+    },
+    {
+      "sample_id": 74,
+      "symbol": "WMGI"
+    },
+    {
+      "sample_id": 77,
+      "symbol": "SRT"
+    },
+    {
+      "sample_id": 80,
+      "symbol": "QTNT"
+    },
+    {
+      "sample_id": 82,
+      "symbol": "APEN"
+    },
+    {
+      "sample_id": 83,
+      "symbol": "GDP"
+    },
+    {
+      "sample_id": 84,
+      "symbol": "GPX"
+    },
+    {
+      "sample_id": 85,
+      "symbol": "MGEN"
+    },
+    {
+      "sample_id": 86,
+      "symbol": "ZIXI"
+    },
+    {
+      "sample_id": 87,
+      "symbol": "SRRA"
+    },
+    {
+      "sample_id": 88,
+      "symbol": "QTNT"
+    }
+  ],
+  "missing_date_rows": [
+    {
+      "sample_id": 16,
+      "symbol": "RPT",
+      "release_date": "2013-10-22",
+      "release_time": "post"
+    },
+    {
+      "sample_id": 23,
+      "symbol": "LL",
+      "release_date": "2014-04-30",
+      "release_time": "pre"
+    },
+    {
+      "sample_id": 31,
+      "symbol": "HIVE",
+      "release_date": "2015-02-11",
+      "release_time": "post"
+    },
+    {
+      "sample_id": 35,
+      "symbol": "EA",
+      "release_date": "2015-07-30",
+      "release_time": "post"
+    },
+    {
+      "sample_id": 47,
+      "symbol": "EURN",
+      "release_date": "2016-07-28",
+      "release_time": "pre"
+    }
+  ],
+  "conclusion": "Phase 0 release-timing gate UNVERIFIABLE on free data: 36 of 100 fixed rows have no historical record in the free Yahoo archive, so full-sample agreement is 63%, below the frozen 95% gate."
+}

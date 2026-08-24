@@ -1,0 +1,19 @@
+{
+  "status": "PENDING_OR_FAILED",
+  "event_source": "research/pead/cache/earnings_latest.csv",
+  "events_after_source_filters": 80446,
+  "symbols": 4599,
+  "date_min": "2012-07-16",
+  "date_max": "2021-06-14",
+  "duplicate_events_dropped": 0,
+  "timing_audit": {
+    "required_rows": 100,
+    "template_path": "research/earnings-anchored-vwap/outputs/timing_audit_template.csv",
+    "audit_path": "research/earnings-anchored-vwap/outputs/timing_audit.csv",
+    "minimum_agreement": 0.95,
+    "status": "FAIL",
+    "audited_rows": 96,
+    "matching_rows": 90,
+    "agreement": 0.9375
+  }
+}
