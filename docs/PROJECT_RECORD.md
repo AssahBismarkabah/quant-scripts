@@ -47,6 +47,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 | 19 | 2026-08-16 | Crypto perps derive pass (E) | Data mining | **EXHAUSTED, 0 candidates** | 1 gate-survivor (first-hour vol → rest-of-day) discarded on interrogation: Spearman ≈ 0, flips under trim, bull-phase beta artifact |
 | 20 | 2026-08-16 | Short-term sector momentum (QC) | Cross-sectional momentum | **DISCONFIRMED** | Reproduced 1:1 (raw px, point-in-time ROC, fees): CAGR 9.6%/Sharpe 0.58 vs SPY 13.8%/0.81, QQQ 19.5%/0.91. Lags both in every window; only 2022 dodge (+2.1% vs −18.6%) which does not compound. QC-cloud's 62.6% (order log d274f46d) verified real but QQQ was +33.4% CAGR in that window |
 | 21 | 2026-08-17 | **Liquidity provision (crypto perps)** | Market making | **DISCONFIRMED** | Mid-quote passive fills, BTC/ETH 1m 2020-2026, ~1.7M round trips: BTC mean −9.42 bps/trade (p5 −9.50), ETH −10.82; fills concentrate on adverse trade-throughs, continuation eats exit, fees finish. All 4 gates failed. Real MMs earn via queue priority/L2/colocation — none available to retail |
+| 22 | 2026-08-24 | **Earnings-anchored VWAP daily proxy** | Book-derived (VWAP anchor) | **DISCONFIRMED** | Phase 0 timing audit unfixable on free data (96/100, 0.9375 < 0.95 after 3 harness-bug fixes); bounded daily falsification run anyway under two recorded free-data allowances (frozen `label` + label-free `next_open`): every OOS gate failed both sides, net base −29 to −45 bps, worse than earnings-gap hold, VWAP weighting adds nothing. Paid data would only relabel an already-negative construction |
 
 ---
 
@@ -109,6 +110,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 - Index-rebalancing family — single-batch artifact
 - Prediction markets / sports betting (Kalshi, Polymarket, soft-book sports) — Probe #22 (exchange side) + Probe #23 (soft-book side, user's one-shot amendment) both measured DEAD 2026-08-20; sports lane terminal on measurement; class not re-litigated per turning-point §5
 - ORB / opening-range breakout on EU index CFDs — Probe #24 (2026-08-20) per explicit user request: same breakout mechanics re-anchored to macro news events (NFP/FOMC) on DAX + FTSE 100. Full frozen protocol run: Phase 0 census passed, but every configuration with sufficient sample failed OOS (primary trigger UNVERIFIABLE per-market, DEAD pooled; V2 trigger DEAD on both markets). Per §6 the ORB/opening-range family is closed permanently — terminal record (see `research-specs/rule-of-four-probe24-spec.md`).
+- Earnings-anchored VWAP pullback family (VWAP Book "anchor at earnings") — Probe 22 (2026-08-24): the Phase 0 release-timing gate is unverifiable on free data and the bounded daily falsification was DISCONFIRMED on every OOS gate for both sides under both recorded anchor modes (`IA/earnings-anchored-vwap-research-gate.md`). Book-derived VWAP family closed.
 
 ---
 
