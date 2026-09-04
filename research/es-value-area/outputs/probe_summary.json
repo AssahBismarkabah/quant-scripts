@@ -1,0 +1,51 @@
+{
+  "instrument": "ES.n.0",
+  "profile": "one-minute-close volume proxy",
+  "is": {
+    "base": {
+      "n_trades": 482,
+      "net_pts": -346.3125,
+      "win_rate": 0.4917,
+      "profit_factor": 0.7954,
+      "max_drawdown_pts": -452.1875
+    },
+    "stress": {
+      "n_trades": 482,
+      "net_pts": -587.3125,
+      "win_rate": 0.4793,
+      "profit_factor": 0.6766,
+      "max_drawdown_pts": -647.1875
+    }
+  },
+  "oos": {
+    "base": {
+      "n_trades": 364,
+      "net_pts": -464.625,
+      "win_rate": 0.4808,
+      "profit_factor": 0.6907,
+      "max_drawdown_pts": -570.4375
+    },
+    "stress": {
+      "n_trades": 364,
+      "net_pts": -646.625,
+      "win_rate": 0.4725,
+      "profit_factor": 0.5953,
+      "max_drawdown_pts": -736.9375
+    }
+  },
+  "gates": {
+    "data_phase0": true,
+    "oos_net_positive_base": false,
+    "oos_net_positive_stress": false,
+    "sample_ge_100": true,
+    "bootstrap_p5_base_positive": false,
+    "bootstrap_p5_stress_positive": false,
+    "base_pf_ge_1_05": false,
+    "stress_pf_gt_1": false,
+    "best_day_le_20pct": false,
+    "is_base_positive": false
+  },
+  "bootstrap_p5_base": -743.3906,
+  "bootstrap_p5_stress": -921.6344,
+  "verdict": "DISCONFIRMED"
+}
