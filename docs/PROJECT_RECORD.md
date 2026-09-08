@@ -73,7 +73,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 
 ## 6. Where we are now (the answer)
 
-1. **The question is closed, by evidence.** "Is it me, or is the edge gone?" — the harness is validated (Test A PASS) and every reachable lane is measured dead. The answer: at retail scale with retail execution and retail-priced data, the accessible surface contains no deployable edge. The missing piece was never a strategy — it is that the remaining lanes cost what a retail account cannot pay (L2 feeds, execution infrastructure, capital that can warehouse risk). The capacity-constrained re-open (Probe #22 prediction markets; Probe #23 soft-book sports via the user's one-shot amendment) is also measured dead (2026-08-20) — both sides of the sports lane fail the pre-registered gates on realized outcomes.
+1. **The question is closed, by evidence.** "Is it me, or is the edge gone?" — the harness is validated (Test A PASS) and every reachable lane is measured dead. The answer: at retail scale with retail execution and retail-priced data, the accessible surface contains no deployable edge. The missing piece was never a strategy — it is that the remaining lanes cost what a retail account cannot pay (L2 feeds, execution infrastructure, capital that can warehouse risk). Separately authorized mechanism audits then covered forced-flow/settlement (A1), capacity-constrained securities (A2), specialist information (A3), and fragmented/operational markets (A4); all returned `NO VIABLE MECHANISM FOUND` without authorizing a trading test.
 2. **The two honest options (the decision memo's terminal fork):**
    - **(a) Stop.** The record is complete; the repo is a finished, trustworthy negative study — one of the only such records a retail trader is likely to ever see. Effort redirects to income work. No further research.
    - **(b) Change the game, not the search.** The only remaining lanes are cost-bearing: paid L2/order-book data + colocation-class execution (market making with real queue priority), or capacity-constrained corners that are by definition unverifiable at our scale, or capital large enough to warehouse risk (risk-carry with a ruin-accepting mandate). Each requires a capital commitment and a different operating model — a business decision, not a research question. If ever pursued, it must be pre-registered and gated exactly like everything above.
@@ -90,6 +90,7 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 | `IA/derive-pass-stage1-spec.md` | The mining method + full status of datasets A-E (all exhausted) |
 | `IA/data-inventory-stage1.md` | Inventory of all owned data + derive-pass results (8.9-8.16) |
 | `IA/retail-edge-landscape.md` | Post-test synthesis: why the retail toolkit fails, why online traders appear profitable, and the LP result (Appendix C) |
+| `IA/mechanism-first-edge-audit.md` | Consolidated five-lane result: public-data strategy search plus A1-A4 mechanism audits; all exhausted or returned `NO VIABLE MECHANISM FOUND` |
 | `IA/research-frontier-mining.md` | Paper-harvest pipeline + funnel read-out |
 | `IA/research-pipeline-review.md` | Prior-candidate review table |
 | `IA/structural-mechanics.md`, `IA/market-edge-framework.md`, `IA/institutional-approach.md` | Reference frameworks |
@@ -111,6 +112,9 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 - Prediction markets / sports betting (Kalshi, Polymarket, soft-book sports) — Probe #22 (exchange side) + Probe #23 (soft-book side, user's one-shot amendment) both measured DEAD 2026-08-20; sports lane terminal on measurement; class not re-litigated per turning-point §5
 - ORB / opening-range breakout on EU index CFDs — Probe #24 (2026-08-20) per explicit user request: same breakout mechanics re-anchored to macro news events (NFP/FOMC) on DAX + FTSE 100. Full frozen protocol run: Phase 0 census passed, but every configuration with sufficient sample failed OOS (primary trigger UNVERIFIABLE per-market, DEAD pooled; V2 trigger DEAD on both markets). Per §6 the ORB/opening-range family is closed permanently — terminal record (see `research-specs/rule-of-four-probe24-spec.md`).
 - Earnings-anchored VWAP pullback family (VWAP Book "anchor at earnings") — Probe 22 (2026-08-24): the Phase 0 release-timing gate is unverifiable on free data and the bounded daily falsification was DISCONFIRMED on every OOS gate for both sides under both recorded anchor modes (`IA/earnings-anchored-vwap-research-gate.md`). Book-derived VWAP family closed.
+- Capacity-constrained securities mechanism family — Phase A2 (2026-09-06): 15 concrete mechanisms audited against primary sources and six gates; no candidate passed. No Phase B/C test authorized. Do not resurface under generic names such as microcap momentum, low-coverage alpha, or small-cap neglect without a separate project amendment.
+- Specialist-information mechanism family — Phase A3 (2026-09-06): 12 concrete mechanisms audited against primary sources, lawful-access constraints, and six gates; no candidate passed. Public BVMAC/BEAC information was not exclusive, while private broker, SVT, operational, and network information was not available to this project. No Phase B/C test authorized.
+- Fragmented/operational mechanism family — Phase A4 (2026-09-08): 12 concrete mechanisms audited against primary venue, custody, settlement, and protocol sources; no candidate passed. BVMAC/CEMAC access remains broker-mediated, while crypto/DEX routes require unverified accounts, funded transfer paths, and costs not available in scope. No Phase B/C test authorized.
 
 ---
 
@@ -121,4 +125,13 @@ The only legitimate reopen conditions:
 2. A genuinely **new observable** with a forced-counterparty why that is not in the closed list above, with free/owned data — triaged through the frontier-mining funnel first.
 3. **Capital preservation only:** a defensive overlay with the pre-measured ~2pp DD expectation, documented as risk management, not alpha.
 
-None of these are open questions today. The record is complete.
+None of these are open questions today. The record is complete. Any Phase A5 mechanism family requires a separate explicit project amendment and a materially new capability or access condition.
+
+## 10. Mechanism-first audit amendments
+
+- **Phase A1 — Forced-flow and settlement (2026-09-06):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
+- **Phase A2 — Capacity-constrained securities (2026-09-06):** 15 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
+- **Phase A3 — Specialist information (2026-09-06):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
+- **Phase A4 — Fragmented and operational markets (2026-09-08):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
+- These phases were source/mechanism audits only. They used no paid data, historical returns, backtests, parameter searches, or strategy implementation.
+- A1's result closed only A1. A2, A3, and A4 were explicitly authorized as separate cycles. A4 is terminal under the current capability set. No A5 or later cycle is authorized by implication.
