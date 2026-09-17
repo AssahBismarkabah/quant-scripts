@@ -107,9 +107,9 @@ The deep-research reconciliation identified B15 spin-offs as the first candidate
 
 On 2026-09-17, S04 was amended for feasibility-only investigation in [`IA/s04-spin-off-index-exclusion-amendment.md`](../IA/s04-spin-off-index-exclusion-amendment.md). This is a narrow spin-off/index-exclusion chain and does not reopen the closed broad index-rebalancing family. No backtest, data purchase, or live trade is authorized by the amendment.
 
-S04 is complete as of 2026-09-17: `NO VIABLE MODERN EXECUTABLE EVENT FOUND`. The next remaining reconciliation candidate is B5 niche-ETF NAV dislocation, subject to a separate feasibility audit.
+S04 is complete as of 2026-09-17: `NO VIABLE MODERN EXECUTABLE EVENT FOUND`. This closes only the tested spin-off/index-exclusion subtype; it does not claim that every possible spin-off research design is impossible. The next remaining reconciliation candidate is B5 niche-ETF NAV dislocation, subject to a separate feasibility audit.
 
-B5 is complete as of 2026-09-17: `UNVERIFIABLE`. The stale-underlying mechanism lacks owned intraday executable NAV/basket history; the AP creation/redemption mechanism is a closed-family overlap with A1 because retail cannot access the primary process. No B5 backtest is authorized.
+B5 is complete as of 2026-09-17: `UNVERIFIABLE`. The stale-underlying mechanism lacks validated intraday executable NAV/basket history in our owned data and current execution setup; the AP creation/redemption mechanism is a closed-family overlap with A1 because retail cannot access the primary process. This is a current-capability finding, not a universal impossibility claim. No B5 backtest is authorized.
 
 
 - Short-vol / VRP family (any form, including dealer-gamma monetization) — ruin tail; stress-conditioning flees the premium
@@ -139,6 +139,10 @@ The only legitimate reopen conditions:
 None of these are open questions today. The record is complete. Any Phase A5 mechanism family requires a separate explicit project amendment and a materially new capability or access condition.
 
 ## 10. Mechanism-first audit amendments
+
+### B5 niche-ETF NAV dislocation feasibility
+
+On 2026-09-17, B5 was implemented as a feasibility-only audit. The stale-underlying route remains `UNVERIFIABLE — NAV/TIMING` because synchronized point-in-time holdings and executable underlying bid/ask history are not established. The AP route is `CLOSED FAMILY OVERLAP` with A1 because retail cannot execute the primary AP process. No returns analysis, backtest, data purchase, or Phase B/C work is authorized.
 
 - **Phase A1 — Forced-flow and settlement (2026-09-06):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
 - **Phase A2 — Capacity-constrained securities (2026-09-06):** 15 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.

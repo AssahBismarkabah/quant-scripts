@@ -1,7 +1,7 @@
 # B15 Spin-Off Feasibility Audit
 
 **Date:** 2026-09-17  
-**Status:** FEASIBILITY AUDIT STARTED — NO TRADING TEST AUTHORIZED
+**Status:** S04 SUBTYPE CLOSED — NO TRADING TEST AUTHORIZED
 
 ## Decision being investigated
 
@@ -39,7 +39,7 @@ These sources establish the event mechanics. They do not establish forced sellin
 
 ## Current terminal result
 
-`UNVERIFIABLE — FEASIBILITY AUDIT INCOMPLETE`
+`S04: NO VIABLE MODERN EXECUTABLE EVENT FOUND; broader B15 spin-off family not proven impossible`
 
 ## Initial census finding (2026-09-17)
 

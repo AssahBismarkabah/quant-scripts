@@ -1,0 +1,5 @@
+universe_version,as_of,ticker,issuer,asset_class,pre_specified_reason,route
+B5-v1,2026-09-17,EMB,iShares,emerging-market sovereign bonds,foreign bond markets and non-synchronous pricing,secondary ETF via IBKR
+B5-v1,2026-09-17,EMLC,VanEck,emerging-market local-currency bonds,foreign bond markets and currency conversion,secondary ETF via IBKR
+B5-v1,2026-09-17,HYEM,VanEck,emerging-market high-yield bonds,less-liquid foreign credit instruments,secondary ETF via IBKR
+B5-v1,2026-09-17,FM,iShares,frontier and emerging-market equities,non-overlapping foreign market hours and less-liquid holdings,secondary ETF via IBKR
