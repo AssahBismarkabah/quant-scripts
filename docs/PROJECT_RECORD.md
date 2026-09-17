@@ -109,6 +109,8 @@ On 2026-09-17, S04 was amended for feasibility-only investigation in [`IA/s04-sp
 
 S04 is complete as of 2026-09-17: `NO VIABLE MODERN EXECUTABLE EVENT FOUND`. The next remaining reconciliation candidate is B5 niche-ETF NAV dislocation, subject to a separate feasibility audit.
 
+B5 is complete as of 2026-09-17: `UNVERIFIABLE`. The stale-underlying mechanism lacks owned intraday executable NAV/basket history; the AP creation/redemption mechanism is a closed-family overlap with A1 because retail cannot access the primary process. No B5 backtest is authorized.
+
 
 - Short-vol / VRP family (any form, including dealer-gamma monetization) — ruin tail; stress-conditioning flees the premium
 - ORB / opening-range / gap family (incl. "IVB", "Oops") — tested dead; gap-fill not falsifiable as a trade
