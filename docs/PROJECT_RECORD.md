@@ -101,6 +101,15 @@ A systematic, pre-registered search for a deployable trading edge at retail scal
 
 ## 8. What is closed and must NOT be resurfaced
 
+### 8.1 Current authorized feasibility work
+
+The deep-research reconciliation identified B15 spin-offs as the first candidate worth a separate feasibility audit. The audit is recorded in [`IA/spin-off-feasibility-audit.md`](../IA/spin-off-feasibility-audit.md) and the work plan in [`research/spin-offs/phase_b_feasibility_plan.md`](../research/spin-offs/phase_b_feasibility_plan.md). This is not a backtest authorization. The required next evidence is a documented recipient constraint, point-in-time tradability, complete corporate-action handling, executable IBKR access, conservative friction/capacity, and sufficient independent events.
+
+On 2026-09-17, S04 was amended for feasibility-only investigation in [`IA/s04-spin-off-index-exclusion-amendment.md`](../IA/s04-spin-off-index-exclusion-amendment.md). This is a narrow spin-off/index-exclusion chain and does not reopen the closed broad index-rebalancing family. No backtest, data purchase, or live trade is authorized by the amendment.
+
+S04 is complete as of 2026-09-17: `NO VIABLE MODERN EXECUTABLE EVENT FOUND`. The next remaining reconciliation candidate is B5 niche-ETF NAV dislocation, subject to a separate feasibility audit.
+
+
 - Short-vol / VRP family (any form, including dealer-gamma monetization) — ruin tail; stress-conditioning flees the premium
 - ORB / opening-range / gap family (incl. "IVB", "Oops") — tested dead; gap-fill not falsifiable as a trade
 - Order-flow / quote-imbalance / aggression predictive states on the owned intraday data — no thesis survived
