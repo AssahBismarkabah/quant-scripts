@@ -144,6 +144,8 @@ None of these are open questions today. The record is complete. Any Phase A5 mec
 
 On 2026-09-17, B5 was implemented as a feasibility-only audit. The stale-underlying route remains `UNVERIFIABLE — NAV/TIMING` because synchronized point-in-time holdings and executable underlying bid/ask history are not established. The AP route is `CLOSED FAMILY OVERLAP` with A1 because retail cannot execute the primary AP process. No returns analysis, backtest, data purchase, or Phase B/C work is authorized.
 
+On 2026-09-17, a free-source survey ([phase_b5_free_data_sources.md](../research/niche-etf-nav/phase_b5_free_data_sources.md)) verified free routes for each B5-01 input: SSGA NAV/holdings archives, SEC N-PORT quarters, and IBKR historical BID_ASK within its documented pacing limits. The B5-01 disposition is unchanged; reopening it requires an explicit authorization decision, a re-frozen equity-ETF universe, and a re-run of the observability gate with acquired data.
+
 - **Phase A1 — Forced-flow and settlement (2026-09-06):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
 - **Phase A2 — Capacity-constrained securities (2026-09-06):** 15 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
 - **Phase A3 — Specialist information (2026-09-06):** 12 concrete mechanisms; `NO VIABLE MECHANISM FOUND`.
