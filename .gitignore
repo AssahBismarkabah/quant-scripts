@@ -29,3 +29,7 @@ research/prediction-markets/outputs/
 # Microstructure probe - large data files
 research/microstructure/cache/
 research/microstructure/cache/*
+ 
+# B5 niche-ETF NAV census - raw SSGA downloads are re-fetchable; scripts,
+# frozen universe, parquet panel, and docs are tracked
+research/niche-etf-nav/raw/

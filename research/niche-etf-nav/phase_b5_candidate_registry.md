@@ -8,3 +8,7 @@
 ## Free-data re-verification note (2026-09-17)
 
 [phase_b5_free_data_sources.md](phase_b5_free_data_sources.md) records that SSGA publishes full daily NAV and shares-outstanding history plus current-day holdings free of charge (fetched and verified), SEC N-PORT quarterly data sets are free (2019q4-2026q2), and IBKR historical BID_ASK is reachable within documented pacing limits. This establishes a no-new-spend acquisition route for B5-01 but does not change its disposition: reopening requires a re-frozen equity-ETF universe, actual data acquisition, and a re-run of the observability gate.
+ 
+## Daily census (2026-09-18)
+ 
+[phase_b5_census.md](phase_b5_census.md) records the authorized free-data observability test: a mechanically frozen 70-fund universe (SPDR US ETFs under 400M dollars, no leveraged/inverse), 25,320 fund-days of official SSGA NAV and published premium/discount data fetched with zero failures, and the pre-specified next-day convergence check. Result: 265 events above 100 bps (1.05 percent of fund-days), concentrated in EM/foreign-hours funds (EEMX, QEMM, XCNY); 84.4 percent shrink next day and 45.6 percent converge below 50 bps by the next NAV print. Daily observability gate PASSED; the B5-01 disposition is unchanged UNVERIFIABLE - NAV/TIMING because the intraday ETF-vs-executable-basket test remains blocked (Databento account locked; TWS/Gateway not running).
