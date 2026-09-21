@@ -128,6 +128,10 @@ The order of work is:
 ```
 
 No data purchase, backtest, parameter search, or strategy implementation is authorized by this document. If both B15 and B5 fail feasibility, the deep-research branch terminates under the current capability set.
+ 
+## Outcome (2026-09-21): both feasibility audits failed - branch terminates
+ 
+The document's own termination condition has been met. B5-01 closed as UNVERIFIABLE - ACCESS ([phase B5 registry](../research/niche-etf-nav/phase_b5_candidate_registry.md); daily census passed but the intraday mechanism test requires quote feeds the account cannot activate, and Databento remains locked). B15/S04 closed as UNVERIFIABLE - NO CONSTRAINT EVIDENCE ([S04 policy closure](../research/spin-offs/s04_policy_closure.md); the index-mandated ex-date sale was eliminated by S&P DJI's 2017 zero-price spin-off policy, and no reviewed primary document established a recipient selling constraint). Per the pre-stated rule, the deep-research branch terminates under the current capability set. Remaining unpursued candidates (B3, B8, B10, B16) remain parked at INTERESTING BUT UNVERIFIABLE and require explicit new authorization plus a distinct access route to reopen.
 
 ## Source record
 
