@@ -35,6 +35,20 @@ A collection of quantitative trading strategies, research specs, and executable 
 | [Spin-off distribution overhang (B15/S04) - CLOSED](IA/spin-off-feasibility-audit.md) | Forced/indifferent selling of distributed spinco shares | CLOSED UNVERIFIABLE - NO CONSTRAINT EVIDENCE (2026-09-21): S04 eliminated by S&P DJI's 2017 zero-price spin-off policy (spinco added to parent's indices at zero, removed end of first trading day; no ex-date mandated sale) - confirmed in SNDK/SOLS/Q/HONA; no reviewed document showed a recipient selling constraint; 2006 follow-up study finds post-spin institutional rebalancing generally has no abnormal price effect. [Closure record](research/spin-offs/s04_policy_closure.md) |
 
 
+## Deep-Research Branch (Small-Trader Advantage, 2026-09) - TERMINATED
+
+The 2026-09 deep-research pass generated 30 candidates; the [reconciliation](IA/deep-research-candidate-reconciliation.md) cut them against the existing record and the branch then terminated when its two feasibility-tested lanes both failed. Full disposition recorded here so nothing is re-litigated by mistake:
+
+- **24 of 30 DUPLICATE / CLOSED** (B1, B2, B4, B6, B7, B9, B11, B12, B13, B14, B17, B18, B19, B20, B21, B22, B23, B24, B25, B26, B27, B28, B29, B30): relabeled versions of families already closed in the table above - public reversal/anomaly searches, index-rebalancing/forced-flow, ORB/gap, calendar effects, carry/term-structure, cross-sectional factors, EDGAR/filing timing, auction/order-flow, and microcap pattern/manipulation families.
+- **4 parked, INTERESTING BUT UNVERIFIABLE - not tested; do not restart without explicit new authorization plus a distinct access route:**
+    - **B3 low-float tender-offer arbitrage** - price converges toward known consideration; no demonstrated small-trader advantage.
+    - **B8 junk-ETF discount** - underlying valuation and real-time NAV unresolved.
+    - **B10 local-rate futures flow** - specialist/local flow unavailable; obscure-futures execution unverified.
+    - **B16 tender-offer retreat** - outcome and timing are event-specific; no verified counterparty advantage.
+- **2 feasibility-tested, both failed (detailed rows above):** B5-01 niche-ETF NAV dislocation (CLOSED UNVERIFIABLE - ACCESS) and B15/S04 spin-off overhang (CLOSED UNVERIFIABLE - NO CONSTRAINT EVIDENCE).
+
+Per [PROJECT_RECORD §9](docs/PROJECT_RECORD.md), legitimate reopen paths are: a new capability (e.g. quote data access), a new observable with a forced counterparty, or a capital-preservation overlay; any new family requires an explicit amendment.
+
 ## Documentation
 
 - [Project Record — everything tested, where we are now](docs/PROJECT_RECORD.md)
