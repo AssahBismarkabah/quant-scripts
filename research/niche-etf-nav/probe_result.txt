@@ -1,6 +1,0 @@
-('SPY', 'TRADES', 'OK', 780)
-('SPY', 'BID_ASK', 'OK', 0)
-('SPY', 'MIDPOINT', 'OK', 0)
-('EEMX', 'TRADES', 'OK', 780)
-('EEMX', 'BID_ASK', 'OK', 0)
-('EEMX', 'MIDPOINT', 'OK', 0)
