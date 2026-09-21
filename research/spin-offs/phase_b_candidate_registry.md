@@ -19,3 +19,11 @@ Search hits, amendments, parent/spinco duplicates, and post-event confirmations 
 ## Current result
 
 No registry candidate currently passes all mechanism gates. No backtest is authorized.
+ 
+## S04 policy closure (2026-09-21)
+ 
+[s04_policy_closure.md](s04_policy_closure.md) closes the S04 subtype on primary evidence: S&P DJI's September 2017 zero-price spin-off policy adds every spinco to its parent's indices at zero price and removes it at the end of the first trading day unless retained by announced committee decision. Index funds never receive the spinco outside the index, so there is no ex-date mandated sale. All four 2025-2026 large spincos (SNDK, SOLS, Q, HONA) confirm the pattern - additions or announced scheduled migrations to another S&P index, never an index-less gap. Modern spinco index exits are therefore scheduled rebalances (closed family).
+ 
+## B15 family disposition (2026-09-21)
+ 
+With S04 closed by policy, no reviewed primary document evidencing a defined recipient selling constraint, and the Abarbanell-Bushee-Raedy (2006) finding that institutional rebalancing after spin-offs is generally not associated with abnormal price movements, the B15 spin-off family terminates as UNVERIFIABLE - NO CONSTRAINT EVIDENCE for this project cycle. Reopen conditions: a new index policy, or a reviewed document class establishing a constraint-bearing recipient, plus a re-frozen census.

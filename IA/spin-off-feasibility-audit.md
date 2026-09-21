@@ -52,3 +52,5 @@ The initial transaction registry is recorded in [`research/spin-offs/phase_b_can
 The full primary-document extraction pass covered all 25 likely rows from the pilot and produced [`research/spin-offs/outputs/primary_evidence_review.csv`](../research/spin-offs/outputs/primary_evidence_review.csv). The rows still require transaction-level human review; repeated parent/spinco filings and planned/non-spin-off mentions remain mixed. No reviewed row supplied explicit evidence of a recipient being required to sell.
 
 This document authorizes only the feasibility/data-census work above. It does not authorize a backtest, data purchase, new account, or live trade.
+ 
+**Update 2026-09-21:** the S04 subtype is closed by primary evidence of policy (S&P DJI September 2017 zero-price spin-off treatment; modern SNDK/SOLS/Q/HONA outcomes) and the broader B15 family terminates as UNVERIFIABLE - NO CONSTRAINT EVIDENCE. See [research/spin-offs/s04_policy_closure.md](../research/spin-offs/s04_policy_closure.md).
