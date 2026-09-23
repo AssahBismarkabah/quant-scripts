@@ -1,0 +1,46 @@
+{
+  "pooled": {
+    "n": 11133,
+    "mean_net_sol": 0.02467362393794164,
+    "median_net_sol": 0.019746488694889503,
+    "boot_p5_mean": 0.016939474900052903,
+    "hit_rate": 0.5699272433306386,
+    "mean_excl_top1pct": 0.00011667759942906646
+  },
+  "regimes": {
+    "pre": {
+      "n": 3858,
+      "mean_net_sol": 0.003711702007051351,
+      "median_net_sol": 0.015928844868110543,
+      "boot_p5_mean": -0.00752705589421048,
+      "hit_rate": 0.555469155002592,
+      "mean_excl_top1pct": -0.013699404932242502
+    },
+    "post": {
+      "n": 7275,
+      "mean_net_sol": 0.03578992562995192,
+      "median_net_sol": 0.02133345106648112,
+      "boot_p5_mean": 0.025722907498134755,
+      "hit_rate": 0.577594501718213,
+      "mean_excl_top1pct": 0.008250177748444035
+    }
+  },
+  "exit_reasons": {
+    "trail_stop": {
+      "n": 7578,
+      "mean": -0.1621
+    },
+    "trail_stop_after_tp": {
+      "n": 3543,
+      "mean": 0.4212
+    },
+    "time_stop_after_tp": {
+      "n": 10,
+      "mean": 1.0495
+    },
+    "time_stop": {
+      "n": 2,
+      "mean": 0.2376
+    }
+  }
+}

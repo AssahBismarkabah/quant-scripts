@@ -1,0 +1,493 @@
+{
+  "F2reRYPQUPkagQy7t5VaZgtiHqXNFQ91ej15GRypump": {
+    "day": "2026-09-13",
+    "create_time": 1789291741.0,
+    "sigs_in_window": 4,
+    "span_s": 4,
+    "failed_count": 0,
+    "hit_page_cap": false,
+    "samples": [
+      {
+        "sig": "3RKyTDBd6H4QNT8o9yGBS3xKnggtNZbP8uJH6iTn8pngyJQinK2RQQB6ELAtQSEpjBvfYG6xnhWmFbgFVBRk7p6j",
+        "err": null,
+        "fee_lamports": 5900,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 90657 of 262882 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 172225 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 0,
+        "blockTime": 116.0
+      },
+      {
+        "sig": "tsuNqYw8Rx1qMwxXyck4wgKu1gDEpzXTG7DSsAgxp5tpKgw2A1AoqphCtaTfjVx7DeHT5q2zrVu7wwSofZD4WQ1",
+        "err": null,
+        "fee_lamports": 5900,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 99624 of 259882 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 160258 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 1,
+        "blockTime": 118.0
+      },
+      {
+        "sig": "25y5wighHiDZYXqDe2wH6NNqToKBBMiYQNgckxVS5VjtX2kQ7PiKSqcGNbevMVH5WVY5mWjETmK4hfeBQenbRSMz",
+        "err": null,
+        "fee_lamports": 5900,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 89208 of 261373 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 172165 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 2,
+        "blockTime": 119.0
+      },
+      {
+        "sig": "5cM4hLTU2XJbxfrav6BgETHGWwTxBnjxTNWQM5zr1TuCaYzqWMeWon1xmSuLuSPxYejdAa8ue8DVqUixcjYMaZ4K",
+        "err": null,
+        "fee_lamports": 5900,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 92079 of 261382 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 169303 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 3,
+        "blockTime": 120.0
+      }
+    ]
+  },
+  "VEY71Uj9G6oZiVHR3dDjhMVrVAXfaTNatTjt226pump": {
+    "day": "2026-09-12",
+    "create_time": 1789189169.0,
+    "sigs_in_window": 159,
+    "span_s": 120,
+    "failed_count": 2,
+    "hit_page_cap": false,
+    "samples": [
+      {
+        "sig": "398jfNmnQUvmEGqAnxTFuZ5CHfzFeBNkUG9Xd1K6WyWV15EqUMRHF5eqY7enFJ717z4ZEgpRwL5YRzKeRxsRRueT",
+        "err": null,
+        "fee_lamports": 103128,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "?",
+          "closeAccount"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 80006 of 124330 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 44324 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 0,
+        "blockTime": 0.0
+      },
+      {
+        "sig": "3hEGi9jZifJYRZSBkW9KNszf1ro5WQf9GAeQ111CMwTgsjiv3QatvDyRFbKyjW9mDtxSzGNzMx8Q2XjphcDhzijY",
+        "err": null,
+        "fee_lamports": 35000,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 78651 of 258382 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 179731 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 53,
+        "blockTime": 25.0
+      },
+      {
+        "sig": "2g6KrrUH14gfg6Rds9yDGxEhb59k2TpevyrV9seemphkrx3wRJSTG4qjDVqt6EwDpQ35TNsY4abcsewwtUMbkj3L",
+        "err": null,
+        "fee_lamports": 7000,
+        "n_inner": 1,
+        "ix_names": [
+          "?",
+          "?",
+          "?",
+          "transfer"
+        ],
+        "programs": [
+          "",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA invoke [1]",
+          "Program log: Instruction: BoostBuyAndBurn"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 2104 of 156302 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 45967 of 199700 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program 11111111111111111111111111111111 invoke [1]",
+          "Program 11111111111111111111111111111111 success"
+        ],
+        "idx": 106,
+        "blockTime": 75.0
+      },
+      {
+        "sig": "2ayNY8UBjb9ug4At6UqEYUsJbhNVADRNPofCawqEVhLkvgG6mVv3giR5ib43hGjwNGuqVgX2PzJ4rhqHt22ZtEuK",
+        "err": null,
+        "fee_lamports": 35000,
+        "n_inner": 3,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "createIdempotent",
+          "createIdempotent",
+          "?"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 79931 of 256882 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 176951 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 158,
+        "blockTime": 120.0
+      }
+    ]
+  },
+  "QTw25puRZ6dDMgw2TbAJJ31kKNdrvEmtmWCixvTpump": {
+    "day": "2026-09-01",
+    "create_time": 1788274029.0,
+    "sigs_in_window": 625,
+    "span_s": 17,
+    "failed_count": 6,
+    "hit_page_cap": false,
+    "samples": [
+      {
+        "sig": "61Nso1oEqcMqzXpRQgeCcKAY9VKBMgTrQxKbWURPWHMFtspyQSM4k4jcSBi5s7grHhtEn9XXuqTTg3ETJaeiYkte",
+        "err": null,
+        "fee_lamports": 8000,
+        "n_inner": 2,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "?",
+          "closeAccount"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 80784 of 184787 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 104003 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 0,
+        "blockTime": 103.0
+      },
+      {
+        "sig": "DJeXzSud88VyR4FzXKR3uBdjkCs9LwCNqRyKgTcyQ1vS2QFBhNpXmeztQELBcjznDqNNSy59W9qFfnABDJQryR3",
+        "err": null,
+        "fee_lamports": 8000,
+        "n_inner": 2,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "transfer",
+          "syncNative",
+          "?",
+          "closeAccount"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token",
+          "system"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 90415 of 185936 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 95521 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 208,
+        "blockTime": 110.0
+      },
+      {
+        "sig": "WvqWSYVQrHcZ5crA6WdMaJaSU2KS74MctAqLB2BgbMDmMCTzLVxhqeKMg75Gr1bUS4D5gP3AUe1w1FH9fn9t2kL",
+        "err": null,
+        "fee_lamports": 8000,
+        "n_inner": 2,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "?",
+          "closeAccount"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 79259 of 184787 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 105528 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 416,
+        "blockTime": 115.0
+      },
+      {
+        "sig": "2chiWkQnQ1dDvo1B7APmibztZdhQTCA4ts6Q5PDGTiPzsW64mVubaBeyvUGFJ6bLLqp8tQRd6nLei2a1stzYGmYr",
+        "err": null,
+        "fee_lamports": 8000,
+        "n_inner": 2,
+        "ix_names": [
+          "?",
+          "?",
+          "createIdempotent",
+          "?",
+          "closeAccount"
+        ],
+        "programs": [
+          "",
+          "spl-associated-token-account",
+          "spl-token"
+        ],
+        "log_head": [
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ComputeBudget111111111111111111111111111111 invoke [1]",
+          "Program ComputeBudget111111111111111111111111111111 success",
+          "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [1]",
+          "Program log: CreateIdempotent"
+        ],
+        "log_tail": [
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA consumed 79301 of 186287 compute units",
+          "Program pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA success",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [1]",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 118 of 106986 compute units",
+          "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success"
+        ],
+        "idx": 624,
+        "blockTime": 120.0
+      }
+    ]
+  }
+}
