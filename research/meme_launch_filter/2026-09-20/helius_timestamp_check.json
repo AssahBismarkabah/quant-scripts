@@ -1,0 +1,52 @@
+[
+ {
+  "mint": "E4pWBbtuNbvjcRL2BGn8X9bA5wHAq2fX6FAVvxoupump",
+  "dune_time": "2026-09-20 01:20:00.000 UTC",
+  "signatures": {
+   "helius_blockTime": 1789867200,
+   "helius_slot": 448581023,
+   "dune_slot": null,
+   "dune_time": "2026-09-20 01:20:00.000 UTC"
+  }
+ },
+ {
+  "mint": "2LVJ55ApwanmybLeD6oeAXsnLg7f3YPAkBSfdRsQpump",
+  "dune_time": "2026-09-20 03:15:00.000 UTC",
+  "signatures": {
+   "helius_blockTime": 1789874100,
+   "helius_slot": 448606899,
+   "dune_slot": null,
+   "dune_time": "2026-09-20 03:15:00.000 UTC"
+  }
+ },
+ {
+  "mint": "AjHawC2nBLyzymfD3Z3tQf569dAZ74Xiujgid4wHpump",
+  "dune_time": "2026-09-20 05:17:00.000 UTC",
+  "signatures": {
+   "helius_blockTime": 1789881420,
+   "helius_slot": 448634370,
+   "dune_slot": null,
+   "dune_time": "2026-09-20 05:17:00.000 UTC"
+  }
+ },
+ {
+  "mint": "HSrjfsmYnQcnM7MWBy8xx2871ZLtjZKFc6767Bwhpump",
+  "dune_time": "2026-09-20 05:30:00.000 UTC",
+  "signatures": {
+   "helius_blockTime": 1789882200,
+   "helius_slot": 448637304,
+   "dune_slot": null,
+   "dune_time": "2026-09-20 05:30:00.000 UTC"
+  }
+ },
+ {
+  "mint": "Dwz3ZkUeuZxuNWDjY6F5wS2VGafAFSM1zFLi9VZfpump",
+  "dune_time": "2026-09-20 05:44:00.000 UTC",
+  "signatures": {
+   "helius_blockTime": 1789883040,
+   "helius_slot": 448640459,
+   "dune_slot": null,
+   "dune_time": "2026-09-20 05:44:00.000 UTC"
+  }
+ }
+]
