@@ -1,0 +1,534 @@
+{
+ "moon_threshold": 200.0,
+ "threshold_scan": {
+  ">10_sol": {
+   "n": 5254,
+   "share": 0.4625
+  },
+  ">20_sol": {
+   "n": 5045,
+   "share": 0.4441
+  },
+  ">50_sol": {
+   "n": 4992,
+   "share": 0.4394
+  },
+  ">100_sol": {
+   "n": 2494,
+   "share": 0.2195
+  },
+  ">200_sol": {
+   "n": 766,
+   "share": 0.0674
+  },
+  ">500_sol": {
+   "n": 332,
+   "share": 0.0292
+  }
+ },
+ "per_day": {
+  "2026-09-01": {
+   "grad_rows": 1063,
+   "with_history": 668,
+   "with_history_share": 0.6284,
+   "outcome_counts": {
+    "drained_small": 558,
+    "mooned": 43,
+    "retained": 67,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-02": {
+   "grad_rows": 944,
+   "with_history": 562,
+   "with_history_share": 0.5953,
+   "outcome_counts": {
+    "drained_small": 476,
+    "mooned": 20,
+    "retained": 66,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-03": {
+   "grad_rows": 1040,
+   "with_history": 577,
+   "with_history_share": 0.5548,
+   "outcome_counts": {
+    "drained_small": 460,
+    "mooned": 25,
+    "retained": 92,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-04": {
+   "grad_rows": 960,
+   "with_history": 463,
+   "with_history_share": 0.4823,
+   "outcome_counts": {
+    "drained_small": 353,
+    "mooned": 18,
+    "retained": 92,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-05": {
+   "grad_rows": 926,
+   "with_history": 410,
+   "with_history_share": 0.4428,
+   "outcome_counts": {
+    "drained_small": 312,
+    "mooned": 7,
+    "retained": 91,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-06": {
+   "grad_rows": 888,
+   "with_history": 358,
+   "with_history_share": 0.4032,
+   "outcome_counts": {
+    "drained_small": 293,
+    "mooned": 10,
+    "retained": 55,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-07": {
+   "grad_rows": 1033,
+   "with_history": 484,
+   "with_history_share": 0.4685,
+   "outcome_counts": {
+    "drained_small": 373,
+    "mooned": 28,
+    "retained": 83,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-08": {
+   "grad_rows": 1063,
+   "with_history": 537,
+   "with_history_share": 0.5052,
+   "outcome_counts": {
+    "drained_small": 416,
+    "mooned": 25,
+    "retained": 96,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-09": {
+   "grad_rows": 1189,
+   "with_history": 581,
+   "with_history_share": 0.4886,
+   "outcome_counts": {
+    "drained_small": 411,
+    "mooned": 42,
+    "retained": 128,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-10": {
+   "grad_rows": 1062,
+   "with_history": 533,
+   "with_history_share": 0.5019,
+   "outcome_counts": {
+    "drained_small": 424,
+    "mooned": 29,
+    "retained": 80,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-11": {
+   "grad_rows": 969,
+   "with_history": 466,
+   "with_history_share": 0.4809,
+   "outcome_counts": {
+    "drained_small": 364,
+    "mooned": 24,
+    "retained": 78,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-12": {
+   "grad_rows": 1033,
+   "with_history": 491,
+   "with_history_share": 0.4753,
+   "outcome_counts": {
+    "drained_small": 349,
+    "mooned": 57,
+    "retained": 85,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-13": {
+   "grad_rows": 950,
+   "with_history": 427,
+   "with_history_share": 0.4495,
+   "outcome_counts": {
+    "drained_small": 329,
+    "mooned": 32,
+    "retained": 66,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-14": {
+   "grad_rows": 945,
+   "with_history": 430,
+   "with_history_share": 0.455,
+   "outcome_counts": {
+    "drained_small": 345,
+    "mooned": 37,
+    "retained": 48,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-15": {
+   "grad_rows": 1001,
+   "with_history": 552,
+   "with_history_share": 0.5514,
+   "outcome_counts": {
+    "drained_small": 426,
+    "mooned": 46,
+    "retained": 80,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-16": {
+   "grad_rows": 1056,
+   "with_history": 576,
+   "with_history_share": 0.5455,
+   "outcome_counts": {
+    "drained_small": 468,
+    "mooned": 28,
+    "retained": 80,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-17": {
+   "grad_rows": 1101,
+   "with_history": 610,
+   "with_history_share": 0.554,
+   "outcome_counts": {
+    "drained_small": 473,
+    "mooned": 54,
+    "retained": 83,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-18": {
+   "grad_rows": 1044,
+   "with_history": 521,
+   "with_history_share": 0.499,
+   "outcome_counts": {
+    "drained_small": 407,
+    "mooned": 31,
+    "retained": 83,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-19": {
+   "grad_rows": 1049,
+   "with_history": 536,
+   "with_history_share": 0.511,
+   "outcome_counts": {
+    "drained_small": 437,
+    "mooned": 23,
+    "retained": 76,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-20": {
+   "grad_rows": 1048,
+   "with_history": 499,
+   "with_history_share": 0.4761,
+   "outcome_counts": {
+    "drained_small": 375,
+    "mooned": 34,
+    "retained": 90,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-21": {
+   "grad_rows": 1064,
+   "with_history": 556,
+   "with_history_share": 0.5226,
+   "outcome_counts": {
+    "drained_small": 429,
+    "mooned": 37,
+    "retained": 90,
+    "no_postgrad": 0
+   }
+  },
+  "2026-09-22": {
+   "grad_rows": 1066,
+   "with_history": 524,
+   "with_history_share": 0.4916,
+   "outcome_counts": {
+    "drained_small": 356,
+    "mooned": 42,
+    "retained": 126,
+    "no_postgrad": 0
+   }
+  },
+  "signal_scan_pre_sep9": {
+   "traders_Q4": {
+    "n": 947,
+    "drain_rate": 0.9145,
+    "moon_rate": 0.0718,
+    "retained_rate": 0.0137
+   },
+   "share_le0.05": {
+    "n": 2446,
+    "drain_rate": 0.823,
+    "moon_rate": 0.0454,
+    "retained_rate": 0.1316
+   },
+   "noncreator_net_gt0": {
+    "n": 2322,
+    "drain_rate": 0.8045,
+    "moon_rate": 0.0736,
+    "retained_rate": 0.1219
+   },
+   "all": {
+    "n": 4059,
+    "drain_rate": 0.7985,
+    "moon_rate": 0.0434,
+    "retained_rate": 0.1582
+   },
+   "traders_Q3": {
+    "n": 794,
+    "drain_rate": 0.796,
+    "moon_rate": 0.0957,
+    "retained_rate": 0.1083
+   },
+   "traders_Q2": {
+    "n": 983,
+    "drain_rate": 0.7721,
+    "moon_rate": 0.0071,
+    "retained_rate": 0.2208
+   },
+   "noncreator_net_le0": {
+    "n": 1737,
+    "drain_rate": 0.7904,
+    "moon_rate": 0.0029,
+    "retained_rate": 0.2067
+   },
+   "traders_Q1": {
+    "n": 1335,
+    "drain_rate": 0.7371,
+    "moon_rate": 0.0187,
+    "retained_rate": 0.2442
+   },
+   "share_0.05-0.15": {
+    "n": 783,
+    "drain_rate": 0.7369,
+    "moon_rate": 0.0383,
+    "retained_rate": 0.2248
+   },
+   "share_gt0.15": {
+    "n": 440,
+    "drain_rate": 0.8773,
+    "moon_rate": 0.0795,
+    "retained_rate": 0.0432
+   },
+   "share_missing": {
+    "n": 390,
+    "drain_rate": 0.6795,
+    "moon_rate": 0.0,
+    "retained_rate": 0.3205
+   }
+  },
+  "trader_quartiles_pre_sep9": {
+   "q1": 23.0,
+   "q2": 34.0,
+   "q3": 260.0
+  },
+  "signal_scan_post_sep9": {
+   "traders_Q2": {
+    "n": 1906,
+    "drain_rate": 0.7587,
+    "moon_rate": 0.0126,
+    "retained_rate": 0.2288
+   },
+   "share_le0.05": {
+    "n": 4643,
+    "drain_rate": 0.8029,
+    "moon_rate": 0.0373,
+    "retained_rate": 0.1598
+   },
+   "noncreator_net_le0": {
+    "n": 3224,
+    "drain_rate": 0.7329,
+    "moon_rate": 0.0794,
+    "retained_rate": 0.1877
+   },
+   "all": {
+    "n": 7302,
+    "drain_rate": 0.766,
+    "moon_rate": 0.0707,
+    "retained_rate": 0.1634
+   },
+   "share_0.05-0.15": {
+    "n": 1150,
+    "drain_rate": 0.7426,
+    "moon_rate": 0.0409,
+    "retained_rate": 0.2165
+   },
+   "traders_Q3": {
+    "n": 1894,
+    "drain_rate": 0.7492,
+    "moon_rate": 0.1061,
+    "retained_rate": 0.1447
+   },
+   "noncreator_net_gt0": {
+    "n": 4078,
+    "drain_rate": 0.7921,
+    "moon_rate": 0.0638,
+    "retained_rate": 0.1442
+   },
+   "share_gt0.15": {
+    "n": 682,
+    "drain_rate": 0.8519,
+    "moon_rate": 0.0924,
+    "retained_rate": 0.0557
+   },
+   "share_missing": {
+    "n": 827,
+    "drain_rate": 0.52,
+    "moon_rate": 0.2817,
+    "retained_rate": 0.1983
+   },
+   "traders_Q1": {
+    "n": 1611,
+    "drain_rate": 0.7393,
+    "moon_rate": 0.0304,
+    "retained_rate": 0.2303
+   },
+   "traders_Q4": {
+    "n": 1891,
+    "drain_rate": 0.8128,
+    "moon_rate": 0.128,
+    "retained_rate": 0.0592
+   }
+  },
+  "trader_quartiles_post_sep9": {
+   "q1": 23.0,
+   "q2": 34.0,
+   "q3": 260.0
+  },
+  "signal_scan_all": {
+   "traders_Q4": {
+    "n": 2838,
+    "drain_rate": 0.8467,
+    "moon_rate": 0.1092,
+    "retained_rate": 0.044
+   },
+   "share_le0.05": {
+    "n": 7089,
+    "drain_rate": 0.8098,
+    "moon_rate": 0.0401,
+    "retained_rate": 0.1501
+   },
+   "noncreator_net_gt0": {
+    "n": 6400,
+    "drain_rate": 0.7966,
+    "moon_rate": 0.0673,
+    "retained_rate": 0.1361
+   },
+   "all": {
+    "n": 11361,
+    "drain_rate": 0.7776,
+    "moon_rate": 0.0609,
+    "retained_rate": 0.1615
+   },
+   "traders_Q3": {
+    "n": 2688,
+    "drain_rate": 0.763,
+    "moon_rate": 0.1031,
+    "retained_rate": 0.1339
+   },
+   "traders_Q2": {
+    "n": 2889,
+    "drain_rate": 0.7632,
+    "moon_rate": 0.0107,
+    "retained_rate": 0.226
+   },
+   "noncreator_net_le0": {
+    "n": 4961,
+    "drain_rate": 0.7531,
+    "moon_rate": 0.0526,
+    "retained_rate": 0.1943
+   },
+   "traders_Q1": {
+    "n": 2946,
+    "drain_rate": 0.7383,
+    "moon_rate": 0.0251,
+    "retained_rate": 0.2366
+   },
+   "share_0.05-0.15": {
+    "n": 1933,
+    "drain_rate": 0.7403,
+    "moon_rate": 0.0398,
+    "retained_rate": 0.2199
+   },
+   "share_gt0.15": {
+    "n": 1122,
+    "drain_rate": 0.8619,
+    "moon_rate": 0.0873,
+    "retained_rate": 0.0508
+   },
+   "share_missing": {
+    "n": 1217,
+    "drain_rate": 0.5711,
+    "moon_rate": 0.1915,
+    "retained_rate": 0.2375
+   }
+  },
+  "trader_quartiles_all": {
+   "q1": 23.0,
+   "q2": 34.0,
+   "q3": 260.0
+  }
+ },
+ "top_pools_month": [
+  {
+   "mint": "FH8dMyGZdfwU8qi5AfqqKyn9N2tM2ro58Dr68ZUHpump",
+   "max_sol": 475466.52
+  },
+  {
+   "mint": "CgxXsJnDszZ4E2mhrXU4tQBKrwSk138o7PVgtCkJDDPC",
+   "max_sol": 355365.55
+  },
+  {
+   "mint": "62Pb1eprgqf3zSwJjad9ZzCtiacTxP8hVknkAp7ypump",
+   "max_sol": 182458.52
+  },
+  {
+   "mint": "HG4XsNtdwxoZKW2JsSWTyek8KcQQ9hok23XcGiv4pump",
+   "max_sol": 114642.24
+  },
+  {
+   "mint": "F5zC2QoP6j2erxNyf4z6iNCi6X6AkburMC2Xofhxpump",
+   "max_sol": 99150.15
+  },
+  {
+   "mint": "B3qyJyAriAsDRzou63ZxNKS2FDFkxakj4nNQRkVzMHV3",
+   "max_sol": 80282.15
+  },
+  {
+   "mint": "Hg5Ja55T5wESq4vyFoiVCMeHXtGyVA69X2UHq8hgpump",
+   "max_sol": 78035.13
+  },
+  {
+   "mint": "FVpuHt6dGfbWbDotUdaDDWqMAKu7r4bHQQJJ6YdsmPas",
+   "max_sol": 57492.4
+  },
+  {
+   "mint": "DS3tKJeEscfe753pSXNiG1HrDMos2sobkBKyabNZpump",
+   "max_sol": 51325.13
+  },
+  {
+   "mint": "9TNvg1W6zQqFVC2ugZySzSmCQKtPbC1w9yoynx9Ppump",
+   "max_sol": 49431.1
+  }
+ ]
+}

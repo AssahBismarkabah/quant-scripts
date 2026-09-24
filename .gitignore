@@ -33,3 +33,11 @@ research/microstructure/cache/*
 # B5 niche-ETF NAV census - raw SSGA downloads are re-fetchable; scripts,
 # frozen universe, parquet panel, and docs are tracked
 research/niche-etf-nav/raw/
+
+# meme-launch-filter: heavy Dune pulls are stored as .parquet siblings;
+# the original JSON wrappers stay local-only (re-runnable via tracked .sql)
+research/meme_launch_filter/*/step1_launches.json
+research/meme_launch_filter/*/step1_firsthour.json
+research/meme_launch_filter/*/step1_trades.json
+research/meme_launch_filter/*/step2_paths.json
+research/meme_launch_filter/*/step1_merged.json

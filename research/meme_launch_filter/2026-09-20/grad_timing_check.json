@@ -1,0 +1,46 @@
+{
+  "execution_id": "01M34BD2BBPAYHGVSJ7B8ABVGG",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T10:43:21.067901Z",
+  "expires_at": "2026-12-21T10:43:36.407305Z",
+  "execution_started_at": "2026-09-22T10:43:33.28913Z",
+  "execution_ended_at": "2026-09-22T10:43:36.407297Z",
+  "result": {
+    "rows": [
+      {
+        "bucket": "under_1min",
+        "n": 618
+      },
+      {
+        "bucket": "1_60min",
+        "n": 368
+      },
+      {
+        "bucket": "1_6h",
+        "n": 36
+      },
+      {
+        "bucket": "over_6h",
+        "n": 17
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "bucket",
+        "n"
+      ],
+      "column_types": [
+        "varchar(10)",
+        "bigint"
+      ],
+      "row_count": 4,
+      "result_set_bytes": 60,
+      "total_row_count": 4,
+      "total_result_set_bytes": 60,
+      "datapoint_count": 8,
+      "pending_time_millis": 12221,
+      "execution_time_millis": 3118
+    }
+  }
+}

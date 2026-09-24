@@ -9,18 +9,18 @@ import statistics
 import sys
 from pathlib import Path
 
+from quant_scripts.meme_launch_filter.io_rows import load_merged, load_rows
+
 BASE = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("research/meme_launch_filter/2026-09-20")
 
 
 def load_firsthour() -> dict[str, dict]:
-    raw = json.loads((BASE / "step1_firsthour.json").read_text())
-    rows = raw["result"]["rows"]
+    rows = load_rows(BASE, "step1_firsthour")
     return {r["mint"]: r for r in rows}
 
 
-def load_merged() -> dict[str, list[dict]]:
-    raw = json.loads((BASE / "step1_merged.json").read_text())
-    return raw["tokens"]
+def load_merged_tokens() -> dict[str, list[dict]]:
+    return load_merged(BASE)["tokens"]
 
 
 def pct(values: list[float], q: float) -> float:
@@ -56,7 +56,7 @@ def num(row: dict, key: str) -> float:
 
 def main() -> None:
     fh = load_firsthour()
-    merged = load_merged()
+    merged = load_merged_tokens()
 
     report: dict = {"fh_rows": len(fh), "buckets": {}}
 

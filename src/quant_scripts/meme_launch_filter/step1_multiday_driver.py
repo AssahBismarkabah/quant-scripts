@@ -11,9 +11,10 @@ from __future__ import annotations
 
 import subprocess
 import sys
-import json
 from datetime import date, timedelta
 from pathlib import Path
+
+from quant_scripts.meme_launch_filter.io_rows import PARQUET_KINDS, convert_dune_json, has_rows
 
 SRC = Path("research/meme_launch_filter/2026-09-20")
 
@@ -45,16 +46,9 @@ def main() -> None:
         print(f"===== {day} =====", flush=True)
         for kind, perf in PULLS:
             out_json = day_dir / f"{kind}.json"
-            # Re-pull if the file is missing OR is a completed-but-empty
-            # result — catches stale/broken windows across all pull kinds.
-            needs_pull = not out_json.exists()
-            if not needs_pull:
-                try:
-                    rows = json.loads(out_json.read_text()).get("result", {}).get("rows", [])
-                    if len(rows) == 0:
-                        needs_pull = True
-                except (json.JSONDecodeError, KeyError, OSError):
-                    needs_pull = True
+            # Re-pull if neither parquet nor JSON has rows — catches
+            # stale/broken windows across all pull kinds.
+            needs_pull = not has_rows(day_dir, kind)
             if not needs_pull:
                 print(f"{kind}: exists, skip", flush=True)
                 continue
@@ -64,6 +58,8 @@ def main() -> None:
                 "--out", str(out_json),
                 "--performance", perf,
             ])
+            if kind in PARQUET_KINDS:
+                convert_dune_json(out_json)
         run([".venv/bin/python", "-m", "quant_scripts.meme_launch_filter.step1_summary", str(day_dir)])
         run([".venv/bin/python", "-m", "quant_scripts.meme_launch_filter.step1_firsthour_analysis", str(day_dir)])
         run([".venv/bin/python", "-m", "quant_scripts.meme_launch_filter.step1_postgrad_analysis", str(day_dir)])

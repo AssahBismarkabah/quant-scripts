@@ -1,0 +1,4142 @@
+{
+  "execution_id": "01M34W5N6P7G0TFHAXMHAAZGFA",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T15:36:24.022867Z",
+  "expires_at": "2026-12-21T15:36:25.423807Z",
+  "execution_started_at": "2026-09-22T15:36:24.026818Z",
+  "execution_ended_at": "2026-09-22T15:36:25.423798Z",
+  "result": {
+    "rows": [
+      {
+        "first_graduation_time": "2026-09-05 00:47:59.000 UTC",
+        "mint": "uNMMbwMagM2nvVFx8K1efKM8Gvh2LiisQxj64a5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:48:16.000 UTC",
+        "mint": "uXsunQSVunLsrQNYNzLD8i7Z67fnT4v4UcnWKs8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:50:09.000 UTC",
+        "mint": "k47tCJzdzvvET7bwFRrWqwgJSwKPs8nBEfkYgpDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:49:01.000 UTC",
+        "mint": "Cv8Vv6pwcPHUbdEUwPZJuQdpFmoiEg2bWEpyxPNcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:11:28.000 UTC",
+        "mint": "5Hnfs8EjmsXuccdcd4Lhec8QJDycWbW66gJTjqX6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:12:30.000 UTC",
+        "mint": "BbzJ1XgFAojGcmj28RKGwkbjJCanzC4S75TF5SQtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:37:24.000 UTC",
+        "mint": "6zMmpEKKyBRjU7dmHVp3G7DfFZqfvvHvJU8ZwnwCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:55:59.000 UTC",
+        "mint": "HR6tNkXpJoHT54aVHQMR8Vkt57j7Z8uFG8hYcsCHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:10:28.000 UTC",
+        "mint": "FmLVQrtExngRbQaQXpE57zvR1fVgJL3Ruh1wG6bKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:13:24.000 UTC",
+        "mint": "AdEvjJ4ghyaZ6y7QUkYL4XNjurp3z8aPTH8Q6Ax4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:17:34.000 UTC",
+        "mint": "uLQpXLzTggRKCAEFWELMaRCKZJmJx4K2LWREkcnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:48:41.000 UTC",
+        "mint": "GxdLiDyKtYMxBkb3x8zKTUu86gKT5JySidW73fR6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:12:02.000 UTC",
+        "mint": "AhiWggtXMu3K9tY1Y3VRmWwLZrrqn8ovZVURjUJ6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:25:20.000 UTC",
+        "mint": "D9G5fVz7vp7xVdYoVpnz23bGgP3XvpNkNH8rG19bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:27:58.000 UTC",
+        "mint": "7BswvpQGuCT4rfKTG8KRa7Dh7iSTyUumjRRKY6rCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:56:04.000 UTC",
+        "mint": "9TgPkfpPhKyxNi3VCCbERTbJvdWPeZc1muEDL9ypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:00:11.000 UTC",
+        "mint": "AN5jbsYD3ojnhC1T7PvwHS7HSueNDAXTpcm2EcCzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:10:00.000 UTC",
+        "mint": "3uMhzx38muAArpCtN7TkAHgf97gnuMJm9PLtQWwRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:25:24.000 UTC",
+        "mint": "79QnS6p9BcXA5RTqwyqexPM2Kg4KULDU61TiiN5npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:33:10.000 UTC",
+        "mint": "526ZXsdVAhEsHKBUmGLSyCUWZbpLLZNnSMJG5Rowpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:55:10.000 UTC",
+        "mint": "9LszwSA2uSw8xgEtsXFZKKCZJxMxfm2nh2ZfKDkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:06:27.000 UTC",
+        "mint": "HUo8a94Tt7j4ytVAwi14jXXnEuhyVCDBuGnjJV4wpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:12:41.000 UTC",
+        "mint": "63vzkPEa9Q2JxXTTkNLQs1PZrZqBvhcEaQGH7BnKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:14:16.000 UTC",
+        "mint": "LqL16TAs4CNr9vmnJsc68HGw27asQxFo2BtNbYypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:33:07.000 UTC",
+        "mint": "6c8sM8szE8tFXB3HVkPxmDy9V7HwaWkiwfMA74xypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:43:14.000 UTC",
+        "mint": "CZzEfuhbsTgqLkr2JjJeHc4TaMPG3sDfTwTgbKHipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:44:27.000 UTC",
+        "mint": "3uk6xbQMUHdDbSZW26dfuxt4LQkySX4J9s3CMm4vEQjX"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:46:41.000 UTC",
+        "mint": "FsvMsuXWdeSG7tLKMYhXhjcHhx6mGENLPWmv8nBKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:29:56.000 UTC",
+        "mint": "AgEdLfy8SJvCd8Z7uT4LeQTBWFFvwAxRZ8kMP4kppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:35:02.000 UTC",
+        "mint": "HRqNdo2nigK7wBn44vJ8pTR2o5hMEcdQcgoDU3e5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:32:10.000 UTC",
+        "mint": "gz9VFREJmAmKVxDaYL9cGKmsW69Vwux8ij8CCvWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:52:36.000 UTC",
+        "mint": "nAMg4ftcmsdLADYoC3svq8q2JcLrRfXitSXrfVCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:10:28.000 UTC",
+        "mint": "9MHrz6yBg2HhyJvfhedDUqR5rubhu1TMKy4QjR1vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:15:10.000 UTC",
+        "mint": "3DJw5VVicu2NyGoJcqT1MgbHMSH21NPDhtPJmFPnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:28:33.000 UTC",
+        "mint": "EHGG99EjhC6Ennm9peCjR6dTqRTm6zEcBeRGDak5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:03:04.000 UTC",
+        "mint": "EjDs5rsRyn2uq7fSbCQ7MC4iXviac7etC9wTYJLApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:02:33.000 UTC",
+        "mint": "FVRpiYTjMcPWJXPaMdukbP4k1LTuA2QjC4VqGQCKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:08:02.000 UTC",
+        "mint": "EjRCwVNHz2Ccpt3rCyajsLGN6NE4EWJybA65RjVapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:41:09.000 UTC",
+        "mint": "5zinULwG3jENuPnzVDJya2TpnkWMGDj2bh9VzRMbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:47:08.000 UTC",
+        "mint": "8zzwXmwgjcgqPE66sthHppJJyTui3HK5gWW2zPnmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:58:49.000 UTC",
+        "mint": "6GEWkNsjXort5euD98pjEipUB3posyJTUJ1bE6Dqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:16:34.000 UTC",
+        "mint": "GSLWFfJPreufk6mXKWctNZ6UoeUFmRumy8crjg5vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:35:07.000 UTC",
+        "mint": "ACdzS1fQVG5hT9CKyjAFFYvTYZJEGu4sKr6zoSypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:44:40.000 UTC",
+        "mint": "4SDvgqSbnRXYqSYoxxXGL9kTdGgk8XQe6cStzKDipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:55:04.000 UTC",
+        "mint": "PesTLMM2WKKWjxip8vEBnTjxNbyM4VnQWBKddgzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:07:07.000 UTC",
+        "mint": "3svueQwvszdtD6RHuNQ1DeMdW1yzUUfcXUw4NH9Dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:15:31.000 UTC",
+        "mint": "HnE4qEMLZXC7U9Wxwu6TdwvAQufmbFGkmm7cAXdXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:18:35.000 UTC",
+        "mint": "8Ge69MMq3SN6G2UfvhqYt5ywUDVzXeBtASnZjQXbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:53:39.000 UTC",
+        "mint": "FbBHdg1KPPAgF5oEbmn34J6X22wpsEG6jkA2rsJYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:12:58.000 UTC",
+        "mint": "2epzToSX5x4oBTscoadbREPVTuVeyru94zXwL3g2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:43:15.000 UTC",
+        "mint": "3zxF3joH5kUnDJoBnybApeneZQxhoAjuawDgN6ZRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:51:42.000 UTC",
+        "mint": "aq4FWcyDQHcEJWuhANot8afe5BMfmBQSnMpi3o7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:04:46.000 UTC",
+        "mint": "Q4tBKML4sZDJMtEnCZXbGeLTpcUZauj6vaSEQvxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:04:40.000 UTC",
+        "mint": "76KWnPhCGNd9186Lyi9TPY3piTNF8SqFue9FKAX2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:26:31.000 UTC",
+        "mint": "48y934Wktt2hfXP9rDEWM41r7dYnXHSp4Ai3cH2Hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:50:55.000 UTC",
+        "mint": "b85seKoJndQxhTAqMekAn27UFZgho5SbE9fEshXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:46:20.000 UTC",
+        "mint": "BEYcVDihMQCUQ1DbMDL1YbGSo2uFzDUQxCMBJmtapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:57:47.000 UTC",
+        "mint": "2B4duivCBSSSQaD7ykeo6A7cPE4GxbR8WVXHzwKUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:08:38.000 UTC",
+        "mint": "Em4GNm6a2XzdH5fkZc6Pgv4zRNVJn6kgM5dj64pEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:17:59.000 UTC",
+        "mint": "EuSTmVciYc5i7kHyWhQ9zZmXfcsa9waCGSuVeML1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:36:17.000 UTC",
+        "mint": "DVGFiRQv8XutVj7ELtM3KDb3dhuJ2XDx2LTuLzqDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:39:15.000 UTC",
+        "mint": "EZguUUw3PgUCFreTbGEo4297MtQzwrFjTseJNJrmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:39:09.000 UTC",
+        "mint": "83uC5DtXwDgsyiXaF1bKf7N3XSuwZuAb4PW4dUbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:55:40.000 UTC",
+        "mint": "5sQADW9AFQEesRgcW4Hg1zCLNDL7CT8vjYDzzHw6Kp2V"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:17:56.000 UTC",
+        "mint": "6ynbtCq3rQE9daqutS9z9pn867jHdSs6ru4pS8hWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:21:39.000 UTC",
+        "mint": "2X1jCQpDfwW8BXH4zFxkrmVYy965eqndBgkxBcpMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:23:48.000 UTC",
+        "mint": "J1SUjZRLqhbnJeLofoZx52pjVBVYe87xwNYPUDEspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:27:49.000 UTC",
+        "mint": "E2ecq3UjyZA4ST4gg56zhYqALn5TQKB4EK9eU3Lcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:30:27.000 UTC",
+        "mint": "e5qVCSHSdnQaDJSLjrg8KPZrT1465i3oNB1Hujvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:46:09.000 UTC",
+        "mint": "HthPMUbn4aSptbKN5L7TR5qXAz2m2Qa7TFBBqXoZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:12:18.000 UTC",
+        "mint": "EyzzSfonAvaneWYnqzg1M8HYBugR5K9eTVCPpJtBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:13:46.000 UTC",
+        "mint": "Dv7XaYZqNL8xS9mhcXG3H8yugpvzw59Vqmkn1wKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:16:59.000 UTC",
+        "mint": "86VRbx1T2jC5sprMkuK5GKCCUboBGE4PYWkWvMS9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:20:49.000 UTC",
+        "mint": "D8h6b1VQ2giZEpfWXAUJLFjAMunATCN3so3C8Efhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:36:34.000 UTC",
+        "mint": "3WbEf5YupKuAXV51RqhyHyuHM916F5XeKiMUZbDRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:56:24.000 UTC",
+        "mint": "Ggxq8vx6sHv7ax8rjaKT5Fsu6Fbj8phfGdAzmNmsz3Xo"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:33:09.000 UTC",
+        "mint": "9M78XCzjLf7c96HYkJj3hqMmAvB1jkj5Tvu8mUHbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:39:06.000 UTC",
+        "mint": "5LJ4613HrXB9x8ieNNWFkwK8si9q1ioZesg4SBW5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:42:06.000 UTC",
+        "mint": "AAJebC6VYGjYJGmoet8cexgDmUr2rUXs9zKX1u9Gpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:26:57.000 UTC",
+        "mint": "MZ9bouCVd8xb2Qk7eaZFTDGZJbiVWdPJgjM8NYaLAMF"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:27:22.000 UTC",
+        "mint": "843cANiRumAZZcgR9mnazkUYhvkdRYhdky6edYS3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:56:09.000 UTC",
+        "mint": "thaNgAcvbwfQy7Vqk46NuZye7mreA1sxNAexqsTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:20:25.000 UTC",
+        "mint": "FvSEEqbtDgrHvcfoczMVMKAJJXDYW7es5K8ZC7KCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:55:15.000 UTC",
+        "mint": "EgdoPsFTwCiedxaUXhKzF1x592KDuvEHxDSnzMwtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:05:46.000 UTC",
+        "mint": "C3N9fG4kEFc4TPzw8Ut5wwUGVeHCWTUn3vW8kVhRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:36:21.000 UTC",
+        "mint": "CxjmF1cDjaBqdGQWU1tCqXpSDZdSWfEyd5eL1ZJ6goMK"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:53:11.000 UTC",
+        "mint": "2BjudtJFXBcyBsufYWFA5gFPbGU8Whc1DshehrsTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:10:38.000 UTC",
+        "mint": "LWtnACFPXpkdr3BfvEzZTfZZXgj6FdafJSRgU9ipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:20:49.000 UTC",
+        "mint": "J1E2a4k5RPifGUa5rraQoksjR1Dzom8m4kxb9Cfrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:35:22.000 UTC",
+        "mint": "7huiz6DieN69wvAQn8Lb5DQZKi9u2oYLDuZJxNbTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:35:59.000 UTC",
+        "mint": "U1JD4D6bsxvmvD3kn2Qs6LU3oSEhv9oLwRd4oxmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:48:58.000 UTC",
+        "mint": "7NtAqAsrXqqCUgGUYMV1JsjEWcZNfuzVXCcaT8fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:01:35.000 UTC",
+        "mint": "4yiVZwKty4LGiopiWT5KndgpStnuphAaU5x8Qcbupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:17:26.000 UTC",
+        "mint": "GB91ML7ZckevJnHLqSeV7LWjgWaUN9ZhQGQU24Snpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:23:37.000 UTC",
+        "mint": "HDXnPsGEoGRbRZKNWJv5yBsHtMLTsRct2CtsH2u8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:22:09.000 UTC",
+        "mint": "FNf93gEgvPf4PgMqHDRWuH6J2V2k89MGSvJRhrApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:36:02.000 UTC",
+        "mint": "4sciyacc2udv2knBqjwRpMsNhzczs8gqqUCxE5kdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:10:50.000 UTC",
+        "mint": "cUeYYeP97Dzekm5Yd1k3BxpNtzv3yfBgFpmHBDdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:43:06.000 UTC",
+        "mint": "6wksv1Q2umTNqU7ekvdGeT6Jf1pxrXWFm7X8s4typump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:47:16.000 UTC",
+        "mint": "Ab2YXS2m6g5fDqBBfZ4sqd2REwjVmxDcaEwHywFSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:49:58.000 UTC",
+        "mint": "Ab8DSU6cz34wnsP7o3waCaRxDS7RrXhVhHXYrrk5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:02:22.000 UTC",
+        "mint": "2UVkVoMeBE1z8SUs4aneFdsZms6ToaowReGFuFCXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:06:57.000 UTC",
+        "mint": "gUkWyBiBWz3CFr5peE8Rh4RbEtmFBcVX5cLb9zYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:22:26.000 UTC",
+        "mint": "8sNopYe9FXkEw1PCTgmcw5FBejuMgaL2zBNg1RXJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:32:37.000 UTC",
+        "mint": "E3KDvgA3RLK51rmjdLeq5pXwTStq6jt2nsFDcUa5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:49:26.000 UTC",
+        "mint": "2vJNXhATD5hGntmQP7UTdpbqWbtc4uDeFa2XzbZ8AE8f"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:27:37.000 UTC",
+        "mint": "DTpEEqJdXtee3dfT6JjgxsJMX7AGRKaFDP2Mn4y7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:44:45.000 UTC",
+        "mint": "zVUj8nt2BaW9FwtGzxqxeU44qNzTC6bk5vuZczRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:47:11.000 UTC",
+        "mint": "6xjxjgcHU6GyPUswW5VrWptvSJLuriATurGVZbEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:00:46.000 UTC",
+        "mint": "HHRSkcn4p34XQNk9qucxANQV6do4pZcwUGjCsWxCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:27:21.000 UTC",
+        "mint": "52xJ8LisgfijbirjeWVV78V9DwY1LWvhW9zeD1g4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:38:26.000 UTC",
+        "mint": "XhsMxRkrP7fXB2AnM6CKBw8HbNW8B4HqeTSKhkKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:55:23.000 UTC",
+        "mint": "J9CxwCpANRhQwtbsF6KdkkDnkMfDXZNrbc2EwJzwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:43:15.000 UTC",
+        "mint": "F6pTF592TP3NSo5c8u2dGWhGhiYeaaZrcTtLh5XZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:45:37.000 UTC",
+        "mint": "A8yGUmUHk1TNk1Y8CC8tigfCp5hAGpBWwDT17cztpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:54:37.000 UTC",
+        "mint": "7dqVbAfVELbx8kMiAZxTPofTJm3eFGxkkHDunMXFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:55:02.000 UTC",
+        "mint": "F8DBMWwHKjwjRbCEVi2vz2SSKYGULrq96bAFnRFmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:08:36.000 UTC",
+        "mint": "BDYQgba7FVBpqaMyMcLW1ENP81VEYwGfCs6TsC5Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:29:36.000 UTC",
+        "mint": "DBDqhnAi5MjaHsk1JyUonAtUUrmRBJPjJi3GdiBLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:09:51.000 UTC",
+        "mint": "6rVyjXKUddKUxAvp3LjkLAXcUgK6NPDw9u1fFXXNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:22:19.000 UTC",
+        "mint": "HbLixxcZGoxWFTs5wJwKi9hn2hPZHFAX2FhH9MzDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:31:49.000 UTC",
+        "mint": "h7Gdn6ag5RC27CSnhWPGoauvcomJxo6keC3bk5Npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:34:30.000 UTC",
+        "mint": "4ULZpBddAcZBZMVKrdrRpoFWHkwz2vv4Sog7kDFmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:36:07.000 UTC",
+        "mint": "GW6PcFkbMc9KYAzkS9wCs9RTMuTNnGdHe8iJLJuxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:47:10.000 UTC",
+        "mint": "6knm51XWABbxaY1AotoExKRDmugmHtHx7wjLJej1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:39:24.000 UTC",
+        "mint": "6oAstWP1FqR8WhhL9WSUKr2SsKzDHGJUyfJft28vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:44:09.000 UTC",
+        "mint": "8hxwxk7PA6YPyHFK17uuwoZ4HEGnp8d1EVG339Tbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:48:31.000 UTC",
+        "mint": "gu9nXeH8FRYu8gMYBiU9Q1i27V2Udp3725GVUtypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:14:28.000 UTC",
+        "mint": "e8sbfYwezgkYmoPW84vvwReNsiMsHVttcgp6VtVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:21:15.000 UTC",
+        "mint": "9HGs6PSgQRaFsGkJL4mJH2844JLtJbcszYXk22z2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:46:39.000 UTC",
+        "mint": "41x6McCTxfvcQGLWTDq7NAPBpE2LY5KQ1wzK8qw4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:05:28.000 UTC",
+        "mint": "5sjHHBmUqfZMWjXqR139SKEf1qNt43N4SSwuyLyZHqsq"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:23:18.000 UTC",
+        "mint": "HFoDdBLPRj6kouCUTuiykPxVwJnf5wenaBjGytGnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:38:50.000 UTC",
+        "mint": "BmNBBiFP8d5VRNN3NBPtjvTwfVYdvGf2jkgMottepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:43:06.000 UTC",
+        "mint": "T3SfQYKfbYEHrAaeXKnmk7n6tRjccypZx6Cu6B6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:47:19.000 UTC",
+        "mint": "sKPu5RjnE1hVNizY7XJ5BEF8XnQDx6h8ZbucXWjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:07:02.000 UTC",
+        "mint": "4D6EbQYYtmdDgmQBKC3kJmP7y6xTtsR77LQC9rNKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:29:21.000 UTC",
+        "mint": "4wcodYew4VPX9uigRD1zFCLFcacAXGmobew2vpYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:09:08.000 UTC",
+        "mint": "6dYjtBu5Z8z7V11Nw7THghWG6oocoGcjhGByEcxRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:20:37.000 UTC",
+        "mint": "oCMLVBTCxWYxCnhGwGGUKpK2N5VRZ8mgk4zrM39pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:40:42.000 UTC",
+        "mint": "HmzzfnybLSjsMnHj6mW6q4qRsJ31kUSCVxEnfLpupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:57:53.000 UTC",
+        "mint": "6fcsAeq8HqYE4YdZ7Pb7m929pNviVyLvfcXrGkjVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:17:57.000 UTC",
+        "mint": "3MUp2GY79dsHXPEEvKjoDX7kVMSohEFdzNWBT4Pqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:53:26.000 UTC",
+        "mint": "agsxZ187nw8QJbig5R8KZ34znRantEfmtWLfpRipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:55:49.000 UTC",
+        "mint": "6TcFmwbF97A9t1rrkQDoBURM8qpqnCAMnmY3QeLcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:55:47.000 UTC",
+        "mint": "4QZX8j1fzUGnRM9u6iGU2FcycxqDeYhCwck4qFiD6i69"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:10:48.000 UTC",
+        "mint": "9WpnKnWHg8cX6gqPs8acK4AJJBrZRF6vJGFP1cv1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:48:58.000 UTC",
+        "mint": "86s3ue1MYMkFfC6vEWc7nASXbx8Ayt5xAHS9o7XPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:46:47.000 UTC",
+        "mint": "8G4qECuauDEknPmkGdq3t8eDUeEdkLJZJmnKvwpKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:42:10.000 UTC",
+        "mint": "Hb8kg9WAs5HSTVriT6djhiyH8kPG9aZGj6vtW6c7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:01:14.000 UTC",
+        "mint": "GDnVxR8XQhbzy9XtiRaRYboi591jeWsYcbL5PWUspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:04:57.000 UTC",
+        "mint": "HiEtnqDJDYK4TYyriCgzuWasrv64CdbzaBDnKsDqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:07:11.000 UTC",
+        "mint": "9kNQYTjqm7qbqu64xJg8wRdny3HqkYj9EvssRMvepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:53:03.000 UTC",
+        "mint": "HhHaXjwwFeam9oGC9TsTDjr1JuiRtxj6KsTkVmopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:55:00.000 UTC",
+        "mint": "8RQniNaU348sKHap11zQWWSh6WfDgWm5GbEMjsVRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:09:01.000 UTC",
+        "mint": "3PYTXdqKZQFt5gmSWMBFuZuLB6fHz1jyccUc6qYPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:20:37.000 UTC",
+        "mint": "rxBPswNw8RzuB7BP96pDkXMDyhy6GYiJdQzQN1tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:59:00.000 UTC",
+        "mint": "97jCC4dL3ceKFqovn3gPKApKQ8hUYwJmCUV3m9d1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:06:38.000 UTC",
+        "mint": "687PSdX7HXTZs217cpEbmjAmJjhxpboeDXZoNdnvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:05:28.000 UTC",
+        "mint": "gtDCkB3yNu6c47X3NbiuMv2YQoDJeyG1PaDRoF9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:17:45.000 UTC",
+        "mint": "2z3RRPjV9JtiF6cqAtbEKqHcoUkBok5QnRG7tcYzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:52:35.000 UTC",
+        "mint": "Hi9dQgyxzo5D1HMCCFMyW8xmQUFCYE7ZKjFN1S2npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:28:00.000 UTC",
+        "mint": "fN367QrqSAYJmsiXqpE9Yor4Xg8PAdxU4FiquRSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:37:42.000 UTC",
+        "mint": "EuJQQvLVmD9mrgaarJ4VrKumA58rBuxhmvqi9ecopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:22:34.000 UTC",
+        "mint": "BbLCZWvfxctUiARyQLPMpvV7eriqYhbtCArYsFampump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:24:18.000 UTC",
+        "mint": "mrp4JM7bndP2znGBiQw3Z52btcc8ssbdJuj6ow9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:33:26.000 UTC",
+        "mint": "AMBCpX7QcfJLJGaNYQMg1Qd14GaCYkRTgH6VTbkopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:24:21.000 UTC",
+        "mint": "wBNswK2HrB93PDqfYhgT9LS32BPitPsFwofpcHkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:43:08.000 UTC",
+        "mint": "uw1YMgpNGShLJsH22FDVYpz52dTqDNAFe7meep2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:56:04.000 UTC",
+        "mint": "CeXHdJZEPDCtERwUtxWmVKB9HTAZi6TKYacraH8Bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:14:16.000 UTC",
+        "mint": "9p3Qdao5WvN6GQzTHSnsUm5dKvhVabgTzHav8U9Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:34:42.000 UTC",
+        "mint": "7fcuQtnZgrHS3KeW7VserZ6L8kZfoLH5KcK7J9Axpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:59:06.000 UTC",
+        "mint": "498oEY53zcguYcwh9p9Dqn39foB9BpkzZYJzpotvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:40:26.000 UTC",
+        "mint": "B9otrSsfvis9QkgLK7die1tEWzGG6vVDP1aQQvQ3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:44:49.000 UTC",
+        "mint": "9vmF2ZH5gYuHh2fY5U9rPj5EWNk5eKZJwTwkTQvypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:31:41.000 UTC",
+        "mint": "2twMhuevyCckecPLfR7M7SDk5qv1GTE6yLno31yxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:08:58.000 UTC",
+        "mint": "4vRut8P189tGm8xvsRoV7k8GtjWjW9SPPRQTuxWhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:16:36.000 UTC",
+        "mint": "CFaaczcAZADbHqsBY7Fg29pqmXMogma3phyUEQXqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:19:56.000 UTC",
+        "mint": "4gSvdaEcEAToxJLcZiXdND2itMRkQGWWKsATgSVKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:22:09.000 UTC",
+        "mint": "dqazKBQMbXYtwa9vhS9aBND4CzxijpvxXAwgWzWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:53:40.000 UTC",
+        "mint": "AcjzHAxC994hS2HgSGGjdEsWk775HcsFTBcfpWsrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:11:56.000 UTC",
+        "mint": "cWvzpMWegYJ3Gg6ywyppH3hbD3UfzBxPUXiBu1upump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:41:32.000 UTC",
+        "mint": "G4SXoyJXz24DZDe6apM5WxjcNw4kyY5PuC8prTjTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:13:31.000 UTC",
+        "mint": "yCuqcFdYzHgrRPUypbD7Ra1kYmRRoLRdVV9FQ7Hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:17:39.000 UTC",
+        "mint": "dMxx6sqfB3LybfnX8QxJddqCbFYb7ugjVXFXZhypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:24:38.000 UTC",
+        "mint": "GFbDjkmKdXQ1p1jpsGaVnQt6Vfj7AHnwsKPyfJGxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:01:35.000 UTC",
+        "mint": "6uzpb2WdSqs6ubDnenHp4pX28SRScNGvFuSnUVitpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:13:34.000 UTC",
+        "mint": "nzZKJkBckdexWEA4mEXGsezVJdkh7vgZpeNG6Mopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:18:02.000 UTC",
+        "mint": "A4sbgGpXDj98JjPK7a33feooAsSsaJqxDz9uh6Gapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:38:25.000 UTC",
+        "mint": "eStaCPtdycfKVugFS2VYt35aYouRGXhUozwZZ6Zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:59:36.000 UTC",
+        "mint": "Ez37oD4EB1p98sbu5ZAoLeocw5HNYLKDy8DDsiZypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:12:31.000 UTC",
+        "mint": "HDAys8iAKZt2WSwMqjMYvo2dwgjXea72VXGta4TApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:20:32.000 UTC",
+        "mint": "2GaeW8wL4aDusFu8FL5or9MQ75nH59AoVfkQxatppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:24:43.000 UTC",
+        "mint": "vaWWiTPf6Zqx5d1SeJ6NEjs9bjQnfCbc1E3hzUDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:27:33.000 UTC",
+        "mint": "3hguynb3Vj7wfJwvqY4s265iBRCFr8GeQnn18PT7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:27:44.000 UTC",
+        "mint": "GX98Lc78erykCDrzui8bKGg3nJjwGNpXzKCfe8jppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:34:51.000 UTC",
+        "mint": "5873gogGzsyF6fxxQUU62VkubAJHCaRb4b3R3m5Tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:42:11.000 UTC",
+        "mint": "ER6FcZcRyYBrk7Vyri6vcMf6kKCbff834YgDHmfrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:43:31.000 UTC",
+        "mint": "DTGZi4cq38m37ieP1fSXirtWMHkgazTLVRiqz2aTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:15:18.000 UTC",
+        "mint": "3VHEtZ3T6vAVBofANZT5p4M4azdAWhhAGyvZ7WTBQCdW"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:27:05.000 UTC",
+        "mint": "3sdiLCprDb4QiESa1EzDNhyCJWXLS17ZpRoSa2expSYu"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:04:14.000 UTC",
+        "mint": "ZSnJuSEhQfmLucdHso4a9KTXcAtRK1i4iFA4xLwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:15:57.000 UTC",
+        "mint": "5bTDJ9RjV9m7K3FcU1ThyFv3TorQ4cYQN2djZ7kk7Ffr"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:33:58.000 UTC",
+        "mint": "5FLceeMNv5RP95UDwS5PaaiEFq4EC3tRMtyBJ4xEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:01:45.000 UTC",
+        "mint": "67a8DLde3ywMzXuoqVw2up6jrMnYBKEn3BofeUUgisS9"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:10:43.000 UTC",
+        "mint": "EjM994vJkBirz8KezPHyVE2GzoeAAXZ4DGP2v44Wpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:19:36.000 UTC",
+        "mint": "AwaL6pzNZQCybg61d7uvKTYNw2zeo5YRr8BuigMrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:25:44.000 UTC",
+        "mint": "vJx63Cx6pikPvLvbZu5AmHN69fc8WpbSWHJx4SZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:32:46.000 UTC",
+        "mint": "DEHgMZ47Yvw7qDzU4uebcfTL5eswt8j5LEXU89cxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:50:39.000 UTC",
+        "mint": "9PngmHTmYVuBPnerrBbguDNUQR4o79dLrG1jSqRCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:26:29.000 UTC",
+        "mint": "2XhK88xHnrFQJMiJB8yJDVsLGNKFuDvyNGoRmg6jpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:50:08.000 UTC",
+        "mint": "2kt5fmGqj3nVcGzFJPFp4Bvk6k9RDvyXBdgZyPT2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:08:01.000 UTC",
+        "mint": "qQ4RMfB879vJUevux7J4vPXZtFXCWKrjzJB4rvBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:16:50.000 UTC",
+        "mint": "fahC7K1LAbjDN5SrygJQLs9ST1FU8qMQUhcngxPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:17:52.000 UTC",
+        "mint": "CB297ya1tJqDewutHBtwBbqLGNxJip7kcqSVatcjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:41:55.000 UTC",
+        "mint": "8aofhp4XKK8aqLJ4FiGdcouGU7rmvEcrwSoRJYqWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:54:51.000 UTC",
+        "mint": "eKXPiPR9iLVsCqn9hjwXC1vPWCc4bVdRrCB3uKnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:41:47.000 UTC",
+        "mint": "2n6nRxQxXCXFZ3twAs6pnQtXhd3hqcByGzUiGXPfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:49:14.000 UTC",
+        "mint": "2s2Gnsnu8UD6RZJnfFChj3TjBxXs125PYKcTTTtgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:52:31.000 UTC",
+        "mint": "FxpNqoieh72Kc2hX2GXrLvwGrdaggQfsGZXSAJLapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:55:53.000 UTC",
+        "mint": "BiVhnjsDAQoDL2cELgckxhaMsybQKf2K5AHCC7PCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:08:18.000 UTC",
+        "mint": "CYhCKKsvYLkqBJi4cr4qzCuZ6Gq6BqjpjQGyTZKmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:17:00.000 UTC",
+        "mint": "9ejN1aLT9itmwftrkc1HJpxDHaHhpwCiVttPhZPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:29:08.000 UTC",
+        "mint": "39e5RmoiavhN6Xhcq3bp1YUdJhPjhCwFn6ij146zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:00:28.000 UTC",
+        "mint": "BrUW6d2hjaMMQWhZiim9JwQBzoLFQaYF5jEhxcEypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:04:51.000 UTC",
+        "mint": "McbTQ3TyMj8U4eU3mgH8qXpuoyfXAV4C4Wbo5fJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:35:53.000 UTC",
+        "mint": "8iTEqTLDuhkGQ6JpayqBV1enC4i4xvBgB8boJZKApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:49:34.000 UTC",
+        "mint": "7bVCesW5dFwzQCSxCLVFX3qVVifzBZ2f3MKcPYcVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:50:26.000 UTC",
+        "mint": "GEdXZma6nMMbGNvjBwRk35KmAbt4fVMExDt9NkWtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:50:49.000 UTC",
+        "mint": "t87cw5FB7LZW6do42tTTh2x3azycRumPvk71W57pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:20:46.000 UTC",
+        "mint": "9oNfjuKXMaVt2DzFFkdPCDLZhMUmTwRhiEjBeHtvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:23:26.000 UTC",
+        "mint": "E3ehmALz8UDnBdKLpEuWzQVV4mjCaAwuvQozJC3Hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:36:24.000 UTC",
+        "mint": "53ckvymkzXyh8SaMWgrXUZXjW2tL2ncbW3drTL7ypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:38:35.000 UTC",
+        "mint": "XkTApk3aoiQADjXnYecrs5dMPSX85qS1dDW3ycQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:49:12.000 UTC",
+        "mint": "2q7C6Y1TY6qSR7rghHXKUSao46m9wX6XNbPuF2D1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:59:24.000 UTC",
+        "mint": "C48RP27Z979NJkV4PZFgeBhzpupXcu1M3EmMhEexpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:51:39.000 UTC",
+        "mint": "z81tERUabaCjSYewmu5dSi4oydoSJydaNbBp8iMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:51:55.000 UTC",
+        "mint": "2DYBKZzjcsaJg7NBq2aByAiNRj3NB1SJ5ebnLq81pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:56:56.000 UTC",
+        "mint": "7ChBF8YiLPPqZcyRBuQ4QtyDPZUTcUexDr4HBTfjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:57:19.000 UTC",
+        "mint": "vaemjcQUJJDizC7p5nDiwzQUJ1UgcSi6r5bhS49pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:26:35.000 UTC",
+        "mint": "2gnUZ6cnwWozEXrVDJRVWsgwx4Dpu856bUrAqFNapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:13:46.000 UTC",
+        "mint": "rDBVm7zgbtimwoThN8BXuDS7R5QGpewKM57Znpkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:54:48.000 UTC",
+        "mint": "iWBUfQcNZgiUPZKCkAeoWaWVGr3PrJy62CHqoL9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:58:13.000 UTC",
+        "mint": "5GbtX9i8D6Y4noW1RTeWuBggrLpwQHTnq39JAiVGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:23:12.000 UTC",
+        "mint": "LYFtxVQVdHNzS96azFJc6PsFiks7xH86JXQJnyopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:46:46.000 UTC",
+        "mint": "A4j77ZgCEW3i4k94jBDQY5XwPikBB41WYi2vCQqSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:14:03.000 UTC",
+        "mint": "Gjs2FksG2Y5bSXD7ezeQ5NVHjFETAjkTx8MM2WYYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:30:45.000 UTC",
+        "mint": "vAXwMJh488eNDzdS4wZiPFKm21ookjLy1WVC1AZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:46:56.000 UTC",
+        "mint": "aRBUPKhSbGVxhzRvC5Tk1fVNokuDYpz3UtUGb3Xpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:15:20.000 UTC",
+        "mint": "AetwReksXD7yHXm67rz9PvLbL9dGvNCbyxor2bjCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:15:29.000 UTC",
+        "mint": "C8WzvBhJF4aWxBoB3MfmRSJkywvfKayhrnBhtXavpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:32:54.000 UTC",
+        "mint": "8vdoNCzNf4xwFLFrtQTQcj2PViAf1huccMUKRfV6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:56:02.000 UTC",
+        "mint": "Xoa5SXWyMSFkDowQ8bRdRQ4uTU41Fi3jXSJgZ9Upump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:30:38.000 UTC",
+        "mint": "GHbL2PEs8tqfaZd6nebStHcojzQyTNkJ3dvo5bHJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:32:45.000 UTC",
+        "mint": "4vuzQs6BKH4XKKM2QqQaLSfjzT6asx4PGv88jX5Ypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:58:31.000 UTC",
+        "mint": "2Hdfhs23yRmJ9Gg1dqtaEsewaeYhXtq7kT7tNT4Spump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:08:58.000 UTC",
+        "mint": "naMVKzLsLkQ96e22FdTu7sx6c57qcTUrmciusxMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:52:06.000 UTC",
+        "mint": "3HWPGBMo9X3UnJvYsD7piiUjPig3m6XHajzBCDdCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:15:44.000 UTC",
+        "mint": "wQhUuD6jgDVhjY8BTE6Q9kcPENFdKRnA8zhvCokpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:03:09.000 UTC",
+        "mint": "2G1zPTtQrBoCSqp7eEG5iy6fibX51p5idi5M6ks4WeeK"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:40:18.000 UTC",
+        "mint": "9yKZs8EPvwna4RunzTuYtWzoR8s6MhqtYDYp8kakpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:08:27.000 UTC",
+        "mint": "N8NkyusphF4V88Wxj6cxVmz9BhX7G37e7xSjK2xJHK5"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:22:50.000 UTC",
+        "mint": "NH6QPw1YmZUSc42a55yqF1kg5DKRgxZp7aQosVapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:48:53.000 UTC",
+        "mint": "CnaJaA9yizi6VuF63hgP5eWD4WrDiZnL1tbjx4Erpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:52:08.000 UTC",
+        "mint": "6zbYeyBbr5hjkPrApW8QDBstMuxbRV8zMP9cYeUwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:57:19.000 UTC",
+        "mint": "8qA3pCHsKgAgSBNySbenV5pRstgcUanwoopngrKJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:04:54.000 UTC",
+        "mint": "AicrgNsw4GZwn36MXS3UGqW9w2ZTexSgGx5VpYL3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:14:46.000 UTC",
+        "mint": "z9ciZC5fmNLvZTvQyoLKCUYdc2LenjHugd5EEA4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:18:02.000 UTC",
+        "mint": "6TasPQnBQPY19kKi8ymTnsP8C3xYRo3X6sj5bXz6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:45:35.000 UTC",
+        "mint": "2qfk9kiE85RPmroy1Ep3iGdHZNRcnGoUwuepr6Jfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:46:13.000 UTC",
+        "mint": "4DV8SDDBb9Ew3Soxz3q6NhfQKWmtS9U6nwofkKPrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:45:00.000 UTC",
+        "mint": "2Vd42YA9Tmszx6g4WsuyhKyZe9KfAVT8eXaBUj15pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:02:21.000 UTC",
+        "mint": "7derokLDpd7zRVjbJHJtKQf1DF7Tp2fpUNTCLz1mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:00:57.000 UTC",
+        "mint": "3846eC2Mcvh7ujMfW7LZ6gktYvngiG7TzrpzGcfGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:47:51.000 UTC",
+        "mint": "ABdGu4xxXyd9VnNTKCUzisM187JQ4WoWKwQchaNkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:06:20.000 UTC",
+        "mint": "8XYRApVZHr4trUzvYt5jgMK3Bz4WtKTbTWiVvwxapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:11:03.000 UTC",
+        "mint": "29p5Cca2MiiKMF8a1CKqgEjVT9opPNDKZNPf8p6Gpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:13:09.000 UTC",
+        "mint": "AM1LmVFyfgSiznsxZtji1f6vY393auRn7GWRYfmepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:36:05.000 UTC",
+        "mint": "G8mDdo43KF9epa9VyW76S3XHgKp4gNtEhUiZ37rwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:44:41.000 UTC",
+        "mint": "DJ9Nx77b4TYKDUsMAeac6qRgxBf9U1tMbu7CJNorpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:16:20.000 UTC",
+        "mint": "3KBvYF7TC26DBn4vpCnVVyXn8JUZjtN3RKUJhU9apump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:54:05.000 UTC",
+        "mint": "F2XtKf8zaCuyRRcKehLxtJTVtnKnGykTzdDvGfHUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:01:37.000 UTC",
+        "mint": "F3Q2fKpiwSRCayPv7AwCNfLGhBAhP2gWvLVsBmiopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:00:46.000 UTC",
+        "mint": "tHjoznhMLzUSeCvStuiqtHcaKy4gyCawd3qZfaYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:04:54.000 UTC",
+        "mint": "A13YMwfJyPLx2nHpz8WHXHCWUaVd4DK4yuXFn78Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:18:24.000 UTC",
+        "mint": "mB9aTDqHsyjYwvFc4i9vNFTN1EXfbCvgZWK9t2fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:24:53.000 UTC",
+        "mint": "Hsihya6sk6gTibEgtaBL3LAmj15PdYksZTq9aAPApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:37:59.000 UTC",
+        "mint": "6UNv1wWp9rVh8vpfLFLd4jSrDqRwgUENXtjW2MZApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:49:32.000 UTC",
+        "mint": "HyPToSznkvy4FyVUxTAFNEFkYGntpohodBTdbYRKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:30:12.000 UTC",
+        "mint": "8D3RCCwqTZeQAFoNMBJgZkBMj5zyLgt8FkJayrsrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:31:35.000 UTC",
+        "mint": "68fQfizTJeDWoBEU83GLGuGnNH7beYRNq5P4KCEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:01:39.000 UTC",
+        "mint": "4NKWq6enDZ2aiuP9UorNJmMu1n4cVX9eSiDmW6t1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:33:53.000 UTC",
+        "mint": "EDTQu1mL4vU4zJKmMyZZpMBTKSKc9Ndu3wdGPyyPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:41:17.000 UTC",
+        "mint": "5pG6AmVbv65MkQLMwaTcCQcuCYJ48c8bhq8XP8iRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:15:40.000 UTC",
+        "mint": "iBuxd5tPodcUzx3Qsip2uW1mozSkzE3XNU8JpX2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:22:25.000 UTC",
+        "mint": "AJkVALCwiHXTvAR7v8tcLiwHCUHAbFeKUFC7L87A7VUH"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:26:36.000 UTC",
+        "mint": "CYVXASQdg5TJcjfJWjey7uKMeo5X4XvWWoYpgRwgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:43:44.000 UTC",
+        "mint": "B1LQ5BDgkCuqdTwVts1t3qgYHVXTEpWaTzh3NYDQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:50:08.000 UTC",
+        "mint": "2pTBfUE2QRkzcGo2tiNESiYiYMcTtpVap9o9CKo2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:51:58.000 UTC",
+        "mint": "JgmPKcGQufisDNiqq6F1fjyZoA35oWPq3cQQDBZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:57:13.000 UTC",
+        "mint": "8BDdBMDDea8aYiJj79se2frHXkZFyX5jF9fUEgFTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:16:01.000 UTC",
+        "mint": "C6j4jTKAsZ6keCapQnfKGgED3oBs7ArNH5LSGR1Rpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:30:24.000 UTC",
+        "mint": "6vyMDKWfUY5V6qJzEyuMJShYgoMfKTXRjN4k2cYCvjbV"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:38:52.000 UTC",
+        "mint": "HHqxamCny8ZFrM6vVaVFPfPC5DLCzLGagMvAN3oRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:52:41.000 UTC",
+        "mint": "tEVqeapuvmGyimqikCW2xJZGV4BYHaukEUh66Knpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:52:14.000 UTC",
+        "mint": "Aiy7wYcXCLo39PfxECDT2RWwAYPmyv48P9K3QgUPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:16:05.000 UTC",
+        "mint": "NBTH5nLi8FDYPtxFbfonxzPVUbPMJSUqTPYYBbwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:22:04.000 UTC",
+        "mint": "7ggBxnb2aJenfvZo9WCjMp16TVdMy2FSrW5w9ry3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:00:10.000 UTC",
+        "mint": "CUFwEHj6MTc7BTXP25cqCAuR11qHrGK31nV9LN5Kmb3"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:23:37.000 UTC",
+        "mint": "bG9mWKPqaxH2m4XtE3cj76E6zodRbpp7wfdY8jKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:33:11.000 UTC",
+        "mint": "BvPMd2jgn7heU3nyj5FWMF6gTNpYZwS2gdhUjzNuRYPy"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:33:10.000 UTC",
+        "mint": "ABLxmJkHdZrEwN39EJ7VLErwcDSAsDSxD7ygs3mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:33:43.000 UTC",
+        "mint": "HunXod3QF2rUw9CrfRQH5JMhVvTfexfNJMkW547Dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:36:58.000 UTC",
+        "mint": "wYiw944wtkn3k3PM5RwiGfp63v75T21L7mx6KsEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:48:04.000 UTC",
+        "mint": "CJsL5Y9acGqVMhEeT9v6aKoTS3SxBWfMtFvZMNXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:54:28.000 UTC",
+        "mint": "GNHeoxsMyPU8WNouW29uxrS93sUF7XWrNqQTzp6hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:58:54.000 UTC",
+        "mint": "54S4ZyRzmdfWdFr3ATEpexNUdhHpARBw6HQJRZRapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:11:05.000 UTC",
+        "mint": "925phSqb5LFULiLbU6L8dUH4UiHYPewsdKp5xH31pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:55:17.000 UTC",
+        "mint": "EmhcMbo2K9hGdKysaPEYVdM8siqXiTjxJfXJG6qgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:34:28.000 UTC",
+        "mint": "xti44bKwCigfyVpjmu9vSXRw5iMap66prFo15Jvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:41:25.000 UTC",
+        "mint": "5FdmGf9ZHZSnQC2PMYL6MtEAR8x6cuuYh7KySF6xpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:14:18.000 UTC",
+        "mint": "EkkY7zvHyi55TMYZdybEDnafuwGzUBzTFWLw1YisEq5C"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:31:25.000 UTC",
+        "mint": "3bDqtpr8L2akw3SXyy4MDPwf93eCsyWTktgPMh1xpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:49:07.000 UTC",
+        "mint": "4BdEC6pzBoyvEaydZph5Erf4wzzBNBLogpSiZoPkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:48:54.000 UTC",
+        "mint": "2FVLthqJjaH52gWYiSQLCnh38GrfhuLaStv2YZeZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:48:01.000 UTC",
+        "mint": "dnqCUft1myN2edtvhVzrfmacaR86xsQmUNrdPCApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:57:40.000 UTC",
+        "mint": "C1Si27fjx1ScuwKqg91AmjmmsgXviRXiFu3wFerQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:31:33.000 UTC",
+        "mint": "2XsFJgP3MjrQ7ArswSyeWANT2TF75tNeCTqV68aupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:50:42.000 UTC",
+        "mint": "HHR2iKdGGrnaJa6vq62pbr1T1vZpPkskTTc6g3Tmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:02:17.000 UTC",
+        "mint": "4tWBynqpYSgzMBy8d9Aib3gLF7ckry3QnyuXa7Yjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:34:34.000 UTC",
+        "mint": "FaVf1iYpm35NwWDFrY4wgwDRfpR4tP4ViM85Z54bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:46:48.000 UTC",
+        "mint": "8bRbfxKBUkasDVV9aD7HD58pN8E27tnrwmXmDp4Spump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:08:23.000 UTC",
+        "mint": "A2EcYoMLE4cSeLiS683BFSJEaeS8b9g6MEBr3oSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:29:10.000 UTC",
+        "mint": "4Sg2e4QQCC44FqXcfo1Z3eZNdNFpjDfwymH1Vqr4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:37:10.000 UTC",
+        "mint": "DLdURY6wmqPb1GRuXfXHxrp7mhiv2dCi4T4SNsgkNqKy"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:41:53.000 UTC",
+        "mint": "6UHR1uZM6ejWB89tCJgMR6oSeg83Bx5y7njJTmAGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:45:19.000 UTC",
+        "mint": "2PvvPpL8Kx9WGhNTQnruPAg4LUt7prFw4P58wbeSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:04:25.000 UTC",
+        "mint": "GzuzkvcvK486S8APod7rxJB8bRQjL391rQm6rrV7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:47:58.000 UTC",
+        "mint": "22rmLHW5G7ajPzNsFe4Jy87qpN6S1P4sQrkp5cAQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:48:46.000 UTC",
+        "mint": "454bthyMVTjFoBhDTCYiTi8pTek64TbKPmK5BAUGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:55:59.000 UTC",
+        "mint": "Af1xKqRRnaxeRmTYdg6qrkDeFw6mWgfxZ6pMp8ALpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:06:37.000 UTC",
+        "mint": "J8weKmr9cb73dDfMnvLBZGahXbL2Pm7AAEV6FKkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:42:36.000 UTC",
+        "mint": "HqXAMTqWj1tx4pvTDgJS55s4N9DFuuRy3W5VqrECpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:30:15.000 UTC",
+        "mint": "2HEJEsuQpwUdpFYVPJjgkxqYQucnW5xxusjt6SbRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:13:58.000 UTC",
+        "mint": "8B3KkxFmpbtYcryqAYbQs3iac17ypyFr5PqRwB95pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:40:49.000 UTC",
+        "mint": "DZnddVMgy1P9v7pTdQZLsB41Pwfv8MzakzgddsUVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:53:55.000 UTC",
+        "mint": "zzTmmF4fncgfJuMYdGeLevWjuYVrhCA4qcz5Km8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:01:59.000 UTC",
+        "mint": "zauvJjgHyT13fzdF3ewKimGNLoEwfj3v6fZHxvrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:42:19.000 UTC",
+        "mint": "DKLL2pkbKpjMaoM3bJ8HymY3va2SAuxgfyNWFZy1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:04:59.000 UTC",
+        "mint": "13GijTxHhWHfFi6S5MmJEKFuJ3skH4CCatYtpYazpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:47:51.000 UTC",
+        "mint": "BrgRofJmH1YNCDnoEhW7pDAhY9mLBYTLWXMVYyYcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:48:59.000 UTC",
+        "mint": "FpEa84JqPWQAxRe9jqabL7C4ZYUyYuvSU8ZqYV3ypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:08:23.000 UTC",
+        "mint": "GpU4yiSziZomzHLLCTgdvA8s6Z4bGJrTLbvWE1Tnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:15:49.000 UTC",
+        "mint": "Ehg5JQxmxTw8HXtXPqHiEDvNANBV2GDWf3mWbonWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:31:56.000 UTC",
+        "mint": "v4SHCFBSmb6GJ15BRYETegLscvvqF3dfNi2sR6rpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:57:09.000 UTC",
+        "mint": "D8QKUPE8MNFMuwD6W1qV26pfZhWzz6HaZHHdxzCepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:10:03.000 UTC",
+        "mint": "BT7oRz7mckbAZqmmCzdMw2Kng7FFTAW4JJYWiZJBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:22:19.000 UTC",
+        "mint": "DPqHwp5H7qsbd5u6phyPkcf2KmwwsRuEusBCaRvopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:57:34.000 UTC",
+        "mint": "oZkqKQgkVnT8LpGbwWjDFzi94aFTDFgx58ezqhVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:30:25.000 UTC",
+        "mint": "C68zkDsoQFBnpWvgqkMixENKKiBiv7YHXgHSHTxNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:32:11.000 UTC",
+        "mint": "8ocQjg7Hb1cUYWxhWwjNi3JpUNxrFcQFHKDKA8M5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:37:37.000 UTC",
+        "mint": "GFBW5oUHN3Knygpv2rdENCN3t72Zq3B3UVfrYDLXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:40:12.000 UTC",
+        "mint": "DJHz7HYuKCSDwjyf8XnkGkbKN9Ed1anh3WKyCac3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:52:27.000 UTC",
+        "mint": "26YCVcKjpZUiS7ok7YZbGAZRzAgJG4kuqtzQuyQUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:21:47.000 UTC",
+        "mint": "Ux2sBWLNYCbdiH1kaZHybo4cUBH7nVVS7dqkA7cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:27:38.000 UTC",
+        "mint": "4kPWjqKy99Kodwfmbj3ZjRow55gGLjHeTh41EMgkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:41:00.000 UTC",
+        "mint": "8zcnf2DgDzJw5YHbQGFW5B5AR1HAcdCfeLu1dDCApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:41:26.000 UTC",
+        "mint": "7CDxfAhtvXKU9Egcg5vMmxb19ePgdfTGdL8e5JkFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:47:41.000 UTC",
+        "mint": "3GeobrutwZ1sp4u1N2Hrkw4nwYD69fe4BqgCjWdYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:04:17.000 UTC",
+        "mint": "CYAQyGC9Nc9RV5MiSiJxdE8utWZtdjtt3tKe1Uvjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:30:44.000 UTC",
+        "mint": "5jyTRYHHbJcghnyRDSoNnWUakXKRhVtwcZkSn8arpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:33:18.000 UTC",
+        "mint": "3URpNcV9wAPjwMAyuBsPjwwkGN9wFJuwcRs3RMbdpair"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:49:40.000 UTC",
+        "mint": "SrAQfyPWszPu9cmSVfJa3CdRzmHFZJFxSZocLMzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:53:44.000 UTC",
+        "mint": "fHZQZqmgWQNv4jvrrSfUbMFAVpTPV8BN71ZEqLtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:15:39.000 UTC",
+        "mint": "4naQGXHuDz2zvziah5msSrbvbyiWiXvrMxyoae4Upump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:30:32.000 UTC",
+        "mint": "5jHPypcs1HR43fPyN3nfkhjHKdWmmQKCzF5z9Eadpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:18:45.000 UTC",
+        "mint": "7SXjDoLABiiaoTfWJDSfGcTzVV7ULbDV25Hba6Zapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:04:15.000 UTC",
+        "mint": "N6uyHTYUFrmFLgpVYTZdvezZB19c5qCNtR1hQhHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:11:07.000 UTC",
+        "mint": "4NjU6ZG9zZVWShPcKQ3jt4zs23CR2Esi7DUPXD3gpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:23:08.000 UTC",
+        "mint": "WQushHsturwyPZiWFHTdF62zykLUgaCat2Djyinpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:24:27.000 UTC",
+        "mint": "5tzSrdSskDSnZjpSHuuqFGC4mNPfumrtDbJ97suHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:09:16.000 UTC",
+        "mint": "H3MFvsxNcm9YnVfd1devkCCE5GiKqYQjUVnCcarppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:10:50.000 UTC",
+        "mint": "9hH7E8bD6TS7StYnjf5GoEQUto2LRhDFH5hGf26pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:19:29.000 UTC",
+        "mint": "9qGELfyPYgiJoj9SCEHTprEPf2zxNYw7hBpGb4fupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:47:20.000 UTC",
+        "mint": "4PLyAxMinkowH7QPfmk4ZqPXC526LjhhC5wzFTjspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:00:21.000 UTC",
+        "mint": "CEe7G2hDFZafvwbF8nsFTZrn3SvGUWFoBoyGtmXVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:32:21.000 UTC",
+        "mint": "8M5Q7y3wxjjf1RjECsXGJBFUmfAiSJBYtQcQQv3Dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:06:23.000 UTC",
+        "mint": "QtWEJhotYwdWgVXToQoGWZsnuA2VmLaSVLDMz2Upump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:10:37.000 UTC",
+        "mint": "76P3Yj53N2n7A3cV4jijRqKo7Pi9ZTco2Y2JXcHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:20:45.000 UTC",
+        "mint": "E9E9RFMgoWVmQbcaCGhHy5qUR2ebKokwrrtQS64Cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:25:24.000 UTC",
+        "mint": "N5HkgiXrHb7rGw2FnD4zjGUVfo5SKaAdY5UCy9Dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:53:57.000 UTC",
+        "mint": "yic34a6kHU4WqKjCvWdcc77h4aGUPJcMXrDUe8Kpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:08:00.000 UTC",
+        "mint": "13iPjiYvJdQbJ2NBahQhQeynEepK1MusBVU715VSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:20:30.000 UTC",
+        "mint": "A9cXx5AAmDFdU7t8NSHK6gEqemZVX5tAgrhjTxZUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:43:33.000 UTC",
+        "mint": "HhGTr8Z6Z7XtEAPqNcnLQsv1sFiVtrG2UApE3aCGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:42:50.000 UTC",
+        "mint": "hkQoguKqcBVP6Uj3B2gP2FaTUS7FAWBcQBaXcvVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:00:03.000 UTC",
+        "mint": "bmq5HwpbS2aX2CMqU6PPHswr8YJw5ddMaNcaM6bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:11:05.000 UTC",
+        "mint": "3aeMNLtWxe4yvUg8ocitZrB8oFoVFeS2EGa9XKZfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:24:31.000 UTC",
+        "mint": "mSEHSY6T9vYyQNKuRDsf591ZDRCj9NSg5HZuK8ipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:33:03.000 UTC",
+        "mint": "85zNoV5b7XDf4uQistn7nNmBuFjuMzBzNWSGDrDGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:41:56.000 UTC",
+        "mint": "qom7xBfrLcffATwWqtBWa9786U8M7UyBZrmLicFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:56:01.000 UTC",
+        "mint": "2TTE4VS32LuXkoz2jQgKmz9w29EspXKFytPg7wHbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:59:13.000 UTC",
+        "mint": "DT9gFviJ5Ksz6g34Ch7FrP3qvcF4Gz1NmCGQG4mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:30:13.000 UTC",
+        "mint": "6QnCcnYzj7xCSHBY8dNAMCb83ESVddo8syoTckZopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:33:59.000 UTC",
+        "mint": "GXVMbkCzW699wyPUgy7saPzrQ9V8HzV17whaSKHWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:47:48.000 UTC",
+        "mint": "8BVkRdTV4nJR9aUXDMQeQzZmJFiBEpr5g5qzKfnfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:58:58.000 UTC",
+        "mint": "4H52B8Ja7VnGmeEnLgddpW4qtALTtVpz4QQTr39apump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:00:07.000 UTC",
+        "mint": "JQwFp7F7kXgiCtKJeUgqXE1LUTouJiBG5bnXdAqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:00:17.000 UTC",
+        "mint": "2pwi16Jepton8ncLZ9XTrsB2c5R1fPK4EpdeKwrDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:07:35.000 UTC",
+        "mint": "FivjUwFh8jiQBFJ6u6kphb5yLVcwZ6mm8mB6S6hgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:24:52.000 UTC",
+        "mint": "25kmbLFnwDMT9r9KpumvfhD5qLV5pNedP3xtm3ptpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:24:20.000 UTC",
+        "mint": "8eTUowtbEoeTSNNEghSjcuS9S29bDEKZai7hhugNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:52:52.000 UTC",
+        "mint": "HeM3is88UqrLhATEdzDA91p8r61289BfqeBUGBkppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:03:25.000 UTC",
+        "mint": "K7DL7LDYyF8spd2FHSFs4VcuKBjkPjdS74b3RaQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:19:43.000 UTC",
+        "mint": "6Bd2opj5LteW6hvdJUjYw8SdfVQYAJ2NeonfgEHMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:57:18.000 UTC",
+        "mint": "FGrSXYbykayfr5eAYDBkQ3AcKRz352f61Sgh23Ztpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:53:46.000 UTC",
+        "mint": "8evYgncw2JHFA1m9Ax5ykp5U9uGPNkARWiLmmzbjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:57:11.000 UTC",
+        "mint": "DNsYAmAWH7JRifFUjFuTjA33FXmSmQFPQottycHMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:23:42.000 UTC",
+        "mint": "5FFdKSsiNmc6KxrC6JqTtSUsT7vUgu8ESJLK221tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:37:39.000 UTC",
+        "mint": "XiP55nXFLMPgzaBK7EKESPrghi27Ct4AmR8BcScpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:48:47.000 UTC",
+        "mint": "iJoVPVaohfmQijBEqjiXrAAkyvcUajj4zvnAJZCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:36:39.000 UTC",
+        "mint": "Cd3xrrhmCnEvNT3pnaeCJtSG9hrzthu7jbLJJqQ2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:29:53.000 UTC",
+        "mint": "9xkcrKvXcEFcxAQJJMY7ozzxFqZ1SjoeqzCbHNS4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:03:03.000 UTC",
+        "mint": "5Dx7TQLb2VezUNeRFMQg1rnyum6QAZktEUGHJitcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:57:45.000 UTC",
+        "mint": "JbrFD1MTrg6xPejpaMt84Ge82uUyYrwtXf9CWmopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:41:15.000 UTC",
+        "mint": "fXeRS56JmNqi6TWLTtGg1CviAf5T1UtiCKj6Sybpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:45:56.000 UTC",
+        "mint": "rtDexkbJsVqVTHUJCAXqiVBHXfyQSZKFXPdCgVmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:27:58.000 UTC",
+        "mint": "9Q7rxvjJHJyn25MTMAkzd2vKv4vFe8TeARp2Dgmapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:30:44.000 UTC",
+        "mint": "AxrRVydXi8YGVxAi6w6aFkm6BxFrXYrVrLtpcwakpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:05:08.000 UTC",
+        "mint": "HCGjWQ8g2VB2ah8vyufj7kZbRajeW61hW4gAsuUM4yNN"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:58:12.000 UTC",
+        "mint": "2XHFML4GZZdPLCEEPD36hoNn6nHjezjawP3JR5sapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:21:59.000 UTC",
+        "mint": "9u5zrvovGd5RJx956KqozMqKQVZcKbC64ynnKb7npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:38:16.000 UTC",
+        "mint": "D4QVMAGGXUTGipUD1U2g4ATqRVsQa3WrPYFNSWSNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:44:32.000 UTC",
+        "mint": "mF1fj5WZzYt4kTEZ9jdrFMFGoAKHgFZswazGRnipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:46:37.000 UTC",
+        "mint": "4Hzvo9PRfaxw6wKmNonvnvMWTNn847fUmcbXMKFxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:50:23.000 UTC",
+        "mint": "kZbqhbCGykGwG27AE8o7F8yhuAbbvwv4rUc1N1wpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:10:41.000 UTC",
+        "mint": "fujSajjqXw98hebGZQbgAtXAsKsp8qmwQAp71N7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:15:11.000 UTC",
+        "mint": "Ht1uvfy81vX9xSs5EqsaU4mvppz5szcshzDbfad8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:04:26.000 UTC",
+        "mint": "CXsaMDnGGvEEmdLPLrTQqNxvF8wVjKbSbtSVFW12pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:05:07.000 UTC",
+        "mint": "bbPQFrxaJ36BKbgcZZZH7A3cvT3vcRexDJ4R4Pupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:28:04.000 UTC",
+        "mint": "7WT3kNNzQNMrwqceDK1ZX1zA6TVMBb5LUfdZqv4epump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:56:03.000 UTC",
+        "mint": "9kCaZtpCpyvUTRzj9tQWPAnwD8n8mrYsjiUoJucPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:03:27.000 UTC",
+        "mint": "7WyYhmFKsKLmY58Zo1iYMQ3VsLEFbRVR3pcsMeDXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:42:59.000 UTC",
+        "mint": "FmAruAJb8Z7wKduk6RHBTMsMrvM9r5kQVyBMEEipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:54:11.000 UTC",
+        "mint": "9FMW2rRswKNBah3B5s4XZfC6i3Q4A4JTM4KCxzRCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:21:20.000 UTC",
+        "mint": "GZ9266Cqm4h3xrHTqxG91CMVQxKWm9zBgFVguVQYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:29:01.000 UTC",
+        "mint": "72FqyGs9vrvvhLSqgTjgAu81owVHVhqcTrbSMTZKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:31:45.000 UTC",
+        "mint": "5QFiapNb9VoSJ6hGhSJ3gknWNsaFvkom766iqhYgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:55:23.000 UTC",
+        "mint": "G48yGReGYhevP9CT4Dkm5dbV4QHbrTWzTRjUrjsipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:16:46.000 UTC",
+        "mint": "6CP1MYPCkpyHypo4CN8Cxr7drCf8eWL8eMJqHtGmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:26:55.000 UTC",
+        "mint": "A1G94XrqfKbjsRp3NJAd8bsY1g3mjCEmLfb2VPiJKunr"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:39:56.000 UTC",
+        "mint": "8fULqyeK3wmDk8f86DmfUc7R4roBEPdndeqZNNnUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:12:05.000 UTC",
+        "mint": "Hz6BP2yABzwqYbPK8xWkVLZiFSj49AcjVJ5QWMZypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:14:32.000 UTC",
+        "mint": "SDbxhdgcTQdK8cuq2VAhyCgwjeV7vfAAc9r6z9Wpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:34:44.000 UTC",
+        "mint": "Ak16o28cRjxa1o4N2hwkW7DjEasvx8gHxFd7EyvNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:44:27.000 UTC",
+        "mint": "7ohbuRMnp4JotUX6wVRdFz721gFTbBfZW4W6ejJDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:46:24.000 UTC",
+        "mint": "uWzNbWyMzjSChj4cP9xiDvtw2D4sBJRgvtAWzh3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:55:16.000 UTC",
+        "mint": "6DyyBytv2U6Hrx6Vh1YjHRe2K78EMgcWNaD2fKF9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:54:06.000 UTC",
+        "mint": "SdtFCMXsRXo77YEtHdn16xisoN4ppq4tt8tssBEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:13:59.000 UTC",
+        "mint": "ApbMDptjkU8tJgpMZyQa1Uu5LUQv625wmufuhGzjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:32:25.000 UTC",
+        "mint": "c3CK31XqKALTynE8FVhcGkK7tmAEkHizNLDP1qTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:36:58.000 UTC",
+        "mint": "4n5SEBv4XPfrzoRRjvitZ5yMpFBmXfA1ugQS2aKupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:59:46.000 UTC",
+        "mint": "8nToXxkPNLuuBxVxeqzNg1zQpvEpmLmzXHnd1tWGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:59:50.000 UTC",
+        "mint": "SKzJmGeJ8VmAByGnv9turCbFWeNyn14FqkJfXGapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:12:06.000 UTC",
+        "mint": "Hki636yJfa9LuGfWd1URhBV2PvSDkWegGhEqacbgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:37:25.000 UTC",
+        "mint": "3vwPG6bJw6JFizdudKUwNyX1tMAjxAMJZVmgchEfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:44:04.000 UTC",
+        "mint": "5XTmMSjPWx59aWhh7UaWLcC2PB846D6XQAgkxrr1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:51:03.000 UTC",
+        "mint": "6o9jDAvvKmeRBFNyJ6yg3GBmWcTUnAXYdzrhm9tWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:09:57.000 UTC",
+        "mint": "7u2A3MNVbzDwPC4T9PQ7piMdR6QAnhuVhTrgs7Evpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:20:50.000 UTC",
+        "mint": "8hJJZvyPBYMQevychcx9HFvMEmptvxYdQJaoR6Akpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:49:39.000 UTC",
+        "mint": "F6EaWFBJR3u2u1MNqxFEkAwG6gXnChahvbLs1fCg8KMn"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:05:42.000 UTC",
+        "mint": "E3bmWpSVmTVNkEx7R18HrnfhpwHKhz2S5BcdGnknpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:07:15.000 UTC",
+        "mint": "Cz16BSzkiFrphuML6iKRHUdxhyxvvzd2kQBtLs3Zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:09:51.000 UTC",
+        "mint": "DKjf2J98TU97WEGc7MTipL1AXPzTUQPH31mg5HHZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:32:59.000 UTC",
+        "mint": "DSEifr62r4ojmoNsMucu2R47UWU9ypVHmVXzZNDmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:40:50.000 UTC",
+        "mint": "CXm4n3e5xKctjaor4g3H17Yje3z5RZV4YkUeFkafpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:15:49.000 UTC",
+        "mint": "GquBgZxY4YyKBCoStdASZCqnMWX79oPPEkZQTRJhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:15:57.000 UTC",
+        "mint": "8Nm14L6Ga9K9M4AURUzULvJfyCANx2h9VhKkqAMPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:40:30.000 UTC",
+        "mint": "2U1gXBFnQri7MS6CmhawE3S4bHPNrdY7uAzCkRs6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:56:36.000 UTC",
+        "mint": "hcoCh1KNqaYpUNZqix4cDJu3UBPWbaFKcVNCvbVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:12:21.000 UTC",
+        "mint": "HxxntkCPhwRgvY6EoVvEbQuSVnJ6uBANCf3RmRa1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:33:49.000 UTC",
+        "mint": "BeEffdaHbeBR7mES66H5DZgo38XMrPKsfw6R5rQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:47:54.000 UTC",
+        "mint": "oTLLRzvKaYAUwosgbtRTrisf82T4zJzfuqPhP7gpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:10:58.000 UTC",
+        "mint": "r9PbwV487YXLDg3SGCYo7QeDARQ3KCq4iSQtsS8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:26:36.000 UTC",
+        "mint": "5kWkcgQ1iKPLHK2MnYZJFdSagXU4PtA2geafRvNLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:28:12.000 UTC",
+        "mint": "GjH3ksHBh4TswEB1yF8qHugpKe6YhdS1c1kNxYkupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:29:20.000 UTC",
+        "mint": "YuiaWqVa9g7Vnd78CH74mVBW9yuAGDPAbttzVSBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:37:19.000 UTC",
+        "mint": "EppnwwtGxgPV7BeqY7PxdwunR8pi3wsYYpkFRxHNEXz3"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:56:38.000 UTC",
+        "mint": "GTgFvvPiuz65nFhK6ZcRzaQwsjjrx8PYKcfu2pN5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:14:20.000 UTC",
+        "mint": "Bf38qhtZJZYZAWn2cFWTkVTBkRiDTk775CHAbCUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:22:15.000 UTC",
+        "mint": "LK1woPUTkW93hqzQm2uuFdnZ2dhRtYUL2M1WUBspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:10:00.000 UTC",
+        "mint": "Hydhf1H5w7CVN2G4KqWGa5pvdmXotHxT5JrTPSNNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:14:57.000 UTC",
+        "mint": "Be8jZp7WXRH1Vi2GAzqJ3ZeDPeYkxoDjZkuAZwFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:19:37.000 UTC",
+        "mint": "5UsTNYvZRHTFEo5MCCeTCoS4LwzTSvUVLnUWg9yhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:34:53.000 UTC",
+        "mint": "G9bMWZ6UX5oyrgLRsSeQ8sL4zHipsmeEuFpLn2Gqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:37:05.000 UTC",
+        "mint": "BRzrN26AbjpDqYXiFFCnM3bDYVNjQfo9oB7PEHAABZue"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:47:29.000 UTC",
+        "mint": "8KVot6E5RJ6JvdfzhpU45dzo8BSdXDegvPAk8SvFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:32:49.000 UTC",
+        "mint": "1kebGNLFsdHSfdXhTLA7T6mAvkPu4GsExTCYC19pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:47:28.000 UTC",
+        "mint": "CxYEuHt4pkE4KHJw27rJhRittWdmEGgYoqjAxHbmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:56:25.000 UTC",
+        "mint": "A9fk9BfgXxvBMPHemUvHXSBWbSUj7WGLHy8g8fUjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:08:08.000 UTC",
+        "mint": "G3eHFFjNE9ymHZu9BvHy5V4NrosCkVvfq9YFsYcZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:23:29.000 UTC",
+        "mint": "8Eqwb8e9BPFj6am4B9k7mhWGZXw47GtEKGH4i8mipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:41:26.000 UTC",
+        "mint": "J9dEBUc9r533UoyG5zo9Tkvu6jgW5ZYkbcMcFBRPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:48:50.000 UTC",
+        "mint": "EX2DBDfFMAsU7RAkrDxd2FKRqnai18hJb9vf4EiVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:36:13.000 UTC",
+        "mint": "A8ks3DuTscBrEgxEt6Z9QoDjYn2Bs1ua9WHVqDmXNxKf"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:50:41.000 UTC",
+        "mint": "sbkN7d99KVytTBu4gVGEmUPnb9tbMVzeRd2rgPupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:24:50.000 UTC",
+        "mint": "7Jk3s3tmV3qBM6MqKauhDzGZrkTs2X6mw4mEKVYo61gQ"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:28:10.000 UTC",
+        "mint": "8BoL3aaXwpuiuMi7E8cLLJ46UNV646VgjM7EczQ1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:02:41.000 UTC",
+        "mint": "oeDFyZX2czG6Poc58wuDrfiWp8DemTLfj3pBfP1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:07:08.000 UTC",
+        "mint": "A9L5nuiXA3uXKRPFc4JF1Q5o1M4F19SDg5LEYPCppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:41:06.000 UTC",
+        "mint": "Cr8PocQiruXczQhzEjMXBeYAN6h6Mf2aGTqsaTHipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:45:36.000 UTC",
+        "mint": "F8UbJ7ymD39F4cQBw9onKNyBLAPSm9VVCnpivhbupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:46:16.000 UTC",
+        "mint": "8tgQVpcDqEUj41rhmDU55BDpRwGDxuDnLWJHcci6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:43:11.000 UTC",
+        "mint": "HtpQvS5dsdwvi2RCvGgSJb7zZc4wNHsJtD7zxg14pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:55:45.000 UTC",
+        "mint": "GRLLQJKRVWUGT2NWiQQUZrn1Nv43tEqWiatSuJ9mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:10:59.000 UTC",
+        "mint": "12A7ubK9nK3Tm7o2tdHPAFxtJ3sGi3WvzxWuZ4GQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:46:11.000 UTC",
+        "mint": "AaGMNYkXaNkcchQtac5EKManV2LCam6SFqWRc3gVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:40:19.000 UTC",
+        "mint": "Uq2oqfW6YBAThK8Pt2x8PgZtfPRrtSqzGc7uKaspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:04:49.000 UTC",
+        "mint": "BeEsw3envYayPeS9nLa7nGo1PpcmKkVK8Z7xdFtvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:19:41.000 UTC",
+        "mint": "4WZ8MiJW1zCLg4fYFPugWvZan3qegvwvodKmznETpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:58:52.000 UTC",
+        "mint": "aFKuwzZ54cZovsaAXbACpHq42DyDybnfR5EMAPhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:27:55.000 UTC",
+        "mint": "9GsXygowhsTXLEtNQWaRH2oqCbkWQRdeVxgQkmQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:35:08.000 UTC",
+        "mint": "HoDCFvq6PSZYfoKhHSjNtXPKQCcLm3EcRtUeay1Dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:35:42.000 UTC",
+        "mint": "5oVQ3TpSTDCSj9vkfjY5GwqbHHPzNP28AXrGk11Xpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:57:36.000 UTC",
+        "mint": "FxH8MaD9gUYQxCWtQh693N6Zn3uj7vLx7MmpTvbGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:21:13.000 UTC",
+        "mint": "7QX9SAnNALxcd9kUez8kfLn24QKE73cuWoXvXJ9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:40:06.000 UTC",
+        "mint": "DfYdiGcTrcvuLqioeUrUibhpuxGf7rtXmZaQTythpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:40:11.000 UTC",
+        "mint": "R2MCtq7rhW8ZmYcmFxyN2SnHHpBPFvnG5jM1yvLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:45:34.000 UTC",
+        "mint": "Z1rM1j6sFhG4XsGPDmpUbbbCy2LQPJvf1dofMnHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:45:59.000 UTC",
+        "mint": "5aaKn8bjgkcXjfov8H7xHxjHjHRgiYUB4ad9MQsFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:49:08.000 UTC",
+        "mint": "G73FJxCti1piQoMB5FLkXvtF5Ae6tvGpPUbaCfP5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:10:19.000 UTC",
+        "mint": "81tcz88Lm6xrcU7HDJT5ZBnxSPhFTKtjDfEAvj3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:30:22.000 UTC",
+        "mint": "BLmaMbYNfErSMboj1mUmT6Ng1uNZ1JKbjMTGvGdKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:59:28.000 UTC",
+        "mint": "CcytF4Hq9hLJcFeZn2NPGedJyvyNUAJDuHgWSaCUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:00:52.000 UTC",
+        "mint": "2LW3ox8V2P4p9B7UvdkaUqDKCk33feuMvEnEsr8hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:14:16.000 UTC",
+        "mint": "A3QXqb7s5N36jjScFzafsPig2NvvzfJuqpERktiipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:55:30.000 UTC",
+        "mint": "3coFBLantjJkMRmzaQ4znMQQzfqFYTyBeNhdXYAzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:39:53.000 UTC",
+        "mint": "AtPaGVpXLLKnqNFQ7DhQvYE63Ye1hsxwAc44QLT6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:17:00.000 UTC",
+        "mint": "rqDVukqQcbmZDJmU5JNiXQNBcP7p2koU5utHRdJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:28:27.000 UTC",
+        "mint": "Rrrkpp8w1YVS4rXC6sENkCxH5QBQvdntoBeQC1Vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:39:55.000 UTC",
+        "mint": "HmVNc3NbWiBCzZbT1i3iGG8iPQ2mVbkbEfpGUQKLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:18:53.000 UTC",
+        "mint": "7d8214ZtaHf3noCugTmLCVbXSeaqSLzKfDh7TVVapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:20:47.000 UTC",
+        "mint": "HJKCc6RuzMcXpsXH91hygvytbjrApBShQGDaZ4Wipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:37:18.000 UTC",
+        "mint": "5chdFnCi3pU5bKctVzjY9Eg8ZHHQHHBVRPMakdaypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:38:47.000 UTC",
+        "mint": "6So7vYgRXTF33wWQKp62WEQggtjCY7HifXLG2TG2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:25:20.000 UTC",
+        "mint": "APFgxWWbzyQ4mcFjDaZnp8iEcPE9NQBv5K6QWMZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:43:26.000 UTC",
+        "mint": "HU3fpjrM9eC4VgZaiorunXEKWoD69CbgmuJLQfJopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:56:06.000 UTC",
+        "mint": "2ZSMiyGaqUf8jSBar9QjNVYT2mSDFPW747KV5oCMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:58:34.000 UTC",
+        "mint": "BEU45PmLUNQ8vwVBoYax5ac4vQrqT5az6npQY7S2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:04:20.000 UTC",
+        "mint": "7HBCjyMj84PwZraqukU3ar3qb19oe6HQh6kpXHCMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:08:00.000 UTC",
+        "mint": "7VpaaqGFWc3zgPu1Q4af7FhgcDm1qnYN5NW86nuhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:24:30.000 UTC",
+        "mint": "2Cx4k2vSTpQMfbi8qDVW63QUQNaNVq6wFyJ2gTZTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:26:47.000 UTC",
+        "mint": "Do2enEoLi7H3mCpgPfZZKayDs68aFQ4qmnXSJjgHWVHS"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:31:02.000 UTC",
+        "mint": "2zMRPbXn6zeASYpru8v8HxWhAYVwwQXm4x38sfxhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:39:53.000 UTC",
+        "mint": "8XyWzVMKV1aqTKqaQ8su6D7oHGjvtvkJu599xLaCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:54:13.000 UTC",
+        "mint": "DgoyaK1pJCzCdNXsUwNPqSDPFyq1XpEDbcbJSHL8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:25:51.000 UTC",
+        "mint": "8JX17dfCRyBsrnz5vRU9ySALVqoPWApJv6hMaPh2McLH"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:28:13.000 UTC",
+        "mint": "BRJAgimzdaCsGxQBRQL2xkfgh593RUaerE26afAppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:55:36.000 UTC",
+        "mint": "vVjD8NA5PDpSuieofWKWpH7BcohBpjWo6BkXhjzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:32:23.000 UTC",
+        "mint": "EHzSp1MRcKXYmGhZHYEQAV9sgwGNw6ZU2KLiQ8nnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:35:07.000 UTC",
+        "mint": "m13zK3iYt15y1ABkRniYudNqj6UWZpkDntEGa7opump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:03:29.000 UTC",
+        "mint": "4XNpog6qeUMf5dJTsD52SFyuqjGU9VB7ztvffnb89sQk"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:32:31.000 UTC",
+        "mint": "589udk4a2tni7tpkyLkD4Afo6boBSJ5rSRJEu5dhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:55:39.000 UTC",
+        "mint": "E8MS8TpZqcqDjsCRjHBjSESeNGRDRK6fvL2CRBZTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:05:46.000 UTC",
+        "mint": "hNboYeqfnk1VuGUPDHkhEnmZFyXSqFk5HTZsXSGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:18:11.000 UTC",
+        "mint": "fSDKAEniyqsPDoHLvXHjRKsh5MtJXgCTN86PTMbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:18:50.000 UTC",
+        "mint": "Hqrqw5BgwyBTZX9R9i6LFrKJpHANGDm4XktXNasapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:35:40.000 UTC",
+        "mint": "MtdGMgmscZYFErZLwdsoeimEPxA4Ug1BAyLZF25pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:42:41.000 UTC",
+        "mint": "43AmvkNBdHaWSweAtRu7GiAyNTb1rQP9fBUG1ENSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:48:23.000 UTC",
+        "mint": "8hwA5PmpEv35GjVL3oetJWCejFUnAGZpFxLRXEt3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:16:32.000 UTC",
+        "mint": "9TCjvTFgbwJetcRqEkZ31EMi4TxCBmGJM38n9mxypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:18:50.000 UTC",
+        "mint": "FHqRfd5cynL3Mn3kADha86D38MtVWymK1HhrNY6Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:06:31.000 UTC",
+        "mint": "ECGNShoLBXSzut43MwerXPj1kZtpX4qwn8SVSfVMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:08:03.000 UTC",
+        "mint": "8nroRtupbktVj3QHsxmHVZhR3RY8RdFRoRJ9nxd2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:15:26.000 UTC",
+        "mint": "CiZxizEmVT17ZpXLMmvJL4cRgjpyXXnCxGa6S94npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:28:20.000 UTC",
+        "mint": "fnQHszQURoVveHLqwaHA3ZfE5WUFRVioRBdivBcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:38:47.000 UTC",
+        "mint": "24eRp4HGzJoEwv8UqcKtZW7mhwbexCLJcM8P7m8Npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:07:15.000 UTC",
+        "mint": "13Q4HJKLfV2sPfuSUUSUf9e6aKSVbj5AEuHLuvmWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:06:42.000 UTC",
+        "mint": "71UhScJFAJ9sfoXPv7E7uRVbkuFdxmPa4Viw384Tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:39:34.000 UTC",
+        "mint": "EgaiwstpogJH82P7BBoL4D9CJbSNcYrDCeFX8Despump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:36:53.000 UTC",
+        "mint": "EHpaxqVVjyyPt2cjfft5SqTkfaEjCF7RUCaFxCrZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:47:23.000 UTC",
+        "mint": "FETE16AhkRS9K2DsbcXfaSZhJupVVEsnkkJcbL4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:31:55.000 UTC",
+        "mint": "CNwnLWKWYYoXbwPQbyN4H85DN4VtX5y9CCzPcyWnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:34:16.000 UTC",
+        "mint": "3b7JjBWMUgnFuAZu9CWdKZsAEyNbpQ1EMF54aP6npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:51:01.000 UTC",
+        "mint": "2i5mDTX7U2eteDLRTY3AV1Susto9FUJ1iDRkhBUgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:02:56.000 UTC",
+        "mint": "ny2UESikJ84iZ3C31WjwndUPTqvC2fBSfDvGwffpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:08:30.000 UTC",
+        "mint": "bWSK2Fp3DCeHWPYgWNQcA6U3n4CXmNzUkGhL9ytpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:32:03.000 UTC",
+        "mint": "rpmekaQDaqRySDKX5CjynN5xE7ziXQu63X8JJFPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:14:35.000 UTC",
+        "mint": "Et3JHmAb4RHNn8qrgAztcXa4TjkAiVMd2SWWz5JCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:27:11.000 UTC",
+        "mint": "nHeYcfi1n5H38Y8HT6nB3vdwv8Eec4637erAVPmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:47:31.000 UTC",
+        "mint": "bGW2x1vfsJDsTvwYweEdMj7wVbiemfS6pFGGah6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:05:21.000 UTC",
+        "mint": "EENsbF92ZjHaWuAzw8KyD2njFZE9MPFGzUNfhsvZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:11:12.000 UTC",
+        "mint": "Fc7FAq8SC7u5i2u13svZrPpKD66gphQzjoxgdWg6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:35:13.000 UTC",
+        "mint": "4trq9hv6gwDFLFHcb91x4H6niPw6AXyVYH7WrNHrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:38:17.000 UTC",
+        "mint": "JDsS4Z36iGQYsMqRtyYSchhXYg4ACcnSTi4gHvbspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:10:12.000 UTC",
+        "mint": "2rmj43yhuCH5QGQvKjnrW6SnGCCeu8GD3qUWhFc5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:13:14.000 UTC",
+        "mint": "sPuccFoMjSvqiZaWcgNZMf5GxQUhg8foccoFqfspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:30:17.000 UTC",
+        "mint": "44CKD67meWvGTC8uExMDpmK28GxX8fr8ZXkizPkdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:41:36.000 UTC",
+        "mint": "ZsdbwNPbbDffBroSFzHWkCz9Bwzcg33bT6ixjwzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:00:44.000 UTC",
+        "mint": "6JV2jrkUK3rxf3oHwpD1BpinxkaJ5gBUoFQmi5czpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:53:17.000 UTC",
+        "mint": "DHEQfBqC5He4euxtUAPK92C7M9rZEetyPqVBUsSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:14:50.000 UTC",
+        "mint": "Br4YSmYf79XoKy6THTgWan2tHXigL93hPeFbyYcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:39:00.000 UTC",
+        "mint": "5cVvF5YpHDRkwsRVjnKhtzTZ2v9FqnHm28fraH1hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:50:41.000 UTC",
+        "mint": "9vs7z2FmYXvcF1865pSJae1qt9UetNQeGp7AcB4npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:53:06.000 UTC",
+        "mint": "G15cRQTokj9zqqxpNeLAGCQHrBjb4EYA8drWceZ4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:14:05.000 UTC",
+        "mint": "oog3DeLFXPGRnKTcXjGND73Hg25UxqoVzJgXfo9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:14:44.000 UTC",
+        "mint": "EsCnE5vrKkLMfwHxEbt71LuomYXcwhEJV3Qo1SMkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:17:10.000 UTC",
+        "mint": "8HuEue9YUkG2yqCz6CGoZhLzztCUQEeVvpTbma5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:53:16.000 UTC",
+        "mint": "882gLtVs62pBXc9Quw9E183B7EQnaqBs5gCjCa9tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:11:49.000 UTC",
+        "mint": "d7YY6mq15js6NVhgWHhNWuvRtvNTKkhhLXbAV9Ppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:33:18.000 UTC",
+        "mint": "GHkHWzkxN1wFG2yn6fytbEaPygbgRk43PMr6CWXnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:33:52.000 UTC",
+        "mint": "6LrNxzvG7KYYfeVZ2TxzDJU4Fgm6GtYvKyzTpMtHFCDa"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:56:50.000 UTC",
+        "mint": "7XVuTjEMeVdRLtEgJj41ZiJW5EaquqeJW8zNXjFDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:32:01.000 UTC",
+        "mint": "AWBrrXKkjFiHSoqvx8AWbGkGqyzGE7fDcMYaiCnppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:02:25.000 UTC",
+        "mint": "mhxBFVhMwTjcBynF5YFsrCzjHGVEYMesknJkGi1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:15:24.000 UTC",
+        "mint": "F2rJFKRNKLTNqx8MViRH9LZcPpAQKPhhJWNzj4ykpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:54:03.000 UTC",
+        "mint": "ipWHD2bDNtprJQscpC2T3iogE8tWu3f1f7avVX1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:00:13.000 UTC",
+        "mint": "7qsnJuQdWHZcmv3H9LcESqNAKZf6K3mtPYkYtpfqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:00:59.000 UTC",
+        "mint": "sUsBLUWh81NMm5dvdNu2kCp9ZoQxhRDkHPokVGppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:03:43.000 UTC",
+        "mint": "7xL7JCuiUHzSBhPm197Li5UcQ1Yxc5TX5vV4fD9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:24:24.000 UTC",
+        "mint": "CNzfdpex3VV7xnvzrPXrr848WLUD2haabxN4vZZkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:32:03.000 UTC",
+        "mint": "sw5BWZzmgT27BQMTNncGguBPz6T6HfxPjkAnrX3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:01:22.000 UTC",
+        "mint": "AJn6F1Bj8ovabgfJnyTBN7Yvc5WtL9UQ7JfGRKepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:33:26.000 UTC",
+        "mint": "4iAEpYVBayY25GqhDuuRCbPoRQ39gogw8jozCeEJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:11:44.000 UTC",
+        "mint": "4QFweysRrA431tYMPyHKqwPLnam7PBBZhiTLXFRypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:34:12.000 UTC",
+        "mint": "97PswhqvvAxRzbXQqSVGf9nAcfRrZJzY2beJq9vApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:38:42.000 UTC",
+        "mint": "Bjbm3ov5qNmCQzebzenSFkqHTDwbN8U6HUhQdhTGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:57:55.000 UTC",
+        "mint": "Hp2dzmvVTr1EuXxmM8k8Z1DAhTx8VSXAny8DQLp3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:01:54.000 UTC",
+        "mint": "4nBz25Nk2J1M4JMjdjE6VQYi66yJBtducUQTNCzSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:31:47.000 UTC",
+        "mint": "6UEsVvMuZnNeywMB7wQRLHMRgnL7xHLjHSyKXrywccat"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:38:18.000 UTC",
+        "mint": "G4V7NRXgEiKEYp8yS6y7Hfrj1C41mF3cmTB4fiGFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:53:26.000 UTC",
+        "mint": "AbGCa1neeXBQNQKe2DFyfdGmq1LDHZwYBw9jGHbjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:38:03.000 UTC",
+        "mint": "4ks7NjmACNZVr7xdQybLBtmgHWwZ8NSrPbTw2um6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:01:29.000 UTC",
+        "mint": "5mmJ7Yuk5a88oTdcdFRzVEmuuecpvnWvZ3KSCY3jpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:32:46.000 UTC",
+        "mint": "eVsTKC9SXCgAPcs9Ynz6vjGvsXbyAEefiFE8Bgspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:33:55.000 UTC",
+        "mint": "euFPMixwQGHwTiEJkNtLjpQzUiSyifH2HnihT1vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:49:35.000 UTC",
+        "mint": "DQTpdG2f2TQD9iXBr9oMhdKJ4kHQNjrxkWRb5Nmppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:38:26.000 UTC",
+        "mint": "Ar41cZFukRN4up5btdV2DN2yqmsu74bJjUMu4BNTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:49:22.000 UTC",
+        "mint": "41bP8aukUewf8UJGvrB1WckNcSpBCH55UjwuveD1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:58:53.000 UTC",
+        "mint": "4vKMFFXhGv1EiH3ozQdvDcyQMoH9YnMbM1PBWW3Wpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:03:27.000 UTC",
+        "mint": "fZKmf2oyzGtRH6HGFeBrz5Y3iLfQ7DqboKpy41Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:09:49.000 UTC",
+        "mint": "2BuhGnMwEj77QFiKwrFfFZbGpVAoCTT2YmmUwgz5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:35:24.000 UTC",
+        "mint": "6Sm9Fssi4RWrfwVVaZjH6ScEhRJ8jzAf8gm6HFHhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:04:23.000 UTC",
+        "mint": "HLzWuJBU15aVcr24SUQiJJTm7giPNx1qDT7DXqRApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:12:00.000 UTC",
+        "mint": "8SrJkdnr796eLpPLpmLiZw8LJ3jCFcHYLmH982Q1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:27:04.000 UTC",
+        "mint": "G8dA2DLMbss32Cp1Lvk31G3RbxSUh8r6LgjiE9cLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:10:32.000 UTC",
+        "mint": "3eGzbmMbmMdQu3ZasrTRMvPL79uYumKN8mAtW3Cupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:04:59.000 UTC",
+        "mint": "ADnzemQkALakykhfWzxSnTgt2XfQUDDPDhhaERuCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:06:36.000 UTC",
+        "mint": "Hd7UjaYYpyapvEp2TB113U44aiSBsYbCFfCHSAK6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:53:05.000 UTC",
+        "mint": "pF2L5wtX36sYEyU7ZNDu95dQjowHVC2mYKzB337pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:14:26.000 UTC",
+        "mint": "DWYkfZj25E1vm6CoPxdCsMru2Nn56uhFwwYKLnnymzta"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:21:45.000 UTC",
+        "mint": "6YHk79hYLzv9cTDfgfyUT9VwcXD1gNwebHGkwAtPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:36:53.000 UTC",
+        "mint": "3KvgTkEGaZTF6mFAgqWnuBih3wU7oQAoAQGi3znhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:09:28.000 UTC",
+        "mint": "9H8in7dWdjqN6mx78JsVmKoSbEHPAcBGhchhxkHtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:02:07.000 UTC",
+        "mint": "HtCAikK2JuMp2ZRwL43tSQkckipgw4YkD8kpxb1Ppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:27:52.000 UTC",
+        "mint": "9u1NkCkiiwxVMs4dxxRQ6W5kBqf9nW3hQBBhHkL8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:27:29.000 UTC",
+        "mint": "Afmivg7dS2dxgRQHoQq526m4FK8mygGYUEgZubXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:58:03.000 UTC",
+        "mint": "Gb8SHoYLhHqYq32gPgGbnNv1zVwZHBYUhCSLpW6npump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:30:33.000 UTC",
+        "mint": "7XacSaKpnjHW4AtFGgS6djptiyv2CHCKd5G9vDhFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:49:06.000 UTC",
+        "mint": "28x2v7HtiUABP4HYTRbUWGp7H2zDX1PXT3UQZmjmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:49:03.000 UTC",
+        "mint": "yMzBQahD8oKyFamhA4qnAqvmJiK1PGYUTavgjBvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:50:39.000 UTC",
+        "mint": "DQzEpA28cH7ezdB9e39HmQHNsfsTgSPaqybUuxErpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:50:08.000 UTC",
+        "mint": "4kde5Gy2ZaE1d6JmyxdCQL5jPaEEjQQNyS7GiiCvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:51:18.000 UTC",
+        "mint": "46jyBkB3D2W8J5FuAX2qtXFnC9qoCynFSFvx2Y5Ypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:53:05.000 UTC",
+        "mint": "eQkDRHNUMRoywWZWzavwCryyBV21hrYCgnHJisKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:58:06.000 UTC",
+        "mint": "Dnz2Qorqh9V1TLeb6drP2BWL2pdNudBgE7AymXUXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:19:41.000 UTC",
+        "mint": "AHJFc16ySuE5x8TdXHuFWDMLJDJGsKL7Tw3Ps3t3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:52:11.000 UTC",
+        "mint": "czBrHNJARi63xnQ5XjBam4mkGeDAbWqjSWfAMx1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:01:26.000 UTC",
+        "mint": "2F4bG2s6uQ239qjWEJYVVsq9kYobYSThixdmMcPWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:03:54.000 UTC",
+        "mint": "Er1awy16ExtBuiJzrDo7RC2M7mzDQeUfRgq7LCipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:06:46.000 UTC",
+        "mint": "CVUyuoNBQMhG6MFqkm3dx4aQC7mL63E4fHP7wJJ4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:20:26.000 UTC",
+        "mint": "C8nHMgQkJEH1RyDRcTyShokdYEFaRQXqTaLnXZKHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:20:06.000 UTC",
+        "mint": "FDR83DEv6qPCzkkCiVcCa5chUEgtp4RRytMhdfV9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:49:03.000 UTC",
+        "mint": "9jnQoXA67ttU9SukmzXDE7DUB8T2wTQ6C9ykBhaYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:02:23.000 UTC",
+        "mint": "V7gLGAobJCWNKhxVP5qdUd3Ge3i2PuJtXMF1BBUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:34:03.000 UTC",
+        "mint": "3rKfkcETwtqvjU3P3Sxa34U3AmcenVYwmGw4HkuCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:47:29.000 UTC",
+        "mint": "S8wRRsrvph7WQ76v7Wa74fwsFu4cTXM6fXDU4ENpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:51:46.000 UTC",
+        "mint": "6ars8ZWUb6a4jrnHgZL54ZntwNBpEfyUyQSLwX5KU9s7"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:17:45.000 UTC",
+        "mint": "CxFkyzYyxJyXVSpCnv37fwyWWPYzE7RQda5WU3kpsGak"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:20:07.000 UTC",
+        "mint": "Em2UgV28oVFZyQ3Zs12XCvH7ee79uqED8cGCPuzEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:29:09.000 UTC",
+        "mint": "DK6vkVKsNtaWqEa9FvFt4qpvCZxHxkHG3Vz2A394pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:04:21.000 UTC",
+        "mint": "5Vn7vEsu3nsr487fAfbBypKJTtiFjZohYVixoABYLrfE"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:05:23.000 UTC",
+        "mint": "DUHuzn4jSVT3gCNVShdvAqp8fQiB14gVavKwKJRDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:12:05.000 UTC",
+        "mint": "4X75QUBLwZwoA9KsGxPMizPWG81TDRCy9xrd7Gh9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:11:16.000 UTC",
+        "mint": "HxQEWjRgUAsFRWxUWBKWFidHpSABdwDTRYsEi8YRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:12:34.000 UTC",
+        "mint": "CZJNXQSAWQmZ12vtMzHkMGuwgdYXR4Nzpq1WwYuXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:58:30.000 UTC",
+        "mint": "HrWT1avLY2P1ntoUS3wcwTPQvRWGEthTMVQWchjwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:21:45.000 UTC",
+        "mint": "QZcaSJxRVx79XTNpQgduYd3vozdCWD1Yu3X1Cpcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:05:14.000 UTC",
+        "mint": "HDWeVf6Pk3GifcnB52NuKApEhxfqSH6pyfC2EWybpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:17:41.000 UTC",
+        "mint": "9pdTdQ5ih2j3FjETMr1TEKSMgmH4BDy9dW2wNyB2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:36:46.000 UTC",
+        "mint": "b9jdJeHuUYQLBPmmNszNKSEeSvo3sZNj55dd943pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:53:24.000 UTC",
+        "mint": "FKGQzGEdwFKDkdyysg9UjGfpM29wdcoZFTWjWuWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:21:25.000 UTC",
+        "mint": "AdhwBrmdediyCccuVU6mBUoSm6GPrxKZjGabmobgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:24:04.000 UTC",
+        "mint": "oVKxjBkFYrdkW8xaKDtMGoqxPpZa5s4Hiy9fWyXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:23:03.000 UTC",
+        "mint": "CBzJvfeWtomVHYgs9AAigQravRwuxj6HgcFtiGHwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:51:14.000 UTC",
+        "mint": "Ebqfs1YUXftAm4YerpfNtKCYtoW2s1cC1bxXodrepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:58:29.000 UTC",
+        "mint": "G2wTuo3JSE967Y26Cwp56iL8tqZXAcdZmryAxx8Apump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:02:02.000 UTC",
+        "mint": "GL49LtFecypvrV5qpArRUAjgBRyj2UDwUhkgJWXipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:09:30.000 UTC",
+        "mint": "6mNDTEuhWkau398JJ1hQZXs7hXprgkYJWHSGZBsjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:10:17.000 UTC",
+        "mint": "DpRuXu1urdcCqQ6RpouXt8UCEwCbBGSQXcfYBVz9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:29:55.000 UTC",
+        "mint": "ePCFvTuPEwRuLKn5r2jyh56DK6HjDVcB4hafUQKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:54:00.000 UTC",
+        "mint": "6HXix269wfWsfYyL4DTafDce1kj1zC6qzX78jdFspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:03:21.000 UTC",
+        "mint": "9oguEhGEAK9doPQvUYqsmciH5tiTzPC7zBrJvH52pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:08:42.000 UTC",
+        "mint": "5YXKFR5gq4VaC1q3Cn3Yf1yzgLAaVfHWyZJm4Fgmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:27:20.000 UTC",
+        "mint": "4QVeBCZFN1SF4f74z43pt1YKNQjEPZJLqFZ6LJd7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:34:12.000 UTC",
+        "mint": "DLc42fz8rANX2UiBuMALdCiSFVZoixvp5ZZ1mTpYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:44:01.000 UTC",
+        "mint": "A68Y213FhV71hZdDBvwtjmBXwCSR9LXzFGCEgNN6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:47:39.000 UTC",
+        "mint": "NSnFLVVi38rRnZpAMWnsSmCsUv6L1Jb9G7q2Wbdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:54:17.000 UTC",
+        "mint": "EBGCKQhXDffUJsHnoM89tEPa2AsSYUvByGaNvycopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:34:20.000 UTC",
+        "mint": "5DCdDEnzMiUrXj4CjZdQaSP98gTRcu8UY84DYPLLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:43:02.000 UTC",
+        "mint": "GdFE9TBKqFyQqzTTkRBExGSbwNwvUZX2vpiQehsmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:05:58.000 UTC",
+        "mint": "4isb1gDk6Wj2fExDnYWKLr7MffGA8QVz93PDZNYrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:07:58.000 UTC",
+        "mint": "23kNRTA8dL3PhqyURz7Hvz7A5hN8yJ3QTEfrWX72pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:10:56.000 UTC",
+        "mint": "ESKpmux3J6CmAmCGAne9ECxa7iy6gPshWmcUMyQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:16:08.000 UTC",
+        "mint": "E3uUbYgux1gVdVUGUDzAkd8ni629xVLd8annLfSupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:47:36.000 UTC",
+        "mint": "HJGnCVAqK7ashWqLNHRh1oqDatSHm7xr6hWhoB2Fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:48:25.000 UTC",
+        "mint": "4e1S2Y4Xmxk97UnwbCtq4QPvk6BGHT7y2pv6p2Dxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:52:26.000 UTC",
+        "mint": "HBA7WmUk7ufhK325eKSgiabiKUMRyDoXD2pWjM1vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:22:22.000 UTC",
+        "mint": "9BTpR74yBp593aW4831eQ33Kex6CojUtFVkhhTDWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:31:03.000 UTC",
+        "mint": "FDkVo2BFWFXuhPHaDTK1EroFSBh2pkW7MsDjfEKgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:31:49.000 UTC",
+        "mint": "zCXe79TKb6AmsXtxDbLkq8gQWKDuwEujs5tVPk6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:42:08.000 UTC",
+        "mint": "sCVVJg6PmVag6zWjDZRefPqceGASaEnry94qcRTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:52:21.000 UTC",
+        "mint": "3nWJJ6KXstWpYARcb8sAo2SfNyjzsGyTcuwSSysopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:15:39.000 UTC",
+        "mint": "djnzH7GgMr9CNa72gtNnfxE1Ax3bptsvj4LkRPxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:17:10.000 UTC",
+        "mint": "4FgrRdQTt71eDTpmCogYDKMvFj3S8JTyKYSUZj8hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:20:40.000 UTC",
+        "mint": "ySNHmfPbd57cx2ypi7UU6UaxCx6zYuXRFXNWuBWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:25:28.000 UTC",
+        "mint": "GUb6gFFPT21gnJVwzE9ZjVTsJxN56vB4sw2dKo21pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:31:03.000 UTC",
+        "mint": "4Z4Ye1gRYdy58qwnSM19xbHC7gHNEjm34E44ub1Gpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:37:19.000 UTC",
+        "mint": "5ECiXiSZHWSLhNwz1Vfxb5PfwWobvNmbdco3wHv8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:05:55.000 UTC",
+        "mint": "Fd6HBmGTyiXGmU1XvLpCggU1L7wXQWpY5TEpK2zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:09:09.000 UTC",
+        "mint": "DLB8w54RtjrhDVbbcM9ScNno2Pr9fmQou2eoAjgzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:11:12.000 UTC",
+        "mint": "86Rt81tS5E17a7X3XcejcGToLg4vH98DJFycU5Yspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:47:21.000 UTC",
+        "mint": "axaqmkWsr2QdTKmEZJbaBgZiT1tcmhnnryYdRiypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:05:12.000 UTC",
+        "mint": "2a9KhRPMsV2egYugopB4HevvoUJj4KWwd9on2ZzzszMM"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:08:34.000 UTC",
+        "mint": "4gUKHD7nMa9ChjRoCo42ExQ6LZYpFAMsXka3SGATpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:19:06.000 UTC",
+        "mint": "Aw1iAgb9BbMp5hjvwLNqrWEaHmRmYG3rGhaJaP6xhg31"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:22:25.000 UTC",
+        "mint": "B6i9tkoKnh5ZFavbsTyWRjLMBHrXLtAvnc5qGjGXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:55:19.000 UTC",
+        "mint": "BC4iR2nBs8N2VCzNdT589Z51sSKFCX7mYgkk6dzhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:01:08.000 UTC",
+        "mint": "Fng5Ku76QLWTYY36NpCnGRFw8PwKTmw58hJZhBCmggYH"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:20:27.000 UTC",
+        "mint": "CEoBBZCu9J4W4mpHroaW5GfPYJrkF2ahDXcmo8v6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:22:00.000 UTC",
+        "mint": "Hn2m46bRPvdVnLkVTrdYvG1PThnd4Fwgq3bZxKyJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:44:29.000 UTC",
+        "mint": "HrXJW8UihaeSDwcqxGBv52EW2BYmMPwRKxoPa44vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:53:24.000 UTC",
+        "mint": "8ZcNEpeAAUYzD28715VqPrDMSoFfdm4j8969vYfgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:55:39.000 UTC",
+        "mint": "5qQBEfJi9WyFfayKowyjqdoUC1NDxrhUS4vCgVW1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:04:35.000 UTC",
+        "mint": "CiJLLYRjW3oPZZCfwzLmHDys6DZUnkxPsXpMuqfEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:10:00.000 UTC",
+        "mint": "7GTMHYXcbAEnFJCenb31XhSqm6F6awHi1p2pfkuWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:21:12.000 UTC",
+        "mint": "GLjhdCD826s4eds1HeFCicvZ7JRZ62u3SzGqkcq3f7CY"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:38:13.000 UTC",
+        "mint": "Cz11hLxpY7mWxvnRzBzavao7kb1Nw7gBDUuhT7XDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:40:19.000 UTC",
+        "mint": "4uxe6kAg3RN9V7ySnQnssBqjasLRX7LmeWTC8KuGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:06:47.000 UTC",
+        "mint": "TYuo2SmBoUbbwqDMYwrgFW1KYDstVzTW1yVkKTFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:40:38.000 UTC",
+        "mint": "GZ9ZwEP8K65Q3tbvKeT8xJxNW7kB4Utokxek9Kf2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:44:05.000 UTC",
+        "mint": "DVDJMPQxZhiWbprWLJevhBfgHbZSb3vXuwugcURxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:13:25.000 UTC",
+        "mint": "QcUF1FpBHLzcSueXsE4kiM9rpdhKn55KTAyYBZBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:38:16.000 UTC",
+        "mint": "AifqCnuVimMp5epwXPXne1dL62FXga4pK3oeSkspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:08:59.000 UTC",
+        "mint": "WD7FNiwiYJxFChwGmfwaLuV2BMahgUajQi6HJQSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:11:30.000 UTC",
+        "mint": "537bL7GnUpYFXq9g8ZptxC5kL5qAUqbXqksoAxUZpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:45:31.000 UTC",
+        "mint": "DbVVBsKCyad9DQWFiZLXsLqjWFMyXRjzqiGS8nZcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:48:26.000 UTC",
+        "mint": "9zgW3XJX6qBuqY1MkkE2w8PuVzxCF1W1qzpUXrLnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:09:59.000 UTC",
+        "mint": "8o8ZSAS3FoNayEhaJiH1NywXaK9qzaoPq5bD7hyqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:09:48.000 UTC",
+        "mint": "Bi3AFyAiqrpUEJW94bGQFY6mCJZywVqLVLA462hspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:26:01.000 UTC",
+        "mint": "mtgJYAiQZnDmZ6ZrztGuf4yT8hjVL16rW5yMDiQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:29:45.000 UTC",
+        "mint": "qDDnb9e7zfcwz7cVhMk1x6pGwG4exWHrZLuQ77kQ6Zj"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:43:28.000 UTC",
+        "mint": "Erg6h5zpFBBWd1BqA5PhBQUViBXc97K4i1PpncRApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:53:07.000 UTC",
+        "mint": "72R8nNwFhqcTENksDhj9Ek8YB9iWZtzEmwcLHBQWhUFr"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:15:51.000 UTC",
+        "mint": "7QoCXnja3MWdM3GhTgaYdbqjshqCVaUZFR4we5Y5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:32:36.000 UTC",
+        "mint": "7R1HmtyCBahC1EQ3chiLdkJFccUypVmgwwTw1K8Cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:38:42.000 UTC",
+        "mint": "9H5xgKFTERSzXbEd8qRsZk5G7Z8Qfq8wmPEaox43pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:40:08.000 UTC",
+        "mint": "5qJ46jsQB2Yk1i6DfVjv91MHCa1rtkzgAiNQt5KHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:14:33.000 UTC",
+        "mint": "8k7T2fGgcf7xwAcGCt9mGHodVq87W8fQ6e48249fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:36:07.000 UTC",
+        "mint": "HXe9JMFGJabPqM6tiNB6tyFSGnXrYiwz8Ps5Ks81ASyf"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:40:16.000 UTC",
+        "mint": "AbqFKKE2FpTkS17DaWJeWmmdf78qSQvtNY9r1GRnpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:23:40.000 UTC",
+        "mint": "596cPBoZ8PehyobAyVpJCr7RHFgQ8xM7noxSJUnipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:08:58.000 UTC",
+        "mint": "BAznrTQX9bmKHAJ9oWXJX9GVBUgEyGNKXHJKJtmDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:12:03.000 UTC",
+        "mint": "FygTiQvJ4vQHf3kN6KVcowDCfQM5pQArfRUB1aHzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:17:57.000 UTC",
+        "mint": "3ZJ6s7JYmALiD6vTFNv3Bb71v22Nc68aqnTm4sTYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:36:47.000 UTC",
+        "mint": "6i7KpwbVoQmcipEJxs5oPfcn1YomMoewKN76LRfPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:05:17.000 UTC",
+        "mint": "GLuEN3Qe91eZEPfsbEMrDpmYrHtFnLMJqyCaFuRppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:38:08.000 UTC",
+        "mint": "928eGXvWQ4Bm9WhG9ELnDpmfNhcQfLLJgKeKZK9opump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:45:41.000 UTC",
+        "mint": "6x15vRDuqz2Bbpz7yLfMd4oaqsMEGD7iK4LoxCcTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:07:33.000 UTC",
+        "mint": "AUtXqjjZswo7berJ5FeobbE8B7tHBd2PJ86C6EfPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:46:16.000 UTC",
+        "mint": "HQwn1xk3BUkqgUdyifRyo9rx7sJdaAYkGEh1kFeczjhy"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:49:57.000 UTC",
+        "mint": "4PxpZthHZT9KnY54h4JAnAnPXGVJmWjWPGo4EXpLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:43:28.000 UTC",
+        "mint": "3ArmSxrUV4ACiK45NDTnB2rM4QTGNAPkftDC2wJapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:23:55.000 UTC",
+        "mint": "4vJ5S6efy352uK4FQPAuM3AN2hpkabRgV5x4a7H6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:35:35.000 UTC",
+        "mint": "tQErMaCPRbL1CXZWL8NUfwYzMjRdmpmJ71AR2Qgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:46:26.000 UTC",
+        "mint": "8w7XpibZ1Q5uTEpeqxu8oaEYtTtBi3dw6VzfzPrMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:01:16.000 UTC",
+        "mint": "DEZMdKS2Axu9W63anQua82zjoauGJiGQKkPvhkpSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:13:42.000 UTC",
+        "mint": "B3FiPJaFrhE7kyXpP8fqtaa1mu6BoKiPPRbdvgj5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:30:04.000 UTC",
+        "mint": "YtbiqbuyQAJp4QbUB1GjPGb4mD9tonEMwZa5PgFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:43:01.000 UTC",
+        "mint": "3YZt2rx9AQjB2PNmHP8SDHrDej5gFo1oYtiWVxvTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:08:42.000 UTC",
+        "mint": "H1WeWhV6YZoeB3EFNJ9PobFYU22UVSLrgM3nzb2Rpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:15:28.000 UTC",
+        "mint": "u1qPLX3a8gxjhXY6P5vM52REE5CjKgFj6H4CTfjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:21:15.000 UTC",
+        "mint": "E2F32QTaaEdGBzSASRpnKZtFWvJaa7YCcia77ngJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:23:49.000 UTC",
+        "mint": "764pL9Zp1mVbNHEimxAnKreDnqUnj5S5AaGkXR1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:32:14.000 UTC",
+        "mint": "HbjbpozphQg6TjV8ooWfLhMzN3jWM3g6EBxwBJDwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:13:42.000 UTC",
+        "mint": "5pRQgyZtVqgXFAh7nTpGN3UPy1wJVQSxiKNMXHCzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:14:36.000 UTC",
+        "mint": "E6S4eBaDv2pCUAevenLEh2dbD2cCWPSmG8RxqruDAK2f"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:16:47.000 UTC",
+        "mint": "JW1yBZNmMBUQC7ktfM6S8aSdP7W5PzuNjoz1Auipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:54:39.000 UTC",
+        "mint": "CoqSJEUZiT7EaTSPhneTzEcu4civLv5CqSCCozwWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:18:02.000 UTC",
+        "mint": "A4gzo153yJTKNQntQQvopi6mmacdUYkC9Qjoaby9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:28:25.000 UTC",
+        "mint": "6B6SCb8XeKjdJsjnp8rXRYPz6ddWJied7qospgL9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:41:55.000 UTC",
+        "mint": "K3DAgozhZ5fQEdsJXEuzh58n6wzpUCetL7z3JnSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:24:38.000 UTC",
+        "mint": "CzYen2XSimGEJGrSc1ABmnZ4PrsUGzdSiMepFjjVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:15:44.000 UTC",
+        "mint": "AFG63H7CJafEKJAEeJre1BdPyaR4mBj6SytaLdhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:47:38.000 UTC",
+        "mint": "3RD7vX8iQug5oBZmRFaztghnfoZ8ojhtxASjf4rBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:50:32.000 UTC",
+        "mint": "nqj2VK1EFSQpoJA8JB38BtzBxshi2DBARMXNpMppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:56:09.000 UTC",
+        "mint": "8MvgWr48jBuW45Zpyy1KYAYJWHL1zk1byma54KSipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:15:10.000 UTC",
+        "mint": "D4aEpQLW45YnWrBmztcpJHqabbPtFe9F9PTv8Umvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:17:07.000 UTC",
+        "mint": "73tR8yCus9UYdKpmffQB2dUAEBZNgAS6sehqBWppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:49:45.000 UTC",
+        "mint": "5Eqb5xR7DNpnqRSpftzrJ2m929aTrq7H21xxUzoDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:28:12.000 UTC",
+        "mint": "3hLfxCKWwtsHogi54ZbCBL2Vw8yHVjKdZ9mPokknpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:30:12.000 UTC",
+        "mint": "GGtvya9rZgGD53rU6gnN3WgidyckausuCqv6m5Xopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:01:14.000 UTC",
+        "mint": "4gPT8GxxnKoyZHKpQoTnWeCZZ6cZNsNpYbpXNb1rpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:04:25.000 UTC",
+        "mint": "2pw42Poei4ys5drzQXnr8ePXUuc8utM8r2S98urSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:09:04.000 UTC",
+        "mint": "5dM8bgGmEL5SJndBPW9Mf6ERsmQeBj3p9TqKiYuXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:54:06.000 UTC",
+        "mint": "DQsMtqJUywwY316gCSgmCqWJbZ4nY3gEFC8sMqd2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:18:51.000 UTC",
+        "mint": "GnH4Yn6DuXi953TgSudNdJc3Vt2vY2pY9qWezYWkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:57:33.000 UTC",
+        "mint": "XFynsiNfSFfY5DjDzHRK5tuFNNbzRKcD7SqMcQ7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:52:11.000 UTC",
+        "mint": "AFqTQVZCyqcwVxKJwbR3UXCquHhE3AKQL2eSSoBNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:26:32.000 UTC",
+        "mint": "Dh1vKhDSmWyUxjqEdFrLLpHJ5ibj3yQbfZrFzqYfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:36:07.000 UTC",
+        "mint": "Eoq52Uzh3NjPhxrvS6FHpJCsHMjq8FUQjQSSveKDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:54:55.000 UTC",
+        "mint": "GobuMLzJWbWcyAkbi3pYtZbJMTYjTWKVRVL1PYHTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:57:55.000 UTC",
+        "mint": "e5yNeyccJuNAUbrny5z8WHkX1s1xwPX1brduHz4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:09:01.000 UTC",
+        "mint": "H4vkdyufuE6WuuGFWMXrfByHQQQDhTnzgDhJZ93tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:11:10.000 UTC",
+        "mint": "rKtoesVPh4akpjLEd7ZmydVFwERAMUDaibTcFtNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:12:50.000 UTC",
+        "mint": "fWAjZJn86rSB5sGiov2g6EQNAuLhDLwdJDGFw35pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:37:02.000 UTC",
+        "mint": "brAQ4cbWhZ9XTtnPgjRiFuWfBGYyHkXc7Dmp98Apump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:04:51.000 UTC",
+        "mint": "626RXFL5DzZdXqndFmgHyympDQVeNQWpf5RqvRnrpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:09:53.000 UTC",
+        "mint": "Xqd26oGBoutZHCeyZSDuFGMvrt7P8gT8LFpuerbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:41:23.000 UTC",
+        "mint": "5WR4V4SCB8MoERqwfj59pfeNL8idMP566CDxTWvGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:50:12.000 UTC",
+        "mint": "2DqtK6uwnrM42pAzQx2aAJ9QvvbcpfBVupW8iMHdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:59:04.000 UTC",
+        "mint": "DmjtHfSdpEKt73JZtivkfw5W7haoymcfP1KvJhJtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:07:00.000 UTC",
+        "mint": "H8CqA1sLwNLYqrRuS8cBuzJjUBGvBwLCzBX9Pqdqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:43:48.000 UTC",
+        "mint": "BozfKdX4z3PU2BERxzcgUprW7cCrZj29Lr9C2omFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:58:12.000 UTC",
+        "mint": "9iXPaXpSZuwrzXTEuLB5i1TymYeD81rRB7uLCE2fpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:00:48.000 UTC",
+        "mint": "FbRQ1QuB5wUaRz5X5dTbs2X6mNzWboWs8qHppaQypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:48:47.000 UTC",
+        "mint": "bxbwswxywHkdNegNurFbN8dZtM8RV8rWvizBV4Tpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:26:11.000 UTC",
+        "mint": "2DpDw2oLmXV1tpPTmWx28EU1JvRVU1AVuFGiaUtPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:52:18.000 UTC",
+        "mint": "6L3k4uNXdeVo7RwEvvSkHtNxSmcUWLVyx7udWQMWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:57:19.000 UTC",
+        "mint": "8344PnBpvNEghudM7kKaxiYeuN4v4ZifxAVLykHHpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:23:00.000 UTC",
+        "mint": "2zzxEo2aZh42wziLQ1r7UBZecV9Lkakdm9r2m4uGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:47:18.000 UTC",
+        "mint": "kCU9JNNFvBcKUSkfPodyjX157SFy3zbgQHSBu8mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:48:20.000 UTC",
+        "mint": "FcQUgeUPpDqpSdHZuhhqSeYksD89Pszvh6dEzbQmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:28:46.000 UTC",
+        "mint": "6f1eYoXGXk3orvqhqJAZFLGAT2PGJuFyYn3PzfaApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:49:27.000 UTC",
+        "mint": "kQyYsf43UXLLJhTsuRqy3BHof7Cq22T8N7CatEBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:20:42.000 UTC",
+        "mint": "Ec2jtUSGRAtc9mquRi1RJhRzahAXPyfPuEJ8zygpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:30:15.000 UTC",
+        "mint": "TDV48a2NdhPYVXD6WtYLFVXpabtJuMGqGQphgngpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:40:03.000 UTC",
+        "mint": "Fj7d3hsNW7MM5TxVji8FWAC2VeMSnMKRwPkyzregpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:14:59.000 UTC",
+        "mint": "2EVmK7rd3BmCzBtqcjKS7hnYyCpN6j6pk6VuaBa5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:31:35.000 UTC",
+        "mint": "EpH36DhiV7SG5PnBcdeLHtcJWx8hWgTrrPwYqDXFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:32:24.000 UTC",
+        "mint": "1vvpM62ktTfJ445DgWLJBvpJEduDpFHk5XoiFHBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:40:55.000 UTC",
+        "mint": "yGfhKbmfZwhcYA9gSYD2nfLWTDCbf75GPa7pdxFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:49:49.000 UTC",
+        "mint": "EKvgzNbdkbRj4xpUvqXZAPPzCzeuFYb6Mx5PgesPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:18:41.000 UTC",
+        "mint": "Uxujsivo4znqBcgifzyxfPrdYPHTK1AfhTDdpgqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:22:50.000 UTC",
+        "mint": "G7cUa7NUen3GyTwA3pHhNX9QG73ctRFCQ4cwaKvGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:29:32.000 UTC",
+        "mint": "6ChHzNh2aeBWadUo15WhRRmVYFcREQiSgbndjrJvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:40:21.000 UTC",
+        "mint": "7CXzL7GXDfsJ2RBsB977baTQeRsTqR3WuQsr8hb9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:45:32.000 UTC",
+        "mint": "81QY2tA9kUwecyZGJK1pDMrFZypAQ27x4ECjDHShe2Gg"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:05:24.000 UTC",
+        "mint": "73jFDC2LaAZeZLHiEa6yWp7jk3topX4Qn9tLj6h1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:13:47.000 UTC",
+        "mint": "7XHa2qiYW4UtNwDzbMmS76m7aBsSHF9dEZh82K7ipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:08:34.000 UTC",
+        "mint": "sM3weobmerhcvwkhpXtG3FnAVEEtB5GA1CztzZ6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:10:24.000 UTC",
+        "mint": "6YxmhTsRFHcjrVSvgoJwURA6M7pJAwNv6gChDxBMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:06:53.000 UTC",
+        "mint": "6Dx99rVBXzcW55tg8vErSBHp2fVHHNDJknfR3c76pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:26:18.000 UTC",
+        "mint": "TQ2ueUK8XZPAwA8FES9aQpzZxL2izifYxQ9gCNfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:29:25.000 UTC",
+        "mint": "8LMQjej2QaNZJGxqSgpMh2irHyZdofNpafdPtAL7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:37:50.000 UTC",
+        "mint": "HxQrCSzHBmv8hyoiLw5k1XCmUdusa3Mde3SNbfcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:03:03.000 UTC",
+        "mint": "4oknwKigGR8tvS4YEzLN2c3yuBc9dT37ezyStPmCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:25:58.000 UTC",
+        "mint": "8yqvGAPJuHzN4sQgakX7Am4qAPiEHnLSZ8HtqHzvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:41:15.000 UTC",
+        "mint": "3VBr4xEmkQX43WNomt22qfY8BepPxGXCykG3uJWApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:41:52.000 UTC",
+        "mint": "7ry18sNk7cYEVrfbRFtLVvkwA8CkfQKZjKqW4XLFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:42:24.000 UTC",
+        "mint": "H2ibJ9XKN42bHQpi3FwWon5hkR5rKsacjMDNHJGopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:51:34.000 UTC",
+        "mint": "8THwAtc2jh7ZGSx9xumbqXbg64752kZUwabBxLKGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:12:17.000 UTC",
+        "mint": "GP7HhsA6uyKVJmSgWoTvpsaMSsnW2kVWvEBn5JUzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:24:43.000 UTC",
+        "mint": "8yUWfCRvWjD2HiQ4SStwmEWECmXfp444xkfcznmepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:41:10.000 UTC",
+        "mint": "FnY68GtwjNYf6iFbeh47vJ5uV1KQz2eVnfxAqYXtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:55:31.000 UTC",
+        "mint": "FBuK7owVDkBndbvcu8rs9xQ88698eCm683Ng2VfJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:15:22.000 UTC",
+        "mint": "DZmSktdysUwzJ3NxDaHuGQfpYKj8T8GBG4Nu4Zeapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:31:31.000 UTC",
+        "mint": "6qzzj1RETtTWD5QpX8BiwmsUPSTAvnBaPeT7cT6xpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:57:36.000 UTC",
+        "mint": "soENimihCcFWCjjKmZnCDFJbuGNYgGYa57dM43Zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:24:53.000 UTC",
+        "mint": "mVeg2VBD6qwcuuDfdsn8m4wrWq6UsJc4G7pBocLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:29:52.000 UTC",
+        "mint": "8a2YT4gDyooSXHrvM9vKv8Svbec36ZkudeB8Xm4Jpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:56:25.000 UTC",
+        "mint": "3sSbDu4q4rfKirh7k1gTNteMJaDQYWUSbgJ5dTXXpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:22:16.000 UTC",
+        "mint": "L4PdRQuoxdBZviQo9EshoFpFebZ7mRMhJUCK3P6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:59:26.000 UTC",
+        "mint": "H65nTRfD7zk2ecTvZfbsiUDZDKWaACWm3oMiJDpwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:16:26.000 UTC",
+        "mint": "1gBFVnDnNxzwCkvgWoENLvTV6r4kn27Gb5JpWdSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:31:35.000 UTC",
+        "mint": "HpXFduweU75RFU5gg1znNU2SznswVJHxBHMdWDt7pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:16:30.000 UTC",
+        "mint": "Er2TiULszyUAZerfWCJRn89wEbNKcvWZVi8z6shBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:35:47.000 UTC",
+        "mint": "PkykdSygeSnNaWJFSLrCveDsT6Sq6BHz5BeN4aEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:57:20.000 UTC",
+        "mint": "8d3fRwzWr34LCnx8Q71Pgs2r6GYVAPYMB2qfekeUpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:06:09.000 UTC",
+        "mint": "jw3rtrCLk6ZRbGKXCBXAFJ8GRucEtQ43PPhbrffpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:05:13.000 UTC",
+        "mint": "EdU1wp7npq9GVmN9oWgXN2vm4tczTTbF8RhuDatNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:06:55.000 UTC",
+        "mint": "BbCGAMvfeNRkEzFuZTFi5cJ35ddbGeEu1W3vL3jApump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:00:27.000 UTC",
+        "mint": "ELsW5SmxhWRe8rvomUvtTvMZ6MCSuoteJm23y9kpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:21:49.000 UTC",
+        "mint": "9PfYTZ7WZo8qVNaxP6mE1X7faFENDcLMG18SFHNmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:26:21.000 UTC",
+        "mint": "XGaRDEavLFvWAwHWPnGB6Hzj6C1Y6owDqDXufpppump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:29:59.000 UTC",
+        "mint": "9ueZbLcPmxcnTzSksper6J2ZYxstjt8HzGbYr7U3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:04:48.000 UTC",
+        "mint": "BN78AjpgJUzWn2FmhnzYxWiyJwBShCJKgvBZyJ1Hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:40:37.000 UTC",
+        "mint": "7ykEtvkLDhuyXwUBmhZhyspup4yCh837H7zFm4b5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:46:38.000 UTC",
+        "mint": "s6TSEVH8cLLihuhQsof6ScnfccMFs198mcV3Lg5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:49:22.000 UTC",
+        "mint": "A6Zpvj47pSin4YLdUWKRG92x5HGJjtD35sZmJQ6cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:09:08.000 UTC",
+        "mint": "Ak5aiyiTw6PhVvjhg4fgTMdTmQcWzXazVRUV6jMfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:02:45.000 UTC",
+        "mint": "6N8EktFqxDSue851833yN8Adf5t6PrMypDNWkgFqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:38:33.000 UTC",
+        "mint": "DmhHfMMDoZNCKrraKGQWrJLi558HueYUbZJDAxEu1ByD"
+      },
+      {
+        "first_graduation_time": "2026-09-05 02:50:27.000 UTC",
+        "mint": "67MMFKx8S9dk56aTwLCnhyjiWNwsXMVpTuahN215pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:17:32.000 UTC",
+        "mint": "HP1mUqkWMncqCJisNCXHhLbJfUzrhpXhWwRuvrw5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:34:47.000 UTC",
+        "mint": "D7gjBvUyxfhhmZ2g4wkL71jwHMhGRL9HEaZoxZB1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:46:34.000 UTC",
+        "mint": "7qvckPaG6FRuvvHYnRSEg1qPstCCRbBZioLwRsyRpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:49:05.000 UTC",
+        "mint": "7WbMJhfFDDk75sfMfSFNqAdvYiAkYJ5JxweehFbpSJDU"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:49:05.000 UTC",
+        "mint": "HgCLqdCrHq4JaGjC2g7t9vB1aq2NVyRM3H7vg4Hbpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 03:57:20.000 UTC",
+        "mint": "6ZmZSSCjiKRQ5CLZLe3uv1EWkcMZuUtg8RTDKve8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:01:21.000 UTC",
+        "mint": "3XE3faM7rRxx4qVU6spnK6vZsEiSRtmuoTGApmeYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:07:12.000 UTC",
+        "mint": "GaKffoz4ZFEAAPRfYosoeFmqfxun5SgcU6pQJXxMpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:33:49.000 UTC",
+        "mint": "2cXvWhQUzovt7CgU6zsNxuywRtkbnB77zs5vdhaDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:39:47.000 UTC",
+        "mint": "wZkJqaFvbL2aehqdeX9V8oXWGVbM4AuFQQFZXVPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:53:02.000 UTC",
+        "mint": "12GJqC5Qtm14yMPv3WuL5NS5ywVjrQafwK2ToJ54pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:06:04.000 UTC",
+        "mint": "E9F4EmbEu7fNCxBj9tTage1gawqeZHY3Jz7XmAnBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:20:50.000 UTC",
+        "mint": "8qnuGdGD26TgFt3nFrBiYXFa3SCEeLQjzxhdbNsipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:23:15.000 UTC",
+        "mint": "4Q5SJudtioAng5bJ3ALL29pSkpMwqTg4kGgTKeA2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:42:21.000 UTC",
+        "mint": "3D6FS8FPEPevXxYvcDVvvKr11hvbZ66rij9xdCHkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:56:52.000 UTC",
+        "mint": "3AuYtM3KjwCZQmEM76LUB2SHvVFpmmqRJK7bYMHfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:14:50.000 UTC",
+        "mint": "tbc52S5CLB5ftMbHeXbBDfLdR4uDfKPxThNH43Cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:15:35.000 UTC",
+        "mint": "LsKkQQSDKTHeM6YkcEHz9sSvcJq2TMvSqXu7Xuhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:25:25.000 UTC",
+        "mint": "9EQXiLhTLhYxhYqEjQjNmQL3NiDxMJP5xbdveHbmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:52:23.000 UTC",
+        "mint": "ST3JuHBDvuaVHLbgqznbrJbMD5bQedpvrhVK1icpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 07:05:46.000 UTC",
+        "mint": "AFJ3RVtBwJY4pVWNCuKGjqFtQfddCLZJatW71VRBtRCq"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:06:59.000 UTC",
+        "mint": "BcrQtC3dERUGNqsAkmEQ9DSxEW2tjaWPdopZnsp6pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:18:25.000 UTC",
+        "mint": "3puEHuAMCnqMKegovLVpJfzkUv7tSTnb9gDgG3dhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:35:57.000 UTC",
+        "mint": "9zKFoMmAPboQ2NvnTRN4hur2wwBu57urEpD3mMMVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:45:19.000 UTC",
+        "mint": "12SfSNvJUpfA1svZWqenuYMoa8XfqkMAJ5BAf9pYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:49:25.000 UTC",
+        "mint": "PbBktCTuNZzQaEUEFLZiAY2NWagF2NFUJEWzmAWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:59:59.000 UTC",
+        "mint": "D9TEbZbMcPbsamYJsc2LKfMXJiXsfdjfPGZ11pJ1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:13:56.000 UTC",
+        "mint": "7zsSncNR7xqimumAr6ZQqxvyKXNz8wmXkiZbEtttpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:41:45.000 UTC",
+        "mint": "AMFgvSab2ra6Cfxv4DM1RWAhSkhgU3xFGFMMWxiQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:47:55.000 UTC",
+        "mint": "Kx9Dy72Mip7TMcfktURNJK8dz9pypPVZR1K2HNNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:54:55.000 UTC",
+        "mint": "7rT23pYYc98nV7U91CQ7bdvAuGoHSQJa5TVXPetipump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:16:52.000 UTC",
+        "mint": "Gah2rNVAbnEj2Gm6sMS1ixbVAXT7aNnqCskXNwtpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:21:10.000 UTC",
+        "mint": "C88xPGMTZJ2UgvNhcSeWnqhvQnKf15MfLUZz1RtCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:29:15.000 UTC",
+        "mint": "J4GEzLpkSoeFKqPKgbig1UM2fkeaPrAJ1zRKtnJpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:34:09.000 UTC",
+        "mint": "CYgwS8CmRmY7PGHWWHzZfenhWtajiHx93KzNf6Zhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:47:45.000 UTC",
+        "mint": "Egw1XyuHr5LuTXRAZGN2fSqzvPiyLEyLexFz6shTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:00:30.000 UTC",
+        "mint": "HmMAcPbyGYHNU5fYmWcQiH8JPGRYkrVzh5GVeoupump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:47:19.000 UTC",
+        "mint": "AMVrjzk1GpJzZWTBH9iP3iMxJWKN7edpkG9GKZaEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:49:16.000 UTC",
+        "mint": "BaxMnMh6cJC5DYDEPTSASiSTBNyVDwC5RCG945eQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:55:23.000 UTC",
+        "mint": "BSMi9fswHRL6Hp81SxqcDp5w5EoTumUnd5CocEG3pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:02:32.000 UTC",
+        "mint": "FpXX3TH5QaUbpzVe2NkQbuFFS6ApjKjHLZpJoFxwpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:41:15.000 UTC",
+        "mint": "3f3u6yN3xn8XAyzmYUHiXjw4b5x2G2EVtU5ySiobpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:49:05.000 UTC",
+        "mint": "DDi8yKP8BBeS7hDMTfrFC38WTmgZrqZ3hjSZSYLspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:59:51.000 UTC",
+        "mint": "DWws9WuUHTT7cZdGyR4RQbkSDknUyKKtEmcEU5Zfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:02:04.000 UTC",
+        "mint": "FwesUBjrcdhSX2udEWDhQN6wG8kLh3XR5QndpPAQpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:23:02.000 UTC",
+        "mint": "A3McYXznZWUutQ3RKUgvEsCc7AHWKF55aThmaMNpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:21:43.000 UTC",
+        "mint": "9ux9J551gkDgiRzrDAazAoFT8i1Mjj9d1ujbfPE2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:26:20.000 UTC",
+        "mint": "9gub7fLvPi44PGoCHgLTeHUQqAzJ1SBtiLpPDhxfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:32:08.000 UTC",
+        "mint": "785zfRgEqhwuM2Xgz5UHsSfRzjDzGKNvjucPSzYmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:46:31.000 UTC",
+        "mint": "AaynkN5VU281RW246AZKk1yf7LrpQXxq2S7AyfMfpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:35:47.000 UTC",
+        "mint": "A9ssUn6sUiAyBE3bLj7Xzhrtpcd16TSgSSHnFPg3Lhoc"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:49:16.000 UTC",
+        "mint": "A6Z7sc9h9r55Gg9EasyTokz7wyw8HdfKxsQ5jUrKpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:15:35.000 UTC",
+        "mint": "2PYiU8mAR6wjQB2arnyv4Wk2neJL6qdGMUsRwzEqpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:00:25.000 UTC",
+        "mint": "9ty7rr8TJHcfgaZkC5expdsfAE4aegTG7gUDV26cpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:27:40.000 UTC",
+        "mint": "82HwrS7MmhqFmymD9Mbchu3eggNzS8nUD3G2Gd8Bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:48:11.000 UTC",
+        "mint": "BRiPubrb4QYvEQCf2Eu2UdJ6sSFohk2seBwsgMdvowFW"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:48:09.000 UTC",
+        "mint": "2zXi3z8rZY9Nv9dzmd1AeXBqrbATubszs21UJdLvpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:02:35.000 UTC",
+        "mint": "7wP4ACz5o2icZfjV1rFixX8aTrvco2LrhEAwXEGapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:28:36.000 UTC",
+        "mint": "pRpCfpijbQXV3XqzMPmnoWH3WK93QjxPz5CwN3dpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:35:15.000 UTC",
+        "mint": "4SxWqoMruofupdQPWuAAxpcL1MQbvBt2KowNqGg5pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:04:03.000 UTC",
+        "mint": "BGN1fq4Sf6wizjBXMtWjw62YLCtdaJMKL1jXfSPTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 22:42:02.000 UTC",
+        "mint": "6nPAS8s3odQckMS6D3YmL2ZR4Krcg4eF2jRTf2TWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:56:16.000 UTC",
+        "mint": "3z2mrcSBKDRP5uAj4YjQtAp5XG8zqchAaw3bjb4rpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:58:29.000 UTC",
+        "mint": "DuqAYeFBAWXWyPsmHSRhUYhNrSkvo25SJydaBJg2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:09:50.000 UTC",
+        "mint": "HnE8ZtRmxp4nmcmeNDeMbcrJaoCtnsHB3eTyibpTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:08:51.000 UTC",
+        "mint": "Eh91VZg2KhBCY7Rb7KYjgDTLfqSvHtH82p6e9kAepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 00:51:45.000 UTC",
+        "mint": "EDFuXLaR1GjsDiwbhzp69cWbam3zfGr9MuyFmzHkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:16:57.000 UTC",
+        "mint": "6cGpiEkiVBGgMm8XbvH2sMmUfyfS9ZdNj4th9ZgYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 01:57:33.000 UTC",
+        "mint": "CHQjfrFiqiuHipk8zx88Qpe6SSGnyogtABFs6HCzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:11:28.000 UTC",
+        "mint": "AxkbcTyw2b5v3zpPxHQwWzrpXPDWAASV5rT8KT5hpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:13:09.000 UTC",
+        "mint": "Ve58rrNnB1TKzTAoHQjYQt6ZDpfUmrZrjWdBRWLpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 04:13:46.000 UTC",
+        "mint": "2Aqn5Cb8tMKNQtUGNLG2eGsqpUULtWByFMcSBzXzpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:53:04.000 UTC",
+        "mint": "5wWc9cjyERp8JToqiSGrTnWmAnWWV5RCZyqohfpgpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 05:59:44.000 UTC",
+        "mint": "6FWKoFmHtsds8TC9dQtNK4TJaD2fpPcay44tqiuR8Rz"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:15:05.000 UTC",
+        "mint": "A9vdsEu7s3PoKCEZLqADDwGbfbjMtEtLvc3Bfgmdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:26:15.000 UTC",
+        "mint": "5tR3TgSht3YCfjAwdtjTWLtpaM39vRD3yUP3Rzv41jbg"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:31:31.000 UTC",
+        "mint": "9PkupVU1PdCLhgNGMq6P7j1RKeUWS8SbfWe1QVdBpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 06:48:53.000 UTC",
+        "mint": "AfKfnG7Hym8fmjxYCGmocNM7KJEAwd46UQ3aKEVSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:04:44.000 UTC",
+        "mint": "3NXrbMu7MVT8ayYKc8K22yszkgpeEjbrDRXcEDe9pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:19:44.000 UTC",
+        "mint": "86V4tZpxJye2DDDk8ffhhQd2vx1Ah8ksNCPaqFxFpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:42:19.000 UTC",
+        "mint": "9B2vPatDrFJ6EfwyBarJi7ZDtYKJpwmB5QLFTkVypump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 08:53:39.000 UTC",
+        "mint": "HM9w5iPHYhEcPg7tnT1DMzYjkrBjidneF37ekCgspump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:38:10.000 UTC",
+        "mint": "66pVRuxTbjjA86NQRsUhuExPScCZYGN519xXqj1Mpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:48:16.000 UTC",
+        "mint": "H6LNwnfjMiMCPGhEwbdH5NPcYeVzUd7PdKdwFkyopump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 09:48:22.000 UTC",
+        "mint": "VCjdG4rrUCpiheWs69VN7HFr51hJN8bTfr7Vojepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:08:45.000 UTC",
+        "mint": "fqSm3nNCTu7g2REu9oDzEbhZAbrwJE2iuYi8fiCpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:35:05.000 UTC",
+        "mint": "2m21LSoCHat6TfxJEjDz5toUhfbHKjW2dYusRCmdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:49:20.000 UTC",
+        "mint": "HgZcuZ4hpaHGQAA6JHSVxMuXZ5oxTZLzdMMqDbaWpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 10:50:10.000 UTC",
+        "mint": "GT3whu9Eq6vh6T4QVHmvmWFsML3eWSvYT5q9xan8pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:27:52.000 UTC",
+        "mint": "GDDEjqb74TYsg3tcLh2x19oq234UHXp8sfAUbUehpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 11:33:49.000 UTC",
+        "mint": "ENtaecVyFnzCRY2aLMgfyaGuj5zcMoLG1bUxsuxhpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:08:19.000 UTC",
+        "mint": "GyT6j7jALXbH1VHp8XNF4Sf985jy9zoXDwu5yR1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:11:02.000 UTC",
+        "mint": "7kTWZ2P6SfTjJF4SbhyDFfHRS199YpWYfz2xydqPpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 12:44:46.000 UTC",
+        "mint": "JquSQJdxpbvf5dEZhzN2i3tzn3ReL893fficsBGpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:11:51.000 UTC",
+        "mint": "8zHUqV2PxzsDj1D8PkL6AX5tYTYSZNWCiKRnpX6Bpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:29:54.000 UTC",
+        "mint": "GyZS1ZQAAFzTvvsk7UkScoSBVdNJ3QfyY27szQTapump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:34:34.000 UTC",
+        "mint": "Gd2woHRXgpcrjuy6S2UmYnUDLNpE7kmJuA35aPF2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:39:11.000 UTC",
+        "mint": "FkB22WDUWo3bvMdeXsmrcn1cNtKFgL3G2pr32edYpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:45:34.000 UTC",
+        "mint": "9shzT7ksYshdVH1GJWgyoGTTaKJ7sRsuLLz42xo2pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 13:47:38.000 UTC",
+        "mint": "7V197Rq6WQ2AtvHV2sRmoBq5XhoNcUkEQTFBVobkpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:08:10.000 UTC",
+        "mint": "8pGQsxFpodwnJovmAfQNEBFFYoJCnQH8HMkfQJa1pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 14:51:33.000 UTC",
+        "mint": "315wxqwnh4aVaDK4JifAWKWv6vQAhZHRKb9YFA4Vpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 15:43:12.000 UTC",
+        "mint": "z6GJRfH2ct6dyysrKj4884cXFPx6wKMxMtc3T6Zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:04:31.000 UTC",
+        "mint": "EJVorenD7MSpgFfkfrEBnP33hQRtdvx768KNVUdpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:19:47.000 UTC",
+        "mint": "7vZcbz7mQ232GQq1jjG9Lxd7KCkfbyEiDrRFCWUxpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:51:47.000 UTC",
+        "mint": "6nqMsxcuYBYmFicYtEs4qXTAuBRGLMjp1uUsdtgjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 16:57:16.000 UTC",
+        "mint": "2fxCQ1hQDQnGuoka4AvetV72yAd47cH82XYfWJTmpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:13:12.000 UTC",
+        "mint": "FkgtWBThcV6D7uQM6dsd54YPtiEa4ummGJk7oMEjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:13:10.000 UTC",
+        "mint": "ASWtFyyByJx9yXDpazMjhvXXLQjfpn4cdMEWmjbcpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:16:02.000 UTC",
+        "mint": "7zQe9TmT5FH6QH1rj1b9MeUkvngcid5V2e2TsuoVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:18:08.000 UTC",
+        "mint": "2CPhCZqMg94nZ59Qds3tQ2sS9L6rPMLs9MkzvQ6Kpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:33:12.000 UTC",
+        "mint": "9qVbd6ZLoJi6daRYtBiKgAKmmbuT5GQ36ATHY4K4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:48:59.000 UTC",
+        "mint": "C8NwrDMHgJGPp9UUe1eg3vaVY2faNCxHoetHPEicpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:50:59.000 UTC",
+        "mint": "pLzrrjLu42P5YJAtv9MjRGhEycF5nRh86nHCUfjpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 17:51:03.000 UTC",
+        "mint": "9SZabBzs7UrRwHDaGUviZfHpdazcMRmp9ZTzTMVepump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 18:12:15.000 UTC",
+        "mint": "562WfcmFScZoxHJs2gi2t1XsSZi35XAQxR9A1qxEpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 19:06:01.000 UTC",
+        "mint": "8E1vwQPRC8yRE9CPduH9ZYSfU7KYECQrBXQNRgz4pump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:06:54.000 UTC",
+        "mint": "H5P9AoWHGxzNYK7TYz2gHtCR7yQ7uYMszrHcNq4BT9dM"
+      },
+      {
+        "first_graduation_time": "2026-09-05 20:48:11.000 UTC",
+        "mint": "EcZMqqYxFdcKSMMEYuacVoaeeRxpc7R7G7zWma9zpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:18:38.000 UTC",
+        "mint": "Dgkcm3LVH5MzWVVPHKAq8ikMa6EUFHS73nEBnyFSpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:33:19.000 UTC",
+        "mint": "9rNPEK3dTbdcx48a9F3uFRNp4WQnfGgFZh1t1XJDpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:43:38.000 UTC",
+        "mint": "4HQZ9rKpyLi5Xf868zqk6rUmP3fRMynkkDvgkPaTpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 21:43:57.000 UTC",
+        "mint": "3piHYExzewMjCRmKLMY51g9KfaFeZ2tXv2Yr7fMVpump"
+      },
+      {
+        "first_graduation_time": "2026-09-05 23:25:05.000 UTC",
+        "mint": "EiYc7AEJ5DZQm67RATBLVmo8qwDzPHaZi5NNakEgpump"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "mint",
+        "first_graduation_time"
+      ],
+      "column_types": [
+        "varchar",
+        "timestamp(3) with time zone"
+      ],
+      "row_count": 1028,
+      "result_set_bytes": 53201,
+      "total_row_count": 1028,
+      "total_result_set_bytes": 53201,
+      "datapoint_count": 2056,
+      "pending_time_millis": 3,
+      "execution_time_millis": 1396
+    }
+  }
+}

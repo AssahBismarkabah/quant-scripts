@@ -1,0 +1,48 @@
+{
+ "drained": 538,
+ "partial": 440,
+ "alive": 71,
+ "no_postgrad": 0,
+ "drained_fh": {
+  "n": 538,
+  "noncreator_net_sol": {
+   "n": 538,
+   "p10": 0.0,
+   "p25": 0.0,
+   "median": 0.0,
+   "p75": 0.0,
+   "p90": 84.907
+  },
+  "noncreator_traders": {
+   "n": 538,
+   "p10": 0.0,
+   "p25": 0.0,
+   "median": 0.0,
+   "p75": 4.0,
+   "p90": 35.0
+  },
+  "share_instant_grad": 0.8216,
+  "share_noncreator_net_gt_0": 0.2491
+ },
+ "alive_fh": {
+  "n": 71,
+  "noncreator_net_sol": {
+   "n": 71,
+   "p10": -0.12,
+   "p25": -0.031,
+   "median": 0.016,
+   "p75": 20.319,
+   "p90": 85.016
+  },
+  "noncreator_traders": {
+   "n": 71,
+   "p10": 0.0,
+   "p25": 21.0,
+   "median": 32.0,
+   "p75": 60.0,
+   "p90": 472.0
+  },
+  "share_instant_grad": 0.1268,
+  "share_noncreator_net_gt_0": 0.507
+ }
+}

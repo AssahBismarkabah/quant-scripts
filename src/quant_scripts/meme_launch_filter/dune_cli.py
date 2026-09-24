@@ -12,6 +12,7 @@ from pathlib import Path
 
 from .config import dune_api_key
 from .dune import DuneClient
+from .io_rows import PARQUET_KINDS, convert_dune_json
 
 
 def main() -> None:
@@ -29,6 +30,8 @@ def main() -> None:
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(results, indent=2))
+    if out.stem in PARQUET_KINDS:
+        convert_dune_json(out)
     meta = results.get("result", {}).get("metadata") or {}
     rows = results.get("result", {}).get("rows") or []
     print(f"state={results.get('state')} rows={len(rows)} total={meta.get('total_row_count')}")

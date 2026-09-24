@@ -11,6 +11,8 @@ from pathlib import Path
 
 import numpy as np
 
+from quant_scripts.meme_launch_filter.io_rows import load_rows
+
 BASE = Path("research/meme_launch_filter")
 DAYS = sorted(p.name for p in BASE.iterdir() if p.name.startswith("2026-09-"))
 
@@ -30,8 +32,8 @@ REGIME_SPLIT = "2026-09-09"
 
 
 def load_day(day: str) -> tuple[dict[str, list[dict]], list[dict]]:
-    paths = json.loads((BASE / day / "step2_paths.json").read_text())["result"]["rows"]
-    postgrad = json.loads((BASE / day / "step1_postgrad.json").read_text())["result"]["rows"]
+    paths = load_rows(BASE / day, "step2_paths")
+    postgrad = load_rows(BASE / day, "step1_postgrad")
     by_mint: dict[str, list[dict]] = {}
     for r in paths:
         by_mint.setdefault(r["mint"], []).append(r)

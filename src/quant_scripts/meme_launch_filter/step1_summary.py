@@ -8,6 +8,8 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
+from quant_scripts.meme_launch_filter.io_rows import load_rows, save_merged
+
 
 def ts(value: str | None) -> float | None:
     if not value:
@@ -18,11 +20,9 @@ def ts(value: str | None) -> float | None:
 
 def main() -> None:
     day_dir = Path(sys.argv[1])
-    launches = json.loads((day_dir / "step1_launches.json").read_text())["result"]["rows"]
-    grads = {r["mint"]: ts(r["first_graduation_time"]) for r in
-             json.loads((day_dir / "step1_graduations.json").read_text())["result"]["rows"]}
-    trades = {r["mint"]: r for r in
-              json.loads((day_dir / "step1_trades.json").read_text())["result"]["rows"]}
+    launches = load_rows(day_dir, "step1_launches")
+    grads = {r["mint"]: ts(r["first_graduation_time"]) for r in load_rows(day_dir, "step1_graduations")}
+    trades = {r["mint"]: r for r in load_rows(day_dir, "step1_trades")}
 
     stats: dict[str, list] = {"graduated": [], "died_zero": [], "live_eod": []}
     for row in launches:
@@ -53,10 +53,8 @@ def main() -> None:
         }
         stats[bucket].append(rec)
 
-    out = {"counts": {k: len(v) for k, v in stats.items()}, "tokens": stats}
-    (day_dir / "step1_merged.json").write_text(json.dumps(out, indent=1))
-
     counts = {k: len(v) for k, v in stats.items()}
+    save_merged(day_dir, counts, stats)
     total = sum(counts.values())
     print(f"total={total} {counts}")
     if counts["graduated"]:

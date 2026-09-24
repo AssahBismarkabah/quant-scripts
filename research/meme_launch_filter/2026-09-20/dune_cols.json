@@ -1,0 +1,157 @@
+{
+  "execution_id": "01M344YM7F158YMTE0NXNCSEK8",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:50:36.400197Z",
+  "expires_at": "2026-12-21T08:50:36.670783Z",
+  "execution_started_at": "2026-09-22T08:50:36.40231Z",
+  "execution_ended_at": "2026-09-22T08:50:36.670775Z",
+  "result": {
+    "rows": [
+      {
+        "column_name": "blockchain",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "project",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "version",
+        "data_type": "integer",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "block_month",
+        "data_type": "date",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "block_time",
+        "data_type": "timestamp(3) with time zone",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "block_slot",
+        "data_type": "bigint",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "trade_source",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_bought_amount_raw",
+        "data_type": "uint256",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_sold_amount_raw",
+        "data_type": "uint256",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "fee_tier",
+        "data_type": "double",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_sold_mint_address",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_bought_mint_address",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "sol_reserves_raw",
+        "data_type": "uint256",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "sol_reserves",
+        "data_type": "double",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_reserves_raw",
+        "data_type": "uint256",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_reserves",
+        "data_type": "double",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_sold_vault",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "token_bought_vault",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "project_program_id",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "project_main_id",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "trader_id",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "tx_id",
+        "data_type": "varchar",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "outer_instruction_index",
+        "data_type": "integer",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "inner_instruction_index",
+        "data_type": "integer",
+        "table_name": "base_trades"
+      },
+      {
+        "column_name": "tx_index",
+        "data_type": "integer",
+        "table_name": "base_trades"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "table_name",
+        "column_name",
+        "data_type"
+      ],
+      "column_types": [
+        "varchar",
+        "varchar",
+        "varchar"
+      ],
+      "row_count": 25,
+      "result_set_bytes": 825,
+      "total_row_count": 25,
+      "total_result_set_bytes": 825,
+      "datapoint_count": 75,
+      "pending_time_millis": 2,
+      "execution_time_millis": 268
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+ "fh_rows": 23374,
+ "buckets": {
+  "graduated": {
+   "tokens_with_fh": 950,
+   "fh_noncreator_traders": {
+    "n": 950,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 31.0,
+    "p90": 330.0,
+    "mean": 81.059
+   },
+   "noncreator_net_sol": {
+    "n": 950,
+    "p10": -0.03,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.074,
+    "p90": 84.709,
+    "mean": 12.207
+   },
+   "creator_net_sol": {
+    "n": 950,
+    "p10": -0.116,
+    "p25": 0.0,
+    "median": 0.099,
+    "p75": 85.005,
+    "p90": 85.005,
+    "mean": 28.147
+   },
+   "instant_grad": {
+    "n": 555,
+    "creator_sold_within_hour": 8,
+    "creator_net_sol": {
+     "n": 555,
+     "p10": 0.0,
+     "p25": 0.0,
+     "median": 85.005,
+     "p75": 85.005,
+     "p90": 85.005,
+     "mean": 48.092
+    },
+    "single_trade_instant": 350
+   },
+   "share_noncreator_traders_ge_5": 0.4379,
+   "share_noncreator_traders_ge_10": 0.4232,
+   "share_noncreator_traders_ge_20": 0.3863,
+   "creator_first_sell": {
+    "n_with_sell_in_hour": 264,
+    "share_sell_le_1min": 0.7424
+   },
+   "share_noncreator_net_gt_0": 0.2768,
+   "organic_grad": {
+    "n": 600,
+    "noncreator_net_sol": {
+     "n": 600,
+     "p10": -0.123,
+     "p25": 0.0,
+     "median": 0.0,
+     "p75": 2.218,
+     "p90": 85.641,
+     "mean": 18.76
+    },
+    "share_noncreator_net_gt_0": 0.4267,
+    "fh_noncreator_traders": {
+     "n": 600,
+     "p10": 0.0,
+     "p25": 0.0,
+     "median": 25.0,
+     "p75": 46.0,
+     "p90": 513.0,
+     "mean": 128.332
+    }
+   }
+  },
+  "died_zero": {
+   "tokens_with_fh": 5743,
+   "fh_noncreator_traders": {
+    "n": 5743,
+    "p10": 0.0,
+    "p25": 1.0,
+    "median": 5.0,
+    "p75": 25.0,
+    "p90": 65.0,
+    "mean": 31.398
+   },
+   "noncreator_net_sol": {
+    "n": 5743,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "mean": -0.011
+   },
+   "creator_net_sol": {
+    "n": 5743,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "mean": 0.012
+   },
+   "instant_grad": {
+    "n": 0,
+    "creator_sold_within_hour": 0,
+    "creator_net_sol": {
+     "n": 0
+    },
+    "single_trade_instant": 0
+   },
+   "share_noncreator_traders_ge_5": 0.5316,
+   "share_noncreator_traders_ge_10": 0.4045,
+   "share_noncreator_traders_ge_20": 0.2993,
+   "creator_first_sell": {
+    "n_with_sell_in_hour": 4923,
+    "share_sell_le_1min": 0.7215
+   },
+   "share_noncreator_net_gt_0": 0.0171
+  },
+  "live_eod": {
+   "tokens_with_fh": 16681,
+   "fh_noncreator_traders": {
+    "n": 16681,
+    "p10": 0.0,
+    "p25": 1.0,
+    "median": 3.0,
+    "p75": 8.0,
+    "p90": 27.0,
+    "mean": 15.783
+   },
+   "noncreator_net_sol": {
+    "n": 16681,
+    "p10": -0.074,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.076,
+    "p90": 0.834,
+    "mean": 0.324
+   },
+   "creator_net_sol": {
+    "n": 16681,
+    "p10": -0.592,
+    "p25": -0.036,
+    "median": 0.0,
+    "p75": 0.005,
+    "p90": 0.145,
+    "mean": -0.169
+   },
+   "instant_grad": {
+    "n": 0,
+    "creator_sold_within_hour": 0,
+    "creator_net_sol": {
+     "n": 0
+    },
+    "single_trade_instant": 0
+   },
+   "share_noncreator_traders_ge_5": 0.3502,
+   "share_noncreator_traders_ge_10": 0.218,
+   "share_noncreator_traders_ge_20": 0.1327,
+   "creator_first_sell": {
+    "n_with_sell_in_hour": 12471,
+    "share_sell_le_1min": 0.5447
+   },
+   "share_noncreator_net_gt_0": 0.602
+  }
+ }
+}

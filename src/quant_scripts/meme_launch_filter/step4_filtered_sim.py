@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 
+from quant_scripts.meme_launch_filter.io_rows import load_rows
 from quant_scripts.meme_launch_filter.step3_sim import (
     BASE, DAYS, FEE, FAILED_TX_COST, NOTIONAL_SOL, N_BOOT, SEED, SLIPPAGE,
     TP_FRAC, TP_GAIN, ATR_MULT, ATR_WINDOW, FILL_CAP, REGIME_SPLIT,
@@ -35,8 +36,8 @@ def main() -> None:
     n_no_feat = 0
     n_share_nan = 0
     for day in DAYS:
-        paths = json.loads((BASE / day / "step2_paths.json").read_text())["result"]["rows"]
-        postgrad = json.loads((BASE / day / "step1_postgrad.json").read_text())["result"]["rows"]
+        paths = load_rows(BASE / day, "step2_paths")
+        postgrad = load_rows(BASE / day, "step1_postgrad")
         featbar = json.loads((BASE / day / "step2_featbar.json").read_text())["result"]["rows"]
         grads = {r["mint"] for r in postgrad}
         feat = {r["mint"]: r for r in featbar}

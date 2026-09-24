@@ -11,6 +11,8 @@ import statistics
 import sys
 from pathlib import Path
 
+from quant_scripts.meme_launch_filter.io_rows import load_merged, load_rows
+
 BASE = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("research/meme_launch_filter/2026-09-20")
 
 
@@ -45,11 +47,11 @@ def num(row: dict, key: str) -> float:
 
 
 def main() -> None:
-    pg_raw = json.loads((BASE / "step1_postgrad.json").read_text())
-    pg = {r["mint"]: r for r in pg_raw["result"]["rows"]}
-    merged = json.loads((BASE / "step1_merged.json").read_text())
-    fh_raw = json.loads((BASE / "step1_firsthour.json").read_text())
-    fh = {r["mint"]: r for r in fh_raw["result"]["rows"]}
+    pg_rows = load_rows(BASE, "step1_postgrad")
+    pg = {r["mint"]: r for r in pg_rows}
+    merged = load_merged(BASE)
+    fh_rows = load_rows(BASE, "step1_firsthour")
+    fh = {r["mint"]: r for r in fh_rows}
 
     graduates = merged["tokens"]["graduated"]
 

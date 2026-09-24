@@ -1,0 +1,328 @@
+{
+  "execution_id": "01M344Q1K885ZHWPWCRDQQ8KSW",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:46:27.944402Z",
+  "expires_at": "2026-12-21T08:49:33.214935Z",
+  "execution_started_at": "2026-09-22T08:47:20.14107Z",
+  "execution_ended_at": "2026-09-22T08:49:33.214928Z",
+  "result": {
+    "rows": [
+      {
+        "table_schema": "across_solana"
+      },
+      {
+        "table_schema": "addresses_events_solana"
+      },
+      {
+        "table_schema": "adrena_perps_solana"
+      },
+      {
+        "table_schema": "aiisdev_solana"
+      },
+      {
+        "table_schema": "aliagents_solana"
+      },
+      {
+        "table_schema": "allbridge_solana_solana"
+      },
+      {
+        "table_schema": "alpha_dex_solana"
+      },
+      {
+        "table_schema": "alphaq_solana"
+      },
+      {
+        "table_schema": "aquifer_solana"
+      },
+      {
+        "table_schema": "aquifer_v2_solana"
+      },
+      {
+        "table_schema": "armada_clmm_solana"
+      },
+      {
+        "table_schema": "autonolas_solana"
+      },
+      {
+        "table_schema": "autosnipe_solana"
+      },
+      {
+        "table_schema": "bags_solana"
+      },
+      {
+        "table_schema": "banana_gun_solana"
+      },
+      {
+        "table_schema": "banana_miner_solana"
+      },
+      {
+        "table_schema": "base_app_swapper_solana"
+      },
+      {
+        "table_schema": "basedbid_solana"
+      },
+      {
+        "table_schema": "bisonfi_solana"
+      },
+      {
+        "table_schema": "bitfoot_solana"
+      },
+      {
+        "table_schema": "bloom_solana"
+      },
+      {
+        "table_schema": "bonkbot_solana"
+      },
+      {
+        "table_schema": "boopdotfun_solana"
+      },
+      {
+        "table_schema": "bpf_loader_upgradeable_solana"
+      },
+      {
+        "table_schema": "bubblegum_solana"
+      },
+      {
+        "table_schema": "butter_solana"
+      },
+      {
+        "table_schema": "byreal_solana"
+      },
+      {
+        "table_schema": "candy_guard_solana"
+      },
+      {
+        "table_schema": "candy_machine_core_solana"
+      },
+      {
+        "table_schema": "candy_machine_solana"
+      },
+      {
+        "table_schema": "carrot_solana"
+      },
+      {
+        "table_schema": "cega_solana"
+      },
+      {
+        "table_schema": "cex_solana"
+      },
+      {
+        "table_schema": "chainlink_solana"
+      },
+      {
+        "table_schema": "circle_cctp_solana"
+      },
+      {
+        "table_schema": "circle_solana"
+      },
+      {
+        "table_schema": "citrus_v1_solana"
+      },
+      {
+        "table_schema": "citrus_v3_solana"
+      },
+      {
+        "table_schema": "closer_solana"
+      },
+      {
+        "table_schema": "consortium_key_solana"
+      },
+      {
+        "table_schema": "cypher_v3_solana"
+      },
+      {
+        "table_schema": "dain_solana"
+      },
+      {
+        "table_schema": "debridge_solana"
+      },
+      {
+        "table_schema": "defituna_solana"
+      },
+      {
+        "table_schema": "degod_solana_base"
+      },
+      {
+        "table_schema": "deltatrade_grid_solana"
+      },
+      {
+        "table_schema": "deriverse_solana"
+      },
+      {
+        "table_schema": "derp_trade_solana"
+      },
+      {
+        "table_schema": "dex_solana"
+      },
+      {
+        "table_schema": "dflow_clearpool_solana"
+      },
+      {
+        "table_schema": "dflow_solana"
+      },
+      {
+        "table_schema": "divvy_bet_solana"
+      },
+      {
+        "table_schema": "dlmm_solana"
+      },
+      {
+        "table_schema": "dln_trade_solana"
+      },
+      {
+        "table_schema": "drift_v2_solana"
+      },
+      {
+        "table_schema": "drift_vaults_solana"
+      },
+      {
+        "table_schema": "dtelecom_solana"
+      },
+      {
+        "table_schema": "ego_solana"
+      },
+      {
+        "table_schema": "endoavs_program_solana"
+      },
+      {
+        "table_schema": "exponent_solana"
+      },
+      {
+        "table_schema": "falcon_solana"
+      },
+      {
+        "table_schema": "fanex_solana"
+      },
+      {
+        "table_schema": "flash_trade_solana"
+      },
+      {
+        "table_schema": "fluxbeam_solana"
+      },
+      {
+        "table_schema": "frakt_bonds_v1_solana"
+      },
+      {
+        "table_schema": "frakt_lending_v2_solana"
+      },
+      {
+        "table_schema": "gamba_v2_solana"
+      },
+      {
+        "table_schema": "gamma_solana"
+      },
+      {
+        "table_schema": "gas_solana"
+      },
+      {
+        "table_schema": "gaslessswap_solana"
+      },
+      {
+        "table_schema": "ggoldca_solana"
+      },
+      {
+        "table_schema": "gildore_marketplace_v1_solana"
+      },
+      {
+        "table_schema": "glam_solana"
+      },
+      {
+        "table_schema": "global_solana"
+      },
+      {
+        "table_schema": "glympse_solana"
+      },
+      {
+        "table_schema": "gmsol_solana"
+      },
+      {
+        "table_schema": "gmtrade_solana"
+      },
+      {
+        "table_schema": "goonfi_solana"
+      },
+      {
+        "table_schema": "goonfi_v2_solana"
+      },
+      {
+        "table_schema": "goosefx_solana"
+      },
+      {
+        "table_schema": "goosefx_ssl_v2_solana"
+      },
+      {
+        "table_schema": "guacswap_solana"
+      },
+      {
+        "table_schema": "gummy_staking_solana"
+      },
+      {
+        "table_schema": "hashflow_v3_solana"
+      },
+      {
+        "table_schema": "hastra_solana"
+      },
+      {
+        "table_schema": "helium_solana"
+      },
+      {
+        "table_schema": "helium_vote_tally_solana"
+      },
+      {
+        "table_schema": "hivemapper_solana"
+      },
+      {
+        "table_schema": "huma_2_0_solana"
+      },
+      {
+        "table_schema": "huma_prime_solana"
+      },
+      {
+        "table_schema": "huma_solana"
+      },
+      {
+        "table_schema": "huma_token_solana"
+      },
+      {
+        "table_schema": "humidifi_solana"
+      },
+      {
+        "table_schema": "iausd_solana"
+      },
+      {
+        "table_schema": "invariant_solana"
+      },
+      {
+        "table_schema": "ionet_tne_solana"
+      },
+      {
+        "table_schema": "jito_solana"
+      },
+      {
+        "table_schema": "jito_stakenet_solana"
+      },
+      {
+        "table_schema": "jito_tip_distribution_solana"
+      },
+      {
+        "table_schema": "jito_tip_payment_solana"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "table_schema"
+      ],
+      "column_types": [
+        "varchar"
+      ],
+      "row_count": 100,
+      "result_set_bytes": 1616,
+      "total_row_count": 100,
+      "total_result_set_bytes": 1616,
+      "datapoint_count": 100,
+      "pending_time_millis": 52196,
+      "execution_time_millis": 133073
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "execution_id": "01M34531EPFQQB6ARF3D6C9ANP",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:53:01.014668Z",
+  "expires_at": "2026-12-21T08:53:02.600394Z",
+  "execution_started_at": "2026-09-22T08:53:01.016959Z",
+  "execution_ended_at": "2026-09-22T08:53:02.600387Z",
+  "result": {
+    "rows": [
+      {
+        "creates": 59,
+        "d": "2026-09-10"
+      },
+      {
+        "creates": 119,
+        "d": "2026-09-11"
+      },
+      {
+        "creates": 78,
+        "d": "2026-09-12"
+      },
+      {
+        "creates": 145,
+        "d": "2026-09-13"
+      },
+      {
+        "creates": 150,
+        "d": "2026-09-14"
+      },
+      {
+        "creates": 80,
+        "d": "2026-09-15"
+      },
+      {
+        "creates": 212,
+        "d": "2026-09-16"
+      },
+      {
+        "creates": 76,
+        "d": "2026-09-17"
+      },
+      {
+        "creates": 58,
+        "d": "2026-09-18"
+      },
+      {
+        "creates": 126,
+        "d": "2026-09-19"
+      },
+      {
+        "creates": 248,
+        "d": "2026-09-20"
+      },
+      {
+        "creates": 231,
+        "d": "2026-09-21"
+      },
+      {
+        "creates": 93,
+        "d": "2026-09-22"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "d",
+        "creates"
+      ],
+      "column_types": [
+        "date",
+        "bigint"
+      ],
+      "row_count": 13,
+      "result_set_bytes": 156,
+      "total_row_count": 13,
+      "total_result_set_bytes": 156,
+      "datapoint_count": 26,
+      "pending_time_millis": 2,
+      "execution_time_millis": 1583
+    }
+  }
+}

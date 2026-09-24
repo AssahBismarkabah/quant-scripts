@@ -1,0 +1,270 @@
+{
+  "execution_id": "01M344EEKKK1GD2TBN96ZH2YAA",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:41:46.356423Z",
+  "expires_at": "2026-12-21T08:45:25.460414Z",
+  "execution_started_at": "2026-09-22T08:42:38.067648Z",
+  "execution_ended_at": "2026-09-22T08:45:25.460407Z",
+  "result": {
+    "rows": [
+      {
+        "n_tables": 24468,
+        "table_schema": "curvefi_ethereum"
+      },
+      {
+        "n_tables": 12707,
+        "table_schema": "silo_finance_v2_sonic"
+      },
+      {
+        "n_tables": 12054,
+        "table_schema": "lynx_finance_fantom"
+      },
+      {
+        "n_tables": 11423,
+        "table_schema": "yield_yak_avalanche_c"
+      },
+      {
+        "n_tables": 8726,
+        "table_schema": "silo_finance_v2_ethereum"
+      },
+      {
+        "n_tables": 7454,
+        "table_schema": "silo_finance_v2_multichain"
+      },
+      {
+        "n_tables": 6806,
+        "table_schema": "lynx_finance_sonic"
+      },
+      {
+        "n_tables": 6714,
+        "table_schema": "voltz_ethereum"
+      },
+      {
+        "n_tables": 6671,
+        "table_schema": "silo_finance_v2_arbitrum"
+      },
+      {
+        "n_tables": 6430,
+        "table_schema": "frax_ethereum"
+      },
+      {
+        "n_tables": 4187,
+        "table_schema": "wombex_bnb"
+      },
+      {
+        "n_tables": 3965,
+        "table_schema": "fx_protocol_ethereum"
+      },
+      {
+        "n_tables": 3715,
+        "table_schema": "zharta_ethereum"
+      },
+      {
+        "n_tables": 3498,
+        "table_schema": "polygon_validator_contract_v2_ethereum"
+      },
+      {
+        "n_tables": 3494,
+        "table_schema": "lido_ethereum"
+      },
+      {
+        "n_tables": 3467,
+        "table_schema": "asymmetry_finance_ethereum"
+      },
+      {
+        "n_tables": 3451,
+        "table_schema": "ebisu_ethereum"
+      },
+      {
+        "n_tables": 3413,
+        "table_schema": "sturdy_v2_ethereum"
+      },
+      {
+        "n_tables": 3251,
+        "table_schema": "silo_finance_v2_avalanche_c"
+      },
+      {
+        "n_tables": 3221,
+        "table_schema": "protocol_fx_v2_ethereum"
+      },
+      {
+        "n_tables": 3206,
+        "table_schema": "centrifuge_ethereum"
+      },
+      {
+        "n_tables": 2988,
+        "table_schema": "inverse_finance_ethereum"
+      },
+      {
+        "n_tables": 2962,
+        "table_schema": "badgerdao_ethereum"
+      },
+      {
+        "n_tables": 2839,
+        "table_schema": "tetuvaults_polygon"
+      },
+      {
+        "n_tables": 2832,
+        "table_schema": "gearbox_ethereum"
+      },
+      {
+        "n_tables": 2814,
+        "table_schema": "gains_network_polygon"
+      },
+      {
+        "n_tables": 2767,
+        "table_schema": "lodestar_arbitrum"
+      },
+      {
+        "n_tables": 2719,
+        "table_schema": "venus_bnb"
+      },
+      {
+        "n_tables": 2709,
+        "table_schema": "curvefi_avalanche_c"
+      },
+      {
+        "n_tables": 2696,
+        "table_schema": "liquity_v2_ethereum"
+      },
+      {
+        "n_tables": 2694,
+        "table_schema": "origin_protocol_ethereum"
+      },
+      {
+        "n_tables": 2684,
+        "table_schema": "pendle_ethereum"
+      },
+      {
+        "n_tables": 2644,
+        "table_schema": "drops_ethereum"
+      },
+      {
+        "n_tables": 2613,
+        "table_schema": "artblocks_ethereum"
+      },
+      {
+        "n_tables": 2597,
+        "table_schema": "wombat_bnb"
+      },
+      {
+        "n_tables": 2577,
+        "table_schema": "synthetix_ethereum"
+      },
+      {
+        "n_tables": 2493,
+        "table_schema": "harbor_protocol_v1_ethereum"
+      },
+      {
+        "n_tables": 2370,
+        "table_schema": "justbet_arbitrum"
+      },
+      {
+        "n_tables": 2364,
+        "table_schema": "governor_ethereum"
+      },
+      {
+        "n_tables": 2356,
+        "table_schema": "sdn_watchdog_bnb"
+      },
+      {
+        "n_tables": 2347,
+        "table_schema": "gains_network_arbitrum"
+      },
+      {
+        "n_tables": 2338,
+        "table_schema": "dopex_protocol_arbitrum"
+      },
+      {
+        "n_tables": 2322,
+        "table_schema": "inception_ethereum"
+      },
+      {
+        "n_tables": 2308,
+        "table_schema": "wombex_arbitrum"
+      },
+      {
+        "n_tables": 2282,
+        "table_schema": "thales_optimism"
+      },
+      {
+        "n_tables": 2253,
+        "table_schema": "dopex_arbitrum"
+      },
+      {
+        "n_tables": 2227,
+        "table_schema": "dinari_arbitrum"
+      },
+      {
+        "n_tables": 2220,
+        "table_schema": "chainlink_ethereum"
+      },
+      {
+        "n_tables": 2200,
+        "table_schema": "silo_ethereum"
+      },
+      {
+        "n_tables": 2174,
+        "table_schema": "gains_network_multichain"
+      },
+      {
+        "n_tables": 2142,
+        "table_schema": "contrax_finance_arbitrum"
+      },
+      {
+        "n_tables": 2127,
+        "table_schema": "spiceusd_blast"
+      },
+      {
+        "n_tables": 2112,
+        "table_schema": "paladin_ethereum"
+      },
+      {
+        "n_tables": 2086,
+        "table_schema": "defisaver_ethereum"
+      },
+      {
+        "n_tables": 2077,
+        "table_schema": "flamix_flare"
+      },
+      {
+        "n_tables": 2016,
+        "table_schema": "pawnfiprotocol_ethereum"
+      },
+      {
+        "n_tables": 2001,
+        "table_schema": "maker_ethereum"
+      },
+      {
+        "n_tables": 1999,
+        "table_schema": "term_finance_ethereum"
+      },
+      {
+        "n_tables": 1985,
+        "table_schema": "nexusmutual_ethereum"
+      },
+      {
+        "n_tables": 1980,
+        "table_schema": "synthetix_optimism"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "table_schema",
+        "n_tables"
+      ],
+      "column_types": [
+        "varchar",
+        "bigint"
+      ],
+      "row_count": 60,
+      "result_set_bytes": 1592,
+      "total_row_count": 60,
+      "total_result_set_bytes": 1592,
+      "datapoint_count": 120,
+      "pending_time_millis": 51711,
+      "execution_time_millis": 167392
+    }
+  }
+}

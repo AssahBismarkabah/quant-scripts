@@ -1,0 +1,43 @@
+{
+  "execution_id": "01M34526G5DTXS86HK79DBJ305",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:52:33.414381Z",
+  "expires_at": "2026-12-21T08:52:36.710897Z",
+  "execution_started_at": "2026-09-22T08:52:33.416986Z",
+  "execution_ended_at": "2026-09-22T08:52:36.710888Z",
+  "result": {
+    "rows": [
+      {
+        "first_slot": 448563187,
+        "first_ts": "2026-09-20 00:00:51.000 UTC",
+        "last_slot": 448884325,
+        "last_ts": "2026-09-20 23:48:19.000 UTC",
+        "n": 248
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "n",
+        "first_ts",
+        "last_ts",
+        "first_slot",
+        "last_slot"
+      ],
+      "column_types": [
+        "bigint",
+        "timestamp(3) with time zone",
+        "timestamp(3) with time zone",
+        "bigint",
+        "bigint"
+      ],
+      "row_count": 1,
+      "result_set_bytes": 40,
+      "total_row_count": 1,
+      "total_result_set_bytes": 40,
+      "datapoint_count": 5,
+      "pending_time_millis": 2,
+      "execution_time_millis": 3293
+    }
+  }
+}

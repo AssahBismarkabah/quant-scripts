@@ -14,12 +14,14 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+from quant_scripts.meme_launch_filter.io_rows import load_merged
+
 RESEARCH = Path("research/meme_launch_filter")
 
 
 def load(day: str) -> dict:
     day_dir = RESEARCH / day
-    merged = json.loads((day_dir / "step1_merged.json").read_text())["counts"]
+    merged = load_merged(day_dir)["counts"]
     fh = json.loads((day_dir / "step1_firsthour_summary.json").read_text())
     pg = json.loads((day_dir / "step1_postgrad_summary.json").read_text())
     buckets = fh["buckets"]

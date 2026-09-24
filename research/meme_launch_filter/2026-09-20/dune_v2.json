@@ -1,0 +1,38 @@
+{
+  "execution_id": "01M3455901W2HMS4CSVT4D9SMD",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:54:14.273442Z",
+  "expires_at": "2026-12-21T08:54:15.657591Z",
+  "execution_started_at": "2026-09-22T08:54:14.697773Z",
+  "execution_ended_at": "2026-09-22T08:54:15.657586Z",
+  "result": {
+    "rows": [
+      {
+        "n": 30535,
+        "src": "v2"
+      },
+      {
+        "n": 248,
+        "src": "v1"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "src",
+        "n"
+      ],
+      "column_types": [
+        "varchar(2)",
+        "bigint"
+      ],
+      "row_count": 2,
+      "result_set_bytes": 20,
+      "total_row_count": 2,
+      "total_result_set_bytes": 20,
+      "datapoint_count": 4,
+      "pending_time_millis": 424,
+      "execution_time_millis": 959
+    }
+  }
+}

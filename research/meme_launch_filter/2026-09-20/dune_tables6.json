@@ -1,0 +1,430 @@
+{
+  "execution_id": "01M344XE8M5ZV1H762EW9J3F52",
+  "is_execution_finished": true,
+  "state": "QUERY_STATE_COMPLETED",
+  "submitted_at": "2026-09-22T08:49:57.524333Z",
+  "expires_at": "2026-12-21T08:49:57.796473Z",
+  "execution_started_at": "2026-09-22T08:49:57.526496Z",
+  "execution_ended_at": "2026-09-22T08:49:57.796464Z",
+  "result": {
+    "rows": [
+      {
+        "table_name": "base_trades",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_admin_set_coin_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_admin_update_token_incentives",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_buy",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_buy_exact_quote_in",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_claim_cashback",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_claim_token_incentives",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_close_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_collect_coin_creator_fee",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_create_config",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_create_pool",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_deposit",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_disable",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_extend_account",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_init_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_migrate_pool_coin_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_sell",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_set_coin_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_set_reserved_fee_recipients",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_sync_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_toggle_cashback_enabled",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_toggle_mayhem_mode",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_transfer_creator_fees_to_pump",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_transfer_creator_fees_to_pump_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_update_admin",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_update_buyback_config",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_update_fee_config",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_call_withdraw",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_adminsetcoincreatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_adminupdatetokenincentivesevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_buyevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_claimcashbackevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_claimtokenincentivesevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_closeuservolumeaccumulatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_collectcoincreatorfeeevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_createconfigevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_createpoolevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_depositevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_disableevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_extendaccountevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_inituservolumeaccumulatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_migratepoolcoincreatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_reservedfeerecipientsevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_sellevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_setbondingcurvecoincreatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_setmetaplexcoincreatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_syncuservolumeaccumulatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_updateadminevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_updatefeeconfigevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_amm_evt_withdrawevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_add_quote_mint",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_admin_set_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_admin_set_idl_authority",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_admin_update_token_incentives",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_buy",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_buy_exact_quote_in_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_buy_exact_sol_in",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_buy_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_claim_cashback",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_claim_cashback_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_claim_token_incentives",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_close_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_collect_creator_fee",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_collect_creator_fee_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_create",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_create_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_distribute_creator_fees",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_distribute_creator_fees_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_extend_account",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_get_minimum_distributable_fee",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_initialize",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_init_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_migrate",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_migrate_bonding_curve_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_migrate_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_remove_quote_mint",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_sell",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_sell_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_mayhem_virtual_params",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_metaplex_creator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_setparams",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_params",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_reserved_fee_recipients",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_set_virtual_quote_reserves",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_sync_user_volume_accumulator",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_toggle_cashback_enabled",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_toggle_create_v2",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_toggle_mayhem_mode",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_update_buyback_config",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_update_global_authority",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_call_withdraw",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_adminsetcreatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_adminsetidlauthorityevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_adminupdatetokenincentivesevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_claimcashbackevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_claimtokenincentivesevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_closeuservolumeaccumulatorevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_collectcreatorfeeevent",
+        "table_schema": "pumpdotfun_solana"
+      },
+      {
+        "table_name": "pump_evt_completeevent",
+        "table_schema": "pumpdotfun_solana"
+      }
+    ],
+    "metadata": {
+      "column_names": [
+        "table_schema",
+        "table_name"
+      ],
+      "column_types": [
+        "varchar",
+        "varchar"
+      ],
+      "row_count": 100,
+      "result_set_bytes": 4755,
+      "total_row_count": 100,
+      "total_result_set_bytes": 4755,
+      "datapoint_count": 200,
+      "pending_time_millis": 2,
+      "execution_time_millis": 269
+    }
+  }
+}
