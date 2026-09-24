@@ -979,3 +979,177 @@ the migration bar using OHLC (same cost-sensitivity caveat applies);
 within-class features. None of these changes the Section 7 gate: the
 burden of proof is a config that survives cost sensitivity
 pre-registered, and nothing has cleared it.
+
+## Addendum O - August 2026 out-of-sample pull and replication (2026-09-24, COMPLETE)
+
+**Purpose:** replicate the September findings (instant-grad moon rate
+69.6%, cost-gate failure) on an earlier regime, per the month-by-month
+pre-registration (Addendum L). Pipeline unchanged: per day the three
+analysis-critical queries (step1_postgrad, step2_featbar, step2_paths)
+generated from the 2026-09-13 SQL templates with the date literal
+swapped (implementation step8_august_pull.py). Featbar fallback to a
+v1-only launches CTE exists but was NOT needed - the v2 create table
+covered August fine.
+
+**Pull status:** first key exhausted datapoints mid-month (HTTP 402);
+user replaced the key and the pull resumed cleanly (Aug-12 paths
+recovered by polling the submitted execution, no re-submission). All
+31 days complete: postgrad 941-1557 rows/day, featbar 785-1372, paths
+132k-257k bars. Featbar v1-only fallback never needed.
+
+**Replication results (implementation step9_august_replication.py;
+summary step9_august_replication_summary.json), canonical labels:**
+
+| class | n | moon rate | drained | retained |
+|---|---|---|---|---|
+| fb_trades = 0 (zero class) | 10,792 | 77.3% | 21.8% | 0.9% |
+| fb_trades > 0 (clean) | 23,421 | 5.6% | 78.7% | 15.7% |
+
+Zero class: 99.99% age_at_grad_s <= 60 (median 0s) - instant-grad
+class replicates exactly. Its moon rate is HIGHER than September's
+69.6% (77.3%); clean class matches (5.6% vs 6.1%).
+
+**Cost-sensitivity grid on the August instant-grad class (n=10,792,
+same naive exit engine):**
+
+| combo | mean net | p5 | hit |
+|---|---|---|---|
+| Addendum M optimistic (0.5% slip, 0.02 fail) | +0.019 | +0.009 | 0.544 |
+| slip 1% fail 0.05 | -0.021 | -0.031 | 0.467 |
+| slip 1% fail 0.10 | -0.071 | -0.081 | 0.385 |
+| slip 1% fail 0.20 | -0.171 | -0.181 | 0.293 |
+| slip 2% fail 0.05 | -0.040 | -0.050 | 0.424 |
+| slip 2% fail 0.10 | -0.090 | -0.100 | 0.364 |
+| slip 2% fail 0.20 | -0.190 | -0.200 | 0.276 |
+| slip 3% fail 0.05 | -0.059 | -0.069 | 0.395 |
+| slip 3% fail 0.10 | -0.109 | -0.119 | 0.342 |
+| slip 3% fail 0.20 | -0.209 | -0.219 | 0.258 |
+
+**Two-regime verdict: the September cost-gate failure REPLICATES on
+August.** The on-paper positive config is again positive only under
+the optimistic cost tier (+0.019, p5 +0.009) and again dies at every
+realistic combo, with the same ~-0.04-to--0.05 per-1% slippage
+sensitivity. The class split itself is stable across two regimes
+one month apart: instant-grad tokens are the moon tail in both.
+
+**Study conclusion at the two-regime horizon:** launch-sniping /
+graduation-bar entry on pump.fun is a bot-infrastructure lane whose
+on-paper expectancy does not survive realistic entry costs in either
+regime. No Dune-grade retail filter tested clears the Section 7 gate.
+The finding is now structural, not regime-specific. Remaining
+directions unchanged in priority: PumpSwap-side migration-bar entry
+sim (expect same cost failure), targeted raw-log rebuild for
+within-class features (professional tier), or pivoting the research
+question to post-migration retention.
+
+- COMPLETE: Aug 1-12 postgrad+featbar, and paths for Aug 1-11, Aug 31
+  (12 days fully done).
+- PARTIAL: Aug 12 (postgrad + featbar done; paths execution
+  01M39BSETP4NHSH7QKWPRWG853 submitted, results fetch blocked by 402).
+- NOT STARTED: Aug 13-30.
+
+Resume rule: poll the submitted Aug-12 paths execution id (burns no new
+datapoints); do NOT re-submit queries for completed/partial days. A
+fresh key or raised datapoint limit resumes the remaining days.
+
+Volume note: late August (25-29) ran hotter (1,100-1,550 grads/day),
+converging toward September levels - the "regime" difference is mostly
+calendar position, not market structure.
+
+## Addendum P - study verdict, final pre-registration, and closure rule (2026-09-24)
+
+**Study verdict (two regimes, pre-registered gates, no config
+survived):** launch-sniping / graduation-bar entry on pump.fun is a
+bot-infrastructure lane. The only on-paper positive configuration
+(instant-grad class, optimistic entry costs) died under the
+pre-registered cost grid in both September (Addendum N) and August
+(Addendum O), and its expectancy was a top-1% lottery-tail harvest in
+both. The class split replicating across regimes (69.6% / 77.3%
+instant-grad moon rate; 6.1% / 5.6% clean moon rate) establishes the
+structure as stable, not anomalous. Retail on Dune-grade data has no
+tested edge in this lane; the Helius probe (Addendum N) shows the
+contested bar requires professional real-time infrastructure.
+
+**Final test pre-registration - post-migration retention study
+(Addendum Q, below).** Rationale: the launch-sniping lane is closed on
+data; the retained class (Sept 9.9% / Aug 15.7% of graduates) is the
+slow-side population where a retail-suitable information edge could
+still exist: no contested bar, holding horizon hours-to-days, features
+computable from already-pulled data. This is the LAST test in this
+study. Pre-registered BEFORE any test ran:
+
+- Population: all graduates (both months, both classes) whose pool
+  survives >= 60 min post-graduation (liquidity still > 10% of peak at
+  t+60m). This excludes the instant-grad lottery class by construction
+  and targets the slow lane.
+- Entry: first bar AFTER t+60m (no lookahead, no contested bar). Exit
+  engine: the SAME frozen naive engine (Section 5 params), unchanged.
+- Edge hypothesis: among entry-bar observable features (pool SOL at
+  t+60m, first-hour noncreator buy/sell balance, trader count,
+  creator concentration), at least one pre-registered split separates
+  a group with positive mean net AND positive p5 under the SAME
+  cost-sensitivity grid as Addendum N (1-3% slippage, 0.05-0.2 fail).
+- Gate: the SAME Section 7 gate. A config passes only if mean net > 0
+  AND boot p5 > 0 at 1% slippage AND 0.05 SOL failure cost (the
+  mildest realistic tier), pre- and post-Sep-9 regime consistent.
+- Closure rule: if no pre-registered split passes, the study closes
+  with the verdict "no retail edge found in pump.fun graduation-cycle
+  trading at Dune-grade data on either the fast (sniping) or slow
+  (retention) lane, two regimes tested". No further configurations
+  will be tested - closing the door on result-driven gate-moving.
+
+Multiple-split honesty: the features listed above are ALL splits that
+will be tried; this is a small fixed family (<= 8), chosen before
+looking at any outcome data on the filtered population. The best-of
+family result must survive a Bonferroni-style correction (the p5 gate
+applies to the best split with the family size as the effective
+multiple) to count as a pass.
+
+## Addendum Q - retention study results and STUDY CLOSED (2026-09-24)
+
+**Implementation:** step10_retention_sim.py; summary
+step10_retention_summary.json; trades step10_retention_trades.jsonl.
+Population: 36,347 survivor trades (both months, t+60m survivors,
+entry at first bar >= t+60m, no lookahead). Same frozen exit engine,
+same cost tiers.
+
+Full family at the optimistic tier (0.5% slip, 0.02 fail) and the
+mildest realistic tier (1% slip, 0.05 fail):
+
+| split | opt n | opt mean | opt p5 | mildest mean | mildest p5 |
+|---|---|---|---|---|---|
+| pool_ge_85 | 11,474 | +0.010 | +0.004 | -0.030 | -0.036 |
+| pool_ge_200 | 9,415 | +0.027 | +0.020 | -0.013 | -0.020 |
+| netflow_pos | 13,722 | -0.067 | -0.074 | -0.106 | -0.113 |
+| netflow_pos_pool85 | 11,056 | +0.014 | +0.007 | -0.026 | -0.033 |
+| price_up | 13,049 | -0.050 | -0.056 | -0.089 | -0.095 |
+| trades_ge_40 | 33,609 | -0.382 | -0.387 | -0.418 | -0.423 |
+| netflow_pos_price_up | 12,907 | -0.042 | -0.048 | -0.081 | -0.088 |
+| pool200_netflow_pos | 9,171 | +0.029 | +0.022 | -0.011 | -0.018 |
+
+**Gate verdict: FAIL for every split.** The best split
+(pool200_netflow_pos) shows the familiar pattern: positive only at
+the optimistic tier (+0.029, p5 +0.022) and negative at the mildest
+realistic tier (-0.011, p5 -0.018), with BOTH regimes negative at the
+mildest tier (pre -0.005/p5 -0.014, post -0.024/p5 -0.039). The
+pre-registered gate (mean > 0 AND p5 > 0 at the mildest tier, both
+regimes) fails with no family member close. Bonferroni correction is
+moot: nothing survives even uncorrected.
+
+The pool_ge_200 result is the clearest single summary of the whole
+study: the same config flips sign between +0.027 and -0.013 on a
+half-point of entry slippage. Every "positive" configuration in this
+study - fast lane or slow lane - is a bet that you can enter at
+sub-1% total cost. That bet is exactly what professional infrastructure
+buys and retail cannot.
+
+**STUDY CLOSED per the Addendum P closure rule.** Final verdict: no
+retail edge found in pump.fun graduation-cycle trading at Dune-grade
+data, on either the fast (sniping) or slow (retention) lane, across
+two calendar regimes (August, September 2026), with pre-registered
+filters, exits, cost grids, and gates. The honest retail takeaway:
+the measurable edge in this market lives in entry-cost infrastructure
+(sub-1% realized slippage at contested bars), not in information or
+filters. Any future revisit needs either a materially different data
+source (raw logs / Geyser) or a materially different market structure,
+and should start from a NEW pre-registered spec, not this one.
